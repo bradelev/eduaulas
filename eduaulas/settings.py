@@ -10,8 +10,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
+DIR_APP = os.path.join(BASE_DIR,'eduaulas')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -36,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
     'principal',
 )
 
@@ -60,9 +63,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eduaulas_db',
-        'USER': 'eduaulas_root',
-        'PASSWORD': '3du_4ul4s_PWD',
-        'HOST': '',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
 
     }
@@ -84,5 +87,21 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+MEDIA_ROOT = os.path.join(RUTA_PROYECTO,'carga')
+MEDIA_URL = 'http://127.0.0.1:8080/media/'
 STATIC_URL = '/static/'
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+    'eduaulas.common.template_base',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.media',
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(DIR_APP,'templates'),
+)
+
+STATICFILES_DIRS = (
+     os.path.join(DIR_APP,'static'),
+)
