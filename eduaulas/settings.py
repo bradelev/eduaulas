@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 DIR_APP = os.path.join(BASE_DIR,'eduaulas')
+RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -28,6 +29,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#CSRF_COOKIE_DOMAIN = '127.0.0.1:8080'
+
 
 # Application definition
 
@@ -39,7 +42,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'principal',
+    'aulas',
+    'docente',
+    'ejercicios',
+    'infraestructura',
+    'locaciones',
+    'panel',
+    'alumno',
 )
 
 MIDDLEWARE_CLASSES = (
