@@ -42,13 +42,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'aulas',
-    'docente',
-    'ejercicios',
-    'infraestructura',
-    'locaciones',
-    'panel',
-    'alumno',
+    'classroom',
+    'teacher',
+    'exercise',
+    'location',
+    'dashboard',
+    'student',
 )
 
 MIDDLEWARE_CLASSES = (
