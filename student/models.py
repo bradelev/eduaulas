@@ -10,4 +10,4 @@ class Student(Person):
 		verbose_name_plural = _('Estudiantes')
 
 	def __unicode__(self):
-		return super.name + " " + super.last_name
+		return self.name + " " + self.last_name
