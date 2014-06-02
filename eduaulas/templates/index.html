@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends template_base %}
 {% block body %}
 {% load staticfiles %}
@@ -19,7 +18,7 @@
                     <li class="">[NAV_LINKS]</li>
                     <li class="">[NAV_LINKS]</li>
                     <li class="">[NAV_LINKS]</li>
-                    
+                    <li> hola <head></head></li>
                 </ul>
             </nav>
         </aside>
@@ -171,56 +170,3 @@ $(document).ready(function() {
 } );
 </script>
 {% endblock%}
-=======
-
-{% extends template_base %}
-{% block body %}
-{% load staticfiles %}
- 
- 
-    <header id="header">
-            [#LOGO]
-            [AJAX_DROPDOWN]
-            [PROJECTS_DROPDOWN]
-            [ICONS_AND_SEARCH]
-    </header>
-
-    <aside id="left-panel">
-       [USER_INFO]
-        <nav>
-            <ul>
-                <li class="">[NAV_LINKS]</li>
-                <li class="">[NAV_LINKS]</li>
-                <li class="">[NAV_LINKS]</li>
-            </ul>
-        </nav>
-    </aside>
-
-    <!-- MAIN PANEL -->
-    <div id="main">     
-        <!-- RIBBON -->
-        <div id="ribbon">
-            [BREAD_CRUMB]
-        </div>
-        <div id="content">
-            contenido
-        </div>
-    </div>
-
-    <div id="shortcut">
-        [METRO_SHORTCUT]
-    </div>
-{% endblock %}
-
-{% block scripts %}
-[ALL_PAGE_SCRIPTS]
-<script type="text/javascript">
-    $(document).ready(function(){
-        alert("hola");
-    });
-</script>
-
-
-{% endblock %}
-
->>>>>>> 367c99cc43f5ad1cac5f8729e853ff4418846c83
