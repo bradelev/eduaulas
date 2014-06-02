@@ -18,17 +18,5 @@ class Teacher(Person):
 	def __unicode__(self):
 		return self.name + " " + self.last_name
 
-class Owner(models.Model):
-	is_owner = models.BooleanField(default=True)
-	classroom = models.ForeignKey(ClassRoom)
-
-	class Meta:
-		verbose_name = _(u'Dueño')
-		verbose_name_plural = _(u'Dueños')
-
-
-	def __unicode__(self):
-		return self.is_owner
-	
 
 
