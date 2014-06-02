@@ -10,14 +10,9 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'Teacher'
         db.create_table(u'teacher_teacher', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('surname', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            (u'person_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['person.Person'], unique=True, primary_key=True)),
             ('nickname', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('password', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('date_of_birth', self.gf('django.db.models.fields.DateField')()),
-            ('gender', self.gf('django.db.models.fields.BooleanField')()),
-            ('serial', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
         ))
         db.send_create_signal(u'teacher', ['Teacher'])
 
@@ -28,16 +23,20 @@ class Migration(SchemaMigration):
 
 
     models = {
-        u'teacher.teacher': {
-            'Meta': {'object_name': 'Teacher'},
+        u'person.person': {
+            'Meta': {'object_name': 'Person'},
             'date_of_birth': ('django.db.models.fields.DateField', [], {}),
-            'gender': ('django.db.models.fields.BooleanField', [], {}),
+            'gender': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'serial': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'})
+        },
+        u'teacher.teacher': {
+            'Meta': {'object_name': 'Teacher', '_ormbases': [u'person.Person']},
             'nickname': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'serial': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
-            'surname': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+            u'person_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['person.Person']", 'unique': 'True', 'primary_key': 'True'})
         }
     }
 

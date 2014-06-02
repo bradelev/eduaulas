@@ -10,10 +10,10 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'ClassRoom'
         db.create_table(u'classroom_classroom', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('code', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('code', self.gf('django.db.models.fields.CharField')(max_length=5, primary_key=True)),
             ('class_letter', self.gf('django.db.models.fields.CharField')(max_length=3)),
             ('shift', self.gf('django.db.models.fields.CharField')(max_length=20)),
+            ('grade', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['classroom.Grade'])),
         ))
         db.send_create_signal(u'classroom', ['ClassRoom'])
 
@@ -37,8 +37,8 @@ class Migration(SchemaMigration):
         u'classroom.classroom': {
             'Meta': {'object_name': 'ClassRoom'},
             'class_letter': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
-            'code': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'code': ('django.db.models.fields.CharField', [], {'max_length': '5', 'primary_key': 'True'}),
+            'grade': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['classroom.Grade']"}),
             'shift': ('django.db.models.fields.CharField', [], {'max_length': '20'})
         },
         u'classroom.grade': {

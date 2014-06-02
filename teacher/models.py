@@ -1,11 +1,19 @@
 from django.db import models
+# -*- encoding: utf-8 -*-
 from person.models import Person
+from django.utils.translation import ugettext as _
 
 # Create your models here.
-class Teacher(models.Model):
-	person = models.ForeignKey(Person)
-	nickname = models.CharField(max_length=50)
-	password = models.CharField(max_length=100)
+class Teacher(Person):
+	nickname = models.CharField(max_length=50, verbose_name=u'Usuario')
+	password = models.CharField(max_length=100, verbose_name=u'Contraseña')
+
+	class Meta:
+		verbose_name = _('Docente')
+		verbose_name_plural = _('Docentes')
+
+	def __unicode__(self):
+		return super.name + " " + super.last_name
 	
 
 

@@ -10,12 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'Student'
         db.create_table(u'student_student', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('surname', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('date_of_birth', self.gf('django.db.models.fields.DateField')()),
-            ('gender', self.gf('django.db.models.fields.BooleanField')()),
-            ('serial', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
+            (u'person_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['person.Person'], unique=True, primary_key=True)),
         ))
         db.send_create_signal(u'student', ['Student'])
 
@@ -26,14 +21,18 @@ class Migration(SchemaMigration):
 
 
     models = {
-        u'student.student': {
-            'Meta': {'object_name': 'Student'},
+        u'person.person': {
+            'Meta': {'object_name': 'Person'},
             'date_of_birth': ('django.db.models.fields.DateField', [], {}),
-            'gender': ('django.db.models.fields.BooleanField', [], {}),
+            'gender': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'serial': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
-            'surname': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'})
+            'serial': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'})
+        },
+        u'student.student': {
+            'Meta': {'object_name': 'Student', '_ormbases': [u'person.Person']},
+            u'person_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['person.Person']", 'unique': 'True', 'primary_key': 'True'})
         }
     }
 

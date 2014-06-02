@@ -21,7 +21,7 @@ class Migration(SchemaMigration):
         db.create_table(u'location_department', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['location.Country'])),
+            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['location.Country'], blank=True)),
         ))
         db.send_create_signal(u'location', ['Department'])
 
@@ -52,7 +52,7 @@ class Migration(SchemaMigration):
         },
         u'location.department': {
             'Meta': {'object_name': 'Department'},
-            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['location.Country']"}),
+            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['location.Country']", 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'})
         },
