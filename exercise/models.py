@@ -23,7 +23,7 @@ class Result(models.Model):
 
 
 class Exercise(models.Model): 
-	exercise_id = models.IntegerField(default=0, verbose_name=u'Tiempo de realización')
+	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo')
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado')
 	topic = models.ForeignKey('Topic', default="", verbose_name=u'Materia')
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D
