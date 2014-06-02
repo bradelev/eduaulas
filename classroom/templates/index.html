@@ -1,0 +1,43 @@
+{% extends template_base %}
+{% block body %}
+{% load staticfiles %}
+ 
+    <body class="">
+ 
+        <header id="header">
+                [#LOGO]
+                [AJAX_DROPDOWN]
+                [PROJECTS_DROPDOWN]
+                [ICONS_AND_SEARCH]
+        </header>
+ 
+        <aside id="left-panel">
+           [USER_INFO]
+            <nav>
+                <ul>
+                    <li class="">[NAV_LINKS]</li>
+                    <li class="">[NAV_LINKS]</li>
+                    <li class="">[NAV_LINKS]</li>
+                </ul>
+            </nav>
+        </aside>
+ 
+        <!-- MAIN PANEL -->
+        <div id="main">     
+            <!-- RIBBON -->
+            <div id="ribbon">
+                [BREAD_CRUMB]
+            </div>
+            <div id="content">
+                [PAGE_CONTENTS]
+            </div>
+        </div>
+ 
+        <div id="shortcut">
+            [METRO_SHORTCUT]
+        </div>
+ 
+        [ALL_PAGE_SCRIPTS]
+    </body>
+
+{% endblock %}
