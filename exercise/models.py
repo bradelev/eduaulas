@@ -11,6 +11,14 @@ class Result(models.Model):
 	answer = models.TextField(null=True)
 	exercise = models.ForeignKey('Exercise')
 	student = models.ForeignKey(Student)
+	time_elapsed = models.IntegerField(blank=True)
+
+	class Meta:
+		verbose_name = _('Resultado')
+		verbose_name_plural = _('Resultados')
+
+	def __unicode__(self):
+		return self.points
 
 
 class Exercise(models.Model): 
@@ -30,6 +38,10 @@ class Exercise(models.Model):
 	img = models.ImageField(upload_to='media', blank=True)
 	ejercicios_bien = models.ManyToManyField('self', blank=True)
 	ejercicios_mal = models.ManyToManyField('self', blank=True)
+
+	class Meta:
+		verbose_name = _('Ejercicio')
+		verbose_name_plural = _('Ejercicios')
 
 	def __unicode__(self):
 		return self.unit.letter + self.exercise_id
