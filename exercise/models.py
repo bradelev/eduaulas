@@ -25,16 +25,16 @@ class Result(models.Model):
 class Exercise(models.Model): 
 	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo')
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado')
-	topic = models.ForeignKey('Topic', default="", verbose_name=u'Materia')
+	subject = models.ForeignKey('Subject', default="", verbose_name=u'Materia')
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D
-	tipo_choices = (
+	ExerciseType = (
 		('TRUE_FALSE', 'Verdadero o Falso'), 
 		('MULTIPLE_CHOICE', 'Multiple Opcion'), 
 		('DRAG_AND_DROP', 'Arrastrar y Soltar'), 
 		('CRUCIGRAMA', 'Crucigrama'),
 		('FILL_BLANKS', 'Rellenar')
 	)
-	tipo = models.CharField(choices=tipo_choices, max_length=50, verbose_name=u'Tipo de ejercicio')
+	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio')
 	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
 	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien')
@@ -65,7 +65,7 @@ class Unit(models.Model):
 	letter = models.CharField(max_length=1, verbose_name=u'Letra de unidad') #A,B,C, etc
 	name = models.CharField(blank=True, max_length=150, verbose_name=u'Nombre') 
 	description = models.TextField(blank=True, max_length=200, verbose_name=u'Descripción') # EXPLICACION DE LA UNIDAD
-	topic = models.ForeignKey('Topic', verbose_name=u'Materia')
+	subject = models.ForeignKey('Subject', verbose_name=u'Materia')
 	available = models.BooleanField(default=True, verbose_name=u'Habilitada')
 
 
@@ -88,7 +88,7 @@ class Area(models.Model):
 		return self.name
     
 #FISICA, QUIMICA, GEOLOGIA    
-class Topic(models.Model):
+class Subject(models.Model):
 	name = models.CharField(max_length=50, verbose_name=u'Materia')
 
 	class Meta:
