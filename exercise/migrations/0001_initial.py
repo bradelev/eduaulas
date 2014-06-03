@@ -24,9 +24,9 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('exercise_id', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('grade', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['classroom.Grade'])),
-            ('topic', self.gf('django.db.models.fields.related.ForeignKey')(default='', to=orm['exercise.Topic'])),
+            ('subject', self.gf('django.db.models.fields.related.ForeignKey')(default='', to=orm['exercise.Subject'])),
             ('unit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['exercise.Unit'])),
-            ('tipo', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('exercise_type', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('teacher_guide', self.gf('django.db.models.fields.TextField')(max_length=1000, blank=True)),
             ('img', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
         ))
@@ -65,7 +65,7 @@ class Migration(SchemaMigration):
             ('letter', self.gf('django.db.models.fields.CharField')(max_length=1)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(max_length=200, blank=True)),
-            ('topic', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['exercise.Topic'])),
+            ('subject', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['exercise.Subject'])),
             ('available', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'exercise', ['Unit'])
@@ -77,12 +77,12 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'exercise', ['Area'])
 
-        # Adding model 'Topic'
-        db.create_table(u'exercise_topic', (
+        # Adding model 'Subject'
+        db.create_table(u'exercise_subject', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
-        db.send_create_signal(u'exercise', ['Topic'])
+        db.send_create_signal(u'exercise', ['Subject'])
 
 
     def backwards(self, orm):
@@ -107,8 +107,8 @@ class Migration(SchemaMigration):
         # Deleting model 'Area'
         db.delete_table(u'exercise_area')
 
-        # Deleting model 'Topic'
-        db.delete_table(u'exercise_topic')
+        # Deleting model 'Subject'
+        db.delete_table(u'exercise_subject')
 
 
     models = {
@@ -126,13 +126,13 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Exercise'},
             'bad_related_exercises': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'bad_related_exercises_rel_+'", 'blank': 'True', 'to': u"orm['exercise.Exercise']"}),
             'exercise_id': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'exercise_type': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'good_related_exercises': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'good_related_exercises_rel_+'", 'blank': 'True', 'to': u"orm['exercise.Exercise']"}),
             'grade': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['classroom.Grade']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'img': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'subject': ('django.db.models.fields.related.ForeignKey', [], {'default': "''", 'to': u"orm['exercise.Subject']"}),
             'teacher_guide': ('django.db.models.fields.TextField', [], {'max_length': '1000', 'blank': 'True'}),
-            'tipo': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'topic': ('django.db.models.fields.related.ForeignKey', [], {'default': "''", 'to': u"orm['exercise.Topic']"}),
             'unit': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['exercise.Unit']"})
         },
         u'exercise.result': {
@@ -144,17 +144,17 @@ class Migration(SchemaMigration):
             'student': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['student.Student']"}),
             'time_elapsed': ('django.db.models.fields.IntegerField', [], {'blank': 'True'})
         },
+        u'exercise.subject': {
+            'Meta': {'object_name': 'Subject'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
         u'exercise.teachercomments': {
             'Meta': {'object_name': 'TeacherComments'},
             'comments': ('django.db.models.fields.TextField', [], {}),
             'exercise': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['exercise.Exercise']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'teacher': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['teacher.Teacher']", 'blank': 'True'})
-        },
-        u'exercise.topic': {
-            'Meta': {'object_name': 'Topic'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         u'exercise.unit': {
             'Meta': {'object_name': 'Unit'},
@@ -163,11 +163,11 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'letter': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'}),
-            'topic': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['exercise.Topic']"})
+            'subject': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['exercise.Subject']"})
         },
         u'person.person': {
             'Meta': {'object_name': 'Person'},
-            'date_of_birth': ('django.db.models.fields.DateField', [], {}),
+            'date_of_birth': ('django.db.models.fields.DateField', [], {'blank': 'True'}),
             'gender': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
@@ -180,6 +180,7 @@ class Migration(SchemaMigration):
         },
         u'teacher.teacher': {
             'Meta': {'object_name': 'Teacher', '_ormbases': [u'person.Person']},
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'nickname': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'person_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['person.Person']", 'unique': 'True', 'primary_key': 'True'})

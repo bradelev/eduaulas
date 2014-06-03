@@ -23,7 +23,7 @@ class Migration(SchemaMigration):
     models = {
         u'person.person': {
             'Meta': {'object_name': 'Person'},
-            'date_of_birth': ('django.db.models.fields.DateField', [], {}),
+            'date_of_birth': ('django.db.models.fields.DateField', [], {'blank': 'True'}),
             'gender': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
