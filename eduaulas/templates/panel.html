@@ -1,0 +1,103 @@
+{% extends template_base %}
+{% block body %}
+{% load staticfiles %}
+ 
+    <body class="">
+ 
+        <header id="header">
+                [#LOGO]
+                [AJAX_DROPDOWN]
+                [PROJECTS_DROPDOWN]
+                [ICONS_AND_SEARCH]
+        </header>
+ 
+        <aside id="left-panel">
+           [USER_INFO]
+            <nav>
+                <ul>
+                    <li class="">[NAV_LINKS]</li>
+                    <li class="">[NAV_LINKS]</li>
+                    <li class="">[NAV_LINKS]</li>
+                    <li> hola <head></head></li>
+                </ul>
+            </nav>
+        </aside>
+ 
+        <!-- MAIN PANEL -->
+        <div id="main">     
+            <!-- RIBBON -->
+            <div id="ribbon">
+                [BREAD_CRUMB]
+            </div>
+            <div id="content">
+                    <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="widget-body-toolbar">
+
+                        </div>
+                        
+                        <table id="dt_basic" class="display table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Last name</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                             
+                            {%for s in students%}
+                                <tr>
+                                <td><a>{{s.name}}</a></td>
+                                <td><a>{{s.last_name}}</a></td>
+                                </tr>
+                            {%endfor%}
+                                
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+    </body>
+            </div>
+        </div>
+ 
+        <div id="shortcut">
+            [METRO_SHORTCUT]
+        </div>
+ 
+        [ALL_PAGE_SCRIPTS]
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+<script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>-->
+<script type="text/javascript">
+
+
+
+$(document).ready(function() {
+    $('#dt_basic').dataTable();
+} );
+</script>
+{% endblock%}

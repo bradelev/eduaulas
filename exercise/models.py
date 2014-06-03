@@ -23,8 +23,8 @@ class Result(models.Model):
 
 
 class Exercise(models.Model): 
-	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo')
-	grade = models.ForeignKey(Grade, verbose_name=u'Grado')
+	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
+	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 	subject = models.ForeignKey('Subject', default="", verbose_name=u'Materia')
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D
 	ExerciseType = (
@@ -44,8 +44,8 @@ class Exercise(models.Model):
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
 
-	def __unicode__(self):
-		return self.grade.name + " " +self.topic.name + " " + self.unit.letter + self.exercise_id
+	#def __unicode__(self):
+	#	return self.grade.name + " " +self.topic.name + " " + self.unit.letter + self.exercise_id
 
 class TeacherComments(models.Model):
 	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True)

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from exercise.models import Result, Exercise, TeacherComments, Unit, Area, Subject
+from exercise.models import Result, Exercise, TeacherComments, Unit, Area, Subject, Grade
 from location.models import School, Department, Country
 from teacher.models import Teacher
 from student.models import Student
@@ -19,3 +19,4 @@ admin.site.register(Department)
 admin.site.register(Country)
 admin.site.register(Teacher)
 admin.site.register(Student)
+admin.site.register(Grade)
