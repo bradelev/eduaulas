@@ -9,7 +9,7 @@ class Teacher(Person):
 	email = models.EmailField(blank=True)
 	nickname = models.CharField(max_length=50, verbose_name=u'Usuario')
 	password = models.CharField(max_length=100, verbose_name=u'Contraseña')
-	owner = models.ForeignKey('Owner', blank=True, default=True)
+	
 
 	class Meta:
 		verbose_name = _('Docente')
