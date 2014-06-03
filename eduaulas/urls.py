@@ -8,4 +8,5 @@ urlpatterns = patterns('',
 	url(r'^panel/', include('dashboard.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^cargarDatos/', 'datosTest.cargarDatosTest.ingresar_datos')
 )
