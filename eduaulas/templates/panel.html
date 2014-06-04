@@ -29,7 +29,16 @@
             <div id="ribbon">
                 [BREAD_CRUMB]
             </div>
+
             <div id="content">
+                <div>
+                <select>
+                     {%for u in us%}
+                    <option>{{u.name}}</option>
+                    {%endfor%}
+                </select>          
+                
+            </div>  
                     <div>
 
                     <!-- widget edit box -->
@@ -47,10 +56,17 @@
                         
                         <table id="dt_basic" class="display table table-striped table-bordered table-hover">
                             <thead>
+                                                               
+                            
                                 <tr>
+                                    
                                     <th>Name</th>
                                     <th>Last name</th>
-                                    
+                                    {%for e in ex%}
+                                    <th>{{e.exercise_id}}</th>
+                                
+                                {%endfor%}
+                                
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,8 +75,16 @@
                                 <tr>
                                 <td><a>{{s.name}}</a></td>
                                 <td><a>{{s.last_name}}</a></td>
+                            
+                            {%for e in ex%}
+                                    
+                                 <td> </td>
+                                {%endfor%}
+                               
                                 </tr>
                             {%endfor%}
+
+                          
                                 
                             </tbody>
                         </table>
