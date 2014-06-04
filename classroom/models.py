@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext as _
+from teacher.models import Teacher
 
 
 
@@ -16,13 +17,14 @@ class ClassRoom(models.Model):
 	)
 	shift = models.CharField(max_length = 20, choices = shift_choices, verbose_name=u'Turno')
 	grade = models.ForeignKey('Grade', verbose_name=u'Grado')
+	teachers = models.ManyToManyField(Teacher, verbose_name=u'Docente')
 
 	class Meta:
 		verbose_name = _('Aula')
 		verbose_name_plural = _('Aulas')
 
 	def __unicode__(self):
-		return self.grade.name + "° " + self.class_letter
+		return str(self.grade.name) + "° " + self.class_letter
 
 	#escuela = 
 
