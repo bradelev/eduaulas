@@ -36,7 +36,7 @@ class Grade(models.Model):
 		verbose_name_plural = _('Grados')
 
 	def __unicode__(self):
-		return self.name
+		return unicode(self.name) 
 
 
 
