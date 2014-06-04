@@ -7,7 +7,7 @@ from teacher.models import Teacher
 
 # Create your models here.
 class ClassRoom(models.Model):
-	code = models.CharField(max_length = 5, verbose_name=u'Código de aula', primary_key=True) #CODIGO DE ACCESO AL AULA	
+	code = models.CharField(max_length = 5, verbose_name=u'Codigo de aula', primary_key=True) #CODIGO DE ACCESO AL AULA	
 	class_letter = models.CharField(max_length=3, verbose_name=u'Letra de clase') #A, B, C...
 	shift_choices = (
 		('OTHER', 'Otro'), 

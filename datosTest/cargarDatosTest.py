@@ -1,5 +1,8 @@
 from django.db import models
 from student.models import Student
+from classroom.models import Grade
+from exercise.models import Unit, Exercise
+from teacher.models import Teacher
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -29,4 +32,6 @@ def ingresar_datos(request):
 	e.last_name= 'Lopez'
 	e.save()
 
+
+	u= Unit()
 	return render_to_response('index.html', context_instance = RequestContext(request))
