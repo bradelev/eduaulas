@@ -2,13 +2,13 @@
 from django.db import models
 from classroom.models import ClassRoom
 from person.models import Person
-
 from django.utils.translation import ugettext as _
 
 # Create your models here.
 class Student(Person):
+	class_room = models.ForeignKey(ClassRoom,verbose_name=u'Aula')
 	
-	#classroom =models.ForeignKey('ClassRoom', verbose_name=u'Aula')
+	
 
 
 	class Meta:
