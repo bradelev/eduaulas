@@ -32,61 +32,57 @@
 
             <div id="content">
                 <div>
-                <select>
-                     {%for u in us%}
-                    <option>{{u.name}}</option>
-                    {%endfor%}
-                </select>          
-                
-            </div>  
-                    <div>
+                   <select>
+                         {%for u in us%}
+                            <option>{{u.name}}</option>
+                        {%endfor%}
+                    </select>        
+                   
+                    <a href="/panel/lista/1" class="btn btn-primary">Refresh</a>
+                </div>  
+                        
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
 
-                    <!-- widget edit box -->
-                    <div class="jarviswidget-editbox">
-                        <!-- This area used as dropdown edit box -->
-
-                    </div>
-                    <!-- end widget edit box -->
+                </div>
+                <!-- end widget edit box -->
 
                     <!-- widget content -->
                     <div class="widget-body no-padding">
                         <div class="widget-body-toolbar">
-
+                            <br>
                         </div>
                         
                         <table id="dt_basic" class="display table table-striped table-bordered table-hover">
                             <thead>
-                                                               
-                            
                                 <tr>
-                                    
                                     <th>Name</th>
                                     <th>Last name</th>
                                     {%for e in ex%}
-                                    <th>{{e.exercise_id}}</th>
-                                
-                                {%endfor%}
-                                
+                                        <th>{{e.exercise_id}}</th>
+                                    {%endfor%}                        
                                 </tr>
                             </thead>
-                            <tbody>
-                             
+                            <tbody>                            
                             {%for s in students%}
-                                <tr>
+                            <tr>
                                 <td><a>{{s.name}}</a></td>
                                 <td><a>{{s.last_name}}</a></td>
-                            
-                            {%for e in ex%}
-                                    
-                                 <td> </td>
-                                {%endfor%}
-                               
-                                </tr>
-                            {%endfor%}
-
-                          
                                 
-                            </tbody>
+
+                                {%for r in results%}                            
+                                        {% if r.student = s %}                                 
+                                            {% if r.points = null %}
+                                                <td>X</td>  
+                                            {%else%}
+                                                <td>{{r.points}} </td>
+                                            {% endif %}                                                                             
+                                        {% endif %}                
+                                   {%endfor%}  
+                            {%endfor%}                            
+                          </tr>                             
+                        </tbody>
                         </table>
 
                     </div>
