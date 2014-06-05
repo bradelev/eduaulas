@@ -14,7 +14,7 @@ class School(models.Model):
 		verbose_name_plural = _('Escuelas')
 
 	def __unicode__(self):
-		return self.number + " - " + self.name
+		return str(self.number) + " - " + self.name
 
 class Department(models.Model):
 	name = models.CharField(max_length=50, blank=True, verbose_name=u'Departamento')

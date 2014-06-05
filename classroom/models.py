@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from teacher.models import Teacher
+from location.models import School
 
 
 
@@ -18,15 +19,16 @@ class ClassRoom(models.Model):
 	shift = models.CharField(max_length = 20, choices = shift_choices, verbose_name=u'Turno')
 	grade = models.ForeignKey('Grade', verbose_name=u'Grado')
 	teachers = models.ManyToManyField(Teacher, verbose_name=u'Docente')
+	school = models.ForeignKey(School, verbose_name=u'Escuela')
 
 	class Meta:
 		verbose_name = _('Aula')
 		verbose_name_plural = _('Aulas')
 
 	def __unicode__(self):
-		return str(self.grade.name) + "° " + self.class_letter
+		return str(self.grade.name) + unicode('°', encoding='utf-8') + self.class_letter + ' Escuela Num ' + str(self.school.number)
 
-	#escuela = 
+	
 
 class Grade(models.Model):
 	name = models.IntegerField(default = 0, blank = True, verbose_name=u'Año')
