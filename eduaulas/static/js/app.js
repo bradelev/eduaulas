@@ -27,7 +27,7 @@
 	 * APP CONFIGURATION
 	 * Description: Enable / disable certain theme features here
 	 */		
-	$.navAsAjax = true; // Your left nav in your app will no longer fire ajax calls
+	$.navAsAjax = false; // Your left nav in your app will no longer fire ajax calls
 	
 	// Please make sure you have included "jarvis.widget.js" for this below feature to work
 	$.enableJarvisWidgets = true;
@@ -57,7 +57,7 @@
 		
 		// Removes the tap delay in idevices
 		// dependency: js/plugin/fastclick/fastclick.js 
-		// FastClick.attach(document.body);
+		//FastClick.attach(document.body);
 	}
 
 /* ~ END: CHECK MOBILE DEVICE */
@@ -187,14 +187,9 @@ $(document).ready(function() {
 
 	// RESET WIDGETS
 	$('#refresh').click(function(e) {
-		
-		var $this = $(this);
-		
-		$.widresetMSG = $this.data('reset-msg');
-		
 		$.SmartMessageBox({
 			title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
-			content : $.widresetMSG || "Would you like to RESET all your saved widgets and clear LocalStorage?",
+			content : "Would you like to RESET all your saved widgets and clear LocalStorage?",
 			buttons : '[No][Yes]'
 		}, function(ButtonPressed) {
 			if (ButtonPressed == "Yes" && localStorage) {
