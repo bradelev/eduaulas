@@ -106,7 +106,10 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
 )
-
+TEMPLATE_LOADERS = (
+   'django.template.loaders.filesystem.Loader',
+   'django.template.loaders.app_directories.Loader',
+)
 TEMPLATE_DIRS = (
     os.path.join(DIR_APP,'templates'),
 )
