@@ -41,7 +41,11 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 						<div class="well no-padding">
-							<form action="index.html" id="login-form" class="smart-form client-form">
+							<form  id="login-form" class="smart-form client-form" method="post">
+								{% csrf_token %}
+						        {% if next %}
+						            <input type="hidden" name="next" value="{{ next }}" />
+						        {% endif %}
 								<header>
 									Ingreso
 								</header>
@@ -49,9 +53,9 @@
 								<fieldset>
 									
 									<section>
-										<label class="label">Correo Electrónico</label>
+										<label class="label">Usuario</label>
 										<label class="input"> <i class="icon-append fa fa-user"></i>
-											<input type="email" name="email">
+											<input type="text" name="username">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingresa tu usuario</b></label>
 									</section>
 
@@ -88,10 +92,10 @@
 		<!--================================================== -->	
 
 		
-		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+		<script src="{% static "js/plugin/jquery-validate/jquery.validate.min.js" %}"></script>
 
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.js"></script>
+		<script src="{% static "js/app.js" %}"></script>
 
 		<script type="text/javascript">
 			runAllForms();
@@ -101,9 +105,8 @@
 				$("#login-form").validate({
 					// Rules for form validation
 					rules : {
-						email : {
+						username : {
 							required : true,
-							email : true
 						},
 						password : {
 							required : true,
@@ -114,9 +117,8 @@
 
 					// Messages for form validation
 					messages : {
-						email : {
-							required : 'Ingrese su correo',
-							email : 'Ingrese una dirección válida'
+						username : {
+							required : 'Ingrese su usuario'
 						},
 						password : {
 							required : 'Ingrese su contraseña'
