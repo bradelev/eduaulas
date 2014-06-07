@@ -1,0 +1,227 @@
+{% extends template_base %}
+{% block body %}
+{% load staticfiles %}
+        
+        <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
+
+        <!-- HEADER -->
+        <header id="header">
+            
+
+            
+            <!-- end projects dropdown -->
+
+            <!-- pulled right: nav area -->
+            
+            <!-- end pulled right: nav area -->
+
+        </header>
+        <!-- END HEADER -->
+
+        <!-- Left panel : Navigation area -->
+        <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+        <aside id="left-panel">
+
+            <!-- User info -->
+            
+            <!-- end user info -->
+
+            <!-- NAVIGATION : This navigation is also responsive
+
+            To make this navigation dynamic please make sure to link the node
+            (the reference to the nav > ul) after page load. Or the navigation
+            will not initialize.
+            -->
+            
+            <!--<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>-->
+
+        </aside>
+        <!-- END NAVIGATION -->
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+
+                
+
+                
+
+                <!-- You can also add more buttons to the
+                ribbon for further usability
+
+                Example below:
+
+                <span class="ribbon-button-alignment pull-right">
+                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                </span> -->
+
+            </div>
+            <!-- END RIBBON -->
+
+           <!-- MAIN CONTENT -->
+            <div id="content">
+
+                <div id="filters">    
+
+                    <select>
+                        {% for a in areas %}
+                        <option>{{a.name}}</option>
+                        {% endfor %}
+                    </select>   
+                    <select>
+                        {% for s in subjects %}
+                        <option>{{s.name}}</option>
+                        {% endfor %}
+                    </select>   
+                    <select>
+                        {% for u in units %}
+                        <option>{{u.name}}</option>
+                        {% endfor %}
+                    </select>   
+
+                    <span class="ribbon-button-alignment"> <span id="test" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="Actualizar Tabla." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+                </div> <!-- filters -->   
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h1 class="page-title txt-color-blueDark">
+                            <i class="fa fa-table fa-fw "></i> 
+                                Quimica 
+                            <span> > 
+                                Unidad: A
+                            </span>
+                        </h1>
+                    </div>
+                    
+                </div>
+                
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                
+                    <!-- row -->
+                    <div class="row">
+                
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="true">
+
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+                
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Alumnos </h2>
+                    
+                                </header>
+                
+                                <!-- widget div-->
+                                <div>
+                
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                
+                                    </div>
+                                    <!-- end widget edit box -->
+                
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                    <div class="widget-body-toolbar">
+                
+                                        </div>
+                                    
+                                        <table  id="dt_alumnos" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>                                                                  
+                                                </tr>
+                                            </thead>
+
+                                            <tbody >                            
+                      
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end widget content -->
+                
+                                </div>
+                                <!-- end widget div -->
+                
+                            </div>
+                            <!-- end widget -->
+
+                
+                        </article>
+                        <!-- WIDGET END -->
+                
+                    </div>
+                
+                    <!-- end row -->
+                
+                </section>
+                <!-- end widget grid -->
+
+            </div>
+            
+                
+        </div>
+        <!-- END MAIN PANEL -->
+
+
+{% endblock %}
+
+{% block scripts %}  
+
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" ></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="{% static "js/libs/jquery-2.0.2.min.js" %}" ><\/script>');
+            }
+        </script>
+        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="{% static "js/libs/jquery-ui-1.10.3.min.js" %}"><\/script>');
+            }
+        </script>
+
+        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+        <script src="{% static "js/plugin/jquery-touch/jquery.ui.touch-punch.min.js" %}"></script> -->
+
+        <!-- BOOTSTRAP JS -->
+        <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
+        <!-- MAIN APP JS FILE -->
+        <script src="{% static "js/app.js" %}"></script>
+        <script src="{% static "js/functions.js" %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                pageSetUp();
+               $('#dt_alumnos').dataTable();
+            
+                });
+        </script>
+
+    
+     
+{% endblock %}
