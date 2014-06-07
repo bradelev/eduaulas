@@ -11,15 +11,17 @@ function ini(){
 function get_students_data () {
 	
     var query = $.ajax({
-    url:"list/",
+    url:"list/students/",
     type:'GET',
     dataType:"json",
     data:{
           name:name,
+          last_name:last_name,
     }, 
 
     "success":function(data){
         create_table_students(data);
+        $('#dt_alumnos').dataTable();
        
       }
 
@@ -36,12 +38,14 @@ if(data['type'] == 'success'){
     for (var x in data["dictionary_students"]){
       output += "<tr>";
       (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
+      (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
       output += "</tr>";
     }
 
     if (output != ""){
-      
+     
       $("#dt_alumnos").html(output);
+
     }
     
 }

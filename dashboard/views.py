@@ -24,7 +24,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 	
 
 def ini(request):
-	
+
 	var_areas = Area.objects.all()
 	var_subjects = Subject.objects.all()
 	var_units = Unit.objects.all()
@@ -50,10 +50,11 @@ def list_students(request):
 		var_results = Result.objects.filter(student=students, exercise=exercises)
 
 		type = "success"
-		for x in dictionary_students:				
+		for x in students:				
 			dictionary_students[x.id] = {
 				
-				"name": name,
+				"name": x.name,
+				"last_name": x.last_name
 				
 			}
 		
