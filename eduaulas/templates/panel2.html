@@ -146,16 +146,7 @@
                                         </div>
                                     
                                         <table  id="dt_alumnos" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Apellido</th>                                                                  
-                                                </tr>
-                                            </thead>
-
-                                            <tbody >                            
-                      
-                                            </tbody>
+                                    
                                         </table>
                                     </div>
                                     <!-- end widget content -->
@@ -212,16 +203,16 @@
         <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
         <!-- MAIN APP JS FILE -->
         <script src="{% static "js/app.js" %}"></script>
-        <script src="{% static "js/functions.js" %}"></script>
+        
         <script type="text/javascript">
             $(document).ready(function() {
                
                 pageSetUp();
-               
+                $('#dt_alumnos').dataTable();
             
                 });
         </script>
-
+        <script src="{% static "js/functions.js" %}"></script>
     
      
 {% endblock %}
