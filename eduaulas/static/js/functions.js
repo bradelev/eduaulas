@@ -15,8 +15,8 @@ function get_students_data () {
     type:'GET',
     dataType:"json",
     data:{
-          name:name,
-          last_name:last_name,
+          name:'name',
+          last_name:'last_name',
     }, 
 
     "success":function(data){
@@ -44,7 +44,7 @@ if(data['type'] == 'success'){
 
     if (output != ""){
      
-      $("#dt_alumnos").html(output);
+      $("#dt_alumnos > tbody").append(output);
 
     }
     

@@ -108,7 +108,7 @@
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="true">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="false">
 
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -141,9 +141,9 @@
                 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                    <div class="widget-body-toolbar">
+                                    <!--<div class="widget-body-toolbar">
                 
-                                        </div>
+                                        </div>-->
                                     
                                         <table  id="dt_alumnos" class="table table-striped table-bordered table-hover">
                                             <thead>
@@ -212,7 +212,7 @@
         <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
         <!-- MAIN APP JS FILE -->
         <script src="{% static "js/app.js" %}"></script>
-        <script src="{% static "js/functions.js" %}"></script>
+        
         <script type="text/javascript">
             $(document).ready(function() {
                
@@ -221,7 +221,7 @@
             
                 });
         </script>
-
+        <script src="{% static "js/functions.js" %}"></script>
     
      
 {% endblock %}
