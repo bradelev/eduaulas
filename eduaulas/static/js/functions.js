@@ -52,7 +52,7 @@ if(data['type'] == 'success'){
     output+="</tbody >"
     if (output != ""){
      
-      $("#dt_alumnos").html(output);
+      $("#dt_alumnos > tbody").append(output);
 
     }
     
