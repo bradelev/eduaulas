@@ -115,15 +115,22 @@
 									<section class="col col-4">
 										<label class="select">
 											<select name="country">
-												<option value="0" selected="" disabled="">Pais</option>
-												<option value="1">Uruguay</option>
+                                                <option value="0" selected="" disabled="">Pais</option>
+                                                {% for c in countrys %}
+												<option value="1">{{c.name}}</option>
+                                                {% endfor%}
 											</select> <i></i> </label>
 									</section>
 									
 									<section class="col col-4">
-										<label class="input">
-											<input type="text" name="department" placeholder="Departamento">
-										</label>
+										    <label class="select">
+                                            <select name="department">
+                                                <option value="0" selected="" disabled="">Departamento</option>
+                                                {% for d in departments %}
+                                                <option value="1">{{d.name}}</option>
+                                                {% endfor %}
+                                            </select> <i></i> </label>
+                                    
 									</section>
 
 								</div>
@@ -134,18 +141,16 @@
 											<input type="text" name="schoolNumber" placeholder="Numero de escuela">
 										</label>
 									</section>
-									<section class="col col-3">
+									<section class="col col-2">
 										<label class="select">
 											<select name="grade">
 												<option value="0" selected="" disabled="">Grado</option>
-												<option value="1">Primero</option>
-												<option value="1">Segundo</option>
-												<option value="2">Tercero</option>
-												<option value="2">Cuarto</option>
-												<option value="3">Quinto</option>
+                                                {% for g in grades%}
+												<option value="1">{{g.name}}</option>
+												{% endfor %}
 											</select> <i></i> </label>
 									</section>
-									<section class="col col-3">
+									<section class="col col-1s">
 										<label for="className" class="input">
 											<input type="text" name="className" id="class" placeholder="Clase">
 										</label>
@@ -154,10 +159,10 @@
 										<label class="select">
 											<select name="shift">
 												<option value="0" selected="" disabled="">Turno</option>
-												<option value="1">Matutino</option>
-												<option value="1">Vespertino</option>
-												<option value="2">Tiempo Completo</option>
-												<option value="2">Otro</option>
+												<option value="MORNING">Matutino</option>
+												<option value="EVENING">Vespertino</option>
+												<option value="FULL_TIME">Tiempo Completo</option>
+												<option value="OTHER">Otro</option>
 												
 											</select> <i></i> </label>
 									</section>

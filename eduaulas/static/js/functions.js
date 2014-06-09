@@ -81,7 +81,7 @@ $('#classroom-form').validate({
           },
           schoolNumber : {
             required : true
-          }
+          },
           shift : {
             required : true
           }
@@ -104,7 +104,7 @@ messages : {
           },
           className : {
             required : 'Por favor ingrese el nombre de la clase'
-          }
+          },
           shift : {
             required : 'Por favor ingrese el turno de la clase'
           }
