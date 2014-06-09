@@ -85,34 +85,21 @@ function get_classroom_data () {
 } /*cierro function get_students_data*/
 
 
-function create_table_classrooms (data) {
+function create_table_students (data) {
 
-if(data['type'] == 'success'){  
-   
-    var output = "";
-    output+="<thead>";
-    output+="<tr>";
-    output+="<th>Nombre</th>";
-    output+="<th>Apellido</th>"
-    output+="</tr>"
-    output+="</thead>"
-    output+="<tbody >"
-
-    for (var x in data["dictionary_students"]){
-      output += "<tr>";
-      (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
-      (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
-      output += "</tr>";
-    }
-    output+="</tbody >"
-    if (output != ""){
+  if(data['type'] == 'success'){  
      
-      $("#dt_alumnos > tbody").append(output);
-
-    }
-    
-}
-
+      var output = "";
+      for (var x in data["dictionary_students"]){
+        output += "<tr>";
+        (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
+        (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
+        output += "</tr>";
+      }
+      if (output != ""){
+        $("#dt_alumnos > tbody").append(output);
+      }
+  }
 
 } /*cierro function create_table_classrooms*/
 
@@ -121,7 +108,7 @@ if(data['type'] == 'success'){
 
 
 
-$(function() {
+$(function(){
 
 $('#classroom-form').validate({
       // Rules for form validation

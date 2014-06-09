@@ -146,7 +146,16 @@
                                         </div>-->
                                     
                                         <table  id="dt_alumnos" class="table table-striped table-bordered table-hover">
-                                    
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody >                            
+                      
+                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- end widget content -->
@@ -208,8 +217,7 @@
             $(document).ready(function() {
                
                 pageSetUp();
-                $('#dt_alumnos').dataTable();
-                get_students_data();
+               
             
                 });
         </script>
