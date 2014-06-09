@@ -1,0 +1,235 @@
+{% extends template_base %}
+{% block body %}
+{% load staticfiles %}
+ 			<header id="header">
+
+        	</header>
+        
+	       <aside id="left-panel">
+
+            <!-- User info -->
+            
+            <!-- end user info -->
+
+            <!-- NAVIGATION : This navigation is also responsive
+
+            To make this navigation dynamic please make sure to link the node
+            (the reference to the nav > ul) after page load. Or the navigation
+            will not initialize.
+            -->
+            
+            <!--<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>-->
+
+        </aside>
+        <!-- END NAVIGATION -->
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+
+                
+
+                
+
+                <!-- You can also add more buttons to the
+                ribbon for further usability
+
+                Example below:
+
+                <span class="ribbon-button-alignment pull-right">
+                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                </span> -->
+
+            </div>
+            <!-- END RIBBON -->
+
+           <!-- MAIN CONTENT -->
+            <div id="content">
+
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h1 class="page-title txt-color-blueDark">
+                            <i class="fa fa-table fa-fw "></i> 
+                                Aulas 
+                            <span> > 
+                               
+                            </span>
+                        </h1>
+                    </div>
+                    
+                </div>
+                
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                
+                    <!-- row -->
+                    <div class="row">
+                
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="false">
+
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+                
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Ingresar aula </h2>
+                    
+                                </header>
+                
+                                <!-- widget div-->
+                                <div>
+                
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+    
+                        </div>
+                        <!-- end widget edit box -->
+    
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
+                            {% csrf_token %}
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<label class="select">
+											<select name="country">
+												<option value="0" selected="" disabled="">Pais</option>
+												<option value="1">Uruguay</option>
+											</select> <i></i> </label>
+									</section>
+									
+									<section class="col col-4">
+										<label class="input">
+											<input type="text" name="department" placeholder="Departamento">
+										</label>
+									</section>
+
+								</div>
+								<div class="row">
+				
+									<section class="col col-2">
+										<label for="schoolNumber" class="input">
+											<input type="text" name="schoolNumber" placeholder="Numero de escuela">
+										</label>
+									</section>
+									<section class="col col-3">
+										<label class="select">
+											<select name="grade">
+												<option value="0" selected="" disabled="">Grado</option>
+												<option value="1">Primero</option>
+												<option value="1">Segundo</option>
+												<option value="2">Tercero</option>
+												<option value="2">Cuarto</option>
+												<option value="3">Quinto</option>
+											</select> <i></i> </label>
+									</section>
+									<section class="col col-3">
+										<label for="className" class="input">
+											<input type="text" name="className" id="class" placeholder="Clase">
+										</label>
+									</section>
+									<section class="col col-3">
+										<label class="select">
+											<select name="shift">
+												<option value="0" selected="" disabled="">Turno</option>
+												<option value="1">Matutino</option>
+												<option value="1">Vespertino</option>
+												<option value="2">Tiempo Completo</option>
+												<option value="2">Otro</option>
+												
+											</select> <i></i> </label>
+									</section>
+								</div>		
+							</fieldset>
+
+							<footer>
+								<button type="submit" class="btn btn-primary">
+									Agregar aula
+								</button>
+							</footer>
+						</form>
+
+			                    </div>
+			                    <!-- end widget content -->
+
+			                </div>
+			                <!-- end widget div -->
+
+			            </div>
+			            <!-- end widget -->
+
+
+			        </article>
+			        <!-- WIDGET END -->
+                
+                    </div>
+                
+                    <!-- end row -->
+                
+                </section>
+                <!-- end widget grid -->
+
+            </div>
+            
+                
+        </div>
+        <!-- END MAIN PANEL -->
+
+		
+		
+{% endblock %}
+
+{% block scripts %}  
+
+	<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" ></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="{% static "js/libs/jquery-2.0.2.min.js" %}" ><\/script>');
+            }
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="{% static "js/libs/jquery-ui-1.10.3.min.js" %}"><\/script>');
+            }
+        </script>
+
+        <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="{% static "js/app.js" %}"></script>
+        <script src="{% static "js/plugin/jquery-form/jquery-form.min.js"%}"></script>
+        <script src="{% static "js/plugin/jquery-validate/jquery.validate.min.js" %}"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                pageSetUp();
+     
+      });
+        </script>
+        <script src="{% static "js/functions.js" %}"></script>
+{% endblock %}
