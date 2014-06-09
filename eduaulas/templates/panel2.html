@@ -131,7 +131,7 @@
                 
                                 <!-- widget div-->
                                 <div>
-                
+                                    
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -141,10 +141,9 @@
                 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                    <!--<div class="widget-body-toolbar">
+                                        <div class="widget-body-toolbar">
                 
-                                        </div>-->
-                                    
+                                        </div>
                                         <table  id="dt_alumnos" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -197,6 +196,13 @@
         </script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/ColReorder.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/FixedColumns.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/ColVis.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/ZeroClipboard.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
         <script>
@@ -217,7 +223,9 @@
             $(document).ready(function() {
                
                 pageSetUp();
-               
+              
+                
+    
             
                 });
         </script>
