@@ -35,6 +35,52 @@ def ini(request):
 
 
 def list_students(request):
+	#print('fuera del post')
+	#if request.POST:
+
+	#	var_unit =request.POST['unit'] 
+	#	print('dentro del post')
+	#	print(var_unit, Unidad)
+	dictionary_students = {}
+	dictionary_students_exercises = {}
+	message = ""
+	type = "error"
+	try:
+		var_unit = Unit.objects.get(pk=1)
+		#cl = ClassRoom.objects.get(pk='efr5g')
+		students = Student.objects.filter()
+		exercises = Exercise.objects.filter(unit=var_unit)
+		var_students_exercises = Result.objects.filter(student=students, exercise=exercises)
+
+		type = "success"
+		for e in var_students_exercises:				
+			dictionary_students_exercises[e.id] = {
+				
+				"exercise_id": e.exercise_id				
+				
+			}
+		for x in students:				
+			dictionary_students[x.id] = {
+				
+				"name": x.name,
+				"last_name": x.last_name
+				
+			}
+		
+	except Student.DoesNotExist:
+		message = "No hay alumnos"
+	result = simplejson.dumps({
+			"dictionary_students":dictionary_students,
+			"dictionary_students_exercises":dictionary_students_exercises,
+			"message":message,
+			"type":type,
+		}, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
+
+	#return render_to_response('panel2.html',{'students':students,'ex':exercises, 'results': var_results }, context_instance = RequestContext(request))
+
+
+	"""def list_students(request):
 	print("entra")
 	#print("no entra")
 	#if request.is_ajax():
@@ -65,18 +111,4 @@ def list_students(request):
 			"message":message,
 			"type":type,
 		}, cls = LazyEncoder)
-	return HttpResponse(result, mimetype = 'application/javascript')
-
-	#return render_to_response('panel2.html',{'students':students,'ex':exercises, 'results': var_results }, context_instance = RequestContext(request))
-
-
-#	render_to_response('index.html', context_instance = RequestContext(request))
-
-#
-
-
-def compartir(request):
-	render_to_response('index.html', context_instance = RequestContext(request))
-
-def detalle(request, id):
-	render_to_response('index.html', context_instance = RequestContext(request))	
+	return HttpResponse(result, mimetype = 'application/javascript')"""

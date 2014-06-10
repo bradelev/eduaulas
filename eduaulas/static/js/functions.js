@@ -2,15 +2,15 @@ $(document).ready(ini);
 
 
 function ini(){
-
-	$('#test').click(get_students_data);
-  get_classroom_data();
+$('#load_students2').click(get_students_data);
+	$('#load_students').click(get_students_data);
+/*  get_classroom_data();*/
 
 }
 
 
 function get_students_data () {
-	
+	 
     var query = $.ajax({
     url:"list/students/",
     type:'GET',
@@ -18,6 +18,7 @@ function get_students_data () {
     data:{
           name:'name',
           last_name:'last_name',
+          exercise_id: 'exercise_id'
     }, 
 
     "success":function(data){
@@ -57,7 +58,7 @@ if(data['type'] == 'success'){
 
 
 function get_classroom_data() {
-    alert('hola mundo');
+    
     var query = $.ajax({
     url:"lista/aulas/",
     type:'GET',
