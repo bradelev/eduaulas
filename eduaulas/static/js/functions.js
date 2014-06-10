@@ -4,7 +4,7 @@ $(document).ready(ini);
 function ini(){
 
 	$('#test').click(get_students_data);
-
+  get_classroom_data();
 
 }
 
@@ -36,13 +36,6 @@ function create_table_students (data) {
 if(data['type'] == 'success'){  
 	 
     var output = "";
-    output+="<thead>";
-    output+="<tr>";
-    output+="<th>Nombre</th>";
-    output+="<th>Apellido</th>"
-    output+="</tr>"
-    output+="</thead>"
-    output+="<tbody >"
 
     for (var x in data["dictionary_students"]){
       output += "<tr>";
@@ -63,20 +56,20 @@ if(data['type'] == 'success'){
 } /*cierro function create_table_students*/
 
 
-function get_classroom_data () {
-  
+function get_classroom_data() {
+    alert('hola mundo');
     var query = $.ajax({
-    url:"list/students/",
+    url:"lista/aulas/",
     type:'GET',
     dataType:"json",
     data:{
-          name:'name',
-          last_name:'last_name',
+          grade:'grade',
+          class_letter:'class_letter',
     }, 
 
     "success":function(data){
-        create_table_students(data);
-        $('#dt_alumnos').dataTable();
+        create_table_classrooms(data);
+        $('#dt_classroom').dataTable();
        
       }
 
@@ -85,19 +78,19 @@ function get_classroom_data () {
 } /*cierro function get_students_data*/
 
 
-function create_table_students (data) {
+function create_table_classrooms (data) {
 
   if(data['type'] == 'success'){  
      
       var output = "";
-      for (var x in data["dictionary_students"]){
+      for (var x in data["dictionary_classrooms"]){
         output += "<tr>";
-        (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
-        (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
+        (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";
+        (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         output += "</tr>";
       }
       if (output != ""){
-        $("#dt_alumnos > tbody").append(output);
+        $("#dt_classroom > tbody").append(output);
       }
   }
 

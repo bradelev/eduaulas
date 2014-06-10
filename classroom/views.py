@@ -4,25 +4,39 @@ from django.conf import settings
 import random
 from classroom.models import  ClassRoom, Grade
 from location.models import School, Country, Department
-
+from django.utils import simplejson
+from django.http import *
+from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import Promise
+from django.utils.encoding import force_unicode
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 # Create your views here.
 
+class LazyEncoder(simplejson.JSONEncoder):
+	"""Encodes django's lazy i18n strings."""
+    
+   
+	def default(self, obj):
+	    if isinstance(obj, Promise):
+	    	return force_unicode(obj)
+	    return obj  
+
+def ini(request):
+
+
+	return render_to_response('classroomList.html', context_instance = RequestContext(request))
+
 def classroom_list(request):
-
-
-	return render_to_response('classroomAdmin.html', context_instance = RequestContext(request))
-
-def classroom_list(request):
-        classrooms = ClassRoom.objects.all()
-        """dictionary_classrooms = {}
+       # classrooms = ClassRoom.objects.all()
+        dictionary_classrooms = {}
         message = ""
         type = "error"
         try:
                 classrooms = ClassRoom.objects.all()
                 type = "success"
-                for x in students:                              
+                for x in classrooms:                              
                         dictionary_classrooms[x.code] = {
                                 
                                 "code": x.code,
@@ -37,9 +51,9 @@ def classroom_list(request):
                         "message":message,
                         "type":type,
                 }, cls = LazyEncoder)
-        return HttpResponse(result, mimetype = 'application/javascript')"""
+        return HttpResponse(result, mimetype = 'application/javascript')
         
-        return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
+       # return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
        
 
 def classroom_add(request):

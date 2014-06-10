@@ -5,12 +5,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
 
-		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+		< SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables 
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">-->
 
 		<!-- SmartAdmin RTL Support is under construction
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> -->
@@ -20,7 +20,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.css">
+		
 
 		<!-- FAVICONS -->
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
@@ -38,7 +38,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+				
 				<!-- END LOGO PLACEHOLDER -->
 
 				<!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -146,18 +146,8 @@
 				<!-- multiple lang dropdown : find all flags in the image folder -->
 				<ul class="header-dropdown-list hidden-xs">
 					<li>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img alt="" src="img/flags/us.png"> <span> US </span> <i class="fa fa-angle-down"></i> </a>
-						<ul class="dropdown-menu pull-right">
-							<li class="active">
-								<a href="javascript:void(0);"><img alt="" src="img/flags/us.png"> US</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);"><img alt="" src="img/flags/es.png"> Spanish</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);"><img alt="" src="img/flags/de.png"> German</a>
-							</li>
-						</ul>
+						 US </span> <i class="fa fa-angle-down"></i> </a>
+						
 					</li>
 				</ul>
 				<!-- end multiple lang -->
@@ -177,7 +167,7 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 					
 					<a href="javascript:void(0);" id="show-shortcut">
-						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						
 						<span>
 							john.doe 
 						</span>
@@ -409,25 +399,12 @@
 										<table id="dt_classroom" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th>ID</th>
-													<th>Name</th>
-													<th>Phone</th>
-													<th>Company</th>
-													<th>Zip</th>
-													<th>City</th>
-													<th>Date</th>
-												</tr>
+													<th>Grado</th>
+													<th>Clase</th>
+													
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Jennifer</td>
-													<td>1-342-463-8341</td>
-													<td>Et Rutrum Non Associates</td>
-													<td>35728</td>
-													<td>Fogo</td>
-													<td>03/04/14</td>
-												</tr>
+												
 												
 											</tbody>
 										</table>
@@ -501,11 +478,10 @@
             $(document).ready(function() {
                
                 pageSetUp();
-               $('#dt_classroom').dataTable();
-            
+               	            
                 });
         </script>
-
+        <script src="{% static "js/functions.js" %}"></script>
     
      
 {% endblock %}
