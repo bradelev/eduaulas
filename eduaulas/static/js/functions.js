@@ -3,40 +3,122 @@ $(document).ready(ini);
 
 function ini(){
 
-  $('#select_unit').change(get_students_data);
+  $("#select_unit").attr('disabled','disabled');
+  $("#select_subject").attr('disabled','disabled');
+  
   $('#select_area').change(test);
 
 
 }
 
 function test(){
-
+    var tok = $("#token").attr("value");
     var id_area = $(this).val();
-
+    $("#select_subject").html('');
     $.ajax({
       beforeSend: function(){
-        $('#select_unit').attr('disabled','disabled');
+
 
 
       },
+      url:"list/",
       chache: false,
       type: "POST",
-      url:"list/ini/",
-      data: "id_area" + id_area,
+      dataType: 'json',      
+      data:{
+            csrfmiddlewaretoken: tok,
+            state:'inactive',
+            id_area:id_area,
+      }, 
+
       success: function(){
 
-        
+        load_filter_subjects(id_area);
       }
 
 
-
     });
+     
+    
+}
 
 
+function load_filter_subjects(id_area){
 
-      
+  
+  var tok = $("#token").attr("value");
+  var query = $.ajax({
+    url:"list/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+          id_area: id_area,
+          name: 'y.name',
+          id:'y.id',
+          
+    }, 
+    
+    "success":function(data){
+       
+      $('#select_subject').removeAttr('disabled');
+      var output_select="";
+      //output_select +="<option value="0" selected="" disabled="">Materia</option>";
+      for (var y in data["dictionary_subjects"]){
+        output_select += "<option value="+(data["dictionary_subjects"][y]['id'])+">";
+        output_select += (data["dictionary_subjects"][y]['name']); 
+        output_select += "</option>";
+        }/*Cierro for dictionary_subjects*/
+        $("#select_subject").html(output_select);
+      }
+
+       
+
+    })
+    $("#select_subject").change(load_units);
 
 }
+
+function load_units(){
+
+  var id_subject = $(this).val();
+
+  var tok = $("#token").attr("value");
+  var query = $.ajax({
+    url:"list/units/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+          id_subject: id_subject,
+          name: 'p.name',
+          id:'p.id',
+          
+    }, 
+    
+    "success":function(data){
+       
+      $('#select_unit').removeAttr('disabled');
+      var output_select_unit="";
+      //output_select +="<option value="0" selected="" disabled="">Materia</option>";
+      for (var p in data["dictionary_units"]){
+        output_select_unit += "<option value="+(data["dictionary_units"][p]['id'])+">";
+        output_select_unit += (data["dictionary_units"][p]['name']); 
+        output_select_unit += "</option>";
+        }/*Cierro for dictionary_subjects*/
+        $("#select_unit").html(output_select_unit);
+      }
+
+       
+
+    })
+
+    $('#select_unit').change(get_students_data);
+
+
+}/*cierro funcion load_units*/
 
 function get_students_data () {
 	 
@@ -65,12 +147,14 @@ function get_students_data () {
 } /*cierro function get_students_data*/
 
 
+
+
 function create_table_students (data) {
 
 if(data['type'] == 'success'){  
 	 
-    $("#dt_alumnos > thead ").html('');
-    $("#dt_alumnos > tbody").html('');
+    //$("#dt_alumnos > thead ").html('');
+    //$("#dt_alumnos > tbody").html('');
     var output_thead = "";
     output_thead +="<thead>";
     output_thead +="<tr>";

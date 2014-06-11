@@ -24,29 +24,80 @@ class LazyEncoder(simplejson.JSONEncoder):
 	
 
 def ini(request):
-
-	print('funcio ini')
 	var_areas = Area.objects.all()
-	var_subjects = Subject.objects.all()
-	var_units = Unit.objects.all()
-	"""if request.POST:
-        
-        id_area =request.POST['id_area']
-	var_subjects = Subject.objects.all()
-	var_units = Unit.objects.all()"""
+	#var_subjects = Subject.objects.all()
+	#var_units = Unit.objects.all()
 
-	return render_to_response('panel2.html',{'areas':var_areas,'subjects':var_subjects, 'units':var_units }, context_instance = RequestContext(request))
+	if request.POST:
+		
+		id_area =request.POST['id_area']
+		dictionary_subjects = {}
+		message = ""
+		type = "error"
+		try:										
+			a = Area.objects.get(pk=id_area)
+			var_subjects = Subject.objects.filter(area=a)
+			
+			type = "success"
+			
+			for y in var_subjects:				
+				dictionary_subjects[y.id] = {
+					
+					"name": y.name,
+					"id": y.id
+								
+					
+				}
+			
+		except Subject.DoesNotExist:
+			message = "No hay materias"
+		result = simplejson.dumps({
+				"dictionary_subjects":dictionary_subjects,
+				"message":message,
+				"type":type,
+			}, cls = LazyEncoder)
+		return HttpResponse(result, mimetype = 'application/javascript')
+		
+		
+	return render_to_response('panel2.html',{'areas':var_areas}, context_instance = RequestContext(request))
 
+def load_filters_unit(request):
 	
+	dictionary_units = {}
+	message = ""
+	type = "error"
+	
+	try:
+		if request.POST:
+			
+			id_subject =request.POST['id_subject']
+			print('materia', id_subject)
+			s = Subject.objects.get(pk=id_subject)
+			var_units = Unit.objects.filter(subject=s)
+			#var_units = Subject.objects.all()
+			type = "success"
+			
+			for p in var_units:				
+				dictionary_units[p.id] = {
+					
+					"name": p.name,
+					"id": p.id
+								
+					
+				}
+		
+	except Unit.DoesNotExist:
+		message = "No hay unidades"
+	result = simplejson.dumps({
+			"dictionary_units":dictionary_units,
+			"message":message,
+			"type":type,
+		}, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
 
 
 def list_students(request):
-	#print('fuera del post')
-	#if request.POST:
 
-	#	var_unit =request.POST['unit'] 
-	#	print('dentro del post')
-	#	print(var_unit, Unidad)
 	dictionary_students = {}
 	dictionary_students_exercises = {}
 	dictionary_units_exercises={}

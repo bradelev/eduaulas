@@ -67,6 +67,7 @@
                 
            </div>
             <div id="content">
+                <input type="hidden" id="token" value="{{csrf_token}}"></input>
                <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comezar a trabajar.</h1>
                 <div id="filters">    
                     <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
@@ -83,29 +84,24 @@
                     </section>    
                     <section class="col col-2">
                         <label class="select">
-                        <select id="select_subject">
-                            <option value="0" selected="" disabled="">Materia</option>
-                            {% for s in subjects %}
-                            <option>{{s.name}}</option>
-                            {% endfor %}
+                        <select id="select_subject" >
+                            
+                            
                         </select>   
                         </select> <i></i> </label>
                     </section>  
                     <section class="col col-3">
                         <label class="select">
                         <select name="unit" id="select_unit">
-                            <option value="0" selected="" disabled="">Unidad</option>
-                        {% for u in units %}
-                        <option>{{u.name}}</option>
-                        {% endfor %}
+                            
                         </select>   
                         </select> <i></i> </label>
                     </section>  
-                    <button type="submit" class="btn-sm btn bg-color-orange txt-color-white" id="load_students2" >Comenzar</button>
+                    
 
                                 
                 </form>
-                    <button  class="btn-sm btn bg-color-orange txt-color-white" id="load_students">Comenzar</button>
+                   
                 </div> <!-- filters -->   
                 <div class="row">
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">

@@ -90,7 +90,7 @@ class Area(models.Model):
 #FISICA, QUIMICA, GEOLOGIA    
 class Subject(models.Model):
 	name = models.CharField(max_length=50, verbose_name=u'Materia')
-
+	area= models.ForeignKey('Area', verbose_name=u'Area')
 	class Meta:
 		verbose_name = _('Materia')
 		verbose_name_plural = _('Materias')
