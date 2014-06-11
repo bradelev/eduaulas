@@ -6,12 +6,12 @@ function ini(){
   $("#select_unit").attr('disabled','disabled');
   $("#select_subject").attr('disabled','disabled');
   
-  $('#select_area').change(test);
+  $('#select_area').change(load_fiters);
 
 
 }
 
-function test(){
+function load_fiters(){
     var tok = $("#token").attr("value");
     var id_area = $(this).val();
     $("#select_subject").html('');
@@ -63,8 +63,8 @@ function load_filter_subjects(id_area){
     "success":function(data){
        
       $('#select_subject').removeAttr('disabled');
-      var output_select="";
-      //output_select +="<option value="0" selected="" disabled="">Materia</option>";
+      var output_select = "";
+      output_select += '<option value="0" selected="" disabled="">Materia</option>'
       for (var y in data["dictionary_subjects"]){
         output_select += "<option value="+(data["dictionary_subjects"][y]['id'])+">";
         output_select += (data["dictionary_subjects"][y]['name']); 
@@ -102,7 +102,7 @@ function load_units(){
        
       $('#select_unit').removeAttr('disabled');
       var output_select_unit="";
-      //output_select +="<option value="0" selected="" disabled="">Materia</option>";
+      output_select_unit +='<option value="0" selected="" disabled="">Unidad</option>'
       for (var p in data["dictionary_units"]){
         output_select_unit += "<option value="+(data["dictionary_units"][p]['id'])+">";
         output_select_unit += (data["dictionary_units"][p]['name']); 
@@ -122,11 +122,16 @@ function load_units(){
 
 function get_students_data () {
 	 
+    var id_unit = $(this).val();
+    var tok = $("#token").attr("value");
     var query = $.ajax({
     url:"list/students/",
-    type:'GET',
+    type:'post',
     dataType:"json",
     data:{
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+          id_unit: id_unit,
           id_student:'x.id',
           name:'name',
           last_name:'last_name',
