@@ -21,7 +21,43 @@
         <!-- Left panel : Navigation area -->
         <!-- Note: This width of the aside area can be adjusted through LESS variables -->
         <aside id="left-panel">
+                        <!-- User info -->
+            <div class="login-info">
+                <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+                    
+                    <a href="javascript:void(0);" id="show-shortcut">
+                         <!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
+                        <span>
+                             
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a> 
+                    
+                </span>
+            </div>
+            <!-- end user info -->
 
+            <!-- NAVIGATION : This navigation is also responsive
+
+            To make this navigation dynamic please make sure to link the node
+            (the reference to the nav > ul) after page load. Or the navigation
+            will not initialize.
+            -->
+            <nav>
+                <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+                Please note that these links work a bit different than
+                traditional hre="" links. See documentation for details.
+                -->
+
+                <ul>
+                    <li>
+                        <a href="http://127.0.0.1:8080/panel/list/" title="Trabajando en clase"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Trabajando en clase</span></a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:8080/aulas/lista/" title="Mis aulas"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Mis Aulas</span></a>
+                    </li>
+                </ul>
+                </nav>
             <!-- User info -->
             
             <!-- end user info -->
@@ -44,7 +80,15 @@
             <!-- RIBBON -->
             <div id="ribbon">
 
-                
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+
+                <!-- breadcrumb -->
+                <ol class="breadcrumb">
+                    <li>
+                        Trabajando en clase
+                    </li>
+                   
+                </ol>
 
                 
 
@@ -103,18 +147,7 @@
                 </form>
                    
                 </div> <!-- filters -->   
-                <div class="row">
-                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                        <h1 class="page-title txt-color-blueDark">
-                            <i class="fa fa-table fa-fw "></i> 
-                                Quimica 
-                            <span> > 
-                                Unidad: A
-                            </span>
-                        </h1>
-                    </div>
-                    
-                </div>
+
                 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -191,6 +224,15 @@
 
             </div>
             
+           
+            
+                
+                    <button type="button" id="eg7" class="btn btn-default"><i class="fa fa-thumbs-up"></i> Extra Small Alert </button>
+                        
+                   
+                
+            
+                                     
                 
         </div>
         <!-- END MAIN PANEL -->
@@ -216,6 +258,8 @@
         <script src="{% static "js/plugin/datatables/ZeroClipboard.js" %}"></script>
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
+        <script src="{% static "js/plugin/bootstrap-progressbar/bootstrap-progressbar.js" %}"></script>
+        <script src="{% static "js/notification/SmartNotification.min.js" %}"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
         <script>
@@ -230,17 +274,17 @@
         <!-- BOOTSTRAP JS -->
         <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
         <!-- MAIN APP JS FILE -->
+        
         <script src="{% static "js/app.js" %}"></script>
         
         <script type="text/javascript">
             $(document).ready(function() {
                
                 pageSetUp();
-              
-                
-    
+
+                         
             
-                });
+                });/*cieero pagesetup*/
         </script>
         <script src="{% static "js/functions.js" %}"></script>
     

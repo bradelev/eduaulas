@@ -7,9 +7,21 @@ function ini(){
   $("#select_subject").attr('disabled','disabled');
   
   $('#select_area').change(load_fiters);
-
+  $('#eg7').click(sm);
 
 }
+
+                
+function sm(){
+  $.smallBox({
+    title : "Juan Perez necesita ayuda",
+    content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+    color : "#296191",
+    iconSmall : "fa fa-thumbs-up bounce animated",
+    //timeout : 4000
+});
+}
+
 
 function load_fiters(){
     var tok = $("#token").attr("value");
@@ -248,7 +260,7 @@ function create_table_classrooms (data) {
 
 
 
-$(function(){
+/*$(function(){
 
 $('#classroom-form').validate({
       // Rules for form validation
