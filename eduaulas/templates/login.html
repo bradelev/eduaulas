@@ -4,62 +4,42 @@
 {% endblock %}	
 {% block body %}
 {% load staticfiles %}
-
 		<header id="header">
-			<!--<span id="logo"></span>-->
-
 			<div id="logo-group">
 				<span id="logo"> <img src="{% static "img/logo.png" %}" alt="SmartAdmin"> </span>
-
 				<!-- END AJAX-DROPDOWN -->
 			</div>
-
 			<span id="login-header-space"> <span class="hidden-mobile">No estás registrado?</span> <a href="register.html" class="btn btn-danger">Registrarse</a> </span>
-			
 		</header>
 
 		<div id="main" role="main">
-
 			<!-- MAIN CONTENT -->
 			<div id="content" class="container">
-
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
 						<h1 class="txt-color-red login-header-big">EduAulas</h1>
 						<div class="hero">
-
 							<div class="pull-left">
 								<h4>EduAulas es una aplicación que permite al docente ver como los alumnos asimilan los conocimientos enseñados, tanto por los temas que se dictan en clase, como con los conceptos aprendidos en Cuasimodo</h4>
 								<br>
 								<a href="http://www.editorialedu.com" target="_blank" class="btn btn-danger btn-sm">Editorial Edu</a>
-								
 							</div>
-							
-							
-
 						</div>
-
-						
-
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 						<div class="well no-padding">
 							<form  id="login-form" class="smart-form client-form" method="post">
 								{% csrf_token %}
-						        
 								<header>
 									Ingreso
 								</header>
-
 								<fieldset>
-									
 									<section>
 										<label class="label">Usuario</label>
 										<label class="input"> <i class="icon-append fa fa-user"></i>
 											<input type="text" name="username">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingresa tu usuario</b></label>
 									</section>
-
 									<section>
 										<label class="label">Contraseña</label>
 										<label class="input"> <i class="icon-append fa fa-lock"></i>
@@ -69,8 +49,6 @@
 											<a href="forgotpassword.html">Olvidaste la contraseña?</a>
 										</div>
 									</section>
-
-									
 								</fieldset>
 								<footer>
 									<button type="submit" class="btn btn-primary">
@@ -78,15 +56,10 @@
 									</button>
 								</footer>
 							</form>
-
 						</div>
-						
-						
-						
 					</div>
 				</div>
 			</div>
-
 		</div>
 {% endblock %}
 {% block scripts %}

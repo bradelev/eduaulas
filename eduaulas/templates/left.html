@@ -1,0 +1,57 @@
+{% extends template_base %}
+
+{% block left_menu %}
+    {% load staticfiles %}
+	<aside id="left-panel">
+    <!-- User info -->
+    <div class="login-info">
+        <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+            
+            <a href="javascript:void(0);" id="show-shortcut">
+                 <!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
+                <span>
+                     
+                </span>
+                <i class="fa fa-angle-down"></i>
+            </a> 
+            
+        </span>
+    </div>
+    <!-- end user info -->
+
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional hre="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li>
+                <a href="/panel/list/" title="Trabajando en clase"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Trabajando en clase</span></a>
+            </li>
+            <li>
+                <a href="/aulas/lista/" title="Mis aulas"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Mis Aulas</span></a>
+            </li>
+        </ul>
+        </nav>
+    <!-- User info -->
+    
+    <!-- end user info -->
+
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    
+    <!--<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>-->
+
+</aside>
+{% endblock %}
