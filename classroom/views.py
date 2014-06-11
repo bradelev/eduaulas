@@ -57,11 +57,10 @@ def classroom_list(request):
        
 
 def classroom_add(request):
-      
-	if request.POST:
-
-		country =request.POST['country'] 
-		department = request.POST['department']  
+    if request.POST:
+        
+        country =request.POST['country'] 
+        department = request.POST['department']  
         schoolNumber= request.POST['schoolNumber'] 
         grade= request.POST['grade'] 
         className=request.POST['className'] 
@@ -75,12 +74,18 @@ def classroom_add(request):
         s= School.objects.get(number=schoolNumber)
         c.school=s
         c.save()
+
     else:
-       countrys = Country.objects.all()
-       departments = Department.objects.all()        
-       schools = School.objects.all()
-       grades= Grade.objects.all()
-       return render_to_response('classroomAdd.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+
+        countrys = Country.objects.all()
+        departments = Department.objects.all()        
+        schools = School.objects.all()
+        grades= Grade.objects.all()
+        return render_to_response('classroomAdd.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+
+      
+
+       
 
 
 	return render_to_response('classroomAdd.html', context_instance = RequestContext(request))

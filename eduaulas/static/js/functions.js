@@ -2,12 +2,41 @@ $(document).ready(ini);
 
 
 function ini(){
-$('#load_students2').click(get_students_data);
-	$('#load_students').click(get_students_data);
-/*  get_classroom_data();*/
+
+  $('#select_unit').change(get_students_data);
+  $('#select_area').change(test);
+
 
 }
 
+function test(){
+
+    var id_area = $(this).val();
+
+    $.ajax({
+      beforeSend: function(){
+        $('#select_unit').attr('disabled','disabled');
+
+
+      },
+      chache: false,
+      type: "POST",
+      url:"list/ini/",
+      data: "id_area" + id_area,
+      success: function(){
+
+        
+      }
+
+
+
+    });
+
+
+
+      
+
+}
 
 function get_students_data () {
 	 
@@ -16,9 +45,13 @@ function get_students_data () {
     type:'GET',
     dataType:"json",
     data:{
+          id_student:'x.id',
           name:'name',
           last_name:'last_name',
-          exercise_id: 'exercise_id'
+          exercise_id: 'exercise_id',
+          points: 'y.points',
+          student: 'y.student.id',
+
     }, 
 
     "success":function(data){
@@ -36,17 +69,41 @@ function create_table_students (data) {
 
 if(data['type'] == 'success'){  
 	 
-    var output = "";
+    $("#dt_alumnos > thead ").html('');
+    $("#dt_alumnos > tbody").html('');
+    var output_thead = "";
+    output_thead +="<thead>";
+    output_thead +="<tr>";
+    output_thead +="<th>Nombre</th>";                                                   
+    output_thead +="<th>Apellido</th>";
+    for (var e in data["dictionary_units_exercises"]){
+        output_thead += "<th>";  
+        output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
+        output_thead += "</th>";
+    }
+    output_thead +="</tr>";
+    output_thead +="</thead>";
 
-    for (var x in data["dictionary_students"]){
-      output += "<tr>";
+  var output = "";
+  for (var x in data["dictionary_students"]){
+      output += "<tr>";      
       (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
       (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
+      for (var y in data["dictionary_students_exercises"]){
+        if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_exercises"][y]['student']  ) {
+          
+          (data["dictionary_students_exercises"][y]['points'] == "0") ? output += "<td>X</td>": output += "<td>"+data["dictionary_students_exercises"][y]['points']+"</td>";
+          }/*cierro if*/
+       
+        }/*cierro for dictionary_students_exercises*/
+
       output += "</tr>";
-    }
+    }/*cierro for dictionary_students*/
+
     output+="</tbody >"
     if (output != ""){
-     
+
+      $("#dt_alumnos").append(output_thead);
       $("#dt_alumnos > tbody").append(output);
 
     }

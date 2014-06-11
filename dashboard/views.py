@@ -25,9 +25,15 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 def ini(request):
 
+	print('funcio ini')
 	var_areas = Area.objects.all()
 	var_subjects = Subject.objects.all()
 	var_units = Unit.objects.all()
+	"""if request.POST:
+        
+        id_area =request.POST['id_area']
+	var_subjects = Subject.objects.all()
+	var_units = Unit.objects.all()"""
 
 	return render_to_response('panel2.html',{'areas':var_areas,'subjects':var_subjects, 'units':var_units }, context_instance = RequestContext(request))
 
@@ -43,35 +49,44 @@ def list_students(request):
 	#	print(var_unit, Unidad)
 	dictionary_students = {}
 	dictionary_students_exercises = {}
+	dictionary_units_exercises={}
 	message = ""
 	type = "error"
 	try:
 		var_unit = Unit.objects.get(pk=1)
 		#cl = ClassRoom.objects.get(pk='efr5g')
 		students = Student.objects.filter()
-		exercises = Exercise.objects.filter(unit=var_unit)
-		var_students_exercises = Result.objects.filter(student=students, exercise=exercises)
+		var_units_exercises = Exercise.objects.filter(unit=var_unit)
+		var_students_exercises = Result.objects.filter(student=students, exercise=var_units_exercises)
 
 		type = "success"
-		for e in var_students_exercises:				
-			dictionary_students_exercises[e.id] = {
+		for y in var_students_exercises:				
+			dictionary_students_exercises[y.id] = {
 				
-				"exercise_id": e.exercise_id				
-				
-			}
-		for x in students:				
-			dictionary_students[x.id] = {
-				
-				"name": x.name,
-				"last_name": x.last_name
+				"points": y.points,
+				"student": y.student.id				
 				
 			}
 		
+		for x in students:
+			dictionary_students[x.id] = {
+			"id_student":x.id,
+			"name": x.name,
+			"last_name": x.last_name
+			}
+		for e in var_units_exercises:				
+			dictionary_units_exercises[e.id] = {				
+				"exercise_id": e.exercise_id			
+				
+			}	
+
+	
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
 			"dictionary_students":dictionary_students,
 			"dictionary_students_exercises":dictionary_students_exercises,
+			"dictionary_units_exercises":dictionary_units_exercises,
 			"message":message,
 			"type":type,
 		}, cls = LazyEncoder)
