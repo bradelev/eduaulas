@@ -59,7 +59,7 @@ def ini(request):
 		return HttpResponse(result, mimetype = 'application/javascript')
 		
 		
-	return render_to_response('panel2.html',{'areas':var_areas}, context_instance = RequestContext(request))
+	return render_to_response('panel.html',{'areas':var_areas}, context_instance = RequestContext(request))
 
 def load_filters_unit(request):
 	
