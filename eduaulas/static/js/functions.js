@@ -8,7 +8,7 @@ function ini(){
   
   $('#select_area').change(load_fiters);
   $('#eg7').click(sm);
-  create_classroom_table()
+  create_classroom_table();
   $('#add_classroom').click(load_selects_classroom);
   
 }
@@ -155,8 +155,6 @@ function get_students_data () {
 
     "success":function(data){
         create_table_students(data);
-        $('#dt_alumnos').dataTable();
-       
       }
 
     })
@@ -169,11 +167,8 @@ function get_students_data () {
 function create_table_students (data) {
 
 if(data['type'] == 'success'){  
-	 
-    //$("#dt_alumnos > thead ").html('');
-    //$("#dt_alumnos > tbody").html('');
     var output_thead = "";
-    output_thead +="<thead>";
+    
     output_thead +="<tr>";
     output_thead +="<th>Nombre</th>";                                                   
     output_thead +="<th>Apellido</th>";
@@ -183,7 +178,7 @@ if(data['type'] == 'success'){
         output_thead += "</th>";
     }
     output_thead +="</tr>";
-    output_thead +="</thead>";
+    
 
   var output = "";
   for (var x in data["dictionary_students"]){
@@ -201,13 +196,12 @@ if(data['type'] == 'success'){
       output += "</tr>";
     }/*cierro for dictionary_students*/
 
-    output+="</tbody >"
     if (output != ""){
-
-      $("#dt_alumnos").append(output_thead);
-      $("#dt_alumnos > tbody").append(output);
+      $("#dt_alumnos > tbody ").html(output);
+      $("#dt_alumnos > thead").html(output_thead);
 
     }
+    /*$('#dt_alumnos').dataTable();*/
     
 }
 

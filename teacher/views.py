@@ -24,13 +24,11 @@ class LazyEncoder(simplejson.JSONEncoder):
         return obj
 
 def login_user(request):
-    
     logout(request)
     username = password = ''
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-        print username+password
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
@@ -40,5 +38,7 @@ def login_user(request):
  
 @login_required(login_url='/login/')
 def inicio(request):
-    print "no entra"
     return render_to_response('index.html' , context_instance=RequestContext(request))
+
+def register(request):
+    return render_to_response('register.html', context_instance=RequestContext(request))
