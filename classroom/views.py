@@ -56,40 +56,144 @@ def classroom_list(request):
        # return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
        
 
-def classroom_add(request):
-    if request.POST:
-        
-        country =request.POST['country'] 
-        department = request.POST['department']  
-        schoolNumber= request.POST['schoolNumber'] 
-        grade= request.POST['grade'] 
-        className=request.POST['className'] 
-        shift=request.POST['shift']               
-        c= ClassRoom()
-        c.code = generate_classroom_code()
-        c.class_letter = className
-        c.shift = shift
-        g = Grade.objects.get(name=grade)
-        c.grade=g
-        s= School.objects.get(number=schoolNumber)
-        c.school=s
-        c.save()
+"""def classroom_add(request):
 
-    else:
+    print('entre a classroom_add')
+    dictionary_countrys = {}
+    dictionary_departments = {}
+    dictionary_schools = {}
+    dictionary_grades = {}
+    message = ""
+    type = "error"
+    try:
 
         countrys = Country.objects.all()
         departments = Department.objects.all()        
         schools = School.objects.all()
         grades= Grade.objects.all()
-        return render_to_response('classroomAdd.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+        if request.POST:
+            print('entre a POST classroom_add')
+            country =request.POST['select_country'] 
+            department = request.POST['select_department']  
+            schoolNumber= request.POST['select_school'] 
+            grade= request.POST['select_grade'] 
+            className=request.POST['class_name'] 
+            shift=request.POST['select_shift']               
+            c= ClassRoom()
+            c.code = generate_classroom_code()
+            c.class_letter = className
+            c.shift = shift
+            g = Grade.objects.get(name=grade)
+            c.grade=g
+            s= School.objects.get(number=schoolNumber)
+            c.school=s
+            c.save()
+            type = "success"
+        else:
 
-      
+            for y in countrys:                
+                dictionary_countrys[y.id] = {
+                    
+                    "name": y.name,
+                    "id": y.id                               
+                }
+            for d in departments:                
+                dictionary_departments[d.id] = {
+                    
+                    "name": d.name,
+                    "id": d.id                               
+                }
+            for s in schools:                
+                dictionary_schools[s.id] = {
+                    
+                    "name": s.name,
+                    "id": s.id                               
+                }
+            for g in grades:                
+                dictionary_grades[g.id] = {
+                    
+                    "name": g.name,
+                    "id": g.id                               
+                }
+            result = simplejson.dumps({
+            "dictionary_countrys":dictionary_countrys,
+            "dictionary_departments":dictionary_departments,
+            "dictionary_schools":dictionary_schools,
+            "dictionary_grades":dictionary_grades,
+            "message":message,
+            "type":type,
+        }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
+            #return render_to_response('classroomList.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+    except Student.DoesNotExist:
+        message = "No hay alumnos"
+    result = simplejson.dumps({
+            "dictionary_countrys":dictionary_countrys,
+            "dictionary_departments":dictionary_departments,
+            "dictionary_schools":dictionary_schools,
+            "dictionary_grades":dictionary_grades,
+            "message":message,
+            "type":type,
+        }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
+    
+    """
+	
+def classroom_add(request):
 
-       
-
-
-	return render_to_response('classroomAdd.html', context_instance = RequestContext(request))
-
+    print('entre a classroom_add')
+    dictionary_countrys = {}
+    dictionary_departments = {}
+    dictionary_schools = {}
+    dictionary_grades = {}
+    message = ""
+    type = "error"
+    try:
+        
+        countrys = Country.objects.all()
+        departments = Department.objects.all()        
+        schools = School.objects.all()
+        grades= Grade.objects.all()
+        type = "success"
+                    
+        for y in countrys:                
+            dictionary_countrys[y.id] = {
+                
+                "name": y.name,
+                "id": y.id                               
+            }
+        for d in departments:                
+            dictionary_departments[d.id] = {
+                
+                "name": d.name,
+                "id": d.id                               
+            }
+        for s in schools:                
+            dictionary_schools[s.id] = {
+                
+                "name": s.name,
+                "id": s.id                               
+            }
+        for g in grades:                
+            dictionary_grades[g.id] = {
+                
+                "name": g.name,
+                "id": g.id                               
+            }
+        result = simplejson.dumps({
+        "dictionary_countrys":dictionary_countrys,
+        "dictionary_departments":dictionary_departments,
+        "dictionary_schools":dictionary_schools,
+        "dictionary_grades":dictionary_grades,
+        "message":message,
+        "type":type,
+        }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
+            #return render_to_response('classroomList.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+    except Student.DoesNotExist:
+        message = "No hay alumnos"
+    
+    return HttpResponse(result, mimetype = 'application/javascript')
 
 def generate_classroom_code():
 
