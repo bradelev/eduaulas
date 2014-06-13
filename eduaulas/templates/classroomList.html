@@ -237,7 +237,7 @@
 								</div><!-- modal-header -->
 								<div class="modal-body">	
 								<input type="hidden" id="token" value="{{csrf_token}}"></input>											
-									<form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
+									<form id="classroom-form" class="smart-form" novalidate="novalidate" method="POST">
 		                            {% csrf_token %}
 									<fieldset>
 										<div class="row">
@@ -250,10 +250,7 @@
 											<section class="col col-6">
 												    <label class="select">
 		                                            <select name="department" id="select_department">
-		                                                <option value="0" selected="" disabled="">Departamento</option>
-		                                                {% for d in departments %}
-		                                                <option value="1">{{d.name}}</option>
-		                                                {% endfor %}
+		                                                
 		                                            </select> <i></i> </label>					                                    
 											</section>
 										</div> <!-- row  -->	
@@ -298,7 +295,7 @@
 									</fieldset>
 									<div class="modal-footer">
 										<footer>
-											<button type="submit" class="btn btn-primary">
+											<button type="submit" class="btn btn-primary" id="subtmit_classroom">
 												Agregar aula
 											</button>
 										</footer>
@@ -384,6 +381,7 @@
 
         <!-- BOOTSTRAP JS -->
         <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/plugin/jquery-validate/jquery.validate.min.js" %}"></script>
         <!-- MAIN APP JS FILE -->
         <script src="{% static "js/app.js" %}"></script>
         <script type="text/javascript">

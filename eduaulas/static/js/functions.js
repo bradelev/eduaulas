@@ -9,7 +9,9 @@ function ini(){
   $('#select_area').change(load_fiters);
   $('#eg7').click(sm);
   create_classroom_table();
-  $('#add_classroom').click(load_selects_classroom);
+  $('#add_classroom').click(get_data_for_selects_classroom);
+  $('#subtmit_classroom').click(save_classroom);
+  
   
 }
 
@@ -271,7 +273,7 @@ $('#classroom-form').validate({
            className : {
             required : true
           },
-          schoolNumber : {
+          school : {
             required : true
           },
           shift : {
@@ -291,8 +293,8 @@ messages : {
           grade : {
             required : 'Por favor ingrese el año del aula'
           },
-          schoolNumber : {
-            required : 'Por favor ingrese el numero de escuela'
+          school : {
+            required : 'Por favor ingrese la escuela'
           },
           className : {
             required : 'Por favor ingrese el nombre de la clase'
@@ -308,14 +310,14 @@ messages : {
       })
 });/*cierro function form_classroom_validate*/
 
-function load_selects_classroom(){
+function get_data_for_selects_classroom(){
 
     var tok = $("#token").attr("value");
      $.ajax({
       beforeSend: function(){
 
       },
-      url:"aulas/add/",
+      url:"aulas/cargar_form/",
       type: "GET",
       dataType: 'json',      
       data:{
@@ -323,16 +325,21 @@ function load_selects_classroom(){
             state:'inactive',
             name:'name',
             id:'id'
-            /*select_country:select_country,
-            select_department:select_department,
-            select_school:select_school,
-            select_grade:select_grade,
-            class_name:class_name,
-            select_shift:select_shift*/
 
       }, 
 
       success: function(data){
+
+          load_selects_classroom(data);
+        
+      }
+
+    });
+
+}
+
+
+function load_selects_classroom(data){
 
       var output_select_country = "";
       output_select_country += '<option value="0" selected="" disabled="">Pais</option>'
@@ -340,11 +347,63 @@ function load_selects_classroom(){
         output_select_country += "<option value="+(data["dictionary_countrys"][y]['id'])+">";
         output_select_country += (data["dictionary_countrys"][y]['name']); 
         output_select_country += "</option>";
-        }/*Cierro for dictionary_subjects*/
+        }/* cierro for countrys*/
         $("#select_country").html(output_select_country);
+        $("#select_country").change(load_selects_departments);
+      
+      var output_select_schools = "";
+      output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
+      for (var s in data["dictionary_schools"]){
+        output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
+        output_select_schools += (data["dictionary_schools"][s]['name']); 
+        output_select_schools += "</option>";
+        }/*Cierro for dictionary_schools*/
+        $("#select_school").html(output_select_schools);
+
+      var output_select_grades = "";
+      output_select_grades += '<option value="0" selected="" disabled="">Grados</option>'
+      for (var g in data["dictionary_grades"]){
+        output_select_grades += "<option value="+(data["dictionary_grades"][g]['id'])+">";
+        output_select_grades += (data["dictionary_grades"][g]['name']); 
+        output_select_grades += "</option>";
+        }/*Cierro for dictionary_grades*/
+        $("#select_grade").html(output_select_grades);
+
+ } 
+
+
+function load_selects_departments(){
+
+    var id_country  = $('#select_country').val();
+   // alert(id_department);
+    var tok = $("#token").attr("value");
+     $.ajax({
+      beforeSend: function(){
+
+      },
+      url:"aulas/departments/",
+      type: "POST",
+      dataType: 'json',      
+      data:{
+            csrfmiddlewaretoken: tok,
+            state:'inactive',
+            name:'name',
+            id:'id',
+            id_country:id_country,
+
+      }, 
+      success: function(data){
+
+      var output_select_departments = "";
+      output_select_departments += '<option value="0" selected="" disabled="">Departamento</option>'
+      for (var d in data["dictionary_departments"]){
+        output_select_departments += "<option value="+(data["dictionary_departments"][d]['id'])+">";
+        output_select_departments += (data["dictionary_departments"][d]['name']); 
+        output_select_departments += "</option>";
+        }/*Cierro for dictionary_grades*/
+        $("#select_department").html(output_select_departments);
         
       }
-
 
     });
 
@@ -359,13 +418,10 @@ function save_classroom() {
     var select_grade = $('#select_grade').val();
     var class_name = $('#class_name').val();
     var select_shift = $('#select_shift').val();
-   
-    $.ajax({
-      beforeSend: function(){
 
-      },
-      url:"aulas/add/",
-      type: "GET",
+    $.ajax({
+      url:"aulas/agregar/aula/",
+      type: "POST",
       dataType: 'json',      
       data:{
             csrfmiddlewaretoken: tok,
