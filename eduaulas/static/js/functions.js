@@ -412,36 +412,43 @@ function load_selects_departments(){
 function save_classroom() {
 
     var tok = $("#token").attr("value");
+    valido = true;
     var select_country = $('#select_country').val();
+    valido *= (select_country != null);
     var select_department= $('#select_department').val();
+    valido *= (select_country != null);
     var select_school= $('#select_school').val();
+    valido *= (select_country != null);
     var select_grade = $('#select_grade').val();
+    valido *= (select_country != null);
     var class_name = $('#class_name').val();
+    valido *= (select_country != null);
     var select_shift = $('#select_shift').val();
+    valido *= (select_country != null);
+    
+    if (valido){
+      $.ajax({
+        url:"aulas/agregar/aula/",
+        type: "POST",
+        dataType: 'json',      
+        data:{
+              csrfmiddlewaretoken: tok,
+              state:'inactive',
+              select_country:select_country,
+              select_department:select_department,
+              select_school:select_school,
+              select_grade:select_grade,
+              class_name:class_name,
+              select_shift:select_shift
 
-    $.ajax({
-      url:"aulas/agregar/aula/",
-      type: "POST",
-      dataType: 'json',      
-      data:{
-            csrfmiddlewaretoken: tok,
-            state:'inactive',
-            select_country:select_country,
-            select_department:select_department,
-            select_school:select_school,
-            select_grade:select_grade,
-            class_name:class_name,
-            select_shift:select_shift
+        }, 
+        success: function(){
+          create_classroom_table();
+        }
+      });
+    }
 
-      }, 
-
-      success: function(){
-
-        create_classroom_table();
-      }
-
-
-    });
+    
 
 
 }
