@@ -218,7 +218,8 @@ function create_classroom_table() {
     type:'GET',
     dataType:"json",
     data:{
-          grade:'grade',
+          code:'code',
+          shift: 'shift',
           class_letter:'class_letter',
     }, 
 
@@ -240,7 +241,8 @@ function draw_table_classrooms (data) {
       var output = "";
       for (var x in data["dictionary_classrooms"]){
         output += "<tr>";
-        (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";
+        (data["dictionary_classrooms"][x]['code'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['code']+"</td>";
+        (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         output += "</tr>";
       }

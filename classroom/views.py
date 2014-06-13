@@ -40,6 +40,7 @@ def classroom_list(request):
                         dictionary_classrooms[x.code] = {
                                 
                                 "code": x.code,
+                                "shift": x.shift,
                                 "class_letter": x.class_letter
                                 
                         }
