@@ -41,7 +41,10 @@ def classroom_list(request):
                                 
                                 "code": x.code,
                                 "shift": x.shift,
-                                "class_letter": x.class_letter
+                                "class_letter": x.class_letter,
+                                "grade":x.grade.name,
+                                "school": x.school.name
+
                                 
                         }
                 
