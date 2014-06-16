@@ -15,6 +15,8 @@ function ini(){
   
 }
 
+
+
                 
 function sm(){
   $.smallBox({

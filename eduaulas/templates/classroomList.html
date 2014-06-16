@@ -86,7 +86,7 @@
 													<select name="grade" id="select_grade" >
 														<option value="0" selected="" disabled="">Grado</option>
 		                                                {% for g in grades%}
-														<option value="1">{{g.name}}</option>
+														<option value={{g.id}}>{{g.name}}</option>↓
 														{% endfor %}
 													</select> <i></i> </label>
 											</section>
