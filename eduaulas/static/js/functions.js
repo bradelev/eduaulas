@@ -35,7 +35,7 @@ function load_fiters(){
       beforeSend: function(){
 
       },
-      url:"list/",
+      url:"lista/",
       chache: false,
       type: "POST",
       dataType: 'json',      
@@ -62,7 +62,7 @@ function load_filter_subjects(id_area){
   
   var tok = $("#token").attr("value");
   var query = $.ajax({
-    url:"list/",
+    url:"lista/",
     type:'POST',
     dataType:"json",
     data:{
@@ -92,6 +92,7 @@ function load_filter_subjects(id_area){
     })
     $("#select_subject").change(load_units);
 
+
 }
 
 function load_units(){
@@ -99,8 +100,10 @@ function load_units(){
   var id_subject = $(this).val();
 
   var tok = $("#token").attr("value");
+  
   var query = $.ajax({
-    url:"list/units/",
+   // url:"lista/unidades/", lista/(?P<code>\w+)?/unidades
+   url:"lista/unidades/",
     type:'POST',
     dataType:"json",
     data:{
@@ -109,6 +112,7 @@ function load_units(){
           id_subject: id_subject,
           name: 'p.name',
           id:'p.id',
+          
           
     }, 
     
@@ -136,10 +140,12 @@ function load_units(){
 
 function get_students_data () {
 	 
+    var code_class = $("#code").attr("value");
+    //alert(code);
     var id_unit = $(this).val();
     var tok = $("#token").attr("value");
     var query = $.ajax({
-    url:"list/students/",
+    url:"lista/alumnos/",
     type:'post',
     dataType:"json",
     data:{
@@ -152,6 +158,7 @@ function get_students_data () {
           exercise_id: 'exercise_id',
           points: 'y.points',
           student: 'y.student.id',
+       //   code:'code'
 
     }, 
 
@@ -221,7 +228,8 @@ function create_classroom_table() {
           code:'code',
           shift: 'shift',
           class_letter:'class_letter',
-          grade:'grade'
+          grade:'grade',
+          school:'school'
 
     }, 
 
@@ -243,11 +251,19 @@ function draw_table_classrooms (data) {
       var output = "";
       for (var x in data["dictionary_classrooms"]){
         output += "<tr>";
-        (data["dictionary_classrooms"][x]['code'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['code']+"</td>";
+        var code_classroom=data["dictionary_classrooms"][x]['code'];
+        (data["dictionary_classrooms"][x]['code'] == "0") ? output += "<td></td>": output += "<td>"+"<a title='Ir a aula' href='http://127.0.0.1:8080/panel/lista/"+[code_classroom]+"'>"+data["dictionary_classrooms"][x]['code']+"</a></td>";
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
         (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
+        
+        
+        output += "<td>";
+       // output += "x";
+        output += '<button class="btn btn-xs btn-default" onclick="" data-original-title="Edit Row"><i class="fa fa-pencil"></i></button>';
+        output += '<button class="btn btn-xs btn-default" onclick="" data-original-title="Edit Row"><i class="fa fa-times"></i></button>';
+        output += "</td>";
         output += "</tr>";
       }
       if (output != ""){

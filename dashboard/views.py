@@ -22,8 +22,8 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 	
-
 def ini(request):
+#def ini(request,code):
 	var_areas = Area.objects.all()
 	#var_subjects = Subject.objects.all()
 	#var_units = Unit.objects.all()
@@ -105,9 +105,11 @@ def list_students(request):
 	try:
 		if request.POST:
 			
+			#code =request.POST['code']
+			#print(code)
 			id_unit =request.POST['id_unit']
 			var_unit = Unit.objects.get(pk=id_unit)
-			print(id_unit,'UNIDAD')
+			
 			#cl = ClassRoom.objects.get(pk='efr5g')
 			students = Student.objects.filter()
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)

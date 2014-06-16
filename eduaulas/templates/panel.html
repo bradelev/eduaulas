@@ -18,7 +18,9 @@
                     <li>
                         Trabajando en clase
                     </li>
-                   
+                   <li>
+                        Aula: {{code}}
+                    </li>
                 </ol>
 
 
@@ -31,6 +33,7 @@
            </div>
             <div id="content">
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
+                <input type="hidden" id="code" value="{{code}}"></input>
                <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comezar a trabajar.</h1>
                 <div id="filters">    
                     <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
