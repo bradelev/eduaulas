@@ -33,8 +33,8 @@
 		<!-- MAIN PANEL -->
 		<div id="main" role="main">
 			
-
-			
+			<button id='edit_class'>Botno</button>
+			<a href="http://127.0.0.1:8080/panel/lista/" title="Ir al aula"></a>
 
 			<!-- MAIN CONTENT -->
 			<div id="content">
@@ -86,7 +86,7 @@
 													<select name="grade" id="select_grade" >
 														<option value="0" selected="" disabled="">Grado</option>
 		                                                {% for g in grades%}
-														<option value={{g.id}}>{{g.name}}</option>↓
+														<option value="1">{{g.name}}</option>
 														{% endfor %}
 													</select> <i></i> </label>
 											</section>

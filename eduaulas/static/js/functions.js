@@ -12,7 +12,7 @@ function ini(){
   $('#add_classroom').click(get_data_for_selects_classroom);
   $('#subtmit_classroom').click(save_classroom);
   
-  
+
 }
 
 
@@ -246,8 +246,11 @@ function create_classroom_table() {
 } /*cierro function get_students_data*/
 
 
+
 function draw_table_classrooms (data) {
 
+  //$(".edit_class").click(edit_classroom);
+  
   if(data['type'] == 'success'){  
      
       var output = "";
@@ -258,25 +261,31 @@ function draw_table_classrooms (data) {
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
-        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
+        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td >"+data["dictionary_classrooms"][x]['school']+"</td>";
         
         
         output += "<td>";
        // output += "x";
-        output += '<button class="btn btn-xs btn-default" onclick="" data-original-title="Edit Row"><i class="fa fa-pencil"></i></button>';
-        output += '<button class="btn btn-xs btn-default" onclick="" data-original-title="Edit Row"><i class="fa fa-times"></i></button>';
+        output += '<button class="edit_class btn btn-xs btn-default" data-original-title="Edit Row"><i class="fa fa-pencil"></i></button>';
+        output += '<button class="btn btn-xs btn-default" data-original-title="Edit Row"><i class="fa fa-times"></i></button>';
         output += "</td>";
         output += "</tr>";
       }
       if (output != ""){
         $("#dt_classroom > tbody").append(output);
+      //  $("#edit_class").click(edit_classroom);
+      $(".edit_class").click(edit_classroom(code_classroom));
+
       }
   }
 
-} /*cierro function create_table_classrooms*/
+} /*cierro function create_table_classrooms*///btn btn-xs btn-default
 
+function edit_classroom(code_classroom){
 
-
+  //var code_classroom2=data["dictionary_classrooms"][x]['code'];
+  alert(code_classroom)
+}
 
 
 

@@ -28,35 +28,8 @@ def ini(request):
 
 	return render_to_response('classroomList.html', context_instance = RequestContext(request))
 
-"""def classroom_save(request):
-    
-    message = ""
-    type = "error"
-    dp = Department.objects.all()
-    c= Country.objects.all()
-    gr = Grade.objects.all()
-    sc = School.objects.all()
-
-    if request.POST:
-        
-        country =request.POST['country'] 
-        department = request.POST['department']  
-        school= request.POST['school'] 
-        grade= request.POST['grade'] 
-        className=request.POST['className'] 
-        shift=request.POST['shift']               
-        c= ClassRoom()
-        c.code = generate_classroom_code()
-        c.class_letter = className
-        c.shift = shift
-        g = Grade.objects.get(pk=grade)
-        c.grade=g
-        s= School.objects.get(pk=school)
-        c.school=s
-        c.save()
-    return render_to_response('classroomAdd.html',{'countrys':c, 'departments':dp,'grades':gr,'schools':sc} ,context_instance = RequestContext(request))
-"""
-
+def edit_classroom(request):
+    pass
 
 def classroom_list(request):
        # classrooms = ClassRoom.objects.all()
