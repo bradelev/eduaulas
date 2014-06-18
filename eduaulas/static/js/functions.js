@@ -261,90 +261,109 @@ function draw_table_classrooms (data) {
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
-        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td >"+data["dictionary_classrooms"][x]['school']+"</td>";
+        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
         
         
         output += "<td>";
        // output += "x";
-        output += '<button class="edit_class btn btn-xs btn-default" data-original-title="Edit Row"><i class="fa fa-pencil"></i></button>';
+        output += '<button class="edit_class btn btn-xs btn-default" data-original-title="Edit Row" data-toggle="modal" data-target="#myModal" value="'+ code_classroom+'"><i class="fa fa-pencil"></i></button>';
         output += '<button class="btn btn-xs btn-default" data-original-title="Edit Row"><i class="fa fa-times"></i></button>';
         output += "</td>";
         output += "</tr>";
       }
       if (output != ""){
         $("#dt_classroom > tbody").append(output);
-      //  $("#edit_class").click(edit_classroom);
-      $(".edit_class").click(edit_classroom(code_classroom));
+        $(".edit_class").click(load_classroom);
+      
 
       }
   }
 
 } /*cierro function create_table_classrooms*///btn btn-xs btn-default
+/***************AULAS**************************************************************************/
+function load_classroom(code_classroom){
+  var editing_classroom= false;
+  var tok = $("#token").attr("value");
+  var code_classroom= $(this).val();
+  
+    var query = $.ajax({
+    url:"editar/aula/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          csrfmiddlewaretoken: tok,
+          code:code_classroom,
+          shift: 'shift',
+          country:'country',
+          department:'department',
+          grade:'grade',
+          school:'school',
+          school_name:'school_name',
+          class_letter:'class_letter'
 
-function edit_classroom(code_classroom){
+    }, 
 
-  //var code_classroom2=data["dictionary_classrooms"][x]['code'];
-  alert(code_classroom)
-}
+    "success":function(data){
+        var editing_classroom= true;
+        for (var classroom in data["dictionary_classroom"]){
+          var shift=data["dictionary_classroom"][classroom]['shift']; 
+          $("#select_shift").val(shift);
+          var grade=data["dictionary_classroom"][classroom]['grade'];
+          
+        
+          //var school=data["dictionary_classroom"][classroom]['school.name'];
+          
+          var class_letter=data["dictionary_classroom"][classroom]['class_letter'];
+          $("#class_name").val(class_letter);
+          get_data_for_selects_classroom(editing_classroom,grade);
+      }
 
-
-
-$(function(){
-
-$('#classroom-form').validate({
-      // Rules for form validation
-        rules : {
-          country : {
-            required : true
-          },
-          department : {
-            required : true
-          },
-          grade : {
-            required : true
-          },
-           className : {
-            required : true
-          },
-          school : {
-            required : true
-          },
-          shift : {
-            required : true
-          }
-        },
-
+       for (var s in data["dictionary_school"]){
+          var school=data["dictionary_school"][s]['school_name']; 
+          alert(school);
+          
+      }
+        /*$("#select_country").val(country);
+        $("#select_department").val(department);
+        edit_classroom();
+        */
        
-// Messages for form validation
-messages : {
-          country : {
-            required : 'Por favor ingrese su pais'
-          },
-          department : {
-            required : 'Por favor ingrese su departamento'
-          },
-          grade : {
-            required : 'Por favor ingrese el año del aula'
-          },
-          school : {
-            required : 'Por favor ingrese la escuela'
-          },
-          className : {
-            required : 'Por favor ingrese el nombre de la clase'
-          },
-          shift : {
-            required : 'Por favor ingrese el turno de la clase'
-          }
-        },
-        // Do not change code below
-        errorPlacement : function(error, element) {
-          error.insertAfter(element.parent());
-        }
-      })
-});/*cierro function form_classroom_validate*/
+      }
 
-function get_data_for_selects_classroom(){
+    })
+}/*load_classroom*/
 
+function edit_classroom(){
+
+ /* var code_classroom= $(this).val()
+    var query = $.ajax({
+    url:"editar/aula/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          code:'code',
+          shift: 'shift',
+          class_letter:'class_letter',
+          grade:'grade',
+          school:'school'
+
+    }, 
+
+    "success":function(data){
+        draw_table_classrooms(data);
+        $('#dt_classroom').dataTable();
+       
+      }
+
+    })*/
+}/*edit_classroom*/
+
+
+
+
+
+function get_data_for_selects_classroom(editing_classroom,grade,school){
+    
     var tok = $("#token").attr("value");
      $.ajax({
       beforeSend: function(){
@@ -363,7 +382,7 @@ function get_data_for_selects_classroom(){
 
       success: function(data){
 
-          load_selects_classroom(data);
+          load_selects_classroom(data,editing_classroom,grade,school);
         
       }
 
@@ -372,8 +391,8 @@ function get_data_for_selects_classroom(){
 }
 
 
-function load_selects_classroom(data){
-
+function load_selects_classroom(data,editing_classroom,grade,school){
+     
       var output_select_country = "";
       output_select_country += '<option value="0" selected="" disabled="">Pais</option>'
       for (var y in data["dictionary_countrys"]){
@@ -385,7 +404,10 @@ function load_selects_classroom(data){
         $("#select_country").change(load_selects_departments);
       
       var output_select_schools = "";
-      output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
+
+      if (editing_classroom==false){
+        output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
+      }else{output_select_schools += '<option value="'+school+'" selected="true" >'+school+'</option>'}
       for (var s in data["dictionary_schools"]){
         output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
         output_select_schools += (data["dictionary_schools"][s]['name']); 
@@ -394,7 +416,9 @@ function load_selects_classroom(data){
         $("#select_school").html(output_select_schools);
 
       var output_select_grades = "";
-      output_select_grades += '<option value="0" selected="" disabled="">Grados</option>'
+      if (editing_classroom==false){
+        output_select_grades += '<option value="0" selected="" disabled="">Grados</option>'
+      }else{output_select_grades += '<option value="'+grade+'" selected="true" >'+grade+'</option>'}
       for (var g in data["dictionary_grades"]){
         output_select_grades += "<option value="+(data["dictionary_grades"][g]['id'])+">";
         output_select_grades += (data["dictionary_grades"][g]['name']); 
@@ -485,3 +509,57 @@ function save_classroom() {
 
 
 }
+
+$(function(){
+
+$('#classroom-form').validate({
+      // Rules for form validation
+        rules : {
+          country : {
+            required : true
+          },
+          department : {
+            required : true
+          },
+          grade : {
+            required : true
+          },
+           className : {
+            required : true
+          },
+          school : {
+            required : true
+          },
+          shift : {
+            required : true
+          }
+        },
+
+       
+// Messages for form validation
+messages : {
+          country : {
+            required : 'Por favor ingrese su pais'
+          },
+          department : {
+            required : 'Por favor ingrese su departamento'
+          },
+          grade : {
+            required : 'Por favor ingrese el año del aula'
+          },
+          school : {
+            required : 'Por favor ingrese la escuela'
+          },
+          className : {
+            required : 'Por favor ingrese el nombre de la clase'
+          },
+          shift : {
+            required : 'Por favor ingrese el turno de la clase'
+          }
+        },
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        }
+      })
+});/*cierro function form_classroom_validate*/

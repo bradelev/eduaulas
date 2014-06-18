@@ -29,7 +29,44 @@ def ini(request):
 	return render_to_response('classroomList.html', context_instance = RequestContext(request))
 
 def edit_classroom(request):
-    pass
+        dictionary_school = {}
+        dictionary_classroom = {}
+        message = ""
+        type = "error"
+        print('entre')
+        try:
+            if request.POST:
+                code =request.POST['code'] 
+                classroom = ClassRoom.objects.get(pk=code)
+               # school_id = classroom.school
+              #  sch = School.objects.get(pk=2)
+                sch = School.objects.all()
+                type = "success"
+                dictionary_classroom[classroom.code] = {
+                           
+                        #"country": classroom.country.name,
+                        #"department":classroom.department.name,                                        
+                        "shift": classroom.shift,
+                        "class_letter": classroom.class_letter,
+                        "grade":classroom.grade.name,
+                        "school": classroom.school.name,
+                        }
+
+                for s in sch:                              
+                        dictionary_school[s.id] = {
+                              
+                                "school_name": s.name,                                
+                        }
+                
+        except ClassRoom.DoesNotExist:
+                message = "No hay aulas"
+        result = simplejson.dumps({
+                        "dictionary_classroom":dictionary_classroom,
+                        "dictionary_school":dictionary_school,
+                        "message":message,
+                        "type":type,
+                }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
 
 def classroom_list(request):
        # classrooms = ClassRoom.objects.all()
