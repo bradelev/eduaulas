@@ -294,11 +294,11 @@ function load_classroom(code_classroom){
           csrfmiddlewaretoken: tok,
           code:code_classroom,
           shift: 'shift',
-          country:'country',
-          department:'department',
-          grade:'grade',
+          country_id:'country_id',
+          department_id:'department_id',
+          grade_id:'grade_id',
           school:'school',
-          school_name:'school_name',
+          school_id:'school_id',
           class_letter:'class_letter'
 
     }, 
@@ -308,61 +308,27 @@ function load_classroom(code_classroom){
         for (var classroom in data["dictionary_classroom"]){
           var shift=data["dictionary_classroom"][classroom]['shift']; 
           $("#select_shift").val(shift);
-          var grade=data["dictionary_classroom"][classroom]['grade'];
-          
-        
-          //var school=data["dictionary_classroom"][classroom]['school.name'];
+          var grade_id=data["dictionary_classroom"][classroom]['grade_id'];
+          var school_id=data["dictionary_classroom"][classroom]['school_id'];
+          var country_id=data["dictionary_classroom"][classroom]['country_id'];
+          var department_id=data["dictionary_classroom"][classroom]['department_id'];
+
           
           var class_letter=data["dictionary_classroom"][classroom]['class_letter'];
           $("#class_name").val(class_letter);
-          get_data_for_selects_classroom(editing_classroom,grade);
-      }
+         
+      }/*cierro for dictionary_classroom*/
+      
+       get_data_for_selects_classroom(editing_classroom,grade_id,school_id,country_id,department_id);
 
-       for (var s in data["dictionary_school"]){
-          var school=data["dictionary_school"][s]['school_name']; 
-          alert(school);
-          
-      }
-        /*$("#select_country").val(country);
-        $("#select_department").val(department);
-        edit_classroom();
-        */
-       
       }
 
     })
 }/*load_classroom*/
 
-function edit_classroom(){
-
- /* var code_classroom= $(this).val()
-    var query = $.ajax({
-    url:"editar/aula/",
-    type:'POST',
-    dataType:"json",
-    data:{
-          code:'code',
-          shift: 'shift',
-          class_letter:'class_letter',
-          grade:'grade',
-          school:'school'
-
-    }, 
-
-    "success":function(data){
-        draw_table_classrooms(data);
-        $('#dt_classroom').dataTable();
-       
-      }
-
-    })*/
-}/*edit_classroom*/
 
 
-
-
-
-function get_data_for_selects_classroom(editing_classroom,grade,school){
+function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,country_id,department_id){
     
     var tok = $("#token").attr("value");
      $.ajax({
@@ -382,8 +348,8 @@ function get_data_for_selects_classroom(editing_classroom,grade,school){
 
       success: function(data){
 
-          load_selects_classroom(data,editing_classroom,grade,school);
-        
+          load_selects_classroom(data,editing_classroom,grade_id,school_id,country_id,department_id);
+          
       }
 
     });
@@ -391,7 +357,9 @@ function get_data_for_selects_classroom(editing_classroom,grade,school){
 }
 
 
-function load_selects_classroom(data,editing_classroom,grade,school){
+function load_selects_classroom(data,editing_classroom,grade_id,school_id,country_id,department_id){
+    
+     $('#subtmit_classroom').click(save_classroom(editing_classroom));
      
       var output_select_country = "";
       output_select_country += '<option value="0" selected="" disabled="">Pais</option>'
@@ -401,35 +369,44 @@ function load_selects_classroom(data,editing_classroom,grade,school){
         output_select_country += "</option>";
         }/* cierro for countrys*/
         $("#select_country").html(output_select_country);
-        $("#select_country").change(load_selects_departments);
+        $("#select_country").change(load_selects_departments(editing_classroom,department_id));
+        /*if (editing_classroom==true){
+          $("#select_country").val(country_id);
+          $("#select_country").change(load_selects_departments(editing_classroom,department_id));
+      }*/
       
-      var output_select_schools = "";
 
-      if (editing_classroom==false){
-        output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
-      }else{output_select_schools += '<option value="'+school+'" selected="true" >'+school+'</option>'}
+      
+      var output_select_schools = "";     
+      output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
       for (var s in data["dictionary_schools"]){
         output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
         output_select_schools += (data["dictionary_schools"][s]['name']); 
         output_select_schools += "</option>";
         }/*Cierro for dictionary_schools*/
         $("#select_school").html(output_select_schools);
+      if (editing_classroom==true){
+        $("#select_school").val(school_id);
+      }
+     
 
-      var output_select_grades = "";
-      if (editing_classroom==false){
-        output_select_grades += '<option value="0" selected="" disabled="">Grados</option>'
-      }else{output_select_grades += '<option value="'+grade+'" selected="true" >'+grade+'</option>'}
+
+    var output_select_grades = "";
+     output_select_grades += '<option value="" selected="" disabled="" >Grados</option>'
       for (var g in data["dictionary_grades"]){
         output_select_grades += "<option value="+(data["dictionary_grades"][g]['id'])+">";
         output_select_grades += (data["dictionary_grades"][g]['name']); 
         output_select_grades += "</option>";
         }/*Cierro for dictionary_grades*/
         $("#select_grade").html(output_select_grades);
+        if (editing_classroom==true){
+          $("#select_grade").val(grade_id);
+      }
 
  } 
 
 
-function load_selects_departments(){
+function load_selects_departments(editing_classroom,department_id){
 
     var id_country  = $('#select_country').val();
    // alert(id_department);
@@ -459,14 +436,19 @@ function load_selects_departments(){
         output_select_departments += "</option>";
         }/*Cierro for dictionary_grades*/
         $("#select_department").html(output_select_departments);
-        
-      }
 
+        if (editing_classroom==true){
+          $("#select_department").val(department_id);
+      }
+       
+      }
+     
     });
 
 }
 
-function save_classroom() {
+function save_classroom(editing_classroom) {
+   // alert(editing_classroom);
 
     var tok = $("#token").attr("value");
     valido = true;
@@ -489,6 +471,8 @@ function save_classroom() {
         type: "POST",
         dataType: 'json',      
         data:{
+
+              editing_classroom: editing_classroom,
               csrfmiddlewaretoken: tok,
               state:'inactive',
               select_country:select_country,
@@ -504,8 +488,6 @@ function save_classroom() {
         }
       });
     }
-
-    
 
 
 }

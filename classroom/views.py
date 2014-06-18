@@ -33,36 +33,31 @@ def edit_classroom(request):
         dictionary_classroom = {}
         message = ""
         type = "error"
-        print('entre')
+        
         try:
             if request.POST:
+                
                 code =request.POST['code'] 
-                classroom = ClassRoom.objects.get(pk=code)
-               # school_id = classroom.school
-              #  sch = School.objects.get(pk=2)
-                sch = School.objects.all()
+                classroom = ClassRoom.objects.get(pk=code) 
+                s = classroom.school.id           
+                sch = School.objects.get(pk=s)
                 type = "success"
                 dictionary_classroom[classroom.code] = {
                            
-                        #"country": classroom.country.name,
-                        #"department":classroom.department.name,                                        
+                        "country_id": classroom.school.department.country.id,
+                        "department_id":classroom.school.department.id,                                        
                         "shift": classroom.shift,
                         "class_letter": classroom.class_letter,
-                        "grade":classroom.grade.name,
-                        "school": classroom.school.name,
+                        "grade_id":classroom.grade.id,
+                        "school_id": classroom.school.id,
                         }
 
-                for s in sch:                              
-                        dictionary_school[s.id] = {
-                              
-                                "school_name": s.name,                                
-                        }
                 
         except ClassRoom.DoesNotExist:
                 message = "No hay aulas"
         result = simplejson.dumps({
                         "dictionary_classroom":dictionary_classroom,
-                        "dictionary_school":dictionary_school,
+                        #"dictionary_school":dictionary_school,
                         "message":message,
                         "type":type,
                 }, cls = LazyEncoder)
@@ -101,13 +96,15 @@ def classroom_list(request):
        
 
 def classroom_save(request):
-    print('entre LA FUNCIONNN')
+   
     message = ""
     type = "error"
+    print('entre al save')
     try:
 
         if request.POST:
-            
+            editing_classroom =request.POST['editing_classroom'] 
+            print(editing_classroom)
             country =request.POST['select_country'] 
             department = request.POST['select_department']  
             school= request.POST['select_school'] 
@@ -194,10 +191,14 @@ def load_departments(request):
     message = ""
     type = "error"
     try:
-        if request.POST:            
+        if request.POST:
+            print('hola post')            
             id_country =request.POST['id_country']
+            print('hola 2',id_country)
             c = Country.objects.get(pk=id_country)
-            departments = Department.objects.filter(country=c)        
+            print('hola 3')
+            departments = Department.objects.filter(country=c)  
+            print('hola 4')      
             
             type = "success"
 
