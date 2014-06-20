@@ -28,7 +28,7 @@ def ini(request):
 
 	return render_to_response('classroomList.html', context_instance = RequestContext(request))
 
-def edit_classroom(request):
+def load_classroom(request):
         dictionary_school = {}
         dictionary_classroom = {}
         message = ""
@@ -50,6 +50,7 @@ def edit_classroom(request):
                         "class_letter": classroom.class_letter,
                         "grade_id":classroom.grade.id,
                         "school_id": classroom.school.id,
+                        "code_class":classroom.code,
                         }
 
                 
@@ -95,31 +96,40 @@ def classroom_list(request):
        # return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
        
 
-def classroom_save(request):
-   
+def classroom_save_add(request):
+    print('entre al save')
     message = ""
     type = "error"
-    print('entre al save')
+    
     try:
 
         if request.POST:
-            editing_classroom =request.POST['editing_classroom'] 
-            print(editing_classroom)
-            country =request.POST['select_country'] 
-            department = request.POST['select_department']  
-            school= request.POST['select_school'] 
+            print('entre al post')
+            country =request.POST['select_country']             
+            department = request.POST['select_department']             
+            school= request.POST['select_school']            
             grade= request.POST['select_grade'] 
-            className=request.POST['class_name'] 
-            shift=request.POST['select_shift']               
+            className=request.POST['class_name']           
+            shift=request.POST['select_shift']    
+            
+           # code=request.POST['code_class'] 
+
             c= ClassRoom()
             c.code = generate_classroom_code()
+            print('hola uno')
             c.class_letter = className
+            print('hola dos')
             c.shift = shift
+            print('hola tres')
             g = Grade.objects.get(pk=grade)
             c.grade=g
+            print('hola cuatro')
             s= School.objects.get(pk=school)
+            print('hola cinco')
             c.school=s
+            print('hola 6')   
             c.save()
+            
             type = "success"
     except ClassRoom.DoesNotExist:
         print('entre a la execpcion')
@@ -132,7 +142,47 @@ def classroom_save(request):
     return HttpResponse(result, mimetype = 'application/javascript')
   
  
-	
+def classroom_save_edit(request):
+    message = ""
+    type = "error"
+    print('entre al save edit')
+    try:
+
+        if request.POST:
+            print('entre al post')
+            country =request.POST['select_country']             
+            department = request.POST['select_department']             
+            school= request.POST['select_school']            
+            grade= request.POST['select_grade'] 
+            className=request.POST['class_name']           
+            shift=request.POST['select_shift']                
+            code=request.POST['code_class'] 
+            
+            c = ClassRoom.objects.get(pk=code)
+            print('hola uno')
+            c.class_letter = className
+            print('hola dos')
+            c.shift = shift
+            print('hola tres')
+            g = Grade.objects.get(pk=grade)
+            c.grade=g
+            print('hola cuatro')
+            s= School.objects.get(pk=school)
+            print('hola cinco')
+            c.school=s
+            print('hola 6')   
+            c.save()
+            
+            type = "success"
+    except ClassRoom.DoesNotExist:
+        print('entre a la execpcion')
+        message = "No hay alumnos"
+
+    result = simplejson.dumps({            
+            "message":message,
+            "type":type,
+        }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')	
 
 
 def load_classroom_form(request):
@@ -192,13 +242,13 @@ def load_departments(request):
     type = "error"
     try:
         if request.POST:
-            print('hola post')            
+                     
             id_country =request.POST['id_country']
-            print('hola 2',id_country)
+            
             c = Country.objects.get(pk=id_country)
-            print('hola 3')
+            
             departments = Department.objects.filter(country=c)  
-            print('hola 4')      
+              
             
             type = "success"
 
