@@ -6,9 +6,11 @@ function ini(){
   create_classroom_table();
   $('#add_classroom').click(get_data_for_selects_classroom);
   var editing_classroom;
-   $('#subtmit_classroom').click(save_classroom_add);
+  $('#subtmit_classroom').click(save_classroom_add);
+  $('#dlt_classroom').click(delete_classroom);
+  
+ 
  }
-
 
 
 function create_classroom_table() {
@@ -58,21 +60,91 @@ function draw_table_classrooms (data) {
         output += "<td>";
        // output += "x";
         output += '<button class="edit_class btn btn-xs btn-default" data-original-title="Edit Row" data-toggle="modal" data-target="#myModal" value="'+ code_classroom+'"><i class="fa fa-pencil"></i></button>';
-        output += '<button class="btn btn-xs btn-default" data-original-title="Edit Row"><i class="fa fa-times"></i></button>';
+        output += '<button class="delete_class btn btn-xs btn-default" data-original-title="Delete Row" data-toggle="modal" data-target="#modal_dlt_classroom" value="'+ code_classroom+'"><i class="fa fa-times"></i></button>';
         output += "</td>";
         output += "</tr>";
       }
       if (output != ""){
         $("#dt_classroom > tbody").append(output);
         $(".edit_class").click(load_classroom);
-      
+        $(".delete_class").click(load_classroom_code);
+        
 
       }
   }
 
 } /*cierro function create_table_classrooms*///btn btn-xs btn-default
-/***************AULAS**************************************************************************/
-function load_classroom(code_classroom){
+
+function load_classroom_code(){
+
+    var code_classroom= $(this).val();
+    //alert(code_classroom);
+    var tok = $("#token").attr("value");
+     $.ajax({
+      beforeSend: function(){
+      },
+      url:"cargar/codigo_aula/",
+      type: "POST",
+      dataType: 'json',      
+      data:{
+            csrfmiddlewaretoken: tok,
+            state:'inactive',
+            code_class_to_delete:code_classroom,
+            code:'code',
+
+      }, 
+
+      success: function(data){
+
+          var output_code= "¿Desea eliminar el aula";
+          for (var classroom in data["dictionary_classroom"]){
+            cg =data["dictionary_classroom"][classroom]['code'];
+            output_code+="  ";
+            output_code+=cg + " ?";
+            $("#txt_delete").val(cg);
+        }
+        $("#txt_delete").html(output_code);
+       
+      }
+
+    });
+
+
+
+}
+
+function delete_classroom(){
+
+    var code_class= $("#txt_delete").val();
+   // alert(code_class);
+    var tok = $("#token").attr("value");
+     $.ajax({
+      beforeSend: function(){
+      },
+      url:"aulas/eliminar/aula/",
+      type: "POST",
+      dataType: 'json',      
+      data:{
+            csrfmiddlewaretoken: tok,
+            state:'inactive',
+            code_class_to_delete:code_class,
+
+      }, 
+
+      success: function(){
+          //alert('succ')
+          create_classroom_table();
+          
+      }
+
+    });
+
+
+}
+
+
+
+function load_classroom(){ 
   editing_classroom= true;
   var tok = $("#token").attr("value");
   var code_classroom= $(this).val();

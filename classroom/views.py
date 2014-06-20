@@ -145,7 +145,7 @@ def classroom_save_add(request):
 def classroom_save_edit(request):
     message = ""
     type = "error"
-    print('entre al save edit')
+    print('entre al save delete')
     try:
 
         if request.POST:
@@ -307,6 +307,58 @@ def load_schools(request):
         message = "No hay escuelas"
     
     return HttpResponse(result, mimetype = 'application/javascript')
+
+def load_classroom_code(request):
+    message = ""
+    type = "error"
+    dictionary_classroom={}
+    
+    try:
+        if request.POST:
+            code_classroom =request.POST['code_class_to_delete']
+            c = ClassRoom.objects.get(pk=code_classroom)
+            dictionary_classroom[c.code] = {
+                       
+                    "code":c.code,
+                    }
+
+        type = "success"
+        result = simplejson.dumps({
+        "dictionary_classroom":dictionary_classroom,    
+        "message":message,
+        "type":type,
+        }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
+    except ClassRoom.DoesNotExist:
+        message = "No hay aula"    
+    return HttpResponse(result, mimetype = 'application/javascript')
+
+def classroom_delete(request):
+
+    message = ""
+    type = "error"
+
+    try:
+        if request.POST:
+           
+            code =request.POST['code_class_to_delete']
+
+            c = ClassRoom.objects.get(pk=code)
+            c.delete()
+           # print('borro aula', co)
+
+        type = "success"
+
+        result = simplejson.dumps({   
+        "message":message,
+        "type":type,
+        }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
+    except ClassRoom.DoesNotExist:
+        message = "No hay aula"    
+    return HttpResponse(result, mimetype = 'application/javascript')
+
+
 
 def generate_classroom_code():
 

@@ -175,6 +175,40 @@
 			
 		</div><!-- END MAIN PANEL -->
 
+
+
+<div class="modal fade" id="modal_dlt_classroom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4><i class='fa fa-warning modal-title'></i> Eliminar aula</h4>
+					
+				</div><!-- modal-header -->
+				<div class="modal-body">	
+				<input type="hidden" id="token" value="{{csrf_token}}"></input>											
+					<form id="classroom-form" class="smart-form" novalidate="novalidate" method="POST">
+                    {% csrf_token %}
+					<fieldset>
+						<div class="row">
+								<h6 id="txt_delete"></h6>
+						</div>	<!-- row  -->	
+						
+					</fieldset>
+					<div class="modal-footer">
+						<footer>
+							<button type="submit" class="btn btn-danger" id="dlt_classroom"><i class='fa fa-trash-o'></i>
+								Eliminar
+							</button>
+						</footer>
+				</form>
+			</div><!-- modal-footer -->
+		</div><!-- modal-body -->
+	</div><!-- modal-content -->																								
+</div><!-- /.modal-dialog -->
+
 {% endblock %}
 
 {% block scripts %}  
@@ -196,6 +230,7 @@
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
    		<link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
+   		<script src="{% static "js/notification/SmartNotification.min.js" %}"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
         <script>
             if (!window.jQuery.ui) {
@@ -215,10 +250,13 @@
             $(document).ready(function() {
                
                 pageSetUp();
-               	            
+
+                
+               	           
                 });
         </script>
         <script src="{% static "js/functions_classroom.js" %}"></script>
     
      
 {% endblock %}
+
