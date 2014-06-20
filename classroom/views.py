@@ -271,6 +271,42 @@ def load_departments(request):
     
     return HttpResponse(result, mimetype = 'application/javascript')
 
+def load_schools(request):
+
+    dictionary_schools = {}
+    
+    message = ""
+    type = "error"
+    try:
+        if request.POST:
+                     
+            id_department =request.POST['id_department']
+            
+            d = Department.objects.get(pk=id_department)
+            
+            schools = School.objects.filter(department=d)  
+              
+            
+            type = "success"
+
+            for s in schools:                
+                dictionary_schools[s.id] = {
+                    
+                    "name": s.name,
+                    "id": s.id                               
+                }
+
+        result = simplejson.dumps({
+        "dictionary_schools":dictionary_schools,
+        "message":message,
+        "type":type,
+        }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
+            #return render_to_response('classroomList.html',{'countrys':countrys, 'departments': departments, 'schools': schools,'grades': grades}, context_instance = RequestContext(request))
+    except School.DoesNotExist:
+        message = "No hay escuelas"
+    
+    return HttpResponse(result, mimetype = 'application/javascript')
 
 def generate_classroom_code():
 

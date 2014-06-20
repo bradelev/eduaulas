@@ -164,24 +164,12 @@ function load_selects_classroom(data,editing_classroom,grade_id,school_id,countr
         if (editing_classroom==true){
           $("#select_country").val(country_id);
           
-            load_selects_departments(editing_classroom,department_id);
+            load_selects_departments(editing_classroom,department_id,school_id);
 
       }
-      $("#select_country").change(function(){load_selects_departments(editing_classroom,department_id)});
+      $("#select_country").change(function(){load_selects_departments(editing_classroom,department_id,school_id)});
 
-      
-      var output_select_schools = "";     
-      output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
-      for (var s in data["dictionary_schools"]){
-        output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
-        output_select_schools += (data["dictionary_schools"][s]['name']); 
-        output_select_schools += "</option>";
-        }/*Cierro for dictionary_schools*/
-        $("#select_school").html(output_select_schools);
-      if (editing_classroom==true){
-        $("#select_school").val(school_id);
-      }
-     
+           
 
 
     var output_select_grades = "";
@@ -199,7 +187,7 @@ function load_selects_classroom(data,editing_classroom,grade_id,school_id,countr
  } 
 
 
-function load_selects_departments(editing_classroom,department_id){
+function load_selects_departments(editing_classroom,department_id,school_id){
 
     var id_country  = $('#select_country').val();
  //   alert(department_id);
@@ -232,14 +220,55 @@ function load_selects_departments(editing_classroom,department_id){
 
         if (editing_classroom==true){
           $("#select_department").val(department_id);
+          load_selects_schools(editing_classroom,school_id);
       }
-       
+       $("#select_department").change(function(){load_selects_schools(editing_classroom,school_id)});
       }
      
     });
 
 }
 
+
+function load_selects_schools(editing_classroom,school_id){
+ // alert(school_id);
+  var id_department  = $('#select_department').val();
+
+    var tok = $("#token").attr("value");
+     $.ajax({
+      beforeSend: function(){
+
+      },
+      url:"aulas/schools/",
+      type: "POST",
+      dataType: 'json',      
+      data:{
+            csrfmiddlewaretoken: tok,
+            state:'inactive',
+            name:'name',
+            id:'id',
+            id_department:id_department,
+
+      }, 
+      success: function(data){
+
+      var output_select_schools = "";     
+      output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
+      for (var s in data["dictionary_schools"]){
+        output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
+        output_select_schools += (data["dictionary_schools"][s]['name']); 
+        output_select_schools += "</option>";
+        }/*Cierro for dictionary_schools*/
+      $("#select_school").html(output_select_schools);
+      if (editing_classroom==true){
+       // alert(school_id);
+          $("#select_school").val(school_id);
+      }
+       
+      }
+     
+    });
+}
 
 
 function save_classroom_add() {
@@ -290,7 +319,7 @@ function save_classroom_add() {
 
 function save_classroom_edit(code_class) {
     
-    alert('editando'+''+code_class);
+ //   alert('editando'+''+code_class);
     var tok = $("#token").attr("value");
     valido = true;
     var select_country = $('#select_country').val();

@@ -5,6 +5,7 @@ urlpatterns = patterns('',
 
 	url(r'lista/$', 'classroom.views.ini'),
 	url(r'departments/$', 'classroom.views.load_departments'),
+	url(r'schools/$', 'classroom.views.load_schools'),
 	url(r'agregar/aula/$', 'classroom.views.classroom_save_add'),
 	url(r'editar/aula/$', 'classroom.views.classroom_save_edit'),
 	url(r'cargar/aula/$', 'classroom.views.load_classroom'),
