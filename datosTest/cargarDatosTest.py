@@ -9,7 +9,7 @@ from django.template import RequestContext
 
 def ingresar_datos(request):
 	
-	"""c = ClassRoom.objects.get(pk='efr5g')
+	c = ClassRoom.objects.get(pk='A8o6')
 
 	e = Student()
 	e.name = 'Maria'
@@ -39,8 +39,10 @@ def ingresar_datos(request):
 	e.name = 'Agustina'
 	e.last_name= 'Lopez'
 	e.class_room=c
-	e.save()"""
+	e.save()
 
+	return render_to_response('index.html', context_instance = RequestContext(request))
+"""
 	g= Grade()
 	g.name='1'
 	g.save()
@@ -49,7 +51,7 @@ def ingresar_datos(request):
 	g.name='2'
 	g.save()
 
-	"""g= Grade()
+	g= Grade()
 	g.name='Tercero'
 	g.save()
 	
@@ -63,7 +65,7 @@ def ingresar_datos(request):
 
 	g= Grade()
 	g.name='Sexto'
-	g.save()	"""
+	g.save()	
 
 	country= Country()
 	country.name='Uruguay'
@@ -83,6 +85,6 @@ def ingresar_datos(request):
 	sc.number='60'
 	sc.name='Mexico'
 	sc.department=dep
-	sc.save()
+	sc.save()"""
 
-	return render_to_response('index.html', context_instance = RequestContext(request))
+	

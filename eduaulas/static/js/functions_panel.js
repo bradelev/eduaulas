@@ -8,12 +8,12 @@ function ini(){
   
   $('#select_area').change(load_fiters);
   $('#eg7').click(sm);
- 
-
+  
 }
 
                 
 function sm(){
+
   $.smallBox({
     title : "Juan Perez necesita ayuda",
     content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
@@ -24,16 +24,14 @@ function sm(){
 }
 
 
-function load_fiters(){
+/*function load_fiters(){
+ // alert('cargar filtros');
     var tok = $("#token").attr("value");
     var id_area = $(this).val();
-    $("#select_subject").html('');
+   // alert(id_area);
+    //$("#select_subject").html('');
     $.ajax({
-      beforeSend: function(){
-
-      },
-      url:"lista/",
-      chache: false,
+      url:"lista/A8o6/materias/",
       type: "POST",
       dataType: 'json',      
       data:{
@@ -51,15 +49,22 @@ function load_fiters(){
     });
      
     
+}*/
+
+function load_fiters(){
+
+    var id_area = $(this).val();
+    load_filter_subjects(id_area);
+
+        
 }
 
-
 function load_filter_subjects(id_area){
-
-  
+  var cg = $('#code').val();
   var tok = $("#token").attr("value");
   var query = $.ajax({
-    url:"lista/",
+    //url:"lista/A8o6/materias/",
+    url:"lista/"+cg+"/materias/",
     type:'POST',
     dataType:"json",
     data:{
@@ -93,14 +98,11 @@ function load_filter_subjects(id_area){
 }
 
 function load_units(){
-
+  var cg = $('#code').val();
   var id_subject = $(this).val();
-
-  var tok = $("#token").attr("value");
-  
+  var tok = $("#token").attr("value");  
   var query = $.ajax({
-   // url:"lista/unidades/", lista/(?P<code>\w+)?/unidades
-   url:"lista/unidades/",
+   url:"lista/"+cg+"/unidades/",
     type:'POST',
     dataType:"json",
     data:{
@@ -136,13 +138,12 @@ function load_units(){
 }/*cierro funcion load_units*/
 
 function get_students_data () {
-	 
+
     var code_class = $("#code").attr("value");
-    //alert(code);
     var id_unit = $(this).val();
     var tok = $("#token").attr("value");
     var query = $.ajax({
-    url:"lista/alumnos/",
+    url:"lista/"+code_class+"/alumnos/",
     type:'post',
     dataType:"json",
     data:{
@@ -205,7 +206,7 @@ if(data['type'] == 'success'){
     if (output != ""){
       $("#dt_alumnos > tbody ").html(output);
       $("#dt_alumnos > thead").html(output_thead);
-
+      $('#dt_alumnos').dataTable();
     }
     /*$('#dt_alumnos').dataTable();*/
     
