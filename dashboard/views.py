@@ -149,16 +149,38 @@ def list_students(request,code):
 			cl = ClassRoom.objects.get(pk=code)
 			students = Student.objects.filter(class_room=cl)
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)
-			var_students_exercises = Result.objects.filter(student=students, exercise=var_units_exercises)
-
+			#var_students_exercises = Result.objects.filter(student=students, exercise=var_units_exercises)
+			
 			type = "success"
-			for y in var_students_exercises:				
+			
+			for c in students:
+				for j in var_units_exercises:
+					var_results = Result.objects.filter(exercise=j, student=c)	
+					
+					if var_results.exists():
+						print('tiene ejerciio', c.id, j.id)
+						for r in var_results:
+							dictionary_students_exercises[r.id] = {
+								"points": r.points,
+								"student": r.student.id				
+								
+							}
+					else:
+						print('no tiene ejerciio',c.id, j.id)
+						dictionary_students_exercises[c.id] = {
+								"points": '',
+								"student": ''			
+								
+							}
+				
+
+			"""for y in var_students_exercises:				
 				dictionary_students_exercises[y.id] = {
 					
 					"points": y.points,
 					"student": y.student.id				
 					
-				}
+				}"""
 			
 			for x in students:
 				dictionary_students[x.id] = {
