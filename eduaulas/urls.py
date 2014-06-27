@@ -6,7 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns('',
 	url(r'^', include('teacher.urls')),
 
-
+	url(r'^alumnos/', include('student.urls')),
 	url(r'^aulas/', include('classroom.urls')),
 	#url(r'^docente/', include('teacher.urls')),
 	url(r'^panel/', include('dashboard.urls')),
