@@ -31,3 +31,18 @@
  	margin-bottom: 20px;
 
  }
+.labsStudents{
+	font-weight:600;
+	color: #008B8B;
+}
+
+.divRight{
+
+	padding:20px 20px 20px 20px;
+	float: right;
+}
+
+.divGraphs{
+
+	margin-right: 400px;
+}

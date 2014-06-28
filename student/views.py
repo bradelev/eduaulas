@@ -15,5 +15,9 @@ def students_list(request,code):
 def student_info(request,id):
 	
 	student = Student.objects.get(pk=id)
-	return render_to_response('studentInfo.html',{'student':student}, context_instance = RequestContext(request))
+	if student.gender == 'FEMALE':
+		student_gender = 'Femenino'
+	else:
+		student_gender = 'Masculino'
+	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender}, context_instance = RequestContext(request))
 	
