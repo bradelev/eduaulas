@@ -39,7 +39,9 @@ class Exercise(models.Model):
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
 	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien')
 	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal')
-
+	metacognitive_percentage = models.IntegerField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True)
+	cognitive_percentage=models.IntegerField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
+	socio_affective_percentage=models.IntegerField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
 	class Meta:
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
