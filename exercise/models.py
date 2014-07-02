@@ -55,8 +55,11 @@ class Exercise(models.Model):
 	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
 	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
 	
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d77dd465b1b0fc29a260c3dae4c444d68874a34e
 	class Meta:
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
