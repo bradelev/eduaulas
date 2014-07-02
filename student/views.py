@@ -67,7 +67,7 @@ def student_info(request,id):
 		#print('promedio',average_by_subject)
 	except Result.DoesNotExist:
 	        message = "El alumno no tiene ejercicios"
-	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
+	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 	
 	
 	#average_by_subject = 
