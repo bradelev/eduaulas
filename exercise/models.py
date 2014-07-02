@@ -12,7 +12,8 @@ class Result(models.Model):
 	answer = models.TextField(null=True, verbose_name=u'Respuesta')
 	exercise = models.ForeignKey('Exercise', verbose_name=u'Ejercicio')
 	student = models.ForeignKey(Student, verbose_name=u'Estudiante')
-	time_elapsed = models.IntegerField(blank=True, verbose_name=u'Tiempo de realización')
+	time_elapsed = models.FloatField(blank=True, verbose_name=u'Tiempo de realización')
+	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
 
 	class Meta:
 		verbose_name = _('Resultado')
@@ -21,12 +22,23 @@ class Result(models.Model):
 	def __unicode__(self):
 		return self.points
 
+class Lectures(models.Model):
+	lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
+	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
+	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
+	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
+	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
+	class Meta:
+		verbose_name = _('Lectura')
+		verbose_name_plural = _('Lecturas')
+
+	def __unicode__(self):
+		return self.exercise_id
 
 class Exercise(models.Model): 
 	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
-	subject = models.ForeignKey('Subject', default="", verbose_name=u'Materia')
-	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D
+	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
 	ExerciseType = (
 		('TRUE_FALSE', 'Verdadero o Falso'), 
 		('MULTIPLE_CHOICE', 'Multiple Opcion'), 
@@ -39,15 +51,18 @@ class Exercise(models.Model):
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
 	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien')
 	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal')
-	metacognitive_percentage = models.IntegerField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True)
-	cognitive_percentage=models.IntegerField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
-	socio_affective_percentage=models.IntegerField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
+	metacognitive_percentage = models.FloatField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True)
+	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
+	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
+	
+
+
 	class Meta:
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
 
-	#def __unicode__(self):
-	#	return self.grade.name + " " +self.topic.name + " " + self.unit.letter + self.exercise_id
+	def __unicode__(self):
+		return self.exercise_id
 
 class TeacherComments(models.Model):
 	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True)
