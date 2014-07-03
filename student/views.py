@@ -16,30 +16,37 @@ def students_list(request,code):
 
 
 def student_info(request,id):
+	
 	dictionary_subjects_average={}
 	student = Student.objects.get(pk=id)
+
 	if student.gender == 'FEMALE':
 		student_gender = 'Femenino'
 	else:
 		student_gender = 'Masculino'
 	try:
+
 		cont=0
 		metacognitive_percentage= 0
 		cognitive_percentage =0
 		socio_affective_percentage=0
 		sub = Subject.objects.all()
+		
 		cont1=0
 		for s in sub:
+			
 			points=0
 			average=0
 			student_exercises_result= Result.objects.filter(student=student,exercise__unit__subject=s)
 			for r in student_exercises_result:
-				cont1 = cont1 +1
+				print(cont1,'contador')
+				cont1 = cont1 + 1
+				print(cont1,'contador')
 				points += r.points
 			average = points/cont1
 			dictionary_subjects_average [s.id]={		
 
-				"subject": r.exercise.unit.subject.name,
+				"subject": s.name,
 				"average": average				
 			}
 								
