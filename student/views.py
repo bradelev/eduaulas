@@ -46,28 +46,22 @@ def student_info(request,id):
 		print(dictionary_subjects_average)
 
 
-	except Result.DoesNotExist:
-		message = "El alumno no tiene ejercicios"
-	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender}, context_instance = RequestContext(request))
+		student_profiles= Result.objects.filter(student=student)
 
-	"""student_exercises_result= Result.objects.filter(student=student)
-
-		for r in student_exercises_result:
+		for p in student_profiles:
 			cont = cont + 1
-			metacognitive_percentage += r.exercise.metacognitive_percentage
-			cognitive_percentage += r.exercise.cognitive_percentage
-			socio_affective_percentage += r.exercise.socio_affective_percentage
+			metacognitive_percentage += p.exercise.metacognitive_percentage
+			cognitive_percentage += p.exercise.cognitive_percentage
+			socio_affective_percentage += p.exercise.socio_affective_percentage
 
 		average_metacognitive_percentage= metacognitive_percentage/cont
 		average_cognitive_percentage= cognitive_percentage/cont
-		average_socio_affective_percentage= socio_affective_percentage/cont		
+		average_socio_affective_percentage= socio_affective_percentage/cont
 
 
 	except Result.DoesNotExist:
 	        message = "El alumno no tiene ejercicios"
 	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
-	"""
-	
-	#average_by_subject = 
+
 	
 	

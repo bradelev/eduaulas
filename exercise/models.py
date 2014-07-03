@@ -7,20 +7,7 @@ from django.utils.translation import ugettext as _
 
 # Create your models here.
 
-class Result(models.Model):
-	points = models.FloatField(null = True, verbose_name=u'Puntos')
-	answer = models.TextField(null=True, verbose_name=u'Respuesta')
-	exercise = models.ForeignKey('Exercise', verbose_name=u'Ejercicio')
-	student = models.ForeignKey(Student, verbose_name=u'Estudiante')
-	time_elapsed = models.FloatField(blank=True, verbose_name=u'Tiempo de realización')
-	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
 
-	class Meta:
-		verbose_name = _('Resultado')
-		verbose_name_plural = _('Resultados')
-
-	def __unicode__(self):
-		return self.points
 
 class Lectures(models.Model):
 	lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
@@ -55,17 +42,29 @@ class Exercise(models.Model):
 	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
 	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
 	
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d77dd465b1b0fc29a260c3dae4c444d68874a34e
 	class Meta:
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
 
+	#def __unicode__(self):
+	#	return self.exercise_id
+
+class Result(models.Model):
+	points = models.FloatField(null = True, verbose_name=u'Puntos')
+	answer = models.TextField(null=True, verbose_name=u'Respuesta')
+	exercise = models.ForeignKey(Exercise, verbose_name=u'Ejercicio')
+	student = models.ForeignKey(Student, verbose_name=u'Estudiante')
+	time_elapsed = models.FloatField(blank=True, verbose_name=u'Tiempo de realización')
+	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
+
+	class Meta:
+		verbose_name = _('Resultado')
+		verbose_name_plural = _('Resultados')
+
 	def __unicode__(self):
-		return self.exercise_id
+		return self.points
+
 
 class TeacherComments(models.Model):
 	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True)
@@ -116,5 +115,4 @@ class Subject(models.Model):
 		verbose_name_plural = _('Materias')
 
 	def __unicode__(self):
-		return self.name
-    
+		return self.name    
