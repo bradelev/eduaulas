@@ -195,7 +195,7 @@ if(data['type'] == 'success'){
       for (var y in data["dictionary_students_exercises"]){
         if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_exercises"][y]['student']  ) {
           
-          (data["dictionary_students_exercises"][y]['points'] == '') ? output += "<td>X</td>": output += "<td>"+data["dictionary_students_exercises"][y]['points']+"</td>";
+          (data["dictionary_students_exercises"][y]['points'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_exercises"][y]['points']+"</td>";
           }/*cierro if*/
        
         }/*cierro for dictionary_students_exercises*/

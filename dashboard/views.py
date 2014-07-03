@@ -160,16 +160,16 @@ def list_students(request,code):
 					if var_results.exists():
 						print('tiene ejerciio', c.id, j.id)
 						for r in var_results:
-							dictionary_students_exercises[r.id] = {
+							dictionary_students_exercises[j.id] = {
 								"points": r.points,
 								"student": r.student.id				
 								
 							}
 					else:
 						print('no tiene ejerciio',c.id, j.id)
-						dictionary_students_exercises[c.id] = {
+						dictionary_students_exercises[j.id] = {
 								"points": '',
-								"student": ''			
+								"student":c.id			
 								
 							}
 				
