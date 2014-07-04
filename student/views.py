@@ -32,22 +32,25 @@ def student_info(request,id):
 		socio_affective_percentage=0
 		sub = Subject.objects.all()
 		
-		cont1=0
+		
 		for s in sub:
 			
 			points=0
 			average=0
 			student_exercises_result= Result.objects.filter(student=student,exercise__unit__subject=s)
-			for r in student_exercises_result:
-				print(cont1,'contador')
-				cont1 = cont1 + 1
-				print(cont1,'contador')
-				points += r.points
-			average = points/cont1
-			dictionary_subjects_average [s.id]={		
+			cont1=0
+			if student_exercises_result.exists():
+				for r in student_exercises_result:
+				
+					cont1 = cont1 + 1
+					
+					points += r.points
+				average = points/cont1
+				
+			dictionary_subjects_average [s.name]={		
 
-				"subject": s.name,
-				"average": average				
+				#"subject": s.name,
+				"average": average*100+ 1				
 			}
 								
 		print(dictionary_subjects_average)
@@ -68,7 +71,7 @@ def student_info(request,id):
 
 	except Result.DoesNotExist:
 	        message = "El alumno no tiene ejercicios"
-	return render_to_response('studentInfo.html',{'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
+	return render_to_response('studentInfo.html',{'list_average':dictionary_subjects_average,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	
 	
