@@ -15,6 +15,12 @@ class Lectures(models.Model):
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
 	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
+	LectureType = (
+		('EXPERIMENT', 'Experimento'), 
+		('LECTURE', 'Lecturas'), 
+		('HOMEWORK', 'Tareas')
+	)
+	lecture_type = models.CharField(choices=LectureType, max_length=50, verbose_name=u'Tipo de página')
 	class Meta:
 		verbose_name = _('Lectura')
 		verbose_name_plural = _('Lecturas')
@@ -86,7 +92,7 @@ class Unit(models.Model):
 	description = models.TextField(blank=True, max_length=200, verbose_name=u'Descripción') # EXPLICACION DE LA UNIDAD
 	subject = models.ForeignKey('Subject', verbose_name=u'Materia')
 	available = models.BooleanField(default=True, verbose_name=u'Habilitada')
-
+	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 
 	class Meta:
 		verbose_name = _('Unidad')
@@ -97,7 +103,7 @@ class Unit(models.Model):
 
 #CIENCIAS NATURALES, ARTISTICA, CIENCIAS SOCIALES, MATEMATICA, LENGUA
 class Area(models.Model):
-	name = models.CharField(max_length=50, verbose_name=u'Area')
+	name = models.CharField(max_length=50, verbose_name=u'Area', unique=True)
 
 	class Meta:
 		verbose_name = _('Area')
@@ -108,7 +114,7 @@ class Area(models.Model):
     
 #FISICA, QUIMICA, GEOLOGIA    
 class Subject(models.Model):
-	name = models.CharField(max_length=50, verbose_name=u'Materia')
+	name = models.CharField(max_length=50, verbose_name=u'Materia', unique=True)
 	area= models.ForeignKey('Area', verbose_name=u'Area')
 	class Meta:
 		verbose_name = _('Materia')

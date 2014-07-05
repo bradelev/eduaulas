@@ -8,7 +8,7 @@ from location.models import School
 
 # Create your models here.
 class ClassRoom(models.Model):
-	code = models.CharField(max_length = 5, verbose_name=u'Codigo de aula', primary_key=True) #CODIGO DE ACCESO AL AULA	
+	code = models.CharField(max_length = 5, verbose_name=u'Codigo de aula', primary_key=True, unique=True) #CODIGO DE ACCESO AL AULA	
 	class_letter = models.CharField(max_length=3, verbose_name=u'Letra de clase') #A, B, C...
 	shift_choices = (
 		('OTHER', 'Otro'), 
@@ -31,7 +31,7 @@ class ClassRoom(models.Model):
 	
 
 class Grade(models.Model):
-	name = models.IntegerField(default = 0, blank = True, verbose_name=u'Año')
+	name = models.IntegerField(default = 0, blank = True, verbose_name=u'Año', unique=True)
 
 	class Meta:
 		verbose_name = _('Grado')

@@ -1,0 +1,218 @@
+{% extends left_menu %}
+{% block body %}
+{% load staticfiles %}
+        {% block left_menu %}
+            {{ block.super }}
+        {% endblock %}
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Se actualizará la tabla con los nuevos ejercicios realizados" data-html="true"><i class="fa fa-refresh"></i></span> </span>
+
+                <!-- breadcrumb -->
+                <ol class="breadcrumb">
+                    <li>
+                        Contenidos
+                    </li>
+                   <li>
+                        Aula: {{code}}
+                    </li>
+                </ol>
+
+
+            </div>
+            <!-- END RIBBON -->
+
+           <!-- MAIN CONTENT -->
+           <div>
+                
+           </div>
+            <div id="content">
+                <input type="hidden" id="token" value="{{csrf_token}}"></input>
+                <input type="hidden" id="code" value="{{code}}"></input>
+               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia que desea ver.</h1>
+                <div id="filters">    
+                    <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
+                        {% csrf_token %}
+                    <section class="col col-2">
+                        <label class="select" >
+                        <select id="select_area">
+                            <option value="0" selected="" disabled="">Área</option>
+                            {% for a in areas %}
+                            <option value="{{a.id}}" >{{a.name}}</option>
+                            {% endfor %}
+                        </select>   
+                        </select> <i></i> </label>
+                    </section>    
+                    <section class="col col-2">
+                        <label class="select">
+                        <select id="select_subject" >
+                            
+                            
+                        </select>   
+                        </select> <i></i> </label>
+                    </section>  
+                    <section class="col col-3">
+                        <label class="select">
+                        <select name="unit" id="select_unit">
+                            
+                        </select>   
+                        </select> <i></i> </label>
+                    </section>  
+                    
+
+                                
+                </form>
+                   
+                </div> <!-- filters -->   
+
+                
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                
+                    <!-- row -->
+                    <div class="row">
+                
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="well well-sm well-light">
+                                <h3>{{subject}}
+                                <br>
+                                <small><strong>{{unit.letter}}</strong>: {{unit.name}}</small></h3>
+
+                                <div id="contents">
+                                    <ul>
+                                        <li>
+                                            <a href="#tabs-a">Experimento</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tabs-b">Lecturas</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tabs-c">Ejercicios</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tabs-d">Tareas</a>
+                                        </li>
+                                    </ul>
+                                    <div id="tabs-a">}
+                                        <div id="experiments">
+                                            <ul>
+                                            {% for e in experiments %}
+                                                <li>
+                                                    <a href="#experiment-{{e.lecture_id}}">{{e.lecture_id}}</a>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% for e in experiments %}
+                                            <div id="experiment-{{e.lecture_id}}">
+                                                <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div id="tabs-b">
+                                        <div id="lectures">
+                                            <ul>
+                                            {% for l in lectures %}
+                                                <li>
+                                                    <a href="#lecture-{{l.lecture_id}}">{{l.lecture_id}}</a>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% for l in lectures %}
+                                            <div id="lecture-{{l.lecture_id}}">
+                                                <img src="{{MEDIA_URL}}{{l.img}}" alt="" style="width:600px;height:480px;">
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div id="tabs-c">
+                                        <div id="exercises">
+                                            <ul>
+                                            {% for e in exercises %}
+                                                <li>
+                                                    <a href="#exercise-{{e.exercise_id}}">{{e.exercise_id}}</a>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% for e in exercises %}
+                                            <div id="exercise-{{e.exercise_id}}">
+                                                <div class="col-sm-8">
+                                                    <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">    
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div id="tabs-d">
+                                        <div id="homeworks">
+                                            <ul>
+                                            {% for h in homeworks %}
+                                                <li>
+                                                    <a href="#homework-{{h.lecture_id}}">{{h.lecture_id}}</a>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% for h in homeworks %}
+                                            <div id="homework-{{h.lecture_id}}">
+                                                <img src="{{MEDIA_URL}}{{h.img}}" alt="" style="width:600px;height:480px;">    
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                
+
+                            </div>  
+                            
+
+                
+                        </article>
+                        <!-- WIDGET END -->
+                
+                    </div>
+                
+                    <!-- end row -->
+                
+                </section>
+                <!-- end widget grid -->
+
+            </div>
+        </div>
+        <!-- END MAIN PANEL -->
+
+
+{% endblock %}
+
+{% block scripts %}  
+
+        
+        <!-- MAIN APP JS FILE -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                $('#contents').tabs();
+                $('#experiments').tabs();
+                $('#lectures').tabs();
+                $('#exercises').tabs();
+                $('#homeworks').tabs();
+
+                         
+            
+                });/*cieero pagesetup*/
+        </script>
+            
+        
+    
+     
+{% endblock %}
