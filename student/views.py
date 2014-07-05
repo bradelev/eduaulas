@@ -10,13 +10,14 @@ from django.template import RequestContext
 def students_list(request,code):
 	dictionary_students_profiles={}
 	dictionary_subjects_students_average ={}
-	metacognitive_percentage= 0
-	cognitive_percentage =0
-	socio_affective_percentage=0
+	
 	
 	students = Student.objects.all()
 	for s in students:
 		cont=0
+		metacognitive_percentage= 0
+		cognitive_percentage =0
+		socio_affective_percentage=0
 		students_profiles= Result.objects.filter(student=s)
 		if students_profiles.exists():
 			for p in students_profiles:
@@ -28,38 +29,37 @@ def students_list(request,code):
 			average_metacognitive_percentage= metacognitive_percentage/cont
 			average_cognitive_percentage= cognitive_percentage/cont
 			average_socio_affective_percentage= socio_affective_percentage/cont
-			dictionary_students_profiles [s.name]={		
+			dictionary_students_profiles [s.id]={		
 
 					"metacognitive": average_metacognitive_percentage,
 					"cognitive": average_cognitive_percentage,	
 					"socio_affective":average_socio_affective_percentage
 				}
-			print(dictionary_students_profiles)	
+	print(dictionary_students_profiles)	
 
 	sub = Subject.objects.all()
 			
-	for s in sub:			
-		points=0
-		average=0
+	for s in sub:							
 		for st in students:
 			student_exercises_result= Result.objects.filter(student=st,exercise__unit__subject=s)
 			cont1=0
+			average=0
+			points=0
 			if student_exercises_result.exists():
-				for r in student_exercises_result:
-				
-					cont1 = cont1 + 1
-					
+
+				for r in student_exercises_result:				
+					cont1 = cont1 + 1					
 					points += r.points
 				average = points/cont1
-				
-			dictionary_subjects_students_average [s.name]={		
-
-				#"subject": s.name,
-				"average": average*100+ 1				
-			}
+				indice= s.name + str(r.student.id)
+				dictionary_subjects_students_average [indice]={		
+					"subj":s.id,
+					"student": r.student.id,
+					"average": average*100				
+				}
 							
 	print(dictionary_subjects_students_average)		
-	return render_to_response('studentsList.html',{'students':students}, context_instance = RequestContext(request))
+	return render_to_response('studentsList.html',{'subjects':sub,'students_average':dictionary_subjects_students_average,'students_profiles':dictionary_students_profiles,'students':students}, context_instance = RequestContext(request))
 
 
 

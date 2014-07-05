@@ -85,6 +85,12 @@
                                                 <tr>
                                                     <th>Nombre</th>
                                                     <th>Apellido</th>
+                                                    <th>Meta cognitivo</th>
+                                                    <th>Cognitivo</th>
+                                                    <th>Socio afectivo</th>
+                                                    {% for sub in  subjects %}
+                                                        <th>{{sub.name}}</th>
+                                                    {% endfor %}
                                                 </tr>
                                             </thead>
 
@@ -93,16 +99,31 @@
                                             <tr>
                                                 <td><a>{{s.name}}</a></td>
                                                 <td><a>{{s.last_name}}</a></td>
+                                                {% for key2, value2 in students_profiles.items %}
+                                                    {% if s.id = key2 %}
+                                                        <td>{{ value2.metacognitive }}</td>
+                                                        <td>{{ value2.cognitive }}</td>
+                                                        <td>{{ value2.socio_affective }}</td>
+                                                   
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for key3, value3 in students_average.items %}
+                                                    {% if s.id = value3.student %}
+
+                                                         <td>{{value3.average}}</td>
+                                                  {% else %}
+                                                  <td></td>
+                                                    {% endif %}
+                                                {% endfor %}
                                             </tr>   
                                              {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
                                     <!-- end widget content -->
-                
+                                    
                                 </div>
                                 <!-- end widget div -->
-                
                             </div>
                             <!-- end widget -->
 
