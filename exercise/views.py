@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from classroom.models import  ClassRoom, Grade
-from exercise.models import Exercise, Lectures, Subject, Unit
+from exercise.models import Exercise, Lecture, Subject, Unit
 from django.utils import simplejson
 from django.http import *
 from django.utils.translation import ugettext_lazy as _
@@ -28,10 +28,10 @@ def contents(request, grade, subject, unit):
 		s = Subject.objects.get(name=subject)
 		g = Grade.objects.get(name=grade)
 		u = Unit.objects.get(letter=unit, grade=g, subject=s)
-		experiments = Lectures.objects.filter(lecture_type='EXPERIMENT')
-		lectures = Lectures.objects.filter(lecture_type='LECTURE')
+		experiments = Lecture.objects.filter(lecture_type='EXPERIMENT')
+		lectures = Lecture.objects.filter(lecture_type='LECTURE')
 		exercises = Exercise.objects.filter(unit=u, grade=g, unit__subject=s)
-		homeworks = Lectures.objects.filter(lecture_type='HOMEWORK')
+		homeworks = Lecture.objects.filter(lecture_type='HOMEWORK')
 	except:
 		error = True
 
