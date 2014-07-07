@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from student.models import Student
+from person.models import Person
 from classroom.models import Grade
 from teacher.models import Teacher
 from django.utils.translation import ugettext as _
@@ -9,7 +10,7 @@ from django.utils.translation import ugettext as _
 
 
 
-class Lectures(models.Model):
+class Lecture(models.Model):
 	cuasimodo_lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
