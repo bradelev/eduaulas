@@ -109,8 +109,10 @@
                                             {% endfor %}
                                             </ul>
                                         {% for e in experiments %}
-                                            <div id="experiment-{{e.lecture_id}}">
-                                                <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">
+                                            <div class="row">
+                                                <div id="experiment-{{e.lecture_id}}">
+                                                    <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">
+                                                </div>
                                             </div>
                                         {% endfor %}
                                         </div>
@@ -125,8 +127,10 @@
                                             {% endfor %}
                                             </ul>
                                         {% for l in lectures %}
-                                            <div id="lecture-{{l.lecture_id}}">
-                                                <img src="{{MEDIA_URL}}{{l.img}}" alt="" style="width:600px;height:480px;">
+                                            <div class="row">
+                                                <div id="lecture-{{l.lecture_id}}">
+                                                    <img src="{{MEDIA_URL}}{{l.img}}" alt="" style="width:600px;height:480px;">
+                                                </div>
                                             </div>
                                         {% endfor %}
                                         </div>
@@ -136,17 +140,40 @@
                                             <ul>
                                             {% for e in exercises %}
                                                 <li>
-                                                    <a href="#exercise-{{e.exercise_id}}">{{e.exercise_id}}</a>
+                                                    <a href="#exercise-{{e.exercise_id}}">{{unit.letter}}{{e.exercise_id}}</a>
                                                 </li>
                                             {% endfor %}
                                             </ul>
                                         {% for e in exercises %}
-                                            <div id="exercise-{{e.exercise_id}}">
+                                            <div class="row">
                                                 <div class="col-sm-8">
-                                                    <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">    
+                                                    <div id="exercise-{{e.exercise_id}}">
+                                                        <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">    
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            {% if e.teacher_guide %}
+                                                                <h3>Guía docente</h3>
+                                                                <p>{{e.teacher_guide}}</p>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <h3>Enviar comentario a la editorial</h3>
+                                                            <form method="POST">
+                                                                {% csrf_token %}
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" placeholder="Comentario a la Editorial" rows="3"></textarea>
+                                                                </div>
+                                                                <div class="btn btn-primary">
+                                                                    Enviar
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         {% endfor %}
@@ -162,12 +189,15 @@
                                             {% endfor %}
                                             </ul>
                                         {% for h in homeworks %}
-                                            <div id="homework-{{h.lecture_id}}">
-                                                <img src="{{MEDIA_URL}}{{h.img}}" alt="" style="width:600px;height:480px;">    
+                                            <div class="row">
+                                                <div id="homework-{{h.lecture_id}}">
+                                                    <img src="{{MEDIA_URL}}{{h.img}}" alt="" style="width:600px;height:480px;">    
+                                                </div>
                                             </div>
                                         {% endfor %}
                                         </div>
                                     </div>
+
 
                                 </div>
 

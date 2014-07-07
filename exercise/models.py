@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 
 
 class Lectures(models.Model):
-	lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
+	cuasimodo_lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
 	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
@@ -29,7 +29,8 @@ class Lectures(models.Model):
 		return self.exercise_id
 
 class Exercise(models.Model): 
-	exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
+	cuasimodo_exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
+	name = models.CharField(max_length=100, blank=True, null=True)
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
 	ExerciseType = (
@@ -39,14 +40,14 @@ class Exercise(models.Model):
 		('CRUCIGRAMA', 'Crucigrama'),
 		('FILL_BLANKS', 'Rellenar')
 	)
-	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio')
-	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
-	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
-	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien')
-	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal')
-	metacognitive_percentage = models.FloatField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True)
-	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True)
-	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True)
+	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio', null=True)
+	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente', null=True)
+	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen', null=True)
+	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien', null=True)
+	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal', null=True)
+	metacognitive_percentage = models.FloatField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True, null=True)
+	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True, null=True)
+	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True, null=True)
 	
 
 	class Meta:
@@ -60,9 +61,10 @@ class Result(models.Model):
 	points = models.FloatField(null = True, verbose_name=u'Puntos')
 	answer = models.TextField(null=True, verbose_name=u'Respuesta')
 	exercise = models.ForeignKey(Exercise, verbose_name=u'Ejercicio')
-	student = models.ForeignKey(Student, verbose_name=u'Estudiante')
+	person = models.ForeignKey(Person, verbose_name=u'Persona')
 	time_elapsed = models.FloatField(blank=True, verbose_name=u'Tiempo de realización')
 	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
+	updated = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de update')
 
 	class Meta:
 		verbose_name = _('Resultado')
@@ -73,9 +75,12 @@ class Result(models.Model):
 
 
 class TeacherComments(models.Model):
-	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True)
+	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True, null=True)
 	comments = models.TextField(verbose_name=u'Comentario')
 	exercise = models.ForeignKey('Exercise', verbose_name=u'Ejercicio')
+	lecture = models.ForeignKey('Lecture', verbose_name=u'Lectura')
+	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
+	updated = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de update')
 
 	class Meta:
 		verbose_name = _('Comentario del docente')

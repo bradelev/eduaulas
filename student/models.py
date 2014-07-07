@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 # Create your models here.
 class Student(Person):
-	class_room = models.ForeignKey(ClassRoom,verbose_name=u'Aula')
+	class_room = models.ForeignKey(ClassRoom,verbose_name=u'Aula', null=True)
 	
 	
 
