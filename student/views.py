@@ -7,10 +7,15 @@ from django.template import RequestContext
 
 # Create your views here.
 
-def students_list(request,code):
+
+def ini(request,code):
+	return render_to_response('studentsList.html',{'code':code}, context_instance = RequestContext(request))
+
+def students_list(request):
 	dictionary_students_profiles={}
 	dictionary_subjects_students_average ={}
-	
+	dictionary_subjects ={}
+	dictionary_students ={}
 	
 	students = Student.objects.all()
 	for s in students:
@@ -39,8 +44,18 @@ def students_list(request,code):
 
 	sub = Subject.objects.all()
 			
-	for s in sub:							
+	for s in sub:	
+		dictionary_subjects[s.id]=	{
+
+			"subject_name": s.name,
+			"subject_id": s.id
+		}					
 		for st in students:
+			dictionary_students[st.id] ={
+				"name":st.name,
+				"last_name": st.last_name
+
+			}
 			student_exercises_result= Result.objects.filter(student=st,exercise__unit__subject=s)
 			cont1=0
 			average=0
@@ -57,9 +72,14 @@ def students_list(request,code):
 					"student": r.student.id,
 					"average": average*100				
 				}
-							
-	print(dictionary_subjects_students_average)		
-	return render_to_response('studentsList.html',{'subjects':sub,'students_average':dictionary_subjects_students_average,'students_profiles':dictionary_students_profiles,'students':students}, context_instance = RequestContext(request))
+	result = simplejson.dumps({
+                "dictionary_subjects":dictionary_subjects,
+                "code":code,
+                "message":message,
+                "type":type,
+        }, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
+	
 
 
 
