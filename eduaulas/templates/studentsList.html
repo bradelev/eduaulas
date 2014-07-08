@@ -62,9 +62,10 @@
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Alumnos  Aula: {{code}}</h2>
-                    
+                                
                                 </header>
-                
+                                <input type="hidden" id="code" value="{{code}}"></input>
+                                <input type="hidden" id="token" value="{{csrf_token}}"></input>
                                 <!-- widget div-->
                                 <div>
                                     
