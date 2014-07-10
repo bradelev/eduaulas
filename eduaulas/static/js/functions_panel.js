@@ -192,7 +192,7 @@ if(data['type'] == 'success'){
       output += "<tr>";      
       (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
       (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
-      for (var y in data["dictionary_students_exercises"]){
+      /*for (var y in data["dictionary_students_exercises"]){
         if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_exercises"][y]['student']  ) {
           
           (data["dictionary_students_exercises"][y]['points'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_exercises"][y]['points']+"</td>";

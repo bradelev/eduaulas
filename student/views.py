@@ -7,59 +7,91 @@ from django.template import RequestContext
 
 # Create your views here.
 
-def students_list(request,code):
+
+def ini(request,code):
+	return render_to_response('studentsList.html',{'code':code}, context_instance = RequestContext(request))
+
+def students_list(request):
 	dictionary_students_profiles={}
 	dictionary_subjects_students_average ={}
-	
-	
-	students = Student.objects.all()
-	for s in students:
-		cont=0
-		metacognitive_percentage= 0
-		cognitive_percentage =0
-		socio_affective_percentage=0
-		students_profiles= Result.objects.filter(student=s)
-		if students_profiles.exists():
-			for p in students_profiles:
-				cont = cont + 1
-				metacognitive_percentage += p.exercise.metacognitive_percentage
-				cognitive_percentage += p.exercise.cognitive_percentage
-				socio_affective_percentage += p.exercise.socio_affective_percentage
+	dictionary_subjects ={}
+	dictionary_students ={}
+	type = "error"
+	try:
 
-			average_metacognitive_percentage= metacognitive_percentage/cont
-			average_cognitive_percentage= cognitive_percentage/cont
-			average_socio_affective_percentage= socio_affective_percentage/cont
-			dictionary_students_profiles [s.id]={		
+		if request.POST:
+			code =request.POST['code']
+		students = Student.objects.all()
+		print(code)
+		for s in students:
+			cont=0
+			metacognitive_percentage= 0
+			cognitive_percentage =0
+			socio_affective_percentage=0
+			students_profiles= Result.objects.filter(student=s)
+			if students_profiles.exists():
+				for p in students_profiles:
+					cont = cont + 1
+					metacognitive_percentage += p.exercise.metacognitive_percentage
+					cognitive_percentage += p.exercise.cognitive_percentage
+					socio_affective_percentage += p.exercise.socio_affective_percentage
 
-					"metacognitive": average_metacognitive_percentage,
-					"cognitive": average_cognitive_percentage,	
-					"socio_affective":average_socio_affective_percentage
+				average_metacognitive_percentage= metacognitive_percentage/cont
+				average_cognitive_percentage= cognitive_percentage/cont
+				average_socio_affective_percentage= socio_affective_percentage/cont
+				dictionary_students_profiles [s.id]={		
+
+						"metacognitive": average_metacognitive_percentage,
+						"cognitive": average_cognitive_percentage,	
+						"socio_affective":average_socio_affective_percentage
+					}
+		print(dictionary_students_profiles)	
+
+		sub = Subject.objects.all()
+				
+		for s in sub:	
+			dictionary_subjects[s.id]=	{
+
+				"subject_name": s.name,
+				"subject_id": s.id
+			}					
+			for st in students:
+				dictionary_students[st.id] ={
+					"name":st.name,
+					"last_name": st.last_name
+
 				}
-	print(dictionary_students_profiles)	
+				student_exercises_result= Result.objects.filter(student=st,exercise__unit__subject=s)
+				cont1=0
+				average=0
+				points=0
+				if student_exercises_result.exists():
 
-	sub = Subject.objects.all()
-			
-	for s in sub:							
-		for st in students:
-			student_exercises_result= Result.objects.filter(student=st,exercise__unit__subject=s)
-			cont1=0
-			average=0
-			points=0
-			if student_exercises_result.exists():
-
-				for r in student_exercises_result:				
-					cont1 = cont1 + 1					
-					points += r.points
-				average = points/cont1
-				indice= s.name + str(r.student.id)
-				dictionary_subjects_students_average [indice]={		
-					"subj":s.id,
-					"student": r.student.id,
-					"average": average*100				
-				}
-							
-	print(dictionary_subjects_students_average)		
-	return render_to_response('studentsList.html',{'subjects':sub,'students_average':dictionary_subjects_students_average,'students_profiles':dictionary_students_profiles,'students':students}, context_instance = RequestContext(request))
+					for r in student_exercises_result:				
+						cont1 = cont1 + 1					
+						points += r.points
+					average = points/cont1
+					indice= s.name + str(r.student.id)
+					dictionary_subjects_students_average [indice]={		
+						"subj":s.id,
+						"student": r.student.id,
+						"average": average*100				
+					}
+		type= "success"
+	print(type)
+	except Student.DoesNotExist:
+	        message = "No hay alumnos"				
+	result = simplejson.dumps({
+                "dictionary_subjects":dictionary_subjects,
+                "dictionary_students": dictionary_students,
+                "dictionary_subjects_students_average":dictionary_subjects_students_average,
+                "dictionary_students_profiles":dictionary_students_profiles,
+                "code":code,
+                "message":message,
+                "type":type,
+        }, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
+	
 
 
 
@@ -86,7 +118,7 @@ def student_info(request,id):
 			
 			points=0
 			average=0
-			student_exercises_result= Result.objects.filter(student=student,exercise__unit__subject=s)
+			student_exercises_result= Result.objects.filter(person=student,exercise__unit__subject=s)
 			cont1=0
 			if student_exercises_result.exists():
 				for r in student_exercises_result:
@@ -105,7 +137,7 @@ def student_info(request,id):
 		print(dictionary_subjects_average)
 
 
-		student_profiles= Result.objects.filter(student=student)
+		student_profiles= Result.objects.filter(person=student)
 
 		for p in student_profiles:
 			cont = cont + 1
