@@ -73,7 +73,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eduaulas_db',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
 
@@ -83,7 +83,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-UY'
 
 TIME_ZONE = 'UTC'
 
@@ -99,6 +99,8 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(RUTA_PROYECTO,'carga')
 MEDIA_URL = 'http://127.0.0.1:8080/media/'
 STATIC_URL = '/static/'
+
+
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',

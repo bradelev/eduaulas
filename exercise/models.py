@@ -12,13 +12,15 @@ from django.utils.translation import ugettext as _
 
 class Lecture(models.Model):
 	cuasimodo_lecture_id = models.IntegerField(default=0, verbose_name = u'ID Cuasimodo', blank = True)
+	name = models.CharField(max_length=100, blank=True, null=True)
 	grade = models.ForeignKey(Grade, verbose_name=u'Grado', blank = True)
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
-	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente')
+	teacher_guide = models.TextField(max_length=2000, blank=True, verbose_name=u'Guía docente')
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
 	LectureType = (
 		('EXPERIMENT', 'Experimento'), 
 		('LECTURE', 'Lecturas'), 
+		('BOOK_ACTIVITY', 'Actividades escritas'),
 		('HOMEWORK', 'Tareas')
 	)
 	lecture_type = models.CharField(choices=LectureType, max_length=50, verbose_name=u'Tipo de página')
@@ -42,7 +44,7 @@ class Exercise(models.Model):
 		('FILL_BLANKS', 'Rellenar')
 	)
 	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio', null=True)
-	teacher_guide = models.TextField(max_length=1000, blank=True, verbose_name=u'Guía docente', null=True)
+	teacher_guide = models.TextField(max_length=2000, blank=True, verbose_name=u'Guía docente', null=True)
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen', null=True)
 	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien', null=True)
 	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal', null=True)
