@@ -33,8 +33,8 @@ function get_students_data () {
   
 } /*cierro function get_students_data*/
 
-function create_table_students() {
-
+function create_table_students(data) {
+alert('fola');
 
 	//if(data['type'] == 'success'){  
     var output_thead = "";                                                 
@@ -63,13 +63,13 @@ function create_table_students() {
     output += "</tr>";
     }/*cierro for dictionary_students*/
 
-   // if (output != ""){
-      $("#dt_alumnos > tbody ").html(output);
-      $("#dt_alumnos > thead").html(output_thead);
-      $('#dt_alumnos').dataTable();
-   // }
+    if (output != ""){
+      $("#dt_students > tbody ").html(output);
+      $("#dt_students > thead").html(output_thead);
+      $('#dt_students').dataTable();
+    }
 
-    
+    alert(output);
 
 }/*CIERRO function create_table_students*/
 

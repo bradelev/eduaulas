@@ -16,7 +16,7 @@ def students_list(request):
 	dictionary_subjects_students_average ={}
 	dictionary_subjects ={}
 	dictionary_students ={}
-	
+	type = "error"
 	try:
 
 		if request.POST:
@@ -77,6 +77,8 @@ def students_list(request):
 						"student": r.student.id,
 						"average": average*100				
 					}
+		type= "success"
+	print(type)
 	except Student.DoesNotExist:
 	        message = "No hay alumnos"				
 	result = simplejson.dumps({
@@ -116,7 +118,7 @@ def student_info(request,id):
 			
 			points=0
 			average=0
-			student_exercises_result= Result.objects.filter(student=student,exercise__unit__subject=s)
+			student_exercises_result= Result.objects.filter(person=student,exercise__unit__subject=s)
 			cont1=0
 			if student_exercises_result.exists():
 				for r in student_exercises_result:
@@ -135,7 +137,7 @@ def student_info(request,id):
 		print(dictionary_subjects_average)
 
 
-		student_profiles= Result.objects.filter(student=student)
+		student_profiles= Result.objects.filter(person=student)
 
 		for p in student_profiles:
 			cont = cont + 1
