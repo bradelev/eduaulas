@@ -34,13 +34,10 @@ def students_list(request,code):
 	dictionary_students ={}
 	message = ""
 	type = "error"
-	print(type)
+	
 	try:
 
-		#if request.POST:
-			#code =request.POST['code']
 		students = Student.objects.all()
-		print(code)
 		for s in students:
 			cont=0
 			metacognitive_percentage= 0
@@ -63,7 +60,7 @@ def students_list(request,code):
 						"cognitive": average_cognitive_percentage,	
 						"socio_affective":average_socio_affective_percentage
 					}
-		print(dictionary_students_profiles)	
+		#print(dictionary_students_profiles)	
 
 		sub = Subject.objects.all()
 				
@@ -89,14 +86,14 @@ def students_list(request,code):
 						cont1 = cont1 + 1					
 						points += r.points
 					average = points/cont1
-					indice= s.name + str(r.student.id)
+					indice= s.name + str(r.person.id)
 					dictionary_subjects_students_average [indice]={		
 						"subj":s.id,
-						"student": r.student.id,
+						"student": r.person.id,
 						"average": average*100				
 					}
 		type= "success"
-		print(type)
+		print(dictionary_subjects_students_average)
 	except Student.DoesNotExist:
 	        message = "No hay alumnos"				
 	result = simplejson.dumps({
