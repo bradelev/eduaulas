@@ -26,7 +26,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 def ini(request,code):
 	return render_to_response('studentsList.html',{'code':code}, context_instance = RequestContext(request))
 
-def students_list(request,code):
+"""def students_list(request,code):
 	
 	dictionary_students_profiles={}
 	dictionary_subjects_students_average ={}
@@ -105,9 +105,91 @@ def students_list(request,code):
                 "message":message,
                 "type":type,
         }, cls = LazyEncoder)
-	return HttpResponse(result, mimetype = 'application/javascript')
+	return HttpResponse(result, mimetype = 'application/javascript')"""
 	
+def students_list(request,code):
+	
+	dictionary_students_profiles={}
+	dictionary_subjects_students_average ={}
+	dictionary_subjects ={}
+	dictionary_students ={}
+	message = ""
+	type = "error"
+	filas= []
+	columnas= []
+	try:
+		for i in range()
 
+
+		students = Student.objects.all()
+		for s in students:
+			cont=0
+			metacognitive_percentage= 0
+			cognitive_percentage =0
+			socio_affective_percentage=0
+			students_profiles= Result.objects.filter(person=s)
+			if students_profiles.exists():
+				for p in students_profiles:
+					cont = cont + 1
+					metacognitive_percentage += p.exercise.metacognitive_percentage
+					cognitive_percentage += p.exercise.cognitive_percentage
+					socio_affective_percentage += p.exercise.socio_affective_percentage
+
+				average_metacognitive_percentage= metacognitive_percentage/cont
+				average_cognitive_percentage= cognitive_percentage/cont
+				average_socio_affective_percentage= socio_affective_percentage/cont
+				dictionary_students_profiles [s.id]={		
+
+						"metacognitive": average_metacognitive_percentage,
+						"cognitive": average_cognitive_percentage,	
+						"socio_affective":average_socio_affective_percentage
+					}
+		#print(dictionary_students_profiles)	
+
+		sub = Subject.objects.all()
+				
+		for s in sub:	
+			dictionary_subjects[s.id]=	{
+
+				"subject_name": s.name,
+				"subject_id": s.id
+			}					
+			for st in students:
+				dictionary_students[st.id] ={
+					"name":st.name,
+					"last_name": st.last_name
+
+				}
+				student_exercises_result= Result.objects.filter(person=st,exercise__unit__subject=s)
+				cont1=0
+				average=0
+				points=0
+				if student_exercises_result.exists():
+
+					for r in student_exercises_result:				
+						cont1 = cont1 + 1					
+						points += r.points
+					average = points/cont1
+					indice= s.name + str(r.person.id)
+					dictionary_subjects_students_average [indice]={		
+						"subj":s.id,
+						"student": r.person.id,
+						"average": average*100				
+					}
+		type= "success"
+		print(dictionary_subjects_students_average)
+	except Student.DoesNotExist:
+	        message = "No hay alumnos"				
+	result = simplejson.dumps({
+                "dictionary_subjects":dictionary_subjects,
+                "dictionary_students": dictionary_students,
+                "dictionary_subjects_students_average":dictionary_subjects_students_average,
+                "dictionary_students_profiles":dictionary_students_profiles,
+                "code":code,
+                "message":message,
+                "type":type,
+        }, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
 
 
 
