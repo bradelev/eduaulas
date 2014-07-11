@@ -4,23 +4,41 @@ from student.models import Student
 from exercise.models import Exercise, Result,Unit,Subject
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.utils import simplejson
+from django.http import *
+from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import Promise
+from django.utils.encoding import force_unicode
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
+
+class LazyEncoder(simplejson.JSONEncoder):
+	"""Encodes django's lazy i18n strings."""
+    
+   
+	def default(self, obj):
+	    if isinstance(obj, Promise):
+	    	return force_unicode(obj)
+	    return obj  
 
 
 def ini(request,code):
 	return render_to_response('studentsList.html',{'code':code}, context_instance = RequestContext(request))
 
-def students_list(request):
+def students_list(request,code):
+	
 	dictionary_students_profiles={}
 	dictionary_subjects_students_average ={}
 	dictionary_subjects ={}
 	dictionary_students ={}
+	message = ""
 	type = "error"
+	print(type)
 	try:
 
-		if request.POST:
-			code =request.POST['code']
+		#if request.POST:
+			#code =request.POST['code']
 		students = Student.objects.all()
 		print(code)
 		for s in students:
@@ -28,7 +46,7 @@ def students_list(request):
 			metacognitive_percentage= 0
 			cognitive_percentage =0
 			socio_affective_percentage=0
-			students_profiles= Result.objects.filter(student=s)
+			students_profiles= Result.objects.filter(person=s)
 			if students_profiles.exists():
 				for p in students_profiles:
 					cont = cont + 1
@@ -61,7 +79,7 @@ def students_list(request):
 					"last_name": st.last_name
 
 				}
-				student_exercises_result= Result.objects.filter(student=st,exercise__unit__subject=s)
+				student_exercises_result= Result.objects.filter(person=st,exercise__unit__subject=s)
 				cont1=0
 				average=0
 				points=0
@@ -78,7 +96,7 @@ def students_list(request):
 						"average": average*100				
 					}
 		type= "success"
-	print(type)
+		print(type)
 	except Student.DoesNotExist:
 	        message = "No hay alumnos"				
 	result = simplejson.dumps({

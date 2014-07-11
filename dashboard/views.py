@@ -22,46 +22,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 	
-"""def ini(request):
-#def ini(request,code):
-	var_areas = Area.objects.all()
-	#var_subjects = Subject.objects.all()
-	#var_units = Unit.objects.all()
 
-	if request.POST:
-		
-		id_area =request.POST['id_area']
-
-		dictionary_subjects = {}
-		message = ""
-		type = "error"
-		try:										
-			a = Area.objects.get(pk=id_area)
-			var_subjects = Subject.objects.filter(area=a)
-			
-			type = "success"
-			
-			for y in var_subjects:				
-				dictionary_subjects[y.id] = {
-					
-					"name": y.name,
-					"id": y.id					
-				}
-			
-		except Subject.DoesNotExist:
-			message = "No hay materias"
-		result = simplejson.dumps({
-				"dictionary_subjects":dictionary_subjects,
-				"message":message,
-				"type":type,
-			}, cls = LazyEncoder)
-		return HttpResponse(result, mimetype = 'application/javascript')
-		
-		
-	return render_to_response('panel.html',{'areas':var_areas}, context_instance = RequestContext(request))"""
-
-
-#def ini(request):
 def ini(request,code):
 	var_areas = Area.objects.all()
 	#var_subjects = Subject.objects.all()
