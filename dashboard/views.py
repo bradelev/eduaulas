@@ -111,11 +111,13 @@ def list_students(request,code):
 			matriz = []
 			type = "success"
 			i=0
+				
 			for s in students:
 				matriz.append([])
 				matriz[i].append(s.name)
 				matriz[i].append(s.last_name)
-				#i = i + 1
+				#j = j + 1
+				print(s.name)
 				for j in var_units_exercises:
 					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
@@ -124,7 +126,7 @@ def list_students(request,code):
 						
 					else:
 						matriz[i].append('9')
-						
+				i = i + 1	
 			print(matriz)
 
 			for e in var_units_exercises:				

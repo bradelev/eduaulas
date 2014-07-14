@@ -24,33 +24,6 @@ function sm(){
 }
 
 
-/*function load_fiters(){
- // alert('cargar filtros');
-    var tok = $("#token").attr("value");
-    var id_area = $(this).val();
-   // alert(id_area);
-    //$("#select_subject").html('');
-    $.ajax({
-      url:"lista/A8o6/materias/",
-      type: "POST",
-      dataType: 'json',      
-      data:{
-            csrfmiddlewaretoken: tok,
-            state:'inactive',
-            id_area:id_area,
-      }, 
-
-      success: function(){
-
-        load_filter_subjects(id_area);
-      }
-
-
-    });
-     
-    
-}*/
-
 function load_fiters(){
 
     var id_area = $(this).val();
@@ -150,12 +123,6 @@ function get_students_data () {
           csrfmiddlewaretoken: tok,
           state:'inactive',
           id_unit: id_unit,
-          id_student:'x.id',
-          name:'name',
-          last_name:'last_name',
-          exercise_id: 'exercise_id',
-          points: 'y.points',
-          student: 'y.student.id',
           matriz:'matriz'
 
     }, 
@@ -186,23 +153,23 @@ if(data['type'] == 'success'){
     }
     output_thead +="</tr>";
     
-
   var output = "";
-  //output += "<td>"+(data["matriz"])+"</td>";
   
   for (var x in (data["matriz"])){
 
    output += "<tr>"; 
-   output += "<td>";
-    for (var y in x){
-       
-        //output += (data["matriz"][0][1])
-        output += (data["matriz"])[x][y]
-      
+
+    for (var y = 0; y < (data["matriz"])[x].length ; y++){
+
+        output += "<td>";
+        output += (data["matriz"])[x][y];
+        output += "</td>";
+
+
    }/*cierro for dictionary_students*/
-    output += "</td>";
+    
     output += "</tr>";
-   // i++;
+
  }
 
     if (output != ""){
@@ -210,8 +177,8 @@ if(data['type'] == 'success'){
       $("#dt_alumnos > thead").html(output_thead);
       $('#dt_alumnos').dataTable();
     }
-    /*$('#dt_alumnos').dataTable();*/
+
     
-}
+  }
 
 }
