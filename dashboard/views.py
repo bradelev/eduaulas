@@ -25,8 +25,6 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 def ini(request,code):
 	var_areas = Area.objects.all()
-	#var_subjects = Subject.objects.all()
-	#var_units = Unit.objects.all()
 	return render_to_response('panel.html',{'areas':var_areas,'code':code}, context_instance = RequestContext(request))	
 
 def load_filters_subject(request,code):
@@ -110,48 +108,28 @@ def list_students(request,code):
 			cl = ClassRoom.objects.get(pk=code)
 			students = Student.objects.filter(class_room=cl)
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)
-			#var_students_exercises = Result.objects.filter(student=students, exercise=var_units_exercises)
-			
+			matriz = []
 			type = "success"
-			
-			for c in students:
+			i=0
+			for s in students:
+				matriz.append([])
+				matriz[i].append(s.name)
+				matriz[i].append(s.last_name)
+				#i = i + 1
 				for j in var_units_exercises:
-					var_results = Result.objects.filter(exercise=j, student=c)	
-					
+					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
-						print('tiene ejerciio', c.id, j.id)
 						for r in var_results:
-							dictionary_students_exercises[j.id] = {
-								"points": r.points,
-								"student": r.student.id				
-								
-							}
+							matriz[i].append(r.points)
+						
 					else:
-						print('no tiene ejerciio',c.id, j.id)
-						dictionary_students_exercises[j.id] = {
-								"points": '',
-								"student":c.id			
-								
-							}
-				
+						matriz[i].append('9')
+						
+			print(matriz)
 
-			"""for y in var_students_exercises:				
-				dictionary_students_exercises[y.id] = {
-					
-					"points": y.points,
-					"student": y.student.id				
-					
-				}"""
-			
-			for x in students:
-				dictionary_students[x.id] = {
-				"id_student":x.id,
-				"name": x.name,
-				"last_name": x.last_name
-				}
 			for e in var_units_exercises:				
 				dictionary_units_exercises[e.id] = {				
-					"exercise_id": e.exercise_id			
+					"exercise_id": e.cuasimodo_exercise_id			
 					
 				}	
 
@@ -159,9 +137,8 @@ def list_students(request,code):
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
-			"dictionary_students":dictionary_students,
-			"dictionary_students_exercises":dictionary_students_exercises,
 			"dictionary_units_exercises":dictionary_units_exercises,
+			"matriz":matriz,
 			"message":message,
 			"type":type,
 		}, cls = LazyEncoder)

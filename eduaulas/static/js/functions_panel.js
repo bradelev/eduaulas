@@ -156,7 +156,7 @@ function get_students_data () {
           exercise_id: 'exercise_id',
           points: 'y.points',
           student: 'y.student.id',
-       //   code:'code'
+          matriz:'matriz'
 
     }, 
 
@@ -188,20 +188,22 @@ if(data['type'] == 'success'){
     
 
   var output = "";
-  for (var x in data["dictionary_students"]){
-      output += "<tr>";      
-      (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
-      (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
-      /*for (var y in data["dictionary_students_exercises"]){
-        if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_exercises"][y]['student']  ) {
-          
-          (data["dictionary_students_exercises"][y]['points'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_exercises"][y]['points']+"</td>";
-          }/*cierro if*/
-       
-        }/*cierro for dictionary_students_exercises*/
+  //output += "<td>"+(data["matriz"])+"</td>";
+  
+  for (var x in (data["matriz"])){
 
-      output += "</tr>";
-    }/*cierro for dictionary_students*/
+   output += "<tr>"; 
+   output += "<td>";
+    for (var y in x){
+       
+        //output += (data["matriz"][0][1])
+        output += (data["matriz"])[x][y]
+      
+   }/*cierro for dictionary_students*/
+    output += "</td>";
+    output += "</tr>";
+   // i++;
+ }
 
     if (output != ""){
       $("#dt_alumnos > tbody ").html(output);
@@ -212,5 +214,4 @@ if(data['type'] == 'success'){
     
 }
 
-
-} /*cierro function create_table_students*/
+}

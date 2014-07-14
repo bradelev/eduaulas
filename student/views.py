@@ -25,7 +25,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 def ini(request,code):
 	students = Student.objects.all()
-	matris = []
+	matriz = []
 	i=0
 	average=0
 	points=0
@@ -40,10 +40,9 @@ def ini(request,code):
 		cont=0
 		
 		students_results= Result.objects.filter(person=s)
-		#fila.append(s.name)
-		matris.append([])
-		matris[i].append(s.name)
-		matris[i].append(s.last_name)
+		matriz.append([])
+		matriz[i].append(s.name)
+		matriz[i].append(s.last_name)
 		if students_results.exists():
 			for p in students_results:
 				cont = cont + 1
@@ -53,23 +52,23 @@ def ini(request,code):
 				points += p.points
 			average_points = points/cont
 			average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
-			matris[i].append(average_metacognitive_percentage)
+			matriz[i].append(average_metacognitive_percentage)
 			
 			average_cognitive_percentage= (cognitive_percentage/cont)*average_points
-			matris[i].append(average_cognitive_percentage)
+			matriz[i].append(average_cognitive_percentage)
 			average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
-			matris[i].append(average_socio_affective_percentage)
+			matriz[i].append(average_socio_affective_percentage)
 			
-			matris[i].append(average_points)
+			matriz[i].append(average_points)
 			i = i + 1
 
 		else:
-			matris[i].append('')
-			matris[i].append('')
-			matris[i].append('')
-			matris[i].append('')
-			
-	return render_to_response('studentsList.html',{'code':code,'students':matris}, context_instance = RequestContext(request))
+			matriz[i].append('')
+			matriz[i].append('')
+			matriz[i].append('')
+			matriz[i].append('')
+		print(matriz)	
+	return render_to_response('studentsList.html',{'code':code,'students':matriz}, context_instance = RequestContext(request))
 
 """def students_list(request,code):
 	
