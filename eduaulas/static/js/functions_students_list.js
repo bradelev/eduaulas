@@ -42,54 +42,42 @@ function create_table_students(data) {
 
 	if(data['type'] == 'success'){  
 
-    var output_thead = "";                                                 
-    output_thead +="<tr>";
-    output_thead +="<th>Nombre</th>";                                                   
-    output_thead +="<th>Apellido</th>";
-    output_thead +="<th>Meta cognitivo</th>";
-    output_thead +="<th>Cognitivo</th>";
-    output_thead +="<th>Socio afectivo</th>";
+	    var output_thead = "";                                                 
+	    output_thead +="<tr>";
+	    output_thead +="<th>Nombre</th>";                                                   
+	    output_thead +="<th>Apellido</th>";
+	    output_thead +="<th>Meta cognitivo</th>";
+	    output_thead +="<th>Cognitivo</th>";
+	    output_thead +="<th>Socio afectivo</th>";
+	    output_thead +="<th>Promedio</th>";
+	    output_thead +="</tr>";
+	   
+	 	
+	  var output = "";
+	  for (var x in data["dictionary_students"]){
+	      output += "<tr>";      
+	      (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
+	      (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
+	      for (var y in data["dictionary_students_profiles"]){
+	          if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_profiles"][y]['student']  ) {        
+	             (data["dictionary_students_profiles"][y]['metacognitive'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['metacognitive']+"</td>";
+	             (data["dictionary_students_profiles"][y]['cognitive'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['cognitive']+"</td>";
+	             (data["dictionary_students_profiles"][y]['socio_affective'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['socio_affective']+"</td>";
+	            
+	          }/*cierro if*/
+	       
+	      }/*cierro for dictionary_students_profiles*/
 
-    for (var s in data["dictionary_subjects"]){
-            output_thead += "<th>";  
-        output_thead += (data["dictionary_subjects"][s]['subject_name']); 
-        output_thead += "</th>";
-    }
-    output_thead +="</tr>";
-   
- 	
-  var output = "";
-  for (var x in data["dictionary_students"]){
-      output += "<tr>";      
-      (data["dictionary_students"][x]['name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['name']+"</td>";
-      (data["dictionary_students"][x]['last_name'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_students"][x]['last_name']+"</td>";
-      for (var y in data["dictionary_students_profiles"]){
-          if (data["dictionary_students"][x]['id_student'] == data["dictionary_students_profiles"][y]['student']  ) {        
-             (data["dictionary_students_profiles"][y]['metacognitive'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['metacognitive']+"</td>";
-             (data["dictionary_students_profiles"][y]['cognitive'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['cognitive']+"</td>";
-             (data["dictionary_students_profiles"][y]['socio_affective'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][y]['socio_affective']+"</td>";
-            
-          }/*cierro if*/
-       
-      }/*cierro for dictionary_students_profiles*/
 
-      for (var k in data["dictionary_subjects"]){
-        	for (var j in data["dictionary_subjects_students_average"]){
-            	if (data["dictionary_subjects"][s]['subject_id'] == data["dictionary_subjects_students_average"][j]['subj']) {        
-                 (data["dictionary_students_profiles"][sbj]['average'] == '') ? output += "<td></td>": output += "<td>"+data["dictionary_students_profiles"][sbj]['average']+"</td>";
-            }  /*cierro if*/
-    		}/*cierro for */
-      }/*cierro for */
+	    output += "</tr>";
 
-    output += "</tr>";
+	}/*cierro for dictionary_students*/
 
-}/*cierro for dictionary_students*/
-
-    if (output != ""){
-        $("#dt_students > tbody ").html(output);
-        $("#dt_students > thead").html(output_thead);
-        $('#dt_students').dataTable();
-    }
+	    if (output != ""){
+	        $("#dt_students > tbody ").html(output);
+	        $("#dt_students > thead").html(output_thead);
+	        $('#dt_students').dataTable();
+	    }
 
 }/*cierro if del type*/
 
