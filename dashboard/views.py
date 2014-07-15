@@ -25,6 +25,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 def ini(request,code):
 	var_areas = Area.objects.all()
+	
 	return render_to_response('panel.html',{'areas':var_areas,'code':code}, context_instance = RequestContext(request))	
 
 def load_filters_subject(request,code):
@@ -131,7 +132,8 @@ def list_students(request,code):
 
 			for e in var_units_exercises:				
 				dictionary_units_exercises[e.id] = {				
-					"exercise_id": e.cuasimodo_exercise_id			
+					"exercise_id": e.cuasimodo_exercise_id,
+					"exercise_img": e.img,			
 					
 				}	
 

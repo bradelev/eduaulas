@@ -123,6 +123,8 @@ function get_students_data () {
           csrfmiddlewaretoken: tok,
           state:'inactive',
           id_unit: id_unit,
+          exercise_img:'exercise_img',
+          exercise_id:'exercise_id',
           matriz:'matriz'
 
     }, 
@@ -150,7 +152,7 @@ if(data['type'] == 'success'){
     for (var e in data["dictionary_units_exercises"]){
         output_thead += "<th>";  
         output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div id="test" class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'>';
-        output_thead += '<img src="http://www.google.com/images/logos/ps_logo2.png">';
+        //output_thead += '<img src="{{MEDIA_URL}}{{'+ (data["dictionary_units_exercises"][e]['exercise_img']) +'}}" class="img-responsive" alt="{{e.nombre}}">';
       /*  var imagen = document.createElement('img');
         imagen.setAttribute('src','http://www.google.com/images/logos/ps_logo2.png');
         output_thead += test.appendChild(imagen);*/
