@@ -1,6 +1,6 @@
 from eduaulas import settings
 from django.shortcuts import render
-from student.models import Student
+from student.models import Student, Person
 from exercise.models import Exercise, Result,Unit,Subject
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext

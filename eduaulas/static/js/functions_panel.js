@@ -136,7 +136,8 @@ function get_students_data () {
 } /*cierro function get_students_data*/
 
 
-
+//<th><a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="<div class='tab-pane fade in active' id='pop-1'>
+//<img src='{% static "img/img.png" %}'></div>" data-html="true">{{e.exercise_id}}</a></th>
 
 function create_table_students (data) {
 
@@ -148,8 +149,15 @@ if(data['type'] == 'success'){
     output_thead +="<th>Apellido</th>";
     for (var e in data["dictionary_units_exercises"]){
         output_thead += "<th>";  
-        output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
-        output_thead += "</th>";
+        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div id="test" class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'>';
+        output_thead += '<img src="http://www.google.com/images/logos/ps_logo2.png">';
+      /*  var imagen = document.createElement('img');
+        imagen.setAttribute('src','http://www.google.com/images/logos/ps_logo2.png');
+        output_thead += test.appendChild(imagen);*/
+        output_thead += '</div>" data-html="true">';
+        output_thead += "</a></th>";  
+       // output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
+        //output_thead += "</a></th>";
     }
     output_thead +="</tr>";
     
@@ -175,6 +183,7 @@ if(data['type'] == 'success'){
     if (output != ""){
       $("#dt_alumnos > tbody ").html(output);
       $("#dt_alumnos > thead").html(output_thead);
+      //$('#dt_alumnos').dataTable().draw();
       $('#dt_alumnos').dataTable();
     }
 
