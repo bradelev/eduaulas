@@ -128,16 +128,17 @@ def list_students(request,code):
 					else:
 						matriz[i].append('')
 				i = i + 1	
-			print(matriz)
+			
 
-			for e in var_units_exercises:				
+			for e in var_units_exercises:		
+						
 				dictionary_units_exercises[e.id] = {				
 					"exercise_id": e.cuasimodo_exercise_id,
-					"exercise_img": e.img,			
+					"img": e.img.url,			
 					
 				}	
 
-	
+			print(dictionary_units_exercises)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({

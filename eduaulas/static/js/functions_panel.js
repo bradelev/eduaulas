@@ -123,7 +123,7 @@ function get_students_data () {
           csrfmiddlewaretoken: tok,
           state:'inactive',
           id_unit: id_unit,
-          exercise_img:'exercise_img',
+          img:'img',
           exercise_id:'exercise_id',
           matriz:'matriz'
 
@@ -151,13 +151,10 @@ if(data['type'] == 'success'){
     output_thead +="<th>Apellido</th>";
     for (var e in data["dictionary_units_exercises"]){
         output_thead += "<th>";  
-        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div id="test" class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'>';
-        //output_thead += '<img src="{{MEDIA_URL}}{{'+ (data["dictionary_units_exercises"][e]['exercise_img']) +'}}" class="img-responsive" alt="{{e.nombre}}">';
-      /*  var imagen = document.createElement('img');
-        imagen.setAttribute('src','http://www.google.com/images/logos/ps_logo2.png');
-        output_thead += test.appendChild(imagen);*/
-        output_thead += '</div>" data-html="true">';
-        output_thead += "</a></th>";  
+        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div data-html="true"class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'></div>';
+        output_thead += '<img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive" ></div>" >';      
+        output_thead += '</a>';
+        output_thead += "</th>";  
        // output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
         //output_thead += "</a></th>";
     }
@@ -181,11 +178,15 @@ if(data['type'] == 'success'){
     output += "</tr>";
 
  }
-
+      
     if (output != ""){
       $("#dt_alumnos > tbody ").html(output);
       $("#dt_alumnos > thead").html(output_thead);
-      //$('#dt_alumnos').dataTable().draw();
+     // var table = $('#dt_alumnos').DataTable();
+     // table.order( [ 1, 'asc' ] );
+      //table.draw();
+    //  $('#dt_alumnos').draw();
+     // $('#dt_alumnos').order( [ 1, 'asc' ] )
       $('#dt_alumnos').dataTable();
     }
 
