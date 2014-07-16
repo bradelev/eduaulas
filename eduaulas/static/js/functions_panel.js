@@ -151,9 +151,11 @@ if(data['type'] == 'success'){
     output_thead +="<th>Apellido</th>";
     for (var e in data["dictionary_units_exercises"]){
         output_thead += "<th>";  
-        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div data-html="true"class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'></div>';
-        output_thead += '<img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive" ></div>" >';      
-        output_thead += '</a>';
+       // output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div data-html="true"class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'></div>';
+        //output_thead += '<img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive" ></div>" >';      
+        //output_thead += '</a>';
+        var contenido = '<div data-html="true" class=' +"'"+ 'tab-pane fade in active' + "'" + 'id='+"'"+'pop-1'+"'" +'><img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive"></div>'
+        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="'+ contenido +'"></a>'; 
         output_thead += "</th>";  
        // output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
         //output_thead += "</a></th>";
