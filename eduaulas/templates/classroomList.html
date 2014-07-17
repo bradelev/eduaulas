@@ -60,13 +60,13 @@
 										<div class="row">
 											<section class="col col-6">
 												<label class="select">
-													<select name="country" id="select_country">
+													<select name="country" id="select_country" title="País">
 		                                                
 													</select> <i></i> </label>
 											</section>
 											<section class="col col-6">
 												    <label class="select">
-		                                            <select name="department" id="select_department">
+		                                            <select name="department" id="select_department" title="Departamento">
 		                                                
 		                                            </select> <i></i> </label>					                                    
 											</section>
@@ -74,7 +74,7 @@
 										<div class="row">										
 											<section class="col col-6">
 												    <label class="select">
-		                                            <select name="school" id="select_school">
+		                                            <select name="school" id="select_school" title="Escuela">
 		                                                <option value="0" selected="" disabled="">Escuela</option>
 		                                                {% for s in schools %}
 		                                                <option value="1">{{s.name}}</option>
@@ -83,7 +83,7 @@
 											</section>
 											<section class="col col-6">
 												<label class="select">
-													<select name="grade" id="select_grade" >
+													<select name="grade" id="select_grade" title="Grado">
 														<option value="0" selected="" disabled="">Grado</option>
 		                                                {% for g in grades%}
 														<option value="1">{{g.name}}</option>
@@ -93,13 +93,13 @@
 										</div><!-- row  -->
 										<div class="row">
 											<section class="col col-6">
-												<label for="className" class="input">
-													<input type="text" name="className" id="class_name" placeholder="Clase">
+												<label for="className" class="input">								
+													<input type="text" name="className"  id="class_name" title='Clase'>
 												</label>
 											</section>
 											<section class="col col-6">
 												<label class="select">
-													<select name="shift" id="select_shift">
+													<select name="shift" id="select_shift" title="Turno">
 														<option value="0" selected="" disabled="">Turno</option>
 														<option value="MORNING">Matutino</option>
 														<option value="EVENING">Vespertino</option>
@@ -112,11 +112,9 @@
 									</fieldset>
 									<div class="modal-footer">
 										<footer>
-											<button type="submit" class="btn btn-primary" id="subtmit_classroom">
-												Agregar aula
-											</button>
-											<button type="submit" class="btn btn-primary" id="subtmit_classroom_edit">
-												Modificar aula
+											
+											<button type="submit" class="btn btn-primary" id="save">
+												Guardar
 											</button>
 										</footer>
 								</form>
@@ -134,7 +132,7 @@
 							<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
 								<header>
 									<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-									<h2>Aulas </h2>	
+									<h2>Mis Aulas </h2>	
 			
 								</header>
 							</div>																				<!--  -->	
@@ -149,7 +147,9 @@
 						<div class="widget-body-toolbar">
 
 						</div>
-						
+	
+
+
 						<table id="dt_classroom" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
@@ -188,7 +188,8 @@
 					
 				</div><!-- modal-header -->
 				<div class="modal-body">	
-				<input type="hidden" id="token" value="{{csrf_token}}"></input>											
+				<input type="hidden" id="token" value="{{csrf_token}}"></input>
+				<input type="hidden" id="action" ></input>											
 					<form id="classroom-form" class="smart-form" novalidate="novalidate" method="POST">
                     {% csrf_token %}
 					<fieldset>
