@@ -115,6 +115,7 @@ def list_students(request,code):
 				
 			for s in students:
 				matriz.append([])
+				matriz[i].append(s.id)
 				matriz[i].append(s.name)
 				matriz[i].append(s.last_name)
 				#j = j + 1
@@ -151,4 +152,3 @@ def list_students(request,code):
 
 	
 
-	

@@ -9,9 +9,47 @@ function ini(){
   $('#select_area').change(load_fiters);
   $('#eg7').click(sm);
   
+ // setInterval(get_students_data,5000);
+  /*setInterval(function() {
+    $("#test").load(location.href+" #test>*","");
+    }, 5000);*/
 }
 
-                
+     
+function check_for_new_results(){
+
+  var query = $.ajax({
+    url:"lista/"+cg+"/materias/",
+    type:'GET',
+    dataType:"json",
+    data:{
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+          id_area: id_area,
+          name: 'y.name',
+          id:'y.id',
+          
+    }, 
+    
+    "success":function(data){
+       
+      $('#select_subject').removeAttr('disabled');
+      var output_select = "";
+      output_select += '<option value="0" selected="" disabled="">Materia</option>'
+      for (var y in data["dictionary_subjects"]){
+        output_select += "<option value="+(data["dictionary_subjects"][y]['id'])+">";
+        output_select += (data["dictionary_subjects"][y]['name']); 
+        output_select += "</option>";
+        }/*Cierro for dictionary_subjects*/
+        $("#select_subject").html(output_select);
+      }
+
+       
+
+    })
+  
+}
+
 function sm(){
 
   $.smallBox({
@@ -106,6 +144,7 @@ function load_units(){
     })
 
     $('#select_unit').change(get_students_data);
+   // setInterval(get_students_data,5000);
 
 
 }/*cierro funcion load_units*/
@@ -138,29 +177,23 @@ function get_students_data () {
 } /*cierro function get_students_data*/
 
 
-//<th><a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="<div class='tab-pane fade in active' id='pop-1'>
-//<img src='{% static "img/img.png" %}'></div>" data-html="true">{{e.exercise_id}}</a></th>
 
 function create_table_students (data) {
 
 if(data['type'] == 'success'){  
     var output_thead = "";
     
-    output_thead +="<tr>";
-    output_thead +="<th>Nombre</th>";                                                   
-    output_thead +="<th>Apellido</th>";
+    output_thead +='<tr>';
+    output_thead +='<th>Nombre</th>';                                                   
+    output_thead +='<th>Apellido</th>';
     for (var e in data["dictionary_units_exercises"]){
-        output_thead += "<th>";  
-       // output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="' + '<div data-html="true"class=' +"'"+ 'tab-pane fade in active' +"'"+ 'id='+"'"+'pop-1'+"'" +'></div>';
-        //output_thead += '<img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive" ></div>" >';      
-        //output_thead += '</a>';
-        var contenido = '<div data-html="true" class=' +"'"+ 'tab-pane fade in active' + "'" + 'id='+"'"+'pop-1'+"'" +'><img src="'+ (data["dictionary_units_exercises"][e]['img']) +'" class="img-responsive"></div>'
-        output_thead += '<a href="javascript:void(0);" class="btn btn-default btn-lg" rel="popover" data-placement="top" data-original-title="<h4>Ejercicio</h4>" data-content="'+ contenido +'"></a>'; 
-        output_thead += "</th>";  
-       // output_thead += (data["dictionary_units_exercises"][e]['exercise_id']); 
-        //output_thead += "</a></th>";
+        output_thead += '<th>';  
+        var contenido = "<div><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " >";
+        var contenido2 = "<h4>Ejercicio Nº "+ (data["dictionary_units_exercises"][e]["exercise_id"]) +"</h4>";
+        output_thead += '<a href="javascript:void(0);"  rel="popover"  data-html="true" data-placement="top" data-original-title="'+ contenido2 +'" data-content="'+ contenido +'">Ej.'+(data["dictionary_units_exercises"][e]["exercise_id"])+'</a>'; 
+        output_thead += '</th>';  
     }
-    output_thead +="</tr>";
+    output_thead +='</tr>';
     
   var output = "";
   
@@ -168,11 +201,16 @@ if(data['type'] == 'success'){
 
    output += "<tr>"; 
 
-    for (var y = 0; y < (data["matriz"])[x].length ; y++){
+    for (var y = 1; y < (data["matriz"])[x].length ; y++){
+      //alert(y);
+        if (y == 1){
+          output += "<td ><a target='blank' href='http://127.0.0.1:8080/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
+          
+        else{
 
-        output += "<td>";
-        output += (data["matriz"])[x][y];
-        output += "</td>";
+          output += "<td>";
+          output += (data["matriz"])[x][y];
+          output += "</td>";}
 
 
    }/*cierro for dictionary_students*/
@@ -182,17 +220,20 @@ if(data['type'] == 'success'){
  }
       
     if (output != ""){
+
       $("#dt_alumnos > tbody ").html(output);
       $("#dt_alumnos > thead").html(output_thead);
-     // var table = $('#dt_alumnos').DataTable();
-     // table.order( [ 1, 'asc' ] );
-      //table.draw();
-    //  $('#dt_alumnos').draw();
-     // $('#dt_alumnos').order( [ 1, 'asc' ] )
-      $('#dt_alumnos').dataTable();
-    }
-
+      /*$('#dt_alumnos').dataTable( {
+          'ordering': false
+        } );
+      /*$('#dt_alumnos').dataTable( {
+                  "columnDefs": [
+                    { "orderable": false, "targets": 0 }
+                  ]
+                } );*/
     
+
+    }
   }
 
 }

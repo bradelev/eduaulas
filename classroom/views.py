@@ -4,6 +4,7 @@ from django.conf import settings
 import random
 from classroom.models import  ClassRoom, Grade
 from location.models import School, Country, Department
+#from django.utils import json
 from django.utils import simplejson
 from django.http import *
 from django.utils.translation import ugettext_lazy as _
@@ -129,8 +130,9 @@ def classroom_save_add(request):
             c.school=s
             print('hola 6')   
             c.save()
-            
+            print('hola 7') 
             type = "success"
+            print('hola 8') 
     except ClassRoom.DoesNotExist:
         print('entre a la execpcion')
         message = "No hay alumnos"
@@ -139,7 +141,7 @@ def classroom_save_add(request):
             "message":message,
             "type":type,
         }, cls = LazyEncoder)
-    return HttpResponse(result, mimetype = 'application/javascript')
+    return HttpResponse(result, content_type = 'application/javascript')
   
  
 def classroom_save_edit(request):

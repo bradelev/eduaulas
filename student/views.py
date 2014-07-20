@@ -24,7 +24,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 
 def ini(request,code):
-	students = Student.objects.all()
+	students = Student.objects.filter(class_room=code)
 	matriz = []
 	i=0
 	average=0
@@ -53,20 +53,21 @@ def ini(request,code):
 			average_points = points/cont
 			average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
 			matriz[i].append(average_metacognitive_percentage)
-			
+		
 			average_cognitive_percentage= (cognitive_percentage/cont)*average_points
 			matriz[i].append(average_cognitive_percentage)
 			average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
 			matriz[i].append(average_socio_affective_percentage)
 			
 			matriz[i].append(average_points)
-			i = i + 1
+			
 
 		else:
 			matriz[i].append('')
 			matriz[i].append('')
 			matriz[i].append('')
 			matriz[i].append('')
+		i = i + 1
 		print(matriz)	
 	return render_to_response('studentsList.html',{'code':code,'students':matriz}, context_instance = RequestContext(request))
 
