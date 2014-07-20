@@ -14,6 +14,6 @@ class Person(models.Model):
 		('FEMALE', 'Femenino')
 	)
 	gender = models.CharField(choices=type_choices, max_length=10, verbose_name=u'Género', null=True)
-	serial = models.CharField(blank=True, max_length=50, verbose_name=u'Numero de serie XO', unique=True)
+	serial = models.CharField(blank=True, max_length=50, verbose_name=u'Numero de serie XO', unique=True, null=True)
 	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
 	updated = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de update')

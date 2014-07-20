@@ -57,8 +57,8 @@ class Exercise(models.Model):
 		verbose_name = _('Ejercicio')
 		verbose_name_plural = _('Ejercicios')
 
-	#def __unicode__(self):
-	#	return self.exercise_id
+	def __unicode__(self):
+		return "%so %s, %s, ej %s" % (self.grade.name, self.unit.subject.name, self.unit.letter, str(self.cuasimodo_exercise_id))
 
 class Result(models.Model):
 	points = models.FloatField(null = True, verbose_name=u'Puntos')

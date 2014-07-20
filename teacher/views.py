@@ -71,7 +71,7 @@ def register(request):
                 nickname=username, 
                 password=password)
             t.save()
-            msg = "Gracias por tu registrp"
+            msg = "Gracias por tu registro"
             registered = True
     print "%s - %s " % (registered, msg)
         

@@ -2,12 +2,11 @@
 from django.db import models
 from person.models import Person
 from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Teacher(Person):
-	email = models.EmailField(blank=True)
-	nickname = models.CharField(max_length=50, verbose_name=u'Usuario')
-	password = models.CharField(max_length=100, verbose_name=u'Contraseña')
+	user = models.OneToOneField(User) 
 	
 
 	class Meta:

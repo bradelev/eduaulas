@@ -32,44 +32,6 @@
                 
            </div>
             <div id="content">
-                <input type="hidden" id="token" value="{{csrf_token}}"></input>
-                <input type="hidden" id="code" value="{{code}}"></input>
-               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia que desea ver.</h1>
-                <div id="filters">    
-                    <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
-                        {% csrf_token %}
-                    <section class="col col-2">
-                        <label class="select" >
-                        <select id="select_area">
-                            <option value="0" selected="" disabled="">Área</option>
-                            {% for a in areas %}
-                            <option value="{{a.id}}" >{{a.name}}</option>
-                            {% endfor %}
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>    
-                    <section class="col col-2">
-                        <label class="select">
-                        <select id="select_subject" >
-                            
-                            
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>  
-                    <section class="col col-3">
-                        <label class="select">
-                        <select name="unit" id="select_unit">
-                            
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>  
-                    
-
-                                
-                </form>
-                   
-                </div> <!-- filters -->   
-
                 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -85,65 +47,9 @@
                                 <small><strong>{{unit.letter}}</strong>: {{unit.name}}</small></h3>
 
                                 <div id="contents">
-                                    <ul>
-                                        <li>
-                                            <a href="#experimentos">Experimentos</a>
-                                        </li>
-                                        <li>
-                                            <a href="#lecturas">Lecturas</a>
-                                        </li>
-                                        <li>
-                                            <a href="#ejercicios">Ejercicios</a>
-                                        </li>
-                                        <li>
-                                            <a href="#tareas">Tareas</a>
-                                        </li>
-                                    </ul>
-                                    <div id="experimentos">
-                                        <div id="experiments">
-                                            <ul>
-                                            {% for e in experiments %}
-                                                <li>
-                                                    <a href="#experiment-{{e.cuasimodo_lecture_id}}">{{e.cuasimodo_lecture_id}}</a>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
-                                        {% for e in experiments %}
-                                            <div class="row">
-                                                <div id="experiment-{{e.cuasimodo_lecture_id}}">
-                                                    <img src="{{MEDIA_URL}}{{e.img}}" alt="" style="width:600px;height:480px;">
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                        </div>
-                                    </div>
-                                    <div id="lecturas">
-                                        <div id="lectures">
-                                            <ul>
-                                            {% for l in lectures %}
-                                                <li>
-                                                    <a href="#lecture-{{l.cuasimodo_lecture_id}}">{{l.cuasimodo_lecture_id}}</a>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
-                                        {% for l in lectures %}
-                                            <div class="row">
-                                                <div id="lecture-{{l.cuasimodo_lecture_id}}">
-                                                    <img src="{{MEDIA_URL}}{{l.img}}" alt="" style="width:600px;height:480px;">
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                        </div>
-                                    </div>
                                     <div id="ejercicios">
                                         <div id="exercises">
-                                            <ul>
-                                            {% for e in exercises %}
-                                                <li>
-                                                    <a href="#exercise-{{e.cuasimodo_exercise_id}}">{{unit.letter}}{{e.cuasimodo_exercise_id}}</a>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
+                                            
                                         {% for ex in exercises %}
                                             <div id="exercise-{{ex.cuasimodo_exercise_id}}">
                                                 <div class="row">

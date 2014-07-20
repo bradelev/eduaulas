@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^cargarDatos/', 'datosTest.cargarDatosTest.ingresar_datos'),
     url(r'^resultados/', 'datosTest.cargarDatosTest.resultados'),
+    url(r'^contar_usuarios/', 'datosTest.cargarDatosTest.contar_usuarios'),
+
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 	
