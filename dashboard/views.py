@@ -101,36 +101,43 @@ def list_students(request,code):
 	dictionary_units_exercises={}
 	message = ""
 	type = "error"
+	
 	try:
 		if request.POST:
-
 			id_unit =request.POST['id_unit']
-			var_unit = Unit.objects.get(pk=id_unit)			
+			var_unit = Unit.objects.get(pk=id_unit)	
+			print 'tres'
+
 			cl = ClassRoom.objects.get(pk=code)
+			print 'cuatro'	
 			students = Student.objects.filter(class_room=cl)
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)
 			matriz = []
 			type = "success"
 			i=0
-				
+			
 			for s in students:
 				matriz.append([])
 				matriz[i].append(s.id)
 				matriz[i].append(s.name)
 				matriz[i].append(s.last_name)
 				#j = j + 1
-				
+					
 				for j in var_units_exercises:
 					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
 						for r in var_results:
-							matriz[i].append(r.points)
+							#matriz[i].append(r.points)
+							if r.points >= 0.5:
+								matriz[i].append('<img src="/static/img/tickBien.png" >')
+							else:
+								matriz[i].append('<img src="/static/img/tickMal.png" >')
 						
 					else:
 						matriz[i].append('')
 				i = i + 1	
 			
-
+					
 			for e in var_units_exercises:		
 						
 				dictionary_units_exercises[e.id] = {				
@@ -138,7 +145,7 @@ def list_students(request,code):
 					"img": e.img.url,			
 					
 				}	
-
+				
 			print(dictionary_units_exercises)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"

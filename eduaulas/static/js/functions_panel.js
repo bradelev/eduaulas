@@ -8,47 +8,12 @@ function ini(){
   
   $('#select_area').change(load_fiters);
   $('#eg7').click(sm);
-  
- // setInterval(get_students_data,5000);
-  /*setInterval(function() {
-    $("#test").load(location.href+" #test>*","");
-    }, 5000);*/
+  $('#refresh_results').click(get_students_data);
+
 }
 
      
-function check_for_new_results(){
 
-  var query = $.ajax({
-    url:"lista/"+cg+"/materias/",
-    type:'GET',
-    dataType:"json",
-    data:{
-          csrfmiddlewaretoken: tok,
-          state:'inactive',
-          id_area: id_area,
-          name: 'y.name',
-          id:'y.id',
-          
-    }, 
-    
-    "success":function(data){
-       
-      $('#select_subject').removeAttr('disabled');
-      var output_select = "";
-      output_select += '<option value="0" selected="" disabled="">Materia</option>'
-      for (var y in data["dictionary_subjects"]){
-        output_select += "<option value="+(data["dictionary_subjects"][y]['id'])+">";
-        output_select += (data["dictionary_subjects"][y]['name']); 
-        output_select += "</option>";
-        }/*Cierro for dictionary_subjects*/
-        $("#select_subject").html(output_select);
-      }
-
-       
-
-    })
-  
-}
 
 function sm(){
 
@@ -74,7 +39,6 @@ function load_filter_subjects(id_area){
   var cg = $('#code').val();
   var tok = $("#token").attr("value");
   var query = $.ajax({
-    //url:"lista/A8o6/materias/",
     url:"lista/"+cg+"/materias/",
     type:'POST',
     dataType:"json",
@@ -144,7 +108,7 @@ function load_units(){
     })
 
     $('#select_unit').change(get_students_data);
-   // setInterval(get_students_data,5000);
+    //setInterval(get_students_data,5000);
 
 
 }/*cierro funcion load_units*/
@@ -152,7 +116,8 @@ function load_units(){
 function get_students_data () {
 
     var code_class = $("#code").attr("value");
-    var id_unit = $(this).val();
+    var id_unit = $('#select_unit').val();
+    //alert(id_unit2);
     var tok = $("#token").attr("value");
     var query = $.ajax({
     url:"lista/"+code_class+"/alumnos/",
@@ -208,9 +173,9 @@ if(data['type'] == 'success'){
           
         else{
 
-          output += "<td>";
+          output += '<td class="tr_green">';
           output += (data["matriz"])[x][y];
-          output += "</td>";}
+          output += '</td>';}
 
 
    }/*cierro for dictionary_students*/
