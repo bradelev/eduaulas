@@ -1,6 +1,7 @@
 # encoding: utf-8
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 from django.shortcuts import render_to_response
 from django.conf import settings
@@ -14,7 +15,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 #from django.core.context_processors import csrf
 from teacher.models import Teacher
-from datetime import date
+import datetime
 
 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -28,18 +29,20 @@ class LazyEncoder(simplejson.JSONEncoder):
 def login_user(request):
     logout(request)
     username = password = ''
+    msg = ""
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        msg = ""
         if user is not None:
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect('/panel/lista/')
         else:
             msg = "No existe este usuario o la contraseña es incorrecta"
-    return render_to_response('login.html', context_instance=RequestContext(request))
+    else:
+        msg = ""
+    return render_to_response('login.html',{'msg':msg}, context_instance=RequestContext(request))
  
 @login_required(login_url='/login/')
 def inicio(request):
@@ -55,24 +58,28 @@ def register(request):
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
         gender = request.POST['gender']
-        #dob = request.POST['dateofbirth']
-        dob = date(1985,11,11)
+        str_dob = request.POST['dateofbirth']
+        dob = datetime.datetime.strptime(str_dob,"%d/%m/%Y").date()
 
         try:
-            t = Teacher.objects.get(email=email)
-            msg = "Ya existe un usuario con este correo"
-        except Teacher.DoesNotExist:
+            t = Teacher.objects.get(username=username)
+            msg = "Ya existe un usuario con este usuario"
+        except:
+            user = User.objects.create_user(username,email,password)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.is_staff = False
+            user.is_active = True
+            user.save()
+            
             t = Teacher(
                 name=first_name, 
                 last_name=last_name, 
                 date_of_birth=dob, 
                 gender=gender, 
-                email=email, 
-                nickname=username, 
-                password=password)
+                user=user)
             t.save()
             msg = "Gracias por tu registro"
             registered = True
-    print "%s - %s " % (registered, msg)
         
     return render_to_response('register.html', {'registered': registered, 'msg':msg}, context_instance=RequestContext(request))

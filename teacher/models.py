@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Teacher(Person):
-	user = models.OneToOneField(User) 
+	user = models.ForeignKey(User)
 	
 
 	class Meta:
