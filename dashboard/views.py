@@ -119,19 +119,19 @@ def list_students(request,code):
 			for s in students:
 				matriz.append([])
 				matriz[i].append(s.id)
-				matriz[i].append(s.name)
-				matriz[i].append(s.last_name)
+				matriz[i].append(s.name + ' '+ s.last_name)
+				#matriz[i].append(s.last_name)
 				#j = j + 1
 					
 				for j in var_units_exercises:
 					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
 						for r in var_results:
-							#matriz[i].append(r.points)
-							if r.points >= 0.5:
+							matriz[i].append(r.points)
+							"""if r.points >= 0.5:
 								matriz[i].append('<img src="/static/img/tickBien.png" >')
 							else:
-								matriz[i].append('<img src="/static/img/tickMal.png" >')
+								matriz[i].append('<img src="/static/img/tickMal.png" >')"""
 						
 					else:
 						matriz[i].append('')

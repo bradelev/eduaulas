@@ -49,10 +49,11 @@
 
 .tr_green{
 
-	background-color: #A2CD5A;
+
+	background-color: #A2CD5A !important;
 }
 
 .tr_red{
 
-	background-color: #F08080;
+	background-color: #F08080 !important;
 }

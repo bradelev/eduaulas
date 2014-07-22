@@ -31,6 +31,7 @@ function load_fiters(){
 
     var id_area = $(this).val();
     load_filter_subjects(id_area);
+    alert('hola');
 
         
 }
@@ -150,7 +151,7 @@ if(data['type'] == 'success'){
     
     output_thead +='<tr>';
     output_thead +='<th>Nombre</th>';                                                   
-    output_thead +='<th>Apellido</th>';
+    //output_thead +='<th>Apellido</th>';
     for (var e in data["dictionary_units_exercises"]){
         output_thead += '<th>';  
         var contenido = "<div><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " >";
@@ -161,26 +162,35 @@ if(data['type'] == 'success'){
     output_thead +='</tr>';
     
   var output = "";
-  
+  var tr_cont = 0;
   for (var x in (data["matriz"])){
-
-   output += "<tr>"; 
+    tr_cont++;
+    output += "<tr  id='fil"+ tr_cont +"'>";  
+    //output += "<tr  id='hola' style='color:red;'>";  
+    var average = 0;
+    var results_quantity = 0;
+    var points_sum = 0;
 
     for (var y = 1; y < (data["matriz"])[x].length ; y++){
-      //alert(y);
+      
         if (y == 1){
-          output += "<td ><a target='blank' href='http://127.0.0.1:8080/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
+          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
           
-        else{
-
-          output += '<td class="tr_green">';
-          output += (data["matriz"])[x][y];
+        else {
+          
+          results_quantity ++;
+          points_sum += (data["matriz"])[x][y];
+          average = points_sum / results_quantity;
+          output += '<td>';
+          output +=  (data["matriz"])[x][y];
           output += '</td>';}
 
 
    }/*cierro for dictionary_students*/
-    
+    tr_color(results_quantity,average,tr_cont);
     output += "</tr>";
+    
+
 
  }
       
@@ -188,17 +198,16 @@ if(data['type'] == 'success'){
 
       $("#dt_alumnos > tbody ").html(output);
       $("#dt_alumnos > thead").html(output_thead);
-      /*$('#dt_alumnos').dataTable( {
-          'ordering': false
-        } );
-      /*$('#dt_alumnos').dataTable( {
-                  "columnDefs": [
-                    { "orderable": false, "targets": 0 }
-                  ]
-                } );*/
-    
+   
 
     }
   }
 
-}
+}/*close function create_table_students*/
+
+function tr_color(results_quantity,average,tr_cont){
+ // alert('hola');
+ // $("#fil1").attr("class","tr_red");
+ //$("#hola").attr("style","tr_red");
+  $("tr#fil1").attr("style","background-color:blue;");
+}/*close function tr_color*/
