@@ -7,15 +7,16 @@ function ini(){
   $("#select_subject").attr('disabled','disabled');
   
   $('#select_area').change(load_fiters);
-  $('#eg7').click(sm);
+ // $('#eg7').click(sm);
   $('#refresh_results').click(get_students_data);
-
+  
+  ///setInterval(check_students_results_status,10000);
 }
 
      
 
 
-function sm(){
+function check_students_results_status(){
 
   $.smallBox({
     title : "Juan Perez necesita ayuda",
@@ -31,7 +32,7 @@ function load_fiters(){
 
     var id_area = $(this).val();
     load_filter_subjects(id_area);
-    alert('hola');
+ //   alert('hola');
 
         
 }
@@ -110,6 +111,7 @@ function load_units(){
 
     $('#select_unit').change(get_students_data);
     //setInterval(get_students_data,5000);
+  //  setInterval(check_students_results_status,10000);
 
 
 }/*cierro funcion load_units*/
@@ -163,15 +165,27 @@ if(data['type'] == 'success'){
     
   var output = "";
   var tr_cont = 0;
+  var tr_color = "";
+  var aux = 0;
   for (var x in (data["matriz"])){
     tr_cont++;
-    output += "<tr  id='fil"+ tr_cont +"'>";  
-    //output += "<tr  id='hola' style='color:red;'>";  
+    aux = (data["matriz"]).length;
+    tr_color = (data["matriz"])[x][aux + 2];
+   // alert(tr_color);
+    if (tr_color == 'green'){
+       output += "<tr class='tr_green'>";  
+    }else{
+    if (tr_color == 'red'){
+       output += "<tr class='tr_red'>";  
+    }else{
+        output += "<tr>";
+    }}
+    
     var average = 0;
     var results_quantity = 0;
     var points_sum = 0;
 
-    for (var y = 1; y < (data["matriz"])[x].length ; y++){
+    for (var y = 1; y < (data["matriz"])[x].length-1; y++){
       
         if (y == 1){
           output += "<td ><a target='blank' href='/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
@@ -187,7 +201,7 @@ if(data['type'] == 'success'){
 
 
    }/*cierro for dictionary_students*/
-    tr_color(results_quantity,average,tr_cont);
+    
     output += "</tr>";
     
 

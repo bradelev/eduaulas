@@ -117,24 +117,35 @@ def list_students(request,code):
 			i=0
 			
 			for s in students:
+				average = 0
+				results_quantity = 0 
 				matriz.append([])
 				matriz[i].append(s.id)
 				matriz[i].append(s.name + ' '+ s.last_name)
-				#matriz[i].append(s.last_name)
-				#j = j + 1
-					
+									
 				for j in var_units_exercises:
 					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
 						for r in var_results:
-							matriz[i].append(r.points)
-							"""if r.points >= 0.5:
+							
+							if r.points >= 0.5:
 								matriz[i].append('<img src="/static/img/tickBien.png" >')
 							else:
-								matriz[i].append('<img src="/static/img/tickMal.png" >')"""
-						
+								matriz[i].append('<img src="/static/img/tickMal.png" >')
+
+							results_quantity = results_quantity + 1	
+							average += r.points
+				
+
 					else:
 						matriz[i].append('')
+				if results_quantity >= 3:
+					if average > 0.3: 	
+						matriz[i].append('green')
+					else:
+						matriz[i].append('red')	
+				else:
+					matriz[i].append('')		
 				i = i + 1	
 			
 					
@@ -146,7 +157,7 @@ def list_students(request,code):
 					
 				}	
 				
-			print(dictionary_units_exercises)
+			print(matriz)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
