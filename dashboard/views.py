@@ -96,8 +96,6 @@ def load_filters_unit(request,code):
 
 def list_students(request,code):
 
-	dictionary_students = {}
-	dictionary_students_exercises = {}
 	dictionary_units_exercises={}
 	message = ""
 	type = "error"
@@ -106,10 +104,7 @@ def list_students(request,code):
 		if request.POST:
 			id_unit =request.POST['id_unit']
 			var_unit = Unit.objects.get(pk=id_unit)	
-			print 'tres'
-
 			cl = ClassRoom.objects.get(pk=code)
-			print 'cuatro'	
 			students = Student.objects.filter(class_room=cl)
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)
 			matriz = []
@@ -157,7 +152,7 @@ def list_students(request,code):
 					
 				}	
 				
-			print(matriz)
+			#print(matriz)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
@@ -170,3 +165,60 @@ def list_students(request,code):
 
 	
 
+def load_suggestions_students(request,code):
+
+	message = ""
+	type = "error"
+	
+	try:
+		if request.POST:
+			id_unit =request.POST['id_unit']
+			var_unit = Unit.objects.get(pk=id_unit)	
+			cl = ClassRoom.objects.get(pk=code)
+			students = Student.objects.filter(class_room=cl)
+			var_units_exercises = Exercise.objects.filter(unit=var_unit)
+			matriz_suggestions_students = []
+			type = "success"
+			i=0
+			for s in students:
+				matriz_suggestions_students.append([])
+				matriz_suggestions_students[i].append(s.id)
+				matriz_suggestions_students[i].append(s.name + ' '+ s.last_name)				
+				for j in var_units_exercises:
+					var_results = Result.objects.filter(exercise=j, person=s)						
+					if var_results.exists():
+						for r in var_results:
+							good_exercises = Exercise.objects.get(pk=r.exercise.id).good_related_exercises.all()
+							"""for x in good_exercises:
+								print x.id"""
+							bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
+																				
+						for rs in var_results:														
+							for b in good_exercises:
+								print s.name,b.id, rs.exercise.id
+								
+								txt = ''								
+								if b.id == r.id:
+									print 'kiki'									
+									txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,b.id , 'Estado: Hecho'
+									matriz_suggestions_students[i].append(txt)
+								else:
+									txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,b.id ,'Estado: Pendiente'
+									matriz_suggestions_students[i].append(txt)
+						
+							
+							
+				
+		
+				i = i + 1	
+			
+									
+			print(matriz_suggestions_students)
+	except Student.DoesNotExist:
+		message = "No hay alumnos"
+	result = simplejson.dumps({
+			"matriz_suggestions_students":matriz_suggestions_students,
+			"message":message,
+			"type":type,
+		}, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')

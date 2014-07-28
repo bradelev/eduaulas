@@ -9,12 +9,46 @@ function ini(){
   $('#select_area').change(load_fiters);
  // $('#eg7').click(sm);
   $('#refresh_results').click(get_students_data);
+  $('#load_suggestions').click(search_for_suggestions);
   
   ///setInterval(check_students_results_status,10000);
 }
 
      
+function search_for_suggestions(){
 
+  var code_class = $("#code").attr("value");
+  var id_unit = $('#select_unit').val();
+  //alert(id_unit2);
+  var tok = $("#token").attr("value");
+  var query = $.ajax({
+  url:"lista/"+code_class+"/sugerencias/",
+  type:'POST',
+  dataType:"json",
+  data:{
+        csrfmiddlewaretoken: tok,
+        state:'inactive',
+        id_unit: id_unit,
+        matriz_suggestions_students:'matriz_suggestions_students'
+
+  }, 
+
+  "success":function(data){
+      load_suggestions(data);
+    }
+
+  })
+
+
+
+}/*close function load_suggestions*/
+
+
+function load_suggestions(data){
+
+  //alert(matriz_suggestions_students);
+
+}
 
 function check_students_results_status(){
 
@@ -32,7 +66,6 @@ function load_fiters(){
 
     var id_area = $(this).val();
     load_filter_subjects(id_area);
- //   alert('hola');
 
         
 }
@@ -153,7 +186,6 @@ if(data['type'] == 'success'){
     
     output_thead +='<tr>';
     output_thead +='<th>Nombre</th>';                                                   
-    //output_thead +='<th>Apellido</th>';
     for (var e in data["dictionary_units_exercises"]){
         output_thead += '<th>';  
         var contenido = "<div><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " >";
@@ -171,7 +203,6 @@ if(data['type'] == 'success'){
     tr_cont++;
     aux = (data["matriz"]).length;
     tr_color = (data["matriz"])[x][aux + 2];
-   // alert(tr_color);
     if (tr_color == 'green'){
        output += "<tr class='tr_green'>";  
     }else{
