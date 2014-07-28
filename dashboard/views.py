@@ -192,20 +192,19 @@ def load_suggestions_students(request,code):
 							"""for x in good_exercises:
 								print x.id"""
 							bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
-																				
-						for rs in var_results:														
-							for b in good_exercises:
-								print s.name,b.id, rs.exercise.id
-								
-								txt = ''								
-								if b.id == r.id:
-									print 'kiki'									
-									txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,b.id , 'Estado: Hecho'
-									matriz_suggestions_students[i].append(txt)
-								else:
-									txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,b.id ,'Estado: Pendiente'
-									matriz_suggestions_students[i].append(txt)
 						
+						for g in good_exercises:														
+							tm = var_results = Result.objects.filter(exercise_id=g.id, person=s)
+							
+																
+							if tm.exists():		
+															
+								txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,g.id , 'Estado: Hecho'
+								matriz_suggestions_students[i].append(txt)
+							else:
+								txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,g.id ,'Estado: Pendiente'
+								matriz_suggestions_students[i].append(txt)
+							txt = ''
 							
 							
 				
