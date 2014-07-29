@@ -49,81 +49,43 @@
                                 <div id="contents">
                                     <div id="ejercicios">
                                         <div id="exercises">
-                                            
-                                        {% for ex in exercises %}
-                                            <div id="exercise-{{ex.cuasimodo_exercise_id}}">
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <img src="{{MEDIA_URL}}{{ex.img}}" alt="{{ex.cuasimodo_exercise_id}}" style="width:600px;height:480px;">    
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                {% if ex.teacher_guide %}
-                                                                    <h3>Guía docente</h3>
-                                                                    <p>{{ex.teacher_guide}}</p>
-                                                                {% endif %}
-                                                            </div>
-                                                        </div>
-                                                        <hr/>
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <h3>Enviar comentario a la editorial</h3>
-                                                                <form method="POST">
-                                                                    {% csrf_token %}
-                                                                    <div class="form-group">
-                                                                        <textarea class="form-control" placeholder="Comentario a la Editorial" rows="6"></textarea>
-                                                                    </div>
-                                                                    <div class="btn btn-primary">
-                                                                        Enviar
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                        </div>
-                                    </div>
-                                    <div id="deberes">
-                                        <div id="homeworks">
-                                            <ul>
-                                            {% for h in homeworks %}
-                                                <li>
-                                                    <a href="#homework-{{h.cuasimodo_lecture_id}}">{{h.cuasimodo_lecture_id}}</a>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
-                                        {% for h in homeworks %}
                                             <div class="row">
-                                                <div id="homework-{{h.cuasimodo_lecture_id}}">
-                                                    <img src="{{MEDIA_URL}}{{h.img}}" alt="" style="width:600px;height:480px;">    
+                                                <div class="col-sm-8">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            {% if exercise.name %}
+                                                                <h3>{{unit.letter}}{{exercise.cuasimodo_exercise_id}} {{exercise.name}}</h3>
+                                                            {% else %}
+                                                                <h3>{{unit.letter}}{{exercise.cuasimodo_exercise_id}}</h3>
+                                                            {% endif %}
+                                                            <img src="{{MEDIA_URL}}{{exercise.img}}" alt="{{exercise.name}}" style="width:600px;height:480px;">    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <hr/>
+                                                            {% if exercise.teacher_guide %}
+                                                                <h3>Guía docente</h3>
+                                                                <p>{{exercise.teacher_guide}}</p>
+                                                            {% else %}
+                                                                <h4>Este ejercicio no tiene guía docente.</h4>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        {% endfor %}
                                         </div>
                                     </div>
-
-
                                 </div>
-
-                                
-
-                            </div>  
-                            
-
-                
+                            </div>
                         </article>
                         <!-- WIDGET END -->
-                
                     </div>
-                
                     <!-- end row -->
-                
                 </section>
                 <!-- end widget grid -->
-
             </div>
         </div>
         <!-- END MAIN PANEL -->

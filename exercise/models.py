@@ -29,7 +29,7 @@ class Lecture(models.Model):
 		verbose_name_plural = _('Lecturas')
 
 	def __unicode__(self):
-		return self.exercise_id
+		return "%so %s, %s, ej %s" % (self.grade.name, self.unit.subject.name, self.unit.letter, str(self.cuasimodo_lecture_id))
 
 class Exercise(models.Model): 
 	cuasimodo_exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
@@ -46,8 +46,9 @@ class Exercise(models.Model):
 	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio', null=True)
 	teacher_guide = models.TextField(max_length=2000, blank=True, verbose_name=u'Guía docente', null=True)
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen', null=True)
-	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien', null=True)
-	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal', null=True)
+	lectures = models.ManyToManyField('Lecture', symmetrical=False, related_name='lectures', blank=True, verbose_name=u'Lectura')
+	good_related_exercises = models.ManyToManyField('self', symmetrical=False, related_name="good_related", blank=True, verbose_name=u'Ejercicios relacionados bien', null=True)
+	bad_related_exercises = models.ManyToManyField('self', symmetrical=False, related_name="bad_related", blank=True, verbose_name=u'Ejercicios relacionados mal', null=True)
 	metacognitive_percentage = models.FloatField(default=0, verbose_name=u'Porcentaje meta congnitivo', blank = True, null=True)
 	cognitive_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje congnitivo', blank = True, null=True)
 	socio_affective_percentage=models.FloatField(default=0, verbose_name=u'Porcentaje socio afectivo', blank = True, null=True)

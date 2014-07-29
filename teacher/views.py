@@ -66,8 +66,6 @@ def register(request):
             msg = "Ya existe un usuario con este usuario"
         except:
             user = User.objects.create_user(username,email,password)
-            user.first_name = first_name
-            user.last_name = last_name
             user.is_staff = False
             user.is_active = True
             user.save()
