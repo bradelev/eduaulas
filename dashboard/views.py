@@ -96,8 +96,6 @@ def load_filters_unit(request,code):
 
 def list_students(request,code):
 
-	dictionary_students = {}
-	dictionary_students_exercises = {}
 	dictionary_units_exercises={}
 	message = ""
 	type = "error"
@@ -106,10 +104,7 @@ def list_students(request,code):
 		if request.POST:
 			id_unit =request.POST['id_unit']
 			var_unit = Unit.objects.get(pk=id_unit)	
-			print 'tres'
-
 			cl = ClassRoom.objects.get(pk=code)
-			print 'cuatro'	
 			students = Student.objects.filter(class_room=cl)
 			var_units_exercises = Exercise.objects.filter(unit=var_unit)
 			matriz = []
@@ -157,7 +152,7 @@ def list_students(request,code):
 					
 				}	
 				
-			print(matriz)
+			#print(matriz)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
@@ -170,3 +165,68 @@ def list_students(request,code):
 
 	
 
+def load_suggestions_students(request,code):
+
+	message = ""
+	type = "error"
+	
+	try:
+		if request.POST:
+			id_unit =request.POST['id_unit']
+			var_unit = Unit.objects.get(pk=id_unit)	
+			cl = ClassRoom.objects.get(pk=code)
+			students = Student.objects.filter(class_room=cl)
+			var_units_exercises = Exercise.objects.filter(unit=var_unit)
+			matriz_suggestions_students = []
+			type = "success"
+			i=0
+			for s in students:
+				matriz_suggestions_students.append([])
+				matriz_suggestions_students[i].append(s.id)
+				matriz_suggestions_students[i].append(s.name + ' '+ s.last_name)				
+				for j in var_units_exercises:
+					var_results = Result.objects.filter(exercise=j, person=s)						
+					if var_results.exists():
+						for r in var_results:
+							good_exercises = Exercise.objects.get(pk=r.exercise.id).good_related_exercises.all()
+							"""for x in good_exercises:
+								print x.id"""
+							bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
+						
+						for g in good_exercises:														
+							tm = var_results = Result.objects.filter(exercise_id=g.id, person=s)
+							
+																
+							if tm.exists():		
+															
+								txt = '<h6>Ejercicios previo al numero' 
+								matriz_suggestions_students[i].append(txt)
+								txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
+								matriz_suggestions_students[i].append(txt)
+								txt = 'Ej.' + str(g.id)
+								matriz_suggestions_students[i].append(txt)
+								txt = ' Estado: Hecho' + '<br>'
+								matriz_suggestions_students[i].append(txt)
+							else:
+								matriz_suggestions_students[i].append(txt)
+								txt ='Ej.' + str(g.id)
+								matriz_suggestions_students[i].append(txt)
+								txt = ' Estado: Pendiente' + '<br>'
+								matriz_suggestions_students[i].append(txt)
+							txt = ''
+							
+							
+				
+		
+				i = i + 1	
+			
+									
+			print(matriz_suggestions_students)
+	except Student.DoesNotExist:
+		message = "No hay alumnos"
+	result = simplejson.dumps({
+			"matriz_suggestions_students":matriz_suggestions_students,
+			"message":message,
+			"type":type,
+		}, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
