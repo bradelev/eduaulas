@@ -199,10 +199,19 @@ def load_suggestions_students(request,code):
 																
 							if tm.exists():		
 															
-								txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,g.id , 'Estado: Hecho'
+								txt = '<h6>Ejercicios previo al numero' 
+								matriz_suggestions_students[i].append(txt)
+								txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
+								matriz_suggestions_students[i].append(txt)
+								txt = 'Ej.' + str(g.id)
+								matriz_suggestions_students[i].append(txt)
+								txt = ' Estado: Hecho' + '<br>'
 								matriz_suggestions_students[i].append(txt)
 							else:
-								txt = 'Ejercicio previo al', r.exercise.cuasimodo_exercise_id,g.id ,'Estado: Pendiente'
+								matriz_suggestions_students[i].append(txt)
+								txt ='Ej.' + str(g.id)
+								matriz_suggestions_students[i].append(txt)
+								txt = ' Estado: Pendiente' + '<br>'
 								matriz_suggestions_students[i].append(txt)
 							txt = ''
 							

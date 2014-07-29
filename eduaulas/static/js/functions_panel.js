@@ -9,14 +9,16 @@ function ini(){
   $('#select_area').change(load_fiters);
  // $('#eg7').click(sm);
   $('#refresh_results').click(get_students_data);
-  $('#load_suggestions').click(search_for_suggestions);
-  
+  $('#load_suggestions').click(function(){search_for_suggestions(0)});
+  $('#next').click( function(){search_for_suggestions(1)});
+  $('#prev').click( function(){search_for_suggestions(2)});
   ///setInterval(check_students_results_status,10000);
 }
 
      
-function search_for_suggestions(){
-
+function search_for_suggestions(pos){
+ 
+ 
   var code_class = $("#code").attr("value");
   var id_unit = $('#select_unit').val();
   //alert(id_unit2);
@@ -34,7 +36,8 @@ function search_for_suggestions(){
   }, 
 
   "success":function(data){
-      load_suggestions(data);
+     
+      load_suggestions(data,pos);
     }
 
   })
@@ -44,11 +47,38 @@ function search_for_suggestions(){
 }/*close function load_suggestions*/
 
 
-function load_suggestions(data){
+function load_suggestions(data,pos){
+var student = 0;  
 
-  //alert(matriz_suggestions_students);
+if (pos==1){
+    student ++;
+  }
+  alert(student);
+  if (pos==2){
+    student --;
+  }  
+  alert(student);
+//alert(student);
+var output ='';
+var cont = '';
+cont =(data["matriz_suggestions_students"])[student].length;
+    for (var y = 1; y < cont; y++){
+      if (y == 1){
 
+      output += "<h6>Alumno:";
+      output += (data["matriz_suggestions_students"])[student][y];
+      output += "<br></h6>";
+      }else{
+      output += (data["matriz_suggestions_students"])[student][y];
+      
+      }
+    }
+
+  $('#content_suggestions').html(output);
+  
+  
 }
+
 
 function check_students_results_status(){
 

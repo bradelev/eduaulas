@@ -33,6 +33,33 @@
            </div>
 
             <div id="content">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Ejercicios sugeridos</h4>
+                            </div><!-- modal-header -->
+                            <div class="modal-body">    
+                                <div id='content_suggestions' ></div>
+                                <div class="modal-footer">
+                                    <div style="width:200px; margin:0 auto">
+                                    <ul class="pager">
+                                        <li >
+                                            <a id='prev' href="javascript:void(0);">&larr; Anterior</a>
+                                        </li>
+                                        <li class="next">
+                                            <a id ='next' href="javascript:void(0);">Siguiente &rarr;</a>
+                                        </li>
+                                    </ul>
+                                </div>          
+                                </div><!-- modal-footer -->
+                            </div><!-- modal-body -->
+                        </div><!-- modal-content -->                                                                                                
+                    </div><!-- /.modal-dialog -->
+                </div>
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
                <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comezar a trabajar.</h1>
@@ -69,7 +96,7 @@
                                 
                 </form>
                    <a href="javascript:void(0);" class="btn btn-labeled btn-info" id='refresh_results'rel="tooltip" data-placement="bottom" data-original-title=" Se actualizará la tabla con los nuevos ejercicios realizados" data-html="true" > <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span>Actualizar resultados </a>
-                   <a href="javascript:void(0);" class="btn btn-labeled btn-info bg-color-green" id='load_suggestions'rel="tooltip" data-placement="bottom" data-original-title=" Se abrira una ventana con las sugerencias de nuevos ejercicios." data-html="true" > <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Mostrar sugerencias</a>
+                   <a href="javascript:void(0);" class="btn btn-labeled btn-info bg-color-green" data-toggle="modal" data-target="#myModal" id='load_suggestions'rel="tooltip" data-placement="bottom" data-original-title=" Se abrira una ventana con las sugerencias de nuevos ejercicios." data-html="true" > <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Mostrar sugerencias</a>
                 </div> <!-- filters -->   
 
                 
