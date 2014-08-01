@@ -5,16 +5,15 @@ function ini(){
 
   $("#select_unit").attr('disabled','disabled');
   $("#select_subject").attr('disabled','disabled');
-  
+  $('#refresh_results').attr('disabled','disabled');
+  $('#load_suggestions').attr('disabled','disabled');
   $('#select_area').change(load_fiters);
  // $('#eg7').click(sm);
-  $('#refresh_results').click(get_students_data);
-  $('#load_suggestions').click(function(){search_for_suggestions(0)});
-  $('#next').click( function(){search_for_suggestions(1)});
-  $('#prev').click( function(){search_for_suggestions(2)});
+  
+
   ///setInterval(check_students_results_status,10000);
 }
-
+var student= 0; 
      
 function search_for_suggestions(pos){
  
@@ -48,19 +47,25 @@ function search_for_suggestions(pos){
 
 
 function load_suggestions(data,pos){
-var student = 0;  
+var output ='';
+var cont = '';
 
-if (pos==1){
-    student ++;
-  }
-  alert(student);
+
+
+  if (pos==0){
+      student = 0;
+    }
+  if ((pos==1 ) && (student < cont)){
+      student ++;
+              } 
+  else{
+      $('#next').attr("disabled","disabled");
+      }
+
   if (pos==2){
     student --;
   }  
-  alert(student);
-//alert(student);
-var output ='';
-var cont = '';
+
 cont =(data["matriz_suggestions_students"])[student].length;
     for (var y = 1; y < cont; y++){
       if (y == 1){
@@ -173,6 +178,7 @@ function load_units(){
     })
 
     $('#select_unit').change(get_students_data);
+   
     //setInterval(get_students_data,5000);
   //  setInterval(check_students_results_status,10000);
 
@@ -201,6 +207,12 @@ function get_students_data () {
 
     "success":function(data){
         create_table_students(data);
+        $('#refresh_results').click(get_students_data);
+        $('#refresh_results').removeAttr('disabled','disabled');
+        $('#load_suggestions').removeAttr('disabled','disabled');
+        $('#load_suggestions').click(function(){search_for_suggestions(0)});
+        $('#next').click( function(){search_for_suggestions(1)});
+        $('#prev').click( function(){search_for_suggestions(2)});
       }
 
     })
