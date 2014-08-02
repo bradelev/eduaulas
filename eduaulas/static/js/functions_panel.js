@@ -8,6 +8,9 @@ function ini(){
   $('#refresh_results').attr('disabled','disabled');
   $('#load_suggestions').attr('disabled','disabled');
   $('#select_area').change(load_fiters);
+  $('#load_suggestions').click(function(){search_for_suggestions(0)});
+  $('#next').click( function(){search_for_suggestions(1)});
+  $('#prev').click( function(){search_for_suggestions(2)});
  // $('#eg7').click(sm);
   
 
@@ -16,7 +19,7 @@ function ini(){
 var student= 0; 
      
 function search_for_suggestions(pos){
- 
+ //alert(pos);
  
   var code_class = $("#code").attr("value");
   var id_unit = $('#select_unit').val();
@@ -36,7 +39,7 @@ function search_for_suggestions(pos){
 
   "success":function(data){
      
-      load_suggestions(data,pos);
+      pagination(data,pos);
     }
 
   })
@@ -46,27 +49,52 @@ function search_for_suggestions(pos){
 }/*close function load_suggestions*/
 
 
-function load_suggestions(data,pos){
-var output ='';
-var cont = '';
+function pagination(data,pos){
 
+var student_cont = '';
+student_cont =(data["matriz_suggestions_students"]).length;
 
 
   if (pos==0){
+
       student = 0;
+      load_suggestions(data,student);
+      $('#next').removeClass('disabled');
+      $('#prev').addClass('disabled');
     }
-  if ((pos==1 ) && (student < cont)){
-      student ++;
-              } 
-  else{
-      $('#next').attr("disabled","disabled");
-      }
 
-  if (pos==2){
-    student --;
-  }  
+    if (pos==1) {
+      $('#prev').removeClass('disabled');
+      student = student + 1;
+      load_suggestions(data,student);
+      //alert('estudiante' + student + 'cont'+student_cont);
+     if (student == student_cont -1){
+        $('#next').addClass('disabled');
+           
+          }
+    }
+               
+ 
+    if ((pos==2) && (student >0 )){
+      student = student - 1;
+      load_suggestions(data,student);
+      $('#next').removeClass('disabled');
+   //  alert(student);
+     if (student == 0){
+        
+        $('#prev').addClass('disabled');   
+          }
+    }
+ 
 
+}/**close function pagination*/
+
+function load_suggestions(data,student){
+
+var cont = '';
 cont =(data["matriz_suggestions_students"])[student].length;
+var output ='';
+   // alert(student);
     for (var y = 1; y < cont; y++){
       if (y == 1){
 
@@ -82,7 +110,7 @@ cont =(data["matriz_suggestions_students"])[student].length;
   $('#content_suggestions').html(output);
   
   
-}
+}/*function load_suggestions*/
 
 
 function check_students_results_status(){
@@ -210,9 +238,8 @@ function get_students_data () {
         $('#refresh_results').click(get_students_data);
         $('#refresh_results').removeAttr('disabled','disabled');
         $('#load_suggestions').removeAttr('disabled','disabled');
-        $('#load_suggestions').click(function(){search_for_suggestions(0)});
-        $('#next').click( function(){search_for_suggestions(1)});
-        $('#prev').click( function(){search_for_suggestions(2)});
+
+        //$('#prev').attr('disabled','disabled');
       }
 
     })

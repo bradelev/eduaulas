@@ -47,11 +47,11 @@
                                 <div class="modal-footer">
                                     <div style="width:200px; margin:0 auto">
                                     <ul class="pager">
-                                        <li >
-                                            <a id='prev' href="javascript:void(0);">&larr; Anterior</a>
+                                        <li id='prev' class="disabled">
+                                            <a  href="javascript:void(0);"   >&larr; Anterior</a>
                                         </li>
-                                        <li class="next">
-                                            <a id ='next' href="javascript:void(0);">Siguiente &rarr;</a>
+                                        <li id ='next'  class="next">
+                                            <a  href="javascript:void(0);">Siguiente &rarr;</a>
                                         </li>
                                     </ul>
                                 </div>          
@@ -62,7 +62,7 @@
                 </div>
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
-               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comezar a trabajar.</h1>
+               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h1>
                 <div id="filters">    
                     <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
                         {% csrf_token %}
@@ -175,16 +175,7 @@
                 </section>
                 <!-- end widget grid -->
 
-            </div>
-            
-           
-            
-                  
-                    <button type="button" id="eg7" class="btn btn-default"><i class="fa fa-thumbs-up"></i> Extra Small Alert </button>
-                        
-                   
-                
-            
+            </div>          
                                      
                 
         </div>
@@ -230,6 +221,7 @@
         
         <script src="{% static "js/app.js" %}"></script>
         <script src="{% static "js/functions_panel.js" %}"></script>
+        <script src="{% static "js/functions_menu.js" %}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                
