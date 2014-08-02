@@ -113,18 +113,6 @@ var output ='';
 }/*function load_suggestions*/
 
 
-function check_students_results_status(){
-
-  $.smallBox({
-    title : "Juan Perez necesita ayuda",
-    content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-    color : "#296191",
-    iconSmall : "fa fa-thumbs-up bounce animated",
-    //timeout : 4000
-});
-}
-
-
 function load_fiters(){
 
     var id_area = $(this).val();
@@ -255,9 +243,9 @@ if(data['type'] == 'success'){
     
     output_thead +='<tr>';
     output_thead +='<th>Nombre</th>';                                                   
-    for (var e in data["dictionary_units_exercises"]){
+    for (var e in data["dictionary_units_exercises"]){ 
         output_thead += '<th>';  
-        var contenido = "<div><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " >";
+        var contenido = "<div><a target = 'blank' href='/contenidos/ejercicio/"+ (data["dictionary_units_exercises"][e]["exercise_id"]) +"'><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " ></a>";
         var contenido2 = "<h4>Ejercicio Nº "+ (data["dictionary_units_exercises"][e]["exercise_id"]) +"</h4>";
         output_thead += '<a href="javascript:void(0);"  rel="popover"  data-html="true" data-placement="top" data-original-title="'+ contenido2 +'" data-content="'+ contenido +'">Ej.'+(data["dictionary_units_exercises"][e]["exercise_id"])+'</a>'; 
         output_thead += '</th>';  
