@@ -37,7 +37,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/panel/lista/')
+                return HttpResponseRedirect('/aulas/lista/')
         else:
             msg = "No existe este usuario o la contraseña es incorrecta"
     else:
