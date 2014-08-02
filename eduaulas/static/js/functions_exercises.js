@@ -106,34 +106,168 @@ function get_content_data () {
 
 function create_table_contents(data){
   var output = '';
-  output+= '<div id="experiments">';
-  output+= '<ul>';
-  console.log(data["dictionary_experiments"]);
-  for(var e in data["dictionary_experiments"]){
-    output+= '<li>';
-    output+= '<a href="#experiment-'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'">'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'</a>';
-    output+= '</li>'; 
-  }
-  output+= '</ul>';
-  for(var e in data["dictionary_experiments"]){
-    output+= '<div class="row">';
-    output+= '<div class="col-sm-8">';
-    output+= '<div id="experiment-'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'">';
-    output+= '<img src="'+(data["dictionary_experiments"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';
-    output+= '</div>';
-    output+= '</div>';
-    output+= '<div class="col-sm-4">';
-    if ((data["dictionary_experiments"])[e]["guia"] != ""){
-      output+= '<h3>Guía docente</h3>';
-      output+= (data["dictionary_experiments"])[e]["guia"];
+  output += '<div id="experiments">';
+    output += '<ul>';
+      for(var e in data["dictionary_experiments"]){
+        output += '<li>';
+          output += '<a href="#experiment-'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'">'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'</a>';
+        output += '</li>';
+      }
+    output += '</ul>';
+    for(var e in data["dictionary_experiments"]){
+      output+= '<div id="experiment-'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'">';
+        output += '<div class="row">';
+          output += '<div class="col-sm-8">';
+            output += '<img src="'+(data["dictionary_experiments"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';    
+          output += '</div>';
+          output += '<div class="col-sm-4">';
+            output += '<div class="row">';
+              output += '<div class="col-sm-12">';
+              if ((data["dictionary_experiments"])[e]["guia"] != ""){
+                output+= '<h3>Guía docente</h3>';
+                output+= (data["dictionary_experiments"])[e]["guia"];
+              }
+              output+= '</div>';
+            output += '</div>';
+            output += '<hr/>';
+              output += '<div class="row">';
+                output += '<div class="col-sm-12">';
+                  output += '<h3>Enviar comentario a la editorial</h3>';
+                  output += '<div id="div_btn_classroom">';
+                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" data-id="'+(data["dictionary_experiments"])[e]+'" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+                  output += '</div>';
+                output += '</div>';
+              output += '</div>';
+          output += '</div>';
+        output += '</div>';
+      output += '</div>';
     }
-    output+= '</div>';
-    output+= '</div>';
-  }
-  output+= '</div>';
+  output += '</div>';
   $("#experimentos").html(output);
 
+  var output = '';
+  output += '<div id="lectures">';
+    output += '<ul>';
+      for(var l in data["dictionary_lectures"]){
+        output += '<li>';
+          output += '<a href="#lecture-'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'">'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'</a>';
+        output += '</li>';
+      }
+    output += '</ul>';
+    for(var l in data["dictionary_lectures"]){
+      output+= '<div id="lecture-'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'">';
+        output += '<div class="row">';
+          output += '<div class="col-sm-8">';
+            output += '<img src="'+(data["dictionary_lectures"])[l]["img"]+'" alt="" style="width:600px;height:480px;">';    
+          output += '</div>';
+          output += '<div class="col-sm-4">';
+            output += '<div class="row">';
+              output += '<div class="col-sm-12">';
+              if ((data["dictionary_lectures"])[l]["guia"] != ""){
+                output+= '<h3>Guía docente</h3>';
+                output+= (data["dictionary_lectures"])[l]["guia"];
+              }
+              output+= '</div>';
+            output += '</div>';
+            output += '<hr/>';
+              output += '<div class="row">';
+                output += '<div class="col-sm-12">';
+                  output += '<h3>Enviar comentario a la editorial</h3>';
+                  output += '<div id="div_btn_classroom">';
+                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" id="send_comment" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+                  output += '</div>';
+                output += '</div>';
+              output += '</div>';
+          output += '</div>';
+        output += '</div>';
+      output += '</div>';
+    }
+  output += '</div>';
+  $("#lecturas").html(output);
 
+  var output = '';
+  output += '<div id="exercises">';
+    output += '<ul>';
+      for(var e in data["dictionary_exercises"]){
+        output += '<li>';
+          output += '<a href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'</a>';
+        output += '</li>';
+      }
+    output += '</ul>';
+    for(var e in data["dictionary_exercises"]){
+      output+= '<div id="exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">';
+        output += '<div class="row">';
+          output += '<div class="col-sm-8">';
+            output += '<img src="'+(data["dictionary_exercises"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';    
+          output += '</div>';
+          output += '<div class="col-sm-4">';
+            output += '<div class="row">';
+              output += '<div class="col-sm-12">';
+              if ((data["dictionary_exercises"])[e]["guia"] != ""){
+                output+= '<h3>Guía docente</h3>';
+                output+= (data["dictionary_exercises"])[e]["guia"];
+              }
+              output+= '</div>';
+            output += '</div>';
+            output += '<hr/>';
+              output += '<div class="row">';
+                output += '<div class="col-sm-12">';
+                  output += '<h3>Enviar comentario a la editorial</h3>';
+                  output += '<div id="div_btn_classroom">';
+                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" id="send_comment" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+                  output += '</div>';
+                output += '</div>';
+              output += '</div>';
+          output += '</div>';
+        output += '</div>';
+      output += '</div>';
+    }
+  output += '</div>';
+  $("#ejercicios").html(output);
+
+  var output = '';
+  output += '<div id="homeworks">';
+    output += '<ul>';
+      for(var h in data["dictionary_homeworks"]){
+        output += '<li>';
+          output += '<a href="#homework-'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'">'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'</a>';
+        output += '</li>';
+      }
+    output += '</ul>';
+    for(var h in data["dictionary_homeworks"]){
+      output+= '<div id="homework-'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'">';
+        output += '<div class="row">';
+          output += '<div class="col-sm-8">';
+            output += '<img src="'+(data["dictionary_homeworks"])[h]["img"]+'" alt="" style="width:600px;height:480px;">';    
+          output += '</div>';
+          output += '<div class="col-sm-4">';
+            output += '<div class="row">';
+              output += '<div class="col-sm-12">';
+              if ((data["dictionary_homeworks"])[h]["guia"] != ""){
+                output+= '<h3>Guía docente</h3>';
+                output+= (data["dictionary_homeworks"])[h]["guia"];
+              }
+              output+= '</div>';
+            output += '</div>';
+            output += '<hr/>';
+              output += '<div class="row">';
+                output += '<div class="col-sm-12">';
+                  output += '<h3>Enviar comentario a la editorial</h3>';
+                  output += '<div id="div_btn_classroom">';
+                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" id="send_comment" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+                  output += '</div>';
+                output += '</div>';
+              output += '</div>';
+          output += '</div>';
+        output += '</div>';
+      output += '</div>';
+    }
+  output += '</div>';
+  $("#deberes").html(output);
+
+
+
+/*
   var output = '';
   output+= '<div id="lectures">';
   output+= '<ul>';
@@ -212,7 +346,7 @@ function create_table_contents(data){
   }
   output+= '</div>';
   $("#deberes").html(output);
-  
+  */
   var title = data["subject"]+"<br><small><strong>"+data["unit_letter"]+"</strong>: "+data["unit_name"]+"</small>";
   $("#title_subject").html(title);
 
@@ -220,5 +354,6 @@ function create_table_contents(data){
   $('#lectures').tabs();
   $('#exercises').tabs();
   $('#homeworks').tabs();
+
 
 }

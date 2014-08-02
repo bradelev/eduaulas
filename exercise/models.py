@@ -81,8 +81,8 @@ class Result(models.Model):
 class TeacherComments(models.Model):
 	teacher = models.ForeignKey(Teacher, verbose_name=u'Docente', blank=True, null=True)
 	comments = models.TextField(verbose_name=u'Comentario')
-	exercise = models.ForeignKey('Exercise', verbose_name=u'Ejercicio')
-	lecture = models.ForeignKey('Lecture', verbose_name=u'Lectura')
+	exercise = models.ForeignKey('Exercise', verbose_name=u'Ejercicio',  blank=True, null=True)
+	lecture = models.ForeignKey('Lecture', verbose_name=u'Lectura', blank=True, null=True)
 	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
 	updated = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de update')
 

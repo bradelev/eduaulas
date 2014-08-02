@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -147,32 +149,61 @@ def list_contents(request,code):
 	        }, cls = LazyEncoder)
 	return HttpResponse(result, mimetype = 'application/javascript')
 
-	
+
+@login_required(login_url='/login/')
+def send_comment(request):
+    message = ""
+    type = "error"
+    try:
+        if request.POST:
+			user = None
+			if request.user.is_authenticated():
+				user = request.user
+				t = Teacher.objects.get(user=user)
+				print "encontro teacher"
+				txt_comment = request.POST['comment']
+
+				comentario = TeacherComment()
+			else:
+				message = "No hay usuario registrado"
+
+			type = "success"
+    except Teacher.DoesNotExist:
+        print('entre a la execpcion')
+        message = "No hay docente"
+
+    result = simplejson.dumps({            
+            "message":message,
+            "type":type,
+        }, cls = LazyEncoder)
+    return HttpResponse(result, content_type = 'application/javascript')	
 
 
 
 
-# Create your views here.
-
-class LazyEncoder(simplejson.JSONEncoder):
-	"""Encodes django's lazy i18n strings."""
-    
-   
-	def default(self, obj):
-	    if isinstance(obj, Promise):
-	    	return force_unicode(obj)
-	    return obj  
 
 
-def specific_content(request, code, subject, unit, number):
+def specific_content(request, grade, subject, unit, number):
 	error = False
 	try:
 		s = Subject.objects.get(name=subject)
-		cr = ClassRoom.objects.get(pk=code)
-		g = Grade.objects.get(pk=cr.grade.id)
+		g = Grade.objects.filter(name=grade)
 		u = Unit.objects.get(letter=unit, grade=g, subject=s)
 		exercise = Exercise.objects.filter(unit=u, grade=g, unit__subject=s, cuasimodo_exercise_id=number)
 	except:
+		error = True
+	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
+
+def specific_content_id(request, id):
+	error = False
+	try:
+		exercise = Exercise.objects.get(pk=id)
+		s = exercise.unit.subject
+		g = exercise.grade
+		u = exercise.unit
+
+	except Exercise.DoesNotExist:
+		print "no encontro ejercicio"
 		error = True
 	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
 
