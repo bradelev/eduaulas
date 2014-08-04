@@ -34,17 +34,34 @@
 
         <ul>
             <li>
-                <a href="/aulas/lista/" title="Mis aulas"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Mis Aulas</span></a>
+                <a href="/aulas/lista/" title="Mis aulas"><i class="glyphicon glyphicon-align-justify"></i> <span class="menu-item-parent">Mis Aulas</span></a>
             </li>
             <li >
-                <a href="" id='option_panel' title="Trabajando en clase"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Trabajando en clase</span></a>
+                <a href="" id='option_panel' title="Trabajando en clase"><i class="glyphicon glyphicon-book"></i> <span class="menu-item-parent">Trabajando en clase</span></a>
             </li>
             <li >
-                <a href="" id='option_students' title="Alumnos"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Alumnos</span></a>
+                <a href="" id='option_students' title="Alumnos"><i class="glyphicon glyphicon-user"></i> <span class="menu-item-parent">Alumnos</span></a>
+            </li>
+            
+            <li>
+                <a href="#" ><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Consultas</span></a>
+                <ul>
+                    <li>
+                        <a id='option_stats_by_learning_profiles' href="buttons.html">Gráficas por áreas temáticas</a>
+                    </li>
+                    <li>
+                        <a id='option_stats_by_topic' href="buttons.html">Gráficas por perfiles de aprendizaje</a>
+                    </li>
+                   
+                </ul>
             </li>
             <li >
-                <a href="" id='option_contents' title="Contenidos"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Contenidos</span></a>
+                <a href="" id='option_contents' title="Contenidos"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Contenidos</span></a>
             </li>
+            <li >
+                <a href="" id='option_configuration' title="Configuración"><i class="glyphicon glyphicon-wrench"></i> <span class="menu-item-parent">Configuración</span></a>
+            </li>
+
         </ul>
     </nav>
     <!-- User info -->
@@ -61,5 +78,6 @@
     <!--<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>-->
 
 </aside>
+
 {% endblock %}
 

@@ -199,18 +199,18 @@ def load_suggestions_students(request,code):
 									good_results =Result.objects.filter(exercise_id=g.id, person=s)									
 																		
 									if good_results.exists():		
-															
+															#<a href=""></a>
 										txt = '<h6>Ejercicios posterior al numero' 
 										matriz_suggestions_students[i].append(txt)
 										txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
 										matriz_suggestions_students[i].append(txt)
-										txt = 'Ej.' + str(g.id)
+										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+str(g.id) +'">'+str(g.id)+'</a>'
 										matriz_suggestions_students[i].append(txt)
 										txt = ' Estado: Hecho' + '<br>'
 										matriz_suggestions_students[i].append(txt)
 									else:
 										matriz_suggestions_students[i].append(txt)
-										txt ='Ej.' + str(g.id)
+										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+str(g.id) +'">'+str(g.id)+'</a>'
 										matriz_suggestions_students[i].append(txt)
 										txt = ' Estado: Pendiente' + '<br>'
 										matriz_suggestions_students[i].append(txt)
@@ -224,21 +224,17 @@ def load_suggestions_students(request,code):
 										txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'		
 								for b in bad_exercises:														
 									bad_results =Result.objects.filter(exercise_id=b.id, person=s)
-									 
-										
 
-									if bad_results.exists():								
-										
-										
+									if bad_results.exists():
 										matriz_suggestions_students[i].append(txt)
-										txt = 'Ej.' + str(b.id)
+										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+str(b.id) +'">'+str(b.id)+'</a>'
 										matriz_suggestions_students[i].append(txt)
 										txt = ' Estado: Hecho' + '<br>'
 										matriz_suggestions_students[i].append(txt)
 									else:
 
 										matriz_suggestions_students[i].append(txt)
-										txt ='Ej.' + str(b.id)
+										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+str(b.id) +'">'+str(b.id)+'</a>'
 										matriz_suggestions_students[i].append(txt)
 										txt = ' Estado: Pendiente' + '<br>'
 										matriz_suggestions_students[i].append(txt)
