@@ -23,7 +23,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 
-def ini(request,code):
+def students_info(request,code):
 	students = Student.objects.filter(class_room=code)
 	matriz = []
 	i=0
@@ -69,170 +69,9 @@ def ini(request,code):
 			matriz[i].append('')
 		i = i + 1
 		print(matriz)	
-	return render_to_response('studentsList.html',{'code':code,'students':matriz}, context_instance = RequestContext(request))
-
-"""def students_list(request,code):
-	
-	dictionary_students_profiles={}
-	dictionary_subjects_students_average ={}
-	dictionary_subjects ={}
-	dictionary_students ={}
-	message = ""
-	type = "error"
-	
-	try:
-
-		students = Student.objects.all()
-		for s in students:
-			cont=0
-			metacognitive_percentage= 0
-			cognitive_percentage =0
-			socio_affective_percentage=0
-			students_profiles= Result.objects.filter(person=s)
-			if students_profiles.exists():
-				for p in students_profiles:
-					cont = cont + 1
-					metacognitive_percentage += p.exercise.metacognitive_percentage
-					cognitive_percentage += p.exercise.cognitive_percentage
-					socio_affective_percentage += p.exercise.socio_affective_percentage
-
-				average_metacognitive_percentage= metacognitive_percentage/cont
-				average_cognitive_percentage= cognitive_percentage/cont
-				average_socio_affective_percentage= socio_affective_percentage/cont
+	return render_to_response('students_list.html',{'code':code,'students':matriz}, context_instance = RequestContext(request))
 
 
-				dictionary_students_profiles [s.id]={		
-
-						"metacognitive": average_metacognitive_percentage,
-						"cognitive": average_cognitive_percentage,	
-						"socio_affective":average_socio_affective_percentage
-					}
-		#print(dictionary_students_profiles)	
-
-		sub = Subject.objects.all()
-
-				
-		for s in sub:	
-			dictionary_subjects[s.id]=	{
-
-				"subject_name": s.name,
-				"subject_id": s.id
-			}					
-			for st in students:
-				dictionary_students[st.id] ={
-					"name":st.name,
-					"last_name": st.last_name
-
-				}
-				student_exercises_result= Result.objects.filter(person=st,exercise__unit__subject=s)
-				cont1=0
-				average=0
-				points=0
-				if student_exercises_result.exists():
-
-					for r in student_exercises_result:				
-						cont1 = cont1 + 1					
-						points += r.points
-					average = points/cont1
-					indice= s.name + str(r.person.id)
-					dictionary_subjects_students_average [indice]={		
-						"subj":s.id,
-						"student": r.person.id,
-						"average": average*100				
-					}
-		type= "success"
-		print(dictionary_subjects_students_average)
-	except Student.DoesNotExist:
-	        message = "No hay alumnos"				
-	result = simplejson.dumps({
-                "dictionary_subjects":dictionary_subjects,
-                "dictionary_students": dictionary_students,
-                "dictionary_subjects_students_average":dictionary_subjects_students_average,
-                "dictionary_students_profiles":dictionary_students_profiles,
-                "code":code,
-                "message":message,
-                "type":type,
-        }, cls = LazyEncoder)
-	return HttpResponse(result, mimetype = 'application/javascript')"""
-
-
-
-
-
-	
-"""def students_list(request,code):
-	
-	dictionary_subjects_students_average={}
-	message = ""
-	type = "error"
-	students = Student.objects.all()
-	matris = []
-	cont2=0
-	#students_profiles= Result.objects.filter(person=s)
-	cont3=0
-	average=0
-	points=0
-	sub = Subject.objects.all()
-	for sb in sub:
-		for st in students:
-			student_exercises_result= Result.objects.filter(person=st,exercise__unit__subject=sb)
-			if student_exercises_result.exists():
-				for r in student_exercises_result:				
-					cont3 = cont3 + 1					
-					points += r.points
-				average = points/cont3
-				indice= sb.name + str(r.person.id)
-				dictionary_subjects_students_average [indice]={		
-					"subj":sb.id,
-					"student": r.person.id,
-					"average": average*100				
-				}
-
-	print(dictionary_subjects_students_average)
-	for s in students:
-		metacognitive_percentage= 0
-		cognitive_percentage =0
-		socio_affective_percentage=0
-		average_metacognitive_percentage=0
-		average_cognitive_percentage=0
-		average_socio_affective_percentage=0
-		cont=0
-		cont2 = cont2 + 1
-		students_results= Result.objects.filter(person=s)
-		matris.append([s.name])
-		if students_profiles.exists():
-			for p in students_results:
-				cont = cont + 1
-				metacognitive_percentage += p.exercise.metacognitive_percentage
-				cognitive_percentage += p.exercise.cognitive_percentage
-				socio_affective_percentage += p.exercise.socio_affective_percentage
-				points += p.points
-
-			
-			average_metacognitive_percentage= metacognitive_percentage/cont
-			matris.append([average_metacognitive_percentage])
-			average_cognitive_percentage= cognitive_percentage/cont
-			matris.append([average_cognitive_percentage])
-			average_socio_affective_percentage= socio_affective_percentage/cont
-			matris.append([average_socio_affective_percentage])
-			average_points = points/cont
-			matris.append([average_points])
-
-		else:
-			matris.append([''])
-
-	print(matris)		
-
-
-
-
-
-	result = simplejson.dumps({
-                "code":code,
-                "message":message,
-                "type":type,
-        }, cls = LazyEncoder)
-	return HttpResponse(result, mimetype = 'application/javascript')"""
 
 
 
@@ -292,7 +131,54 @@ def student_info(request,id):
 
 	except Result.DoesNotExist:
 	        message = "El alumno no tiene ejercicios"
-	return render_to_response('studentInfo.html',{'list_average':dictionary_subjects_average,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
+	return render_to_response('student_info.html',{'list_average':dictionary_subjects_average,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	
 	
+def stats_by_learning_profiles(request,code):
+	"""students = Student.objects.filter(class_room=code)
+	matriz = []
+	i=0
+	average=0
+	points=0
+
+	for s in students:
+		metacognitive_percentage= 0
+		cognitive_percentage =0
+		socio_affective_percentage=0
+		average_metacognitive_percentage=0
+		average_cognitive_percentage=0
+		average_socio_affective_percentage=0
+		cont=0
+		
+		students_results= Result.objects.filter(person=s)
+		matriz.append([])
+		matriz[i].append(s.name)
+		matriz[i].append(s.last_name)
+		if students_results.exists():
+			for p in students_results:
+				cont = cont + 1
+				metacognitive_percentage += p.exercise.metacognitive_percentage
+				cognitive_percentage += p.exercise.cognitive_percentage
+				socio_affective_percentage += p.exercise.socio_affective_percentage
+				points += p.points
+			average_points = points/cont
+			average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
+			matriz[i].append(average_metacognitive_percentage)
+		
+			average_cognitive_percentage= (cognitive_percentage/cont)*average_points
+			matriz[i].append(average_cognitive_percentage)
+			average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
+			matriz[i].append(average_socio_affective_percentage)
+			
+			matriz[i].append(average_points)
+			
+
+		else:
+			matriz[i].append('')
+			matriz[i].append('')
+			matriz[i].append('')
+			matriz[i].append('')
+		i = i + 1
+		print(matriz)	"""
+	return render_to_response('stats_by_learning_profiles.html', context_instance = RequestContext(request))

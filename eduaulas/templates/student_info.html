@@ -89,11 +89,27 @@
                                 <div class="tab-pane" id="tab-r2">
                                     <div class="divGraphs">
                                         <div class="divRight">
+                                            <div class="well well-sm well-light">
+                            <h4 class="txt-color-blue">Pie <span class="semi-bold">Chart</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
+                            <br>
+                            <div class="text-center">
+                                <div class="sparkline txt-color-red display-inline" 
+                                data-sparkline-type="pie" 
+                                data-sparkline-offset="90" 
+                                data-sparkline-piesize="275px">3,5,2</div>
+                                <div class="sparkline txt-color-green display-inline" 
+                                data-sparkline-type="pie" 
+                                data-sparkline-offset="90" 
+                                data-sparkline-piesize="75px">30,20,15,35</div>
+                            </div>
+                
+                        </div>
                                             <p>Cognitivo</p>
                                                 <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-pie-size="110" data-percent="{{cognitive_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-greenLight font-md">55</span>
                                                 <canvas height="110" width="110"></canvas>
                                             </div>
+
                                         </div>
                                         <div class="divRight">
                                             <p>Socio afectivo</p>
@@ -178,7 +194,7 @@
         <script src="{% static "js/notification/SmartNotification.min.js" %}"></script>
         <script src="{% static "js/smartwidgets/jarvis.widget.min.js" %}"></script>
         <script src="{% static "js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js" %}"></script>
-
+        
 
         <link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>

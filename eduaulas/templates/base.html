@@ -19,17 +19,16 @@
 	    <link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
 	    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
 	    
-	    <!-- FAVICONS -->
-	    <link href="{% static "img/favicon/favicon.ico" %}" rel="shortcut icon" type="image/x-icon">
-	    <link href="{% static "img/favicon/favicon.ico" %}" rel="icon" type="image/x-icon">
+	
 	    <!-- GOOGLE FONT -->
-	    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" rel="stylesheet">
+	    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" rel="stylesheet">-->
 	</head>
 		{% block body_tag %}
-			<body>
+			<body class="smart-style-3">
 		{% endblock %}
 		
 		{% block body %}
+
 		<!-- CONTENIDO -->
 			{% block left_menu %}
 			{% endblock %}
@@ -54,15 +53,10 @@
 		<script src="{% static "js/functions_menu.js" %}"></script>
 		<script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
 		<script src="{% static "js/app.js" %}"></script>
-        <script src="{% static "js/plugin/fastclick/fastclick.js" %}"></script>
+        
         <script src="{% static "js/plugin/msie-fix/jquery.mb.browser.min.js" %}"></script>
         <script src="{% static "js/plugin/bootstrap-slider/bootstrap-slider.min.js" %}"></script>
-        <script src="{% static "js/plugin/select2/select2.min.js" %}"></script>
-        <script src="{% static "js/plugin/masked-input/jquery.maskedinput.min.js" %}"></script>
-        <script src="{% static "js/plugin/jquery-validate/jquery.validate.min.js" %}"></script>
-        <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
-        <script src="{% static "js/smartwidgets/jarvis.widget.min.js" %}"></script>
-        <script src="{% static "js/notification/SmartNotification.min.js" %}"></script>
+        
         <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
 
 

@@ -1,0 +1,113 @@
+{% extends left_menu %}
+{% load staticfiles %}
+{% block body %}
+
+        {% block left_menu %}
+            {{ block.super }}
+        {% endblock %}
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+
+               
+                <!-- breadcrumb -->
+                <ol class="breadcrumb">
+                    <li>Consultas</li>
+                    <li>Por perfiles de aprendizaje</li>
+                </ol>
+
+
+            </div>
+            <!-- END RIBBON -->
+
+           <!-- MAIN CONTENT -->
+
+            <div id="content">
+    
+                <header>
+                    <h1>Estadísticas por perfiles de aprendizaje</h1>
+                    
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+
+                    <div class="widget-body">
+                        <div class="well well-sm well-light">
+                            <h4 class="txt-color-blue">Pie <span class="semi-bold">Chart</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
+                            <br>
+                            <div class="text-center">
+                                <div class="sparkline txt-color-red display-inline" 
+                                data-sparkline-type="pie" 
+                                data-sparkline-offset="90" 
+                                data-sparkline-piesize="275px">3,5,2</div>
+                                <div class="sparkline txt-color-green display-inline" 
+                                data-sparkline-type="pie" 
+                                data-sparkline-offset="90" 
+                                data-sparkline-piesize="75px">30,20,15,35</div>
+                            </div>
+                
+                        </div>
+
+                    </div>  <!-- end widget body -->
+                                                
+                
+                </div>
+            </div>  <!-- END content -->
+        </div>  <!-- END MAIN PANEL -->
+        
+
+
+{% endblock %}
+
+{% block scripts %}  
+        
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" ></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="{% static "js/libs/jquery-2.0.2.min.js" %}" ><\/script>');
+            }
+        </script>
+        
+        
+            
+        <link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="{% static "js/libs/jquery-ui-1.10.3.min.js" %}"><\/script>');
+            }
+        </script>
+        <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js" %}"></script>
+        <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
+
+        <script src="{% static "js/app.js" %}"></script>
+
+                <!-- BOOTSTRAP JS -->
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                pageSetUp();
+
+                         
+            
+                });/*cieero pagesetup*/
+        </script>
+        
+     
+{% endblock %}
