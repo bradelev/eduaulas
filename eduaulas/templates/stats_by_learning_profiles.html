@@ -74,28 +74,10 @@
 
 {% block scripts %}  
         
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" ></script>
-        <script>
-            if (!window.jQuery) {
-                document.write('<script src="{% static "js/libs/jquery-2.0.2.min.js" %}" ><\/script>');
-            }
-        </script>
+
         
-        
-            
-        <link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
-        <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="{% static "js/libs/jquery-ui-1.10.3.min.js" %}"><\/script>');
-            }
-        </script>
-        <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
-        <script src="{% static "js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js" %}"></script>
         <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
 
-        <script src="{% static "js/app.js" %}"></script>
 
                 <!-- BOOTSTRAP JS -->
         
