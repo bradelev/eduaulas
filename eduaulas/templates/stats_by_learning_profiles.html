@@ -46,21 +46,26 @@
 
                     <div class="widget-body">
                         <div class="well well-sm well-light">
-                            <h4 class="txt-color-blue">Pie <span class="semi-bold">Chart</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
+                            <h4 class="txt-color-blue">Aula: <span class="semi-bold">{{code}}</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
                             <br>
                             <div class="text-center">
                                 <div class="sparkline txt-color-red display-inline" 
                                 data-sparkline-type="pie" 
                                 data-sparkline-offset="90" 
-                                data-sparkline-piesize="275px">3,5,2</div>
-                                <div class="sparkline txt-color-green display-inline" 
-                                data-sparkline-type="pie" 
-                                data-sparkline-offset="90" 
-                                data-sparkline-piesize="75px">30,20,15,35</div>
-                            </div>
-                
+                                data-sparkline-piesize="275px">{{cognitive_percentage}}{{metacognitive_percentage}}{{socio_affective_percentage}}</div>
+                                                
                         </div>
-
+                        <div>
+                            <table class="table-bordered ">
+                                <tr>
+                                    <td  class ="td_graphs" style="background-color:RGB(68,144,177);">Meta cognitivo</td>
+                                    <td  class ="td_graphs" style="background-color:RGB(152,170,86);">Cognitivo</td>
+                                    <td  class ="td_graphs" style="background-color:RGB(180,202,211);">Socio afectivo</td>
+                                   
+                                </tr>
+                               
+                            </table>
+                        </div>
                     </div>  <!-- end widget body -->
                                                 
                 

@@ -1,0 +1,100 @@
+{% extends left_menu %}
+{% load staticfiles %}
+{% block body %}
+
+        {% block left_menu %}
+            {{ block.super }}
+        {% endblock %}
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+
+               
+                <!-- breadcrumb -->
+                <ol class="breadcrumb">
+                    <li>Consultas</li>
+                    <li>Por áreas temáticas </li>
+                </ol>
+
+
+            </div>
+            <!-- END RIBBON -->
+
+           <!-- MAIN CONTENT -->
+
+            <div id="content">
+    
+                <header>
+                    <h1>Estadísticas por áreas temáticas </h1>
+                    
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+
+                    <div class="widget-body">
+                        <div class="well well-sm well-light">
+                            <h4 class="txt-color-blue">Aula: <span class="semi-bold">{{code}}</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
+                            <br>
+                            <div class="text-center">
+                                <div class="sparkline txt-color-red display-inline" 
+                                data-sparkline-type="pie" 
+                                data-sparkline-offset="90" 
+                                data-sparkline-piesize="275px">50,30,20</div>
+                                                
+                        </div>
+                        <div>
+                            <table class="table-bordered ">
+                                <tr>
+                                    <td  class ="td_graphs" style="background-color:RGB(68,144,177);">Meta cognitivo</td>
+                                    <td  class ="td_graphs" style="background-color:RGB(152,170,86);">Cognitivo</td>
+                                    <td  class ="td_graphs" style="background-color:RGB(180,202,211);">Socio afectivo</td>
+                                   
+                                </tr>
+                               
+                            </table>
+                        </div>
+                    </div>  <!-- end widget body -->
+                                                
+                
+                </div>
+            </div>  <!-- END content -->
+        </div>  <!-- END MAIN PANEL -->
+        
+
+
+{% endblock %}
+
+{% block scripts %}  
+        
+
+        
+        <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
+
+
+                <!-- BOOTSTRAP JS -->
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                pageSetUp();
+
+                         
+            
+                });/*cieero pagesetup*/
+        </script>
+        
+     
+{% endblock %}

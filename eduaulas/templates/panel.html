@@ -62,7 +62,11 @@
                 </div>
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
-               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h1>
+                <header >
+                    <h1>Trabajando en clase</h1>
+                    
+                </header>
+                <h5>Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h5>
                 <div id="filters">    
                     <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
                         {% csrf_token %}

@@ -136,7 +136,43 @@ def student_info(request,id):
 	
 	
 def stats_by_learning_profiles(request,code):
-	"""students = Student.objects.filter(class_room=code)
+	students = Student.objects.filter(class_room=code)
+	
+	points=0
+	average_metacognitive_percentage_class=0
+	average_cognitive_percentage_class=0
+	average_socio_affective_percentage_class=0		
+	average_metacognitive_percentage=0
+	average_cognitive_percentage=0
+	average_socio_affective_percentage=0
+	for s in students:
+		metacognitive_percentage= 0
+		cognitive_percentage =0
+		socio_affective_percentage=0		
+		cont=0		
+		students_results= Result.objects.filter(person=s)
+
+		if students_results.exists():
+			for p in students_results:
+				cont = cont + 1
+				metacognitive_percentage += p.exercise.metacognitive_percentage
+				cognitive_percentage += p.exercise.cognitive_percentage
+				socio_affective_percentage += p.exercise.socio_affective_percentage
+				points += p.points
+			average_points = points/cont
+			average_metacognitive_percentage = (metacognitive_percentage/cont)*average_points		
+			average_cognitive_percentage = (cognitive_percentage/cont)*average_points
+			average_socio_affective_percentage = (socio_affective_percentage/cont)*average_points
+
+	average_metacognitive_percentage_class += average_metacognitive_percentage
+	average_cognitive_percentage_class += average_cognitive_percentage
+	average_socio_affective_percentage_class += average_socio_affective_percentage	
+	return render_to_response('stats_by_learning_profiles.html',{"code":code,"cognitive_percentage":average_cognitive_percentage_class,"metacognitive_percentage":average_metacognitive_percentage_class,"socio_affective_percentage":average_socio_affective_percentage_class}, context_instance = RequestContext(request))
+
+
+
+def stats_by_topics(request,code):
+	students = Student.objects.filter(class_room=code)
 	matriz = []
 	i=0
 	average=0
@@ -180,5 +216,5 @@ def stats_by_learning_profiles(request,code):
 			matriz[i].append('')
 			matriz[i].append('')
 		i = i + 1
-		print(matriz)	"""
-	return render_to_response('stats_by_learning_profiles.html', context_instance = RequestContext(request))
+		print(matriz)	
+	return render_to_response('stats_by_topic.html',{'code':code}, context_instance = RequestContext(request))

@@ -18,6 +18,16 @@
  * - CUSTOM STYLES
  */
 
+.td_graphs{
+
+	width: 120px;
+	height: 50px;
+	color: #303030;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+ 
+}
 
  .titleh1{
  	margin-left: 15px;
