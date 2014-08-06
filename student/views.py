@@ -23,53 +23,69 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 
+def ini(request,code):
+
+
+	return render_to_response('students_list.html',{"code":code}, context_instance = RequestContext(request))
+
 def students_info(request,code):
+	message = ""
+	type = "error"
 	students = Student.objects.filter(class_room=code)
 	matriz = []
 	i=0
 	average=0
 	points=0
-
-	for s in students:
-		metacognitive_percentage= 0
-		cognitive_percentage =0
-		socio_affective_percentage=0
-		average_metacognitive_percentage=0
-		average_cognitive_percentage=0
-		average_socio_affective_percentage=0
-		cont=0
-		
-		students_results= Result.objects.filter(person=s)
-		matriz.append([])
-		matriz[i].append(s.name)
-		matriz[i].append(s.last_name)
-		if students_results.exists():
-			for p in students_results:
-				cont = cont + 1
-				metacognitive_percentage += p.exercise.metacognitive_percentage
-				cognitive_percentage += p.exercise.cognitive_percentage
-				socio_affective_percentage += p.exercise.socio_affective_percentage
-				points += p.points
-			average_points = points/cont
-			average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
-			matriz[i].append(average_metacognitive_percentage)
-		
-			average_cognitive_percentage= (cognitive_percentage/cont)*average_points
-			matriz[i].append(average_cognitive_percentage)
-			average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
-			matriz[i].append(average_socio_affective_percentage)
+	try:
+		for s in students:
+			metacognitive_percentage= 0
+			cognitive_percentage =0
+			socio_affective_percentage=0
+			average_metacognitive_percentage=0
+			average_cognitive_percentage=0
+			average_socio_affective_percentage=0
+			cont=0
 			
-			matriz[i].append(average_points)
+			students_results= Result.objects.filter(person=s)
+			matriz.append([])
+			matriz[i].append(s.id)
+			matriz[i].append(s.name + ' '+ s.last_name)
+			if students_results.exists():
+				for p in students_results:
+					cont = cont + 1
+					metacognitive_percentage += p.exercise.metacognitive_percentage
+					cognitive_percentage += p.exercise.cognitive_percentage
+					socio_affective_percentage += p.exercise.socio_affective_percentage
+					points += p.points
+				average_points = points/cont
+				average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
+				matriz[i].append(average_metacognitive_percentage)
 			
+				average_cognitive_percentage= (cognitive_percentage/cont)*average_points
+				matriz[i].append(average_cognitive_percentage)
+				average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
+				matriz[i].append(average_socio_affective_percentage)
+				
+				matriz[i].append(average_points)
+				
 
-		else:
-			matriz[i].append('')
-			matriz[i].append('')
-			matriz[i].append('')
-			matriz[i].append('')
-		i = i + 1
-		print(matriz)	
-	return render_to_response('students_list.html',{'code':code,'students':matriz}, context_instance = RequestContext(request))
+			else:
+				matriz[i].append('')
+				matriz[i].append('')
+				matriz[i].append('')
+				matriz[i].append('')
+			i = i + 1
+			print(matriz)
+			type = "success"
+		   
+	except Student.DoesNotExist:
+		message = "No hay alumnos"
+	result = simplejson.dumps({
+			"matriz":matriz,
+			"message":message,
+			"type":type,
+		}, cls = LazyEncoder)
+	return HttpResponse(result, mimetype = 'application/javascript')
 
 
 
