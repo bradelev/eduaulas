@@ -189,48 +189,37 @@ def stats_by_learning_profiles(request,code):
 
 def stats_by_topics(request,code):
 	students = Student.objects.filter(class_room=code)
+	subjects = Subject.objects.all()
 	matriz = []
+
 	i=0
-	average=0
 	points=0
-
-	for s in students:
-		metacognitive_percentage= 0
-		cognitive_percentage =0
-		socio_affective_percentage=0
-		average_metacognitive_percentage=0
-		average_cognitive_percentage=0
-		average_socio_affective_percentage=0
-		cont=0
-		
+	average_points_subject=0
+	
+	
+	cont=0	
+	for s in students:			
 		students_results= Result.objects.filter(person=s)
-		matriz.append([])
-		matriz[i].append(s.name)
-		matriz[i].append(s.last_name)
-		if students_results.exists():
-			for p in students_results:
-				cont = cont + 1
-				metacognitive_percentage += p.exercise.metacognitive_percentage
-				cognitive_percentage += p.exercise.cognitive_percentage
-				socio_affective_percentage += p.exercise.socio_affective_percentage
-				points += p.points
-			average_points = points/cont
-			average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
-			matriz[i].append(average_metacognitive_percentage)
-		
-			average_cognitive_percentage= (cognitive_percentage/cont)*average_points
-			matriz[i].append(average_cognitive_percentage)
-			average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
-			matriz[i].append(average_socio_affective_percentage)
-			
-			matriz[i].append(average_points)
-			
 
-		else:
-			matriz[i].append('')
-			matriz[i].append('')
-			matriz[i].append('')
-			matriz[i].append('')
-		i = i + 1
-		print(matriz)	
+		if students_results.exists():
+
+			for sb in subjects:
+				matriz.append([])
+				average_points_subject=0
+				points=0
+								
+				matriz[i].append(sb.name)			
+				for r in students_results:
+					cont = cont + 1 
+					if r.exercise.unit.subject.id == sb.id:
+						points += r.points
+				
+						#print 'puntos', points, 'cantidad', cont
+				average_points_subject = points/cont
+				matriz[i].append(average_points_subject)
+				i = i + 1
+
+
+	print(matriz)
+
 	return render_to_response('stats_by_topic.html',{'code':code}, context_instance = RequestContext(request))

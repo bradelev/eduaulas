@@ -152,7 +152,7 @@ def list_students(request,code):
 					
 				}	
 				
-			#print(matriz)
+			print(matriz)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
