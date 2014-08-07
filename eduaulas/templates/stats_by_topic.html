@@ -34,7 +34,8 @@
 
                 <!-- widget div-->
                 <div>
-
+                    <input type="hidden" id="token" value="{{csrf_token}}"></input>
+                    <input type="hidden" id="code" value="{{code}}"></input>
                     <!-- widget edit box -->
                     <div class="jarviswidget-editbox">
                         <!-- This area used as dropdown edit box -->
@@ -48,12 +49,16 @@
                         <div class="well well-sm well-light">
                             <h4 class="txt-color-blue">Aula: <span class="semi-bold">{{code}}</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
                             <br>
-                            <div class="text-center">
-                                <div class="sparkline txt-color-red display-inline" 
-                                data-sparkline-type="pie" 
-                                data-sparkline-offset="90" 
-                                data-sparkline-piesize="275px">50,30,20</div>
-                                                
+                            <div class="text-center" id = "stat_by_topic">
+                             <div class="sparkline txt-color-red display-inline" data-sparkline-piesize="275px" data-sparkline-offset="90" data-sparkline-type="pie">54,6,12</div>
+                                                    
+                            </div>
+
+
+                        <div id ='test'>
+                            
+                            
+
                         </div>
                         <div>
                             <table class="table-bordered ">
@@ -82,6 +87,7 @@
 
         
         <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
+        <script src="{% static "js/functions_stats_by_topic.js" %}"></script>
 
 
                 <!-- BOOTSTRAP JS -->
