@@ -5,12 +5,13 @@ function ini(){
 
 	
 	get_data();
+	
 }
 
 
 
 function get_data () {
-
+	
     var code_class = $("#code").attr("value");
     var tok = $("#token").attr("value");
     var query = $.ajax({
@@ -35,10 +36,12 @@ function get_data () {
 
 
 function draw_stats(data){
+	$('#stat_by_topic').html('<div class="sparkline txt-color-red display-inline" data-sparkline-piesize="275px" data-sparkline-offset="90" data-sparkline-type="pie">54,6,12</div>');
 
 	var output = '';
-	output += ' <div class="sparkline txt-color-red display-inline" data-sparkline-type="pie" data-sparkline-offset="90" data-sparkline-piesize="275px">';
-	output+= '54,6,12';
+	output = '';
+	//output += ' <div class="sparkline txt-color-red display-inline" data-sparkline-type="pie" data-sparkline-offset="90" data-sparkline-piesize="275px">';
+	//output+= 54 6 12;
 	 for (var x in (data["matriz"])){
 	 	//output +=  (data["matriz"])[x][1] +',';
 
@@ -50,10 +53,10 @@ function draw_stats(data){
 	}/*cierro for dictionary_students*/
 }
 
-output += '</div>';
-alert(output);	
+//output += '</div>';
+//alert(output);	
 
-//	$('#stat_by_topic').html(output);
+	//$('#stat_by_topic').html('<div class="sparkline txt-color-red display-inline" data-sparkline-piesize="275px" data-sparkline-offset="90" data-sparkline-type="pie">54,6,12</div>');
 
 
 }/*close draw_stats */
