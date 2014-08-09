@@ -48,8 +48,8 @@ def load_filters_subject(request,code):
 					"name": y.name,
 					"id": y.id					
 				}
-	except ClassRoom.DoesNotExist:
-	        message = "No hay aulas"
+	except Area.DoesNotExist:
+	        message = "No existe areas"
 	result = simplejson.dumps({
 	                "dictionary_subjects":dictionary_subjects,
 	                "code":code,
@@ -62,19 +62,17 @@ def load_filters_subject(request,code):
 
 @login_required(login_url='/login/')
 def load_filters_unit(request,code):
-	print('cargo UNIDADES')
+	
 	dictionary_units = {}
 	message = ""
-	type = "error"
-	
+	type = "error"	
 	try:
 		if request.POST:
 			
 			id_subject =request.POST['id_subject']			
 			s = Subject.objects.get(pk=id_subject)
 			var_units = Unit.objects.filter(subject=s)
-			
-			
+						
 			for p in var_units:				
 				dictionary_units[p.id] = {
 					
@@ -102,7 +100,8 @@ def list_students(request,code):
 	dictionary_units_exercises={}
 	message = ""
 	type = "error"
-	
+	results_exist = 'no'
+	students_exist = 'no'
 	try:
 		if request.POST:
 			id_unit =request.POST['id_unit']
@@ -115,6 +114,7 @@ def list_students(request,code):
 			i=0
 			
 			for s in students:
+				students_exist = 'yes'
 				average = 0
 				results_quantity = 0 
 				matriz.append([])
@@ -124,6 +124,7 @@ def list_students(request,code):
 				for j in var_units_exercises:
 					var_results = Result.objects.filter(exercise=j, person=s)						
 					if var_results.exists():
+						results_exist = 'yes'
 						for r in var_results:
 							
 							if r.points >= 0.5:
@@ -155,12 +156,14 @@ def list_students(request,code):
 					
 				}	
 				
-			print(matriz)
+			
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
 			"dictionary_units_exercises":dictionary_units_exercises,
 			"matriz":matriz,
+			"results_exist":results_exist,
+			"students_exist":students_exist,
 			"message":message,
 			"type":type,
 		}, cls = LazyEncoder)
@@ -202,7 +205,7 @@ def load_suggestions_students(request,code):
 									good_results =Result.objects.filter(exercise_id=g.id, person=s)									
 																		
 									if good_results.exists():		
-															#<a href=""></a>
+															
 										txt = '<h6>Ejercicios posterior al numero' 
 										matriz_suggestions_students[i].append(txt)
 										txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
@@ -243,9 +246,7 @@ def load_suggestions_students(request,code):
 										matriz_suggestions_students[i].append(txt)
 									txt = ''	
 				i = i + 1
-			
-							
-			
+													
 								
 			print(matriz_suggestions_students)
 	except Student.DoesNotExist:

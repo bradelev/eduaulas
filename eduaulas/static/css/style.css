@@ -18,6 +18,11 @@
  * - CUSTOM STYLES
  */
 
+.space{
+		margin-left: 10px;
+		margin-right: 10px;
+      }
+
 .td_graphs{
 
 	width: 120px;

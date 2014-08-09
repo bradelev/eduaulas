@@ -202,7 +202,7 @@ def specific_content(request, grade, subject, unit, number):
 	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
-def specific_content_id(request, id):
+def specific_content_id(request,code,id):
 	error = False
 	try:
 		exercise = Exercise.objects.get(pk=id)

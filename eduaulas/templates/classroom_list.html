@@ -32,10 +32,8 @@
 
 		<!-- MAIN PANEL -->
 		<div id="main" role="main">
+						
 			
-			
-			<a href="http://127.0.0.1:8080/panel/lista/" title="Ir al aula"></a>
-
 			<!-- MAIN CONTENT -->
 			<div id="content">
 				<!-- Aulas -->
@@ -213,15 +211,8 @@
 {% endblock %}
 
 {% block scripts %}  
-
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" ></script>
-        <script>
-            if (!window.jQuery) {
-                document.write('<script src="{% static "js/libs/jquery-2.0.2.min.js" %}" ><\/script>');
-            }
-        </script>
-        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+	
+	    <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/ColReorder.min.js" %}"></script>
@@ -230,24 +221,7 @@
         <script src="{% static "js/plugin/datatables/ZeroClipboard.js" %}"></script>
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
-   		<link href="{% static "css/style.css" %}" media="screen" rel="stylesheet" type="text/css">
-   		<script src="{% static "js/notification/SmartNotification.min.js" %}"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
-        <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="{% static "js/libs/jquery-ui-1.10.3.min.js" %}"><\/script>');
-            }
-        </script>
-
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
-        <script src="{% static "js/plugin/jquery-touch/jquery.ui.touch-punch.min.js" %}"></script> -->
-
-        <!-- BOOTSTRAP JS -->
-        <script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
-        <script src="{% static "js/plugin/jquery-validate/jquery.validate.min.js" %}"></script>
-        <!-- MAIN APP JS FILE -->
-        <script src="{% static "js/app.js" %}"></script>
-        <script type="text/javascript">
+   	    <script type="text/javascript">
             $(document).ready(function() {
                
                 pageSetUp();

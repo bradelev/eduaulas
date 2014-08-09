@@ -15,8 +15,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
-# Create your views here.
-
+# Create your views here 
 class LazyEncoder(simplejson.JSONEncoder):
 	"""Encodes django's lazy i18n strings."""
     
@@ -30,7 +29,7 @@ class LazyEncoder(simplejson.JSONEncoder):
 def ini(request):
 
 
-	return render_to_response('classroomList.html', context_instance = RequestContext(request))
+	return render_to_response('classroom_list.html', context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def load_classroom(request):
@@ -71,7 +70,7 @@ def load_classroom(request):
 
 @login_required(login_url='/login/')
 def classroom_list(request):
-       # classrooms = ClassRoom.objects.all()
+
         dictionary_classrooms = {}
         message = ""
         type = "error"
@@ -99,7 +98,6 @@ def classroom_list(request):
                 }, cls = LazyEncoder)
         return HttpResponse(result, mimetype = 'application/javascript')
         
-       # return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
        
 
 @login_required(login_url='/login/')
@@ -118,9 +116,7 @@ def classroom_save_add(request):
             grade= request.POST['select_grade'] 
             className=request.POST['class_name']           
             shift=request.POST['select_shift']    
-            
-           # code=request.POST['code_class'] 
-
+         
             c= ClassRoom()
             c.code = generate_classroom_code()
             print('hola uno')

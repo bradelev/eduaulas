@@ -213,7 +213,7 @@ function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,cou
      $.ajax({
       beforeSend: function(){
       },
-      url:"aulas/cargar_form/",
+      url:"cargar_form/",
       type: "GET",
       dataType: 'json',      
       data:{
@@ -371,14 +371,14 @@ function save_classroom_add() {
   
     if (valido){
       $.ajax({
-        url:"aulas/agregar/aula/",
+        url:"agregar/aula/",
         type: "POST",
         dataType: 'json',      
         data:{
 
              
               csrfmiddlewaretoken: tok,
-              state:'inactive',
+             // state:'inactive',
               select_country:select_country,
               select_department:select_department,
               select_school:select_school,
@@ -416,7 +416,7 @@ function save_classroom_edit(code_class) {
     
       if (valido){
         $.ajax({
-          url:"aulas/editar/aula/",
+          url:"editar/aula/",
           type: "POST",
           dataType: 'json',      
           data:{
