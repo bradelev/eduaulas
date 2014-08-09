@@ -5,6 +5,7 @@ from person.models import Person
 from classroom.models import Grade
 from teacher.models import Teacher
 from django.utils.translation import ugettext as _
+from PIL import Image
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Lecture(models.Model):
 	unit = models.ForeignKey('Unit', verbose_name=u'Unidad')  #A,B,C,D - es el link a materia
 	teacher_guide = models.TextField(max_length=2000, blank=True, verbose_name=u'Guía docente')
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen')
+	thumb_img = models.ImageField(upload_to='media/thumb', blank=True, verbose_name=u'Thumb_Imágen')
 	LectureType = (
 		('EXPERIMENT', 'Experimento'), 
 		('LECTURE', 'Lecturas'), 
@@ -30,6 +32,8 @@ class Lecture(models.Model):
 
 	def __unicode__(self):
 		return "%so %s, %s, ej %s" % (self.grade.name, self.unit.subject.name, self.unit.letter, str(self.cuasimodo_lecture_id))
+
+
 
 class Exercise(models.Model): 
 	cuasimodo_exercise_id = models.IntegerField(default=0, verbose_name=u'ID Cuasimodo', blank = True)
@@ -46,6 +50,7 @@ class Exercise(models.Model):
 	exercise_type = models.CharField(choices=ExerciseType, max_length=50, verbose_name=u'Tipo de ejercicio', null=True)
 	teacher_guide = models.TextField(max_length=2000, blank=True, verbose_name=u'Guía docente', null=True)
 	img = models.ImageField(upload_to='media', blank=True, verbose_name=u'Imágen', null=True)
+	thumb_img = models.ImageField(upload_to='media/thumb', blank=True, verbose_name=u'Thumb_Imágen')
 	lectures = models.ManyToManyField('Lecture', symmetrical=False, related_name='lectures', blank=True, verbose_name=u'Lectura')
 	good_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados bien', null=True, symmetrical = False, related_name = 'good')
 	bad_related_exercises = models.ManyToManyField('self', blank=True, verbose_name=u'Ejercicios relacionados mal', null=True, symmetrical = False, related_name = 'bad')
@@ -60,6 +65,31 @@ class Exercise(models.Model):
 
 	def __unicode__(self):
 		return "%so %s, %s, ej %s" % (self.grade.name, self.unit.subject.name, self.unit.letter, str(self.cuasimodo_exercise_id))
+
+	def save(self):
+		if not self.img:
+			return
+		super(Exercise, self).save()
+		img = Image.open(self.img)
+		(width, height) = img.size
+		razon = width / float(height)
+		if razon > 1:
+			size = (640, 480)
+		else:
+			size = (480, 640)
+		img = img.resize(size, Image.ANTIALIAS)
+		img.save(self.img.path)
+
+		thumb_img = Image.open(self.img)
+		(width, height) = thumb_img.size
+		razon = width / float(height)
+		if razon > 1:
+			size = (160, 120)
+		else:
+			size = (120, 320)
+		thumb_img = thumb_img.resize(size, Image.ANTIALIAS)
+		thumb_img.save(self.thumb_img.path)
+
 
 class Result(models.Model):
 	points = models.FloatField(null = True, verbose_name=u'Puntos')
