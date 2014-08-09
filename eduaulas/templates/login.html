@@ -54,8 +54,10 @@
 											<input type="password" name="password">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingresa tu contraseña</b> </label>
 										<div class="note">
+											{% if msg %}
+												<p style="color:#f00;">{{msg}}</p>
+											{% endif %}
 											<a href="forgotpassword.html">Olvidaste la contraseña?</a>
-											<p>{{msg}}</p>
 										</div>
 									</section>
 								</fieldset>

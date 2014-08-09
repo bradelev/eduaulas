@@ -48,6 +48,11 @@ def login_user(request):
 def inicio(request):
     return render_to_response('index.html' , context_instance=RequestContext(request))
 
+
+def logout_view(request):
+    logout(request)
+    return render_to_response('logout.html' , context_instance=RequestContext(request))
+
 def register(request):
     registered = False
     msg = ""
