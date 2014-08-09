@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,6 +101,7 @@ MEDIA_ROOT = os.path.join(RUTA_PROYECTO,'carga')
 MEDIA_URL = 'http://127.0.0.1:8080/media/'
 STATIC_URL = '/static/'
 
+GRAPPELLI_ADMIN_TITLE = "ADMINISTRADOR DE EDUAULAS"
 
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
@@ -114,6 +116,11 @@ TEMPLATE_LOADERS = (
 )
 TEMPLATE_DIRS = (
     os.path.join(DIR_APP,'templates'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 )
 
 STATICFILES_DIRS = (

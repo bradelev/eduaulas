@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 	#url(r'^docente/', include('teacher.urls')),
 	url(r'^panel/', include('dashboard.urls')),
 	url(r'^contenidos/', include('exercise.urls')),
-
+	url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^cargarDatos/', 'datosTest.cargarDatosTest.ingresar_datos'),
     url(r'^resultados/', 'datosTest.cargarDatosTest.resultados'),

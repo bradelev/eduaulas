@@ -1,0 +1,69 @@
+/*
+ * It is advised not to edit the smartadmin_production.css
+ * as this will override any changes you make in the 
+ * later versions of this theme. 
+ * 
+ * We advise that you use use this CSS to override 
+ * SmartAdmin styles. 
+ * 
+ * Rename the stylesheet to whatever your liking so it will stay
+ * unique to you with each update of SmartAdmin.
+ */
+
+/*
+ * INDEX
+ * 
+ * - HTML
+ * - BODY
+ * - CUSTOM STYLES
+ */
+
+.td_graphs{
+
+	width: 120px;
+	height: 50px;
+	color: #303030;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+ 
+}
+
+ .titleh1{
+ 	margin-left: 15px;
+ 	font-weight:400;
+ 	margin-bottom: 30px;
+ 	
+ }
+
+ #div_btn_classroom{
+
+ 	margin-bottom: 20px;
+
+ }
+.labsStudents{
+	font-weight:600;
+	color: #008B8B;
+}
+
+.divRight{
+
+	padding:20px 20px 20px 20px;
+	float: right;
+}
+
+.divGraphs{
+
+	margin-right: 400px;
+}
+
+.tr_green{
+
+
+	background-color: #A2CD5A !important;
+}
+
+.tr_red{
+
+	background-color: #F08080 !important;
+}
