@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
@@ -24,12 +26,13 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 	
-
+@login_required(login_url='/login/')
 def ini(request,code):
 	var_areas = Area.objects.all()
 
 	return render_to_response('contents.html',{'areas':var_areas,'code':code}, context_instance = RequestContext(request))	
 
+@login_required(login_url='/login/')
 def load_filters_subject(request,code):
 	message = ""
 	type = "error"
@@ -56,7 +59,7 @@ def load_filters_subject(request,code):
 	
 
 
-
+@login_required(login_url='/login/')
 def load_filters_unit(request,code):
 	dictionary_units = {}
 	message = ""
@@ -83,7 +86,7 @@ def load_filters_unit(request,code):
 	return HttpResponse(result, mimetype = 'application/javascript')
 
 
-
+@login_required(login_url='/login/')
 def list_contents(request,code):
 	message = ""
 	type = "error"
@@ -106,6 +109,7 @@ def list_contents(request,code):
 			homeworks = Lecture.objects.filter(lecture_type='HOMEWORK', unit=u, grade=g, unit__subject=s).order_by('cuasimodo_lecture_id')
 			for e in experiments:
 				dictionary_experiments[e.id] = {
+					'id':e.id,
 					"id_cuasimodo": e.cuasimodo_lecture_id,
 					"guia": e.teacher_guide,
 					"lecture_type": "Experimento",
@@ -113,6 +117,7 @@ def list_contents(request,code):
 				}
 			for l in lectures:
 				dictionary_lectures[l.id] = {
+					'id':l.id,	
 					"id_cuasimodo": l.cuasimodo_lecture_id,
 					"guia": l.teacher_guide,
 					"lecture_type": "Lectura",
@@ -120,6 +125,7 @@ def list_contents(request,code):
 				}
 			for e in exercises:
 				dictionary_exercises[e.id] = {
+					'id':e.id,
 					"id_cuasimodo": e.cuasimodo_exercise_id,
 					"guia": e.teacher_guide,
 					"lecture_type": "Ejercicio",
@@ -127,6 +133,7 @@ def list_contents(request,code):
 				}
 			for h in homeworks:
 				dictionary_homeworks[h.id] = {
+					'id':h.id,
 					"id_cuasimodo": h.cuasimodo_lecture_id,
 					"guia": h.teacher_guide,
 					"lecture_type": "Tarea",
@@ -182,7 +189,7 @@ def send_comment(request):
 
 
 
-
+@login_required(login_url='/login/')
 def specific_content(request, grade, subject, unit, number):
 	error = False
 	try:
@@ -194,6 +201,7 @@ def specific_content(request, grade, subject, unit, number):
 		error = True
 	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
 def specific_content_id(request, id):
 	error = False
 	try:

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from eduaulas import settings
 from django.shortcuts import render
 from student.models import Student, Person
@@ -22,12 +24,13 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    	return force_unicode(obj)
 	    return obj  
 
-
+@login_required(login_url='/login/')
 def ini(request,code):
 
 
 	return render_to_response('students_list.html',{"code":code}, context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
 def students_info(request,code):
 	message = ""
 	type = "error"
@@ -90,7 +93,7 @@ def students_info(request,code):
 
 
 
-
+@login_required(login_url='/login/')
 def student_info(request,id):
 	
 	dictionary_subjects_average={}
@@ -150,7 +153,7 @@ def student_info(request,id):
 	return render_to_response('student_info.html',{'list_average':dictionary_subjects_average,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	
-	
+@login_required(login_url='/login/')	
 def stats_by_learning_profiles(request,code):
 	students = Student.objects.filter(class_room=code)
 	
@@ -183,11 +186,12 @@ def stats_by_learning_profiles(request,code):
 	return render_to_response('stats_by_learning_profiles.html',{"code":code,"cognitive_percentage":average_cognitive_percentage,"metacognitive_percentage":average_metacognitive_percentage,"socio_affective_percentage":average_socio_affective_percentage}, context_instance = RequestContext(request))
 
 
-
+@login_required(login_url='/login/')
 def ini_stats_by_topics(request,code):
 
 	return render_to_response('stats_by_topic.html',{'code':code}, context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
 def stats_by_topics(request,code):
 	
 	message = ""

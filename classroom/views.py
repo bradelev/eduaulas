@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
@@ -24,11 +26,13 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    	return force_unicode(obj)
 	    return obj  
 
+@login_required(login_url='/login/')
 def ini(request):
 
 
 	return render_to_response('classroomList.html', context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
 def load_classroom(request):
         dictionary_school = {}
         dictionary_classroom = {}
@@ -65,6 +69,7 @@ def load_classroom(request):
                 }, cls = LazyEncoder)
         return HttpResponse(result, mimetype = 'application/javascript')
 
+@login_required(login_url='/login/')
 def classroom_list(request):
        # classrooms = ClassRoom.objects.all()
         dictionary_classrooms = {}
@@ -97,6 +102,7 @@ def classroom_list(request):
        # return render_to_response('classroomList.html',{'classrooms':classrooms}, context_instance = RequestContext(request))
        
 
+@login_required(login_url='/login/')
 def classroom_save_add(request):
     print('entre al save')
     message = ""
@@ -143,7 +149,7 @@ def classroom_save_add(request):
         }, cls = LazyEncoder)
     return HttpResponse(result, content_type = 'application/javascript')
   
- 
+@login_required(login_url='/login/')
 def classroom_save_edit(request):
     message = ""
     type = "error"
@@ -186,7 +192,7 @@ def classroom_save_edit(request):
         }, cls = LazyEncoder)
     return HttpResponse(result, mimetype = 'application/javascript')	
 
-
+@login_required(login_url='/login/')
 def load_classroom_form(request):
 
     dictionary_countrys = {}
@@ -236,6 +242,7 @@ def load_classroom_form(request):
     
     return HttpResponse(result, mimetype = 'application/javascript')
 
+@login_required(login_url='/login/')
 def load_departments(request):
 
     dictionary_departments = {}
@@ -273,6 +280,7 @@ def load_departments(request):
     
     return HttpResponse(result, mimetype = 'application/javascript')
 
+@login_required(login_url='/login/')
 def load_schools(request):
 
     dictionary_schools = {}
@@ -310,6 +318,7 @@ def load_schools(request):
     
     return HttpResponse(result, mimetype = 'application/javascript')
 
+@login_required(login_url='/login/')
 def load_classroom_code(request):
     message = ""
     type = "error"
@@ -335,6 +344,8 @@ def load_classroom_code(request):
         message = "No hay aula"    
     return HttpResponse(result, mimetype = 'application/javascript')
 
+
+@login_required(login_url='/login/')
 def classroom_delete(request):
 
     message = ""
@@ -361,7 +372,7 @@ def classroom_delete(request):
     return HttpResponse(result, mimetype = 'application/javascript')
 
 
-
+@login_required(login_url='/login/')
 def generate_classroom_code():
 
         code=''

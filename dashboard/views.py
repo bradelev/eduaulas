@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from student.models import Student
@@ -22,12 +24,13 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 	
-
+@login_required(login_url='/login/')
 def ini(request,code):
 	var_areas = Area.objects.all()
 	
 	return render_to_response('panel.html',{'areas':var_areas,'code':code}, context_instance = RequestContext(request))	
 
+@login_required(login_url='/login/')
 def load_filters_subject(request,code):
 	message = ""
 	type = "error"
@@ -57,7 +60,7 @@ def load_filters_subject(request,code):
 	
 
 
-
+@login_required(login_url='/login/')
 def load_filters_unit(request,code):
 	print('cargo UNIDADES')
 	dictionary_units = {}
@@ -93,7 +96,7 @@ def load_filters_unit(request,code):
 	return HttpResponse(result, mimetype = 'application/javascript')
 
 
-
+@login_required(login_url='/login/')
 def list_students(request,code):
 
 	dictionary_units_exercises={}
@@ -164,7 +167,7 @@ def list_students(request,code):
 	return HttpResponse(result, mimetype = 'application/javascript')
 
 	
-
+@login_required(login_url='/login/')
 def load_suggestions_students(request,code):
 
 	message = ""
