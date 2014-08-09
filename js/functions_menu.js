@@ -2,6 +2,7 @@ $(document).ready(ini);
 
 
 function ini(){
+	alert('aaaaaaaaaaaaaaaaaa');
 
 	var pathArray = window.location.pathname.split('/');
 	$('#option_panel').click(function(){go_to_panel(pathArray)});
@@ -32,9 +33,10 @@ function go_to_students_list(pathArray){
 
 
 function go_to_contents_list(pathArray){
+	alert('holaa');
 
 	var classroom = pathArray[3] ;
-	$('#option_contents').attr('href','/contenidos/' + classroom);
+	$('#option_contents').attr('href','/contenidos/lista/' + classroom);
 
 }
 

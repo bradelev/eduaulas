@@ -289,7 +289,7 @@ if(data['type'] == 'success'){
     for (var y = 1; y < (data["matriz"])[x].length-1; y++){
       
         if (y == 1){
-          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
+          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
           
         else {
           

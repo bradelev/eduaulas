@@ -35,7 +35,7 @@ function get_students_data () {
 function create_table_students (data) {
 
 
-
+var code_class = $("#code").attr("value");
 if(data['type'] == 'success'){  
     var output_thead = "";
     var output = "";
@@ -53,7 +53,7 @@ if(data['type'] == 'success'){
 	    for (var y = 1; y < (data["matriz"])[x].length; y++){
 	      
 	        if (y == 1){
-	          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
+	          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
 	          
 	        else {
 	          
@@ -74,7 +74,6 @@ if(data['type'] == 'success'){
    
     }
 
- }}}
-//}/*close if data type*/
-
-//}/*close function create_table_students*/
+     }
+    }
+}

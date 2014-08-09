@@ -60,16 +60,18 @@ def students_info(request,code):
 					cognitive_percentage += p.exercise.cognitive_percentage
 					socio_affective_percentage += p.exercise.socio_affective_percentage
 					points += p.points
-				average_points = points/cont
-				average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
-				matriz[i].append(average_metacognitive_percentage)
-			
-				average_cognitive_percentage= (cognitive_percentage/cont)*average_points
-				matriz[i].append(average_cognitive_percentage)
-				average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
-				matriz[i].append(average_socio_affective_percentage)
-				
-				matriz[i].append(average_points)
+				if cont != 0:
+					average_points = points/cont
+					if average_points !=0:
+						average_metacognitive_percentage= (metacognitive_percentage/cont)*average_points
+						matriz[i].append(average_metacognitive_percentage)
+					
+						average_cognitive_percentage= (cognitive_percentage/cont)*average_points
+						matriz[i].append(average_cognitive_percentage)
+						average_socio_affective_percentage= (socio_affective_percentage/cont)*average_points
+						matriz[i].append(average_socio_affective_percentage)
+						
+						matriz[i].append(average_points)
 				
 
 			else:
@@ -94,7 +96,7 @@ def students_info(request,code):
 
 
 @login_required(login_url='/login/')
-def student_info(request,id):
+def student_info(request,code,id):
 	
 	dictionary_subjects_average={}
 	student = Student.objects.get(pk=id)
@@ -106,46 +108,46 @@ def student_info(request,id):
 	try:
 
 		cont=0
-		metacognitive_percentage= 0
-		cognitive_percentage =0
-		socio_affective_percentage=0
+		metacognitive_percentage = 0
+		cognitive_percentage = 0
+		socio_affective_percentage = 0
 		sub = Subject.objects.all()
+		average_metacognitive_percentage = 0
+		average_cognitive_percentage = 0
+		average_socio_affective_percentage = 0
 		
-		
-		for s in sub:
-			
-			points=0
-			average=0
-			student_exercises_result= Result.objects.filter(person=student,exercise__unit__subject=s)
-			cont1=0
+		for s in sub:			
+			points = 0
+			average = 0
+			student_exercises_result = Result.objects.filter(person=student,exercise__unit__subject=s)
+			cont1 = 0
 			if student_exercises_result.exists():
 				for r in student_exercises_result:
 				
 					cont1 = cont1 + 1
 					
 					points += r.points
-				average = points/cont1
+				if cont1 != 0:	
+					average = points/cont1
 				
 			dictionary_subjects_average [s.name]={		
 
-				#"subject": s.name,
-				"average": average*100+ 1				
+				"average": average * 100 + 1				
 			}
 								
-		print(dictionary_subjects_average)
 
+		student_results= Result.objects.filter(person=student)
 
-		student_profiles= Result.objects.filter(person=student)
-
-		for p in student_profiles:
+		for r in student_results:
 			cont = cont + 1
-			metacognitive_percentage += p.exercise.metacognitive_percentage
-			cognitive_percentage += p.exercise.cognitive_percentage
-			socio_affective_percentage += p.exercise.socio_affective_percentage
+			metacognitive_percentage += r.exercise.metacognitive_percentage * r.points
+			cognitive_percentage += r.exercise.cognitive_percentage * r.points
+			socio_affective_percentage += r.exercise.socio_affective_percentage * r.points
 
-		average_metacognitive_percentage= metacognitive_percentage/cont
-		average_cognitive_percentage= cognitive_percentage/cont
-		average_socio_affective_percentage= socio_affective_percentage/cont
+		if cont !=0:	
+			average_metacognitive_percentage= metacognitive_percentage/cont
+			average_cognitive_percentage= cognitive_percentage/cont
+			average_socio_affective_percentage= socio_affective_percentage/cont
 
 
 	except Result.DoesNotExist:
