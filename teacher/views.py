@@ -84,5 +84,9 @@ def register(request):
             t.save()
             msg = "Gracias por tu registro"
             registered = True
+            HttpResponseRedirect("/registro/exito/")
         
     return render_to_response('register.html', {'registered': registered, 'msg':msg}, context_instance=RequestContext(request))
+
+def register_success(request):
+    pass
