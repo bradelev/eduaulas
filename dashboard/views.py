@@ -27,8 +27,8 @@ class LazyEncoder(simplejson.JSONEncoder):
 @login_required(login_url='/login/')
 def ini(request,code):
 	var_areas = Area.objects.all()
-	
-	return render_to_response('panel.html',{'areas':var_areas,'code':code}, context_instance = RequestContext(request))	
+	class_room = ClassRoom.objects.get(pk = code)
+	return render_to_response('panel.html',{'areas':var_areas,'classroom':class_room}, context_instance = RequestContext(request))	
 
 @login_required(login_url='/login/')
 def load_filters_subject(request,code):

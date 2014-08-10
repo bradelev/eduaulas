@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'dashboard',
     'student',
     'person',    
+    'configurations',
 )
 
 MIDDLEWARE_CLASSES = (

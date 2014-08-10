@@ -174,30 +174,20 @@
         <script src="{% static "js/plugin/datatables/ZeroClipboard.js" %}"></script>
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
-          
+      
         <script type="text/javascript">
             $(document).ready(function() {
                
+
                 pageSetUp();
 
-                
+                $('#contents').tabs();    
                            
                 });
         </script>
         <script src="{% static "js/functions_exercises.js" %}"></script>
         <!-- MAIN APP JS FILE -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-               
-                $('#contents').tabs();
-                
-
-                         
-            
-                });/*cieero pagesetup*/
-        </script>
-            
-        
+      
     
      
 {% endblock %}

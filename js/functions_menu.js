@@ -2,15 +2,16 @@ $(document).ready(ini);
 
 
 function ini(){
-	alert('aaaaaaaaaaaaaaaaaa');
+
 
 	var pathArray = window.location.pathname.split('/');
+	alert(pathArray);
 	$('#option_panel').click(function(){go_to_panel(pathArray)});
 	$('#option_students').click(function(){go_to_students_list(pathArray)});
-	$('#option_contents').click(function(){go_to_contents_list(pathArray)});
+
 	$('#option_stats_by_topic').click(function(){go_to_stats_by_topics(pathArray)});
 	$('#option_stats_by_learning_profiles').click(function(){go_to_stats_by_learning_profiles(pathArray)});
-
+	$('#option_contents').click(function(){go_to_contents_list(pathArray)});
 
 
 
@@ -26,7 +27,9 @@ function go_to_panel(pathArray){
 
 function go_to_students_list(pathArray){
 
+	
 	var classroom = pathArray[3] ;
+
 	$('#option_students').attr('href','/alumnos/listas/' + classroom);
 
 }
@@ -36,7 +39,7 @@ function go_to_contents_list(pathArray){
 	alert('holaa');
 
 	var classroom = pathArray[3] ;
-	$('#option_contents').attr('href','/contenidos/lista/' + classroom);
+	$('#option_contents').attr('href','/contenidos/lista' + classroom);
 
 }
 
