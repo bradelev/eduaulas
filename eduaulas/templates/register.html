@@ -101,7 +101,7 @@
 								<div class="row">
 									<section class="col col-10">
 										<label class="input"> <i class="icon-append fa fa-calendar"></i>
-											<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy'>
+											<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth">
 										</label>
 									</section>
 								</div>
@@ -166,6 +166,10 @@
 						},
 						lastname : {
 							required : true,
+						},
+						dateofbirth : {
+							required : true,
+							date : true,	
 						}
 					},
 
@@ -190,6 +194,9 @@
 						},
 						lastname : {
 							required : 'Ingrese su apellido',
+						},
+						dateofbirth : {
+							date : 'Ingrese una fecha válida',
 						}
 
 					},

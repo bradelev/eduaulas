@@ -1,0 +1,39 @@
+{% extends template_base %}
+{% block body_tag %}
+<body id="login" class="animated fadeInDown">
+{% endblock %}	
+{% block body %}
+{% load staticfiles %}
+		<header id="header">
+			<div id="logo-group">
+				<span id="logo"> <img src="{% static "img/logo.png" %}" alt="SmartAdmin"> </span>
+				<!-- END AJAX-DROPDOWN -->
+			</div>
+		</header>
+
+		<div id="main" role="main">
+			<!-- MAIN CONTENT -->
+			<div id="content" class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+						<h1 class="txt-color-red login-header-big">EduAulas</h1>
+						<div class="hero">
+							<div class="pull-left">
+								<h4>Registro realizado con éxito</h4>
+								<h4>Bienvenido {{username}} a EduAulas</h4>
+								<br>
+								<p>
+									<a href="/aulas/lista/" >Ir al panel de administración de aulas</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+{% endblock %}
+{% block scripts %}
+		<!--================================================== -->	
+ 		<!-- MAIN APP JS FILE -->
+{% endblock %}

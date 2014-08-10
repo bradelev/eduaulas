@@ -15,6 +15,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 #from django.core.context_processors import csrf
 from teacher.models import Teacher
+from configurations.models import Configuration
 import datetime
 
 
@@ -64,7 +65,10 @@ def register(request):
         last_name = request.POST['lastname']
         gender = request.POST['gender']
         str_dob = request.POST['dateofbirth']
-        dob = datetime.datetime.strptime(str_dob,"%d/%m/%Y").date()
+        try:
+            dob = datetime.datetime.strptime(str_dob,"%d/%m/%Y").date()
+        except:
+            dob = datetime.datetime.now().date()
 
         try:
             t = Teacher.objects.get(username=username)
@@ -82,11 +86,21 @@ def register(request):
                 gender=gender, 
                 user=user)
             t.save()
+            c = Configuration(teacher=t)
+            c.save()
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
             msg = "Gracias por tu registro"
             registered = True
-            HttpResponseRedirect("/registro/exito/")
+            return HttpResponseRedirect("/registro_exitoso/")
         
     return render_to_response('register.html', {'registered': registered, 'msg':msg}, context_instance=RequestContext(request))
 
 def register_success(request):
-    pass
+    try:
+        username = request.user.username
+    except:
+        username = ""
+    return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
