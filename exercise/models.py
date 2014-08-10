@@ -80,7 +80,7 @@ class Exercise(models.Model):
 		img = img.resize(size, Image.ANTIALIAS)
 		img.save(self.img.path)
 
-		thumb_img = Image.open(self.img)
+		thumb_img = Image.open(self.thumb_img)
 		(width, height) = thumb_img.size
 		razon = width / float(height)
 		if razon > 1:
