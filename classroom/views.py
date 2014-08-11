@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 import random
+import string
 from classroom.models import  ClassRoom, Grade
 from location.models import School, Country, Department
 #from django.utils import json
@@ -107,34 +108,42 @@ def classroom_save_add(request):
     type = "error"
     
     try:
-
-        if request.POST:
-            print('entre al post')
-            country =request.POST['select_country']             
-            department = request.POST['select_department']             
-            school= request.POST['select_school']            
-            grade= request.POST['select_grade'] 
-            className=request.POST['class_name']           
-            shift=request.POST['select_shift']    
-         
-            c= ClassRoom()
-            c.code = generate_classroom_code()
-            print('hola uno')
-            c.class_letter = className
-            print('hola dos')
-            c.shift = shift
-            print('hola tres')
-            g = Grade.objects.get(pk=grade)
-            c.grade=g
-            print('hola cuatro')
-            s= School.objects.get(pk=school)
-            print('hola cinco')
-            c.school=s
-            print('hola 6')   
-            c.save()
-            print('hola 7') 
-            type = "success"
-            print('hola 8') 
+        if request.is_ajax():
+            if request.method == 'POST':
+            
+                print('entre al post')
+                """country =request.POST['select_country']             
+                                                                department = request.POST['select_department']             
+                                                                school= request.POST['select_school']            
+                                                                grade= request.POST['select_grade'] 
+                                                                className=request.POST['class_name']           
+                                                                shift=request.POST['select_shift']    """
+                
+                country = 1            
+                department = 1            
+                school= 1         
+                grade= 1
+                className='Q'          
+                shift='OHTER'  
+                c= ClassRoom()
+                c.code = generate_classroom_code()
+                print c.code
+                print('hola uno')
+                c.class_letter = className
+                print('hola dos')
+                c.shift = shift
+                print('hola tres')
+                g = Grade.objects.get(pk=grade)
+                c.grade=g
+                print('hola cuatro')
+                s= School.objects.get(pk=school)
+                print('hola cinco')
+                c.school=s
+                print('hola 6')   
+                #c.save()
+                print('hola 7') 
+                type = "success"
+                print('hola 8') 
     except ClassRoom.DoesNotExist:
         print('entre a la execpcion')
         message = "No hay alumnos"
@@ -369,10 +378,7 @@ def classroom_delete(request):
 
 
 @login_required(login_url='/login/')
-def generate_classroom_code():
+def generate_classroom_code(size=6, chars=string.ascii_uppercase + string.digits):
 
-        code=''
-        for x in xrange(1,5):                
-        	code+= random.choice('AFcgoje67497368')
-        return code
+    return ''.join(random.choice(chars) for _ in range(size))
 	

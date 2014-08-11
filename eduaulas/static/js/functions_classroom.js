@@ -159,7 +159,7 @@ function delete_classroom(){
 
 function load_classroom(){
 
-  $('#action').val('2')
+  $('#action').val('2') /*editing classroom*/
   editing_classroom= true;
   var tok = $("#token").attr("value");
   var code_classroom= $(this).val();
@@ -259,7 +259,7 @@ function load_selects_classroom(data,editing_classroom,grade_id,school_id,countr
     output_select_grades += '<option value="" selected="" disabled="" >Grados</option>'
       for (var g in data["dictionary_grades"]){
         output_select_grades += "<option value="+(data["dictionary_grades"][g]['id'])+">";
-        output_select_grades += (data["dictionary_grades"][g]['name']); 
+        output_select_grades += (data["dictionary_grades"][g]['name']) + '° Primaria'; 
         output_select_grades += "</option>";
         }/*Cierro for dictionary_grades*/
         $("#select_grade").html(output_select_grades);
@@ -370,15 +370,16 @@ function save_classroom_add() {
   valido *= (select_shift != null);
   
     if (valido){
+     // alert('hola');
       $.ajax({
-        url:"agregar/aula/",
+        url:"/aulas/lista/agregar/aula/",
         type: "POST",
         dataType: 'json',      
         data:{
 
              
               csrfmiddlewaretoken: tok,
-             // state:'inactive',
+              state:'inactive',
               select_country:select_country,
               select_department:select_department,
               select_school:select_school,

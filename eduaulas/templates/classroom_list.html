@@ -73,26 +73,20 @@
 											<section class="col col-6">
 												    <label class="select">
 		                                            <select name="school" id="select_school" title="Escuela">
-		                                                <option value="0" selected="" disabled="">Escuela</option>
-		                                                {% for s in schools %}
-		                                                <option value="1">{{s.name}}</option>
-		                                                {% endfor %}
+		                                                
 		                                            </select> <i></i> </label>					                                    
 											</section>
 											<section class="col col-6">
 												<label class="select">
 													<select name="grade" id="select_grade" title="Grado">
-														<option value="0" selected="" disabled="">Grado</option>
-		                                                {% for g in grades%}
-														<option value="1">{{g.name}}</option>
-														{% endfor %}
+														
 													</select> <i></i> </label>
 											</section>
 										</div><!-- row  -->
 										<div class="row">
 											<section class="col col-6">
 												<label for="className" class="input">								
-													<input type="text" name="className"  id="class_name" title='Clase'>
+													<input maxlength= "1" type="text" name="className"  id="class_name" title='Clase'>
 												</label>
 											</section>
 											<section class="col col-6">
