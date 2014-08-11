@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from student.models import Student
+from configurations.models import Configuration
 from classroom.models import  ClassRoom
 from exercise.models import Unit, Exercise, Result, Area, Subject
 from django.utils import simplejson
@@ -112,11 +113,13 @@ def list_students(request,code):
 			matriz = []
 			type = "success"
 			i=0
-			
+			userid = request.user.id
+			teacher_config = Configuration.objects.get(teacher=userid)
 			for s in students:
 				students_exist = 'yes'
 				average = 0
 				results_quantity = 0 
+				total_points = 0 
 				matriz.append([])
 				matriz[i].append(s.id)
 				matriz[i].append(s.name + ' '+ s.last_name)
@@ -127,19 +130,21 @@ def list_students(request,code):
 						results_exist = 'yes'
 						for r in var_results:
 							
-							if r.points >= 0.5:
+							if r.points >= teacher_config.correct_points:
 								matriz[i].append('<img src="/static/img/tickBien.png" >')
-							else:
+							if r.points <= teacher_config.incorrect_points:
 								matriz[i].append('<img src="/static/img/tickMal.png" >')
 
 							results_quantity = results_quantity + 1	
-							average += r.points
+							total_points += r.points
 				
 
 					else:
 						matriz[i].append('')
-				if results_quantity >= 3:
-					if average > 0.3: 	
+				if results_quantity !=0:
+					average = total_points / results_quantity
+				if results_quantity >= teacher_config.minimum_quantity_exercise:
+					if average > teacher_config.incorrect_points: 	
 						matriz[i].append('green')
 					else:
 						matriz[i].append('red')	
@@ -150,13 +155,15 @@ def list_students(request,code):
 					
 			for e in var_units_exercises:		
 						
-				dictionary_units_exercises[e.id] = {				
+				dictionary_units_exercises[e.id] = {	
+
 					"exercise_id": e.cuasimodo_exercise_id,
-					"img": e.img.url,			
+					"id": e.id,
+					"img": e.thumb_img.url,			
 					
 				}	
 				
-			
+			#print matriz
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({

@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
-
+import datetime
 # Create your views here.
 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -101,6 +101,9 @@ def student_info(request,code,id):
 	dictionary_subjects_average={}
 	student = Student.objects.get(pk=id)
 
+	diff = (datetime.date.today() - student.date_of_birth).days
+	years = str(int(diff/365))
+
 	if student.gender == 'FEMALE':
 		student_gender = 'Femenino'
 	else:
@@ -152,7 +155,7 @@ def student_info(request,code,id):
 
 	except Result.DoesNotExist:
 	        message = "El alumno no tiene ejercicios"
-	return render_to_response('student_info.html',{'list_average':dictionary_subjects_average,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
+	return render_to_response('student_info.html',{'list_average':dictionary_subjects_average,'years':years,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	
 @login_required(login_url='/login/')	
