@@ -124,7 +124,7 @@ function load_filter_subjects(id_area){
   var cg = $('#code').val();
   var tok = $("#token").attr("value");
   var query = $.ajax({
-    url:cg+"/materias/",
+    url:"/panel/lista/"+cg+"/materias/",
     type:'POST',
     dataType:"json",
     data:{
