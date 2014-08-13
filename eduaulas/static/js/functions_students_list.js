@@ -17,7 +17,9 @@ function get_students_data () {
     data:{
     	  csrfmiddlewaretoken: tok,
           state:'inactive',
-          matriz:'matriz'
+          matriz:'matriz',
+          quantity_results:'quantity_results',
+          quantity_students:'quantity_students'
 
     }, 
 
@@ -42,10 +44,10 @@ if(data['type'] == 'success'){
 
     output_thead +='<tr>';
     output_thead +='<th>Nombre</th>';                                                   
-    output_thead +='<th>Meta cognitivo</th>';
-    output_thead +='<th>Cognitivo</th>';
-    output_thead +='<th>Socio afectivo</th>';
-    output_thead +='<th>Promedio</th>';
+    output_thead +='<th>Promedio meta cognitivo</th>';
+    output_thead +='<th>Promedio cognitivo</th>';
+    output_thead +='<th>Promedio socio afectivo</th>';
+    output_thead +='<th>% promedio academico</th>';
     output_thead +='</tr>';
 
     for (var x in (data["matriz"])){
@@ -66,14 +68,17 @@ if(data['type'] == 'success'){
     
     output += "</tr>";
        
-      
+  var txt = "<p>Para estos datos se evaluaron " +(data["quantity_results"]) +" ejercicios, de "+ (data["quantity_students"]) +" alumnos.</p>" ;    
     if (output != ""){
 
       $("#dt_students > tbody ").html(output);
       $("#dt_students > thead").html(output_thead);
+      $("#dt_students").dataTable();
+      $("#more_info_stats_students").html(txt);
    
     }
 
      }
     }
 }
+

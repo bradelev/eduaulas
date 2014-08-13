@@ -12,7 +12,7 @@ function ini(){
   $('#load_suggestions').click(function(){search_for_suggestions(0)});
   $('#next').click( function(){search_for_suggestions(1)});
   $('#prev').click( function(){search_for_suggestions(2)});
- 
+  
 }
 var student= 0; 
      
@@ -195,13 +195,17 @@ function load_units(){
 
     $('#select_unit').change(get_students_data);
    
-    //setInterval(get_students_data,5000);
+    setInterval(get_students_data, 3000000);
+    
  
 
 }/*cierro funcion load_units*/
 
 function get_students_data () {
-
+  
+    var d = new Date();
+    var date = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + "-" + d.getHours() + ":" + d.getMinutes() +":"+ d.getSeconds();
+    $('#last_update').html(date)
     var code_class = $("#code").attr("value");
     var id_unit = $('#select_unit').val();
     var tok = $("#token").attr("value");
@@ -270,18 +274,22 @@ if(data['type'] == 'success'){
     tr_cont++;
     aux = (data["matriz"]).length;
     tr_color = (data["matriz"])[x][aux+1];
-   // alert(aux);
+    output += "<tr>";
+    if (tr_color == 'orange'){
+       output += "<tr class='tr_orange'>";  
+    }
+
     if (tr_color == 'green'){
        output += "<tr class='tr_green'>";  
     }
-    else{
+  
     if (tr_color == 'red'){
        output += "<tr class='tr_red'>";  
     }
-    else{
-        output += "<tr>";
-    }
-  }
+    
+      
+    
+  
     
     var average = 0;
     var results_quantity = 0;

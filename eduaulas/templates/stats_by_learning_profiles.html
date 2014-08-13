@@ -45,27 +45,32 @@
                     <!-- widget content -->
 
                     <div class="widget-body">
-                        <div class="well well-sm well-light">
-                            <h4 class="txt-color-blue">Aula: <span class="semi-bold">{{code}}</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
-                            <br>
-                            <div class="text-center">
-                                <div class="sparkline txt-color-red display-inline" 
-                                data-sparkline-type="pie" 
-                                data-sparkline-offset="90" 
-                                data-sparkline-piesize="275px">{{cognitive_percentage}}{{metacognitive_percentage}}{{socio_affective_percentage}}</div>
-                                                
-                        </div>
-                        <div>
-                            <table class="table-bordered ">
-                                <tr>
-                                    <td  class ="td_graphs" style="background-color:RGB(68,144,177);">Meta cognitivo</td>
-                                    <td  class ="td_graphs" style="background-color:RGB(152,170,86);">Cognitivo</td>
-                                    <td  class ="td_graphs" style="background-color:RGB(180,202,211);">Socio afectivo</td>
-                                   
-                                </tr>
-                               
-                            </table>
-                        </div>
+                        <div class="well well-sm well-light content_stats">
+                            
+                            
+                                <div class= "stats">
+                                    <h5>Meta cognitivo</h5>
+                                     <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{metacognitive_percentage}}" data-pie-size="180">
+                                        <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{metacognitive_percentage}}</span>
+                                    </div>    
+                                </div>
+                                <div class= "divRight">
+                                    <h5>Cognitivo</h5>
+                                     <div class="easy-pie-chart txt-color-green easyPieChart" data-percent="{{cognitive_percentage}}" data-pie-size="180">
+                                        <span class="percent percent-sign txt-color-green font-xl semi-bold">{{cognitive_percentage}}</span>
+                                    </div>  
+                                </div>      
+                                <div class="stats">
+                                    <h5>Socio afectivo</h5>
+                                     <div class="easy-pie-chart txt-color-red easyPieChart" data-percent="{{socio_affective_percentage}}" data-pie-size="180">
+                                        <span class="percent percent-sign txt-color-red font-xl semi-bold">{{socio_affective_percentage}}</span>
+                                    </div>    
+                                </div>
+
+                            <!--</div> end content_stats -->
+                             <div class="more_info_stats">
+                                <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados, de {{quantity_students}} alumnos.</p>                
+                            </div>
                     </div>  <!-- end widget body -->
                                                 
                 
@@ -81,8 +86,7 @@
         
 
         
-        <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
-
+          <script src="{% static "js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js" %}"></script>
 
                 <!-- BOOTSTRAP JS -->
         

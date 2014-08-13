@@ -59,7 +59,11 @@
 
 .divGraphs{
 
-	margin-right: 400px;
+	text-align: center;
+	
+	right: 200px;
+	padding-left: 80px;
+	float: left;
 }
 
 .tr_green{
@@ -68,7 +72,38 @@
 	background-color: #A2CD5A !important;
 }
 
+.tr_orange{
+
+
+	background-color: #FFEC8B !important;
+}
 .tr_red{
 
 	background-color: #F08080 !important;
+}
+
+.stats{
+	float: right;
+	margin-top: 25px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-bottom: 40px;
+}
+
+.content_stats{
+
+	text-align: center;
+	float: left;  
+}
+
+
+.more_info_stats{
+
+	position: relative;
+}
+
+#dt_results{
+
+
+	width: 500px;
 }

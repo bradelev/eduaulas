@@ -135,6 +135,9 @@ def list_students(request,code):
 							if r.points <= teacher_config.incorrect_points:
 								matriz[i].append('<img src="/static/img/tickMal.png" >')
 
+							if (r.points < teacher_config.correct_points and r.points > teacher_config.incorrect_points):
+								matriz[i].append('<img src="/static/img/tickMaso.png" >')
+
 							results_quantity = results_quantity + 1	
 							total_points += r.points
 				
@@ -144,10 +147,13 @@ def list_students(request,code):
 				if results_quantity !=0:
 					average = total_points / results_quantity
 				if results_quantity >= teacher_config.minimum_quantity_exercise:
-					if average > teacher_config.incorrect_points: 	
+					print average  , s.name
+					if average >= teacher_config.correct_points: 	
 						matriz[i].append('green')
-					else:
+					if r.points <= teacher_config.incorrect_points:
 						matriz[i].append('red')	
+					if ((average < teacher_config.correct_points) and (average > teacher_config.incorrect_points)):	
+						matriz[i].append('orange')	
 				else:
 					matriz[i].append('')		
 				i = i + 1	
@@ -163,7 +169,7 @@ def list_students(request,code):
 					
 				}	
 				
-			#print matriz
+			print matriz
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({

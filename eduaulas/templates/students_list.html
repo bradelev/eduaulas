@@ -16,7 +16,7 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>
-                        Trabajando en clase
+                        Informacion de los alumnos
                     </li>
                    <li>
                         Aula: {{code}}
@@ -74,7 +74,9 @@
                                         </table>
                                     </div>
                                     <!-- end widget content -->
-                                    
+                                    <div "well well-sm well-light" id ="more_info_stats_students">
+                                       
+                                    </div>
                                 </div>
                                 <!-- end widget div -->
                             </div>
@@ -92,16 +94,7 @@
                 <!-- end widget grid -->
 
             </div>
-            
-           
-            
-                
-                    <button type="button" id="eg7" class="btn btn-default"><i class="fa fa-thumbs-up"></i> Extra Small Alert </button>
-                        
                    
-                
-            
-                                     
                 
         </div>
         <!-- END MAIN PANEL -->
@@ -112,10 +105,11 @@
 {% block scripts %}  
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-
-        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+        <script src="{% static "js/functions_students_list.js" %}"></script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
-     
+        <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/ColReorder.min.js" %}"></script>
+        <script src="{% static "js/plugin/datatables/FixedColumns.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
                         
@@ -130,6 +124,6 @@
                 });/*cieero pagesetup*/
         </script>
         
-    <script src="{% static "js/functions_students_list.js" %}"></script>
+    
      
 {% endblock %}

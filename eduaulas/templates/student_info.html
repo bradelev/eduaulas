@@ -5,13 +5,11 @@
             {{ block.super }}
         {% endblock %}
 
-        <!-- MAIN PANEL -->
-        <div id="main" role="main">
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
 
             <!-- RIBBON -->
             <div id="ribbon">
-
-      
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
@@ -20,33 +18,17 @@
                 </ol>
 
 
-            </div>
-            <!-- END RIBBON -->
+            </div><!-- END RIBBON -->
+                   
 
-           <!-- MAIN CONTENT -->
-
-            <div id="content">
-            <!-- Widget ID (each widget will need unique ID)-->
-            <div class="jarviswidget" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
-
-
-                -->
-                <header>
-                    <h2>Alumno/a: {{student.name}}</h2>
-                    
-                </header>
-
-                <!-- widget div-->
-                <div>
-
-                    <!-- widget edit box -->
-                    <div class="jarviswidget-editbox">
-                        <!-- This area used as dropdown edit box -->
-
-                    </div>
-                    <!-- end widget edit box -->
-
-                    <!-- widget content -->
+            <div id="content"> <!-- CONTENT -->
+            
+                <div class="jarviswidget" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+                   
+                    <header>
+                        <h2>Alumno/a: {{student.name}}</h2>                   
+                    </header>
+                        
                     <div class="widget-body">
 
                         <div class="tabs-left">
@@ -59,6 +41,9 @@
                                 </li>
                                 <li>
                                     <a href="#tab-r3" data-toggle="tab"><span class="badge bg-color-greenLight txt-color-white"></span> Promedios</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-r4" data-toggle="tab"><span class="badge bg-color-greenLight txt-color-white"></span> Ejercicios realizados</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -76,7 +61,7 @@
                                     <p>
                                         <span class="labsStudents"> Genero:</span> {{gender}}
                                     </p>
-                                </div>
+                                </div><!-- end div tab-r1 -->  
                                 <div class="tab-pane" id="tab-r2">
                                     <div class="divGraphs">
                                         <div class="divRight">
@@ -101,49 +86,74 @@
                                                 <canvas height="110" width="110"></canvas>
                                             </div>
                                         </div>
+                                        <div class="more_info_stats">
+                                            <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </div><!-- end div tab-r2 -->  
                                 <div class="tab-pane" id="tab-r3">
                                     <div class="divGraphs">
                                         {% for k,value in list_average.items %}
                                         <div class="divRight"> 
                                             <p>{{k}}</p>
-                                            {% if value.average < 50 %}
+                                            {% if value.average <= value.incorrect_points %}
                                                 <div class="easy-pie-chart txt-color-red easyPieChart" data-pie-size="110" data-percent="{{value.average}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                         <span class="percent percent-sign txt-color-greenLight font-md">55</span>
                                                         <canvas height="110" width="110"></canvas>
                                                 </div>
                                             {% endif %}  
-                                             {% if value.average > 50 %}
+                                            {% if value.average >= value.correct_points %}
                                                 <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-pie-size="110" data-percent="{{value.average}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                         <span class="percent percent-sign txt-color-greenLight font-md">55</span>
                                                         <canvas height="110" width="110"></canvas>
                                                 </div>
+                                            {% endif %}
+                                            {% if value.average < value.correct_points and value.average > value.incorrect_points %}
+                                                <div class="easy-pie-chart txt-color-orange easyPieChart" data-pie-size="110" data-percent="{{value.average}}" style="width: 110px; height: 110px; line-height: 110px;">
+                                                        <span class="percent percent-sign txt-color-black font-md">55</span>
+                                                        <canvas height="110" width="110"></canvas>
+                                                </div>
                                             {% endif %}    
                                         </div>
-                                        {% endfor %}   
-                                                 
+                                        {% endfor %}      
+                                        <div class="more_info_stats">
+                                            <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
+                                        </div>   
+                                    </div>                                                                                 
+                                </div><!-- end div tab-r3 -->  
+                                 <div class="tab-pane" id="tab-r4">
+                                    <div id = "table_students_results">
+                                        <table id ="dt_results" class= "table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th>Numero / Nombre ejercicio</th>
+                                                <th>Materia</th>
+                                                <th>Unidad</th>
+                                                <th>Resultado</th>
+                                            </thead>
+                                            <tbody>
+                                                {%for r in student_results %}
+                                                    <tr> 
+                                                        <td><a target="blank" href="/contenidos/ejercicio/{{code}}/{{r.exercise.id}}">{{r.exercise.cuasimodo_exercise_id}} - {{r.exercise.name}}</a></td>
+                                                        <td>{{r.exercise.unit.subject.name}} </td>  
+                                                        <td>{{r.exercise.unit.name }} </td>
+                                                        <td>{{r.points}} </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                 </div>   <!-- end div tab-r4 -->    
+                            </div><!-- end div tab-content -->
+                            
+                        </div><!-- end div tabs-left-->
+
+                    </div><!-- end div widget-body -->
                                      
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- end widget content -->
-
-                </div>
-                <!-- end widget div -->
-
-            </div>
-            <!-- end widget -->
-
-
-
-            </div>
-                                                
                 
-        </div>
-        <!-- END MAIN PANEL -->
+                </div><!-- end div jarviswidget -->       
+            </div><!-- end content -->                                                                         
+    </div><!-- END MAIN PANEL -->
+        
 
 
 {% endblock %}
@@ -164,7 +174,7 @@
             
                 });/*cieero pagesetup*/
         </script>
-        <script src="{% static "js/functions_student_info.js" %}"></script>
+    
     
      
 {% endblock %}

@@ -16,7 +16,7 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>Consultas</li>
-                    <li>Por áreas temáticas </li>
+                    <li>Por areas tematicas</li>
                 </ol>
 
 
@@ -28,14 +28,13 @@
             <div id="content">
     
                 <header>
-                    <h1>Estadísticas por áreas temáticas </h1>
+                    <h1>Estadísticas por areas tematicas</h1>
                     
                 </header>
 
                 <!-- widget div-->
                 <div>
-                    <input type="hidden" id="token" value="{{csrf_token}}"></input>
-                    <input type="hidden" id="code" value="{{code}}"></input>
+
                     <!-- widget edit box -->
                     <div class="jarviswidget-editbox">
                         <!-- This area used as dropdown edit box -->
@@ -46,30 +45,23 @@
                     <!-- widget content -->
 
                     <div class="widget-body">
-                        <div class="well well-sm well-light">
-                            <h4 class="txt-color-blue">Aula: <span class="semi-bold">{{code}}</span> <a href="javascript:void(0);" class="pull-right"><i class="fa fa-refresh"></i></a></h4>
-                            <br>
-                            <div class="text-center" id = "stat_by_topic">
-                                                  
-                            </div>
-
-
-                        <div id ='test'>
+                        <div class="well well-sm well-light content_stats">
                             
-                            
-
-                        </div>
-                        <div>
-                            <table class="table-bordered ">
-                                <tr>
-                                    <td  class ="td_graphs" style="background-color:RGB(68,144,177);">Meta cognitivo</td>
-                                    <td  class ="td_graphs" style="background-color:RGB(152,170,86);">Cognitivo</td>
-                                    <td  class ="td_graphs" style="background-color:RGB(180,202,211);">Socio afectivo</td>
-                                   
-                                </tr>
-                               
-                            </table>
-                        </div>
+                            {% for k,value in dictionary_subjects_average.items %}
+                              
+                                    <div class= "stats">
+                                        <h5>{{k}}</h5>
+                                         <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{value.average}}" data-pie-size="180">
+                                            <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{value.average}}</span>
+                                        </div>   
+                                        <div class="more_info_stats">
+                                             <p>Para construir esta grafica se evaluaron {{value.quantity_results_subject}} resultados </p>                
+                                         </div> 
+                                    </div>
+                                
+                            {%endfor%}    
+                            <!--</div> end content_stats -->
+                             
                     </div>  <!-- end widget body -->
                                                 
                 
@@ -85,9 +77,7 @@
         
 
         
-        <script src="{% static "js/plugin/sparkline/jquery.sparkline.min.js" %}"></script>
-        <script src="{% static "js/functions_stats_by_topic.js" %}"></script>
-
+          <script src="{% static "js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js" %}"></script>
 
                 <!-- BOOTSTRAP JS -->
         
