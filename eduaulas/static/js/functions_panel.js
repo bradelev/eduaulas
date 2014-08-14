@@ -195,7 +195,7 @@ function load_units(){
 
     $('#select_unit').change(get_students_data);
    
-    setInterval(get_students_data, 3000000);
+    setInterval(get_students_data, 60000);
     
  
 

@@ -179,12 +179,15 @@ def stats_by_learning_profiles(request,code):
 	average_socio_affective_percentage=0
 	quantity_results=0		
 	students_results= Result.objects.filter(person__student__class_room__code=code)
-	#students = Result.objects.filter(person__student__class_room__code=code).distinct()
-	#print len(students)
 
-	#students = Student.objects.filter(class_room=code,)
-
-
+	
+	quantity_students = 0
+	students = Student.objects.filter(class_room=code)
+	for s in students:
+		res = Result.objects.filter(person=s)
+		if res.exists():
+			quantity_students = quantity_students + 1
+	
 	if students_results.exists():
 		for p in students_results:
 			quantity_results = quantity_results + 1
@@ -215,8 +218,11 @@ def stats_by_topics(request,code):
 	average_points_subject=0	
 	quantity_results = 0	
 	quantity_results_subject = 0	
+	students = Student.objects.filter(class_room=code)
 	try:
+
 		for sb in subjects:
+			quantity_students = 0
 			average_points_subject=0
 			points=0
 			quantity_results_subject = 0
@@ -227,13 +233,19 @@ def stats_by_topics(request,code):
 				quantity_results_subject = quantity_results_subject +1	
 				points += r.points
 			
-			if quantity_results != 0:		
+			if quantity_results_subject != 0:		
 				average_points_subject = points/quantity_results_subject
+
+			for s in students:
+				res = Result.objects.filter(person=s,exercise__unit__subject__id=sb.id)
+				if res.exists():
+					quantity_students = quantity_students + 1
 
 			dictionary_subjects_average [sb.name]={		
 
 				"average": average_points_subject * 100 +1 ,
-				"quantity_results_subject": quantity_results_subject 				
+				"quantity_results_subject": quantity_results_subject, 	
+				"quantity_students": quantity_students			
 			}
 
 		type = "success"	

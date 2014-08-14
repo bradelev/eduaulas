@@ -243,7 +243,7 @@ def load_suggestions_students(request,code):
 										
 										txt = ''
 										
-							else:
+							if r.points <= teacher_config.incorrect_points:
 								bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
 								if bad_exercises.exists():
 
