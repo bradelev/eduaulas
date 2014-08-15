@@ -10,8 +10,43 @@ function ini(){
   $('#dlt_classroom').click(delete_classroom);
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
- 
+  $('#btn_update_techer_info').click(update_techer_info);
  }
+
+
+
+function update_techer_info(){
+  var name = $("#name").val();
+  var last_name = $("#last_name").val();
+  var user = $("#user").val();
+  var email = $("#email").val();
+
+
+  var tok = $("#token").attr("value");
+
+  var query2 = $.ajax({
+    url:"/actualizar_datos/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          name:name,
+          last_name:last_name,
+          user:user,
+          email:email,
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+
+    }, 
+
+    "success":function(data){
+       // draw_table_classrooms(data);
+       
+       
+      }
+
+    })
+  
+}/*close function update_techer_info*/
 
 function edit_or_save(){
 
@@ -45,7 +80,7 @@ function create_classroom_table() {
 
     "success":function(data){
         draw_table_classrooms(data);
-        $('#dt_classroom').dataTable();
+       // $('#dt_classroom').dataTable();
        
       }
 

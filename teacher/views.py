@@ -104,3 +104,27 @@ def register_success(request):
     except:
         username = ""
     return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
+
+def update_teacher_info(request):    
+
+    
+    message=''
+    type=''
+
+    try:
+        if request.POST:
+            name =request.POST['name']    
+            last_name = request.POST['last_name']             
+            email = request.POST['email']             
+            user = request.POST['user']             
+            print name, lastname, email, user
+
+    except Teacher.DoesNotExist:
+        message = "No hay aulas"
+
+    result = simplejson.dumps({
+                    
+                    "message":message,
+                    "type":type,
+            }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')

@@ -41,106 +41,17 @@
 					<button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" id="add_classroom">Agregar Aula</button>
 				</div>
 				
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-										&times;
-									</button>
-									<h4 class="modal-title" id="myModalLabel">Agregar aula</h4>
-								</div><!-- modal-header -->
-								<div class="modal-body">	
-								<input type="hidden" id="token" value="{{csrf_token}}"></input>											
-									<form id="classroom-form" class="smart-form" novalidate="novalidate" method="POST">
-		                            {% csrf_token %}
-									<fieldset>
-										<div class="row">
-											<section class="col col-6">
-												<label class="select">
-													<select name="country" id="select_country" title="País">
-		                                                
-													</select> <i></i> </label>
-											</section>
-											<section class="col col-6">
-												    <label class="select">
-		                                            <select name="department" id="select_department" title="Departamento">
-		                                                
-		                                            </select> <i></i> </label>					                                    
-											</section>
-										</div> <!-- row  -->	
-										<div class="row">										
-											<section class="col col-6">
-												    <label class="select">
-		                                            <select name="school" id="select_school" title="Escuela">
-		                                                
-		                                            </select> <i></i> </label>					                                    
-											</section>
-											<section class="col col-6">
-												<label class="select">
-													<select name="grade" id="select_grade" title="Grado">
-														
-													</select> <i></i> </label>
-											</section>
-										</div><!-- row  -->
-										<div class="row">
-											<section class="col col-6">
-												<label for="className" class="input">								
-													<input maxlength= "1" type="text" name="className"  id="class_name" title='Clase'>
-												</label>
-											</section>
-											<section class="col col-6">
-												<label class="select">
-													<select name="shift" id="select_shift" title="Turno">
-														<option value="0" selected="" disabled="">Turno</option>
-														<option value="MORNING">Matutino</option>
-														<option value="EVENING">Vespertino</option>
-														<option value="FULL_TIME">Tiempo Completo</option>
-														<option value="OTHER">Otro</option>
-														
-													</select> <i></i> </label>
-											</section>
-										</div>	<!-- row  -->	
-									</fieldset>
-									<div class="modal-footer">
-										<footer>
-											
-											<button type="submit" class="btn btn-primary" id="save">
-												Guardar
-											</button>
-										</footer>
-								</form>
-							</div><!-- modal-footer -->
-						</div><!-- modal-body -->
-					</div><!-- modal-content -->																								
-				</div><!-- /.modal-dialog -->
-			</div>
-			<!-- Aulas *******************************************************************************************-->
-				<!-- widget grid -->
-				<section id="widget-grid" class="">									
-									
-					<!-- row -->
-					<div class="row">
-							<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-								<header>
-									<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-									<h2>Mis Aulas </h2>	
+				
+
+
 			
-								</header>
-							</div>																				<!--  -->	
-					</div><!-- row -->
-								
-					<div class="jarviswidget-editbox">
-						<!-- This area used as dropdown edit box -->				
-					</div><!-- end widget edit box -->
-																																			
-					<!-- widget content -->
-					<div class="widget-body no-padding">
-						<div class="widget-body-toolbar">
-
-						</div>
-	
-
+			<!--Aulas *******************************************************************************************-->
+				<!-- widget grid -->
+											
+	<div class="well no-padding">								
+					<header class= "header_classroom">
+						<h6>Mis Aulas </h6>				
+					</header>																																										
 
 						<table id="dt_classroom" class="table table-striped table-bordered table-hover">
 							<thead>
@@ -159,16 +70,218 @@
 							</tbody>
 						</table>
 
-					</div><!-- end widget content -->					
-
-				</section><!-- end widget grid -->
+					<!-- </div>end widget content -->					
+		</div>			
 				
+				<div id="teacher" class="row">
+						<div id = "teacher_configuration_info" class="well no-padding">
+							<form id="smart-form-register" class="smart-form client-form" method="post">
+									{% csrf_token %}
+									<header class="header_update_teacher_configuration">
+										<h6>Configuración</h6> 
+									</header>
+
+									<fieldset id="update_techaer_first">
+										<section>
+											<label class="input"> <i class="icon-append fa fa-cogs "></i>
+												<input type="text" name="config1" placeholder="Puntos correctos">
+												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma correcta</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa  fa-cogs"></i>
+												<input name="config2" placeholder="Puntos incorrectos">
+												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma incorrecta</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-cogs "></i>
+												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="">
+												<b class="tooltip tooltip-bottom-right">Cantidad de ejercicios para poder evaluar a un alumno.</b> </label>
+										</section>
+
+										
+									</fieldset>
+
+									<footer>
+										<button type="submit" class="btn btn-primary" id = "btn_sub">
+											Guardar
+										</button>
+									</footer>
+
+									<div class="message">
+										<i class="fa fa-check"></i>
+										{% if registered %}
+										<p>
+											{{ msg }}
+										</p>
+										{% endif %}
+									</div>
+								</form>
+						</div> 
+						<div id = "teacher_info" class="well no-padding">
+
+								<form id="smart-form-register" class="smart-form client-form" method="post">
+									{% csrf_token %}
+									<header class="header_update_teacher">
+									<h6>Actualizar datos</h6>
+									</header>
+
+									<fieldset id="update_techaer_first">
+										<section >
+											<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="username" placeholder="Usuario" id="user" value="{{teacher.user}}">
+												<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-envelope"></i>
+												<input type="email" name="email" placeholder="Correo electrónico" id = "email" value="{{teacher.user.email}}">
+												<b class="tooltip tooltip-bottom-right">Necesario para verificar su cuenta</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input type="password" name="password" placeholder="Contraseña" id="password">
+												<b class="tooltip tooltip-bottom-right">Contraseña que utilizará para registrarse</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input type="password" name="passwordConfirm" placeholder="Confirmar contraseña">
+												<b class="tooltip tooltip-bottom-right">Escriba la misma contraseña que en el campo anterior, verificaremos si hay posibles errores</b> </label>
+										</section>
+									</fieldset>
+
+									<fieldset id="update_techaer_second">
+										<div class="row">
+											<section >
+												<label class="input">
+													<input type="text" name="firstname" id="name" placeholder="Nombre" value="{{teacher.name}}">
+												</label>
+											</section>
+											<section >
+												<label class="input">
+													<input type="text" name="lastname" placeholder="Apellido" id ="last_name" value="{{teacher.last_name}}">
+												</label>
+											</section>
+										</div>
+
+										<div class="row">
+											<section >
+												<label class="select">
+													<select name="gender" value= "{{teacher.gender}}">
+														<option value="0" selected="" disabled="">Sexo</option>
+														<option value="1">Masculino</option>
+														<option value="2">Femenino</option>
+														<option value="3">No deseo contestar</option>
+													</select> <i></i>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section >
+												<label class="input"> <i class="icon-append fa fa-calendar"></i>
+													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth" value= "{{teacher.date_of_birth}}">
+												</label>
+											</section>
+										</div>
+									</fieldset>
+									<footer>
+										<button class="btn btn-primary" id = "btn_update_techer_info">
+											Modificar
+										</button>
+									</footer>
+
+									<div class="message">
+										<i class="fa fa-check"></i>
+										{% if registered %}
+										<p>
+											{{ msg }}
+										</p>
+										{% endif %}
+									</div>
+								</form>
+						</div> 		
+					</div> <!-- close teacher_info -->
+				</div>	<!-- close teacher -->
+				<div class="clear">
+					
+				</div>
 			</div><!-- END MAIN CONTENT -->
-			
+					
 		</div><!-- END MAIN PANEL -->
-
-
-
+<!-- *********************************************************************************************************************************-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Agregar aula</h4>
+			</div><!-- modal-header -->
+			<div class="modal-body">	
+				<input type="hidden" id="token" value="{{csrf_token}}"></input>											
+				<form id="classroom-form" class="smart-form" novalidate="novalidate" method="POST">
+	            	{% csrf_token %}
+					<fieldset>
+						<div class="row">
+							<section class="col col-6">
+								<label class="select">
+								<select name="country" id="select_country" title="País">	                                
+								</select> <i></i> </label>
+							</section>
+							<section class="col col-6">
+							    <label class="select">
+	                            <select name="department" id="select_department" title="Departamento">
+	                                
+	                            </select> <i></i> </label>					                                    
+							</section>
+						</div> <!-- row  -->	
+						<div class="row">										
+							<section class="col col-6">
+							    <label class="select">
+	                            <select name="school" id="select_school" title="Escuela">                                
+	                            </select> <i></i> </label>					                                    
+							</section>
+							<section class="col col-6">
+								<label class="select">
+								<select name="grade" id="select_grade" title="Grado">								
+								</select> <i></i> </label>
+							</section>
+						</div><!-- row  -->
+						<div class="row">
+							<section class="col col-6">
+								<label for="className" class="input">								
+								<input maxlength= "1" type="text" name="className"  id="class_name" title='Clase'>
+								</label>
+							</section>
+							<section class="col col-6">
+								<label class="select">
+									<select name="shift" id="select_shift" title="Turno">
+										<option value="0" selected="" disabled="">Turno</option>
+										<option value="MORNING">Matutino</option>
+										<option value="EVENING">Vespertino</option>
+										<option value="FULL_TIME">Tiempo Completo</option>
+										<option value="OTHER">Otro</option>
+									</select> <i></i> </label>
+							</section>
+						</div>	<!-- row  -->	
+					</fieldset>
+					<div class="modal-footer">
+						<footer>					
+							<button type="submit" class="btn btn-primary" id="save">
+								Guardar
+							</button>
+						</footer>
+					</div><!-- modal-footer -->	
+				</form>		
+			</div><!-- modal-body -->
+		</div><!-- modal-content -->																								
+	</div><!-- /.modal-dialog -->
+</div><!--modal fade-->
+<!-- *********************************************************************************************************************************-->
 <div class="modal fade" id="modal_dlt_classroom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -201,7 +314,7 @@
 		</div><!-- modal-body -->
 	</div><!-- modal-content -->																								
 </div><!-- /.modal-dialog -->
-
+<!-- *********************************************************************************************************************************-->
 {% endblock %}
 
 {% block scripts %}  
