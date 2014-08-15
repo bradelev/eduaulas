@@ -28,9 +28,12 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 @login_required(login_url='/login/')
 def ini(request):
+    return render_to_response('classroom_list.html', context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
+def ini_redirect(request):
+    return HttpResponseRedirect("/aulas/lista/")
 
-	return render_to_response('classroom_list.html', context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def load_classroom(request):
