@@ -115,7 +115,10 @@
 					</div><!-- modal-content -->																								
 				</div><!-- /.modal-dialog -->
 			</div>
-			<!-- Aulas *******************************************************************************************-->
+
+
+			
+			<!--Aulas *******************************************************************************************-->
 				<!-- widget grid -->
 				<section id="widget-grid" class="">									
 									
@@ -130,9 +133,6 @@
 							</div>																				<!--  -->	
 					</div><!-- row -->
 								
-					<div class="jarviswidget-editbox">
-						<!-- This area used as dropdown edit box -->				
-					</div><!-- end widget edit box -->
 																																			
 					<!-- widget content -->
 					<div class="widget-body no-padding">
@@ -162,9 +162,140 @@
 					</div><!-- end widget content -->					
 
 				</section><!-- end widget grid -->
-				
+				<div id="teacher">
+						<div id = "teacher_configuration_info" class="well no-padding">
+							<form id="smart-form-register" class="smart-form client-form" method="post">
+									{% csrf_token %}
+									<header>
+										Configuración
+									</header>
+
+									<fieldset id="update_techaer_first">
+										<section>
+											<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="config1" placeholder="Puntos correctos">
+												<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-envelope"></i>
+												<input name="config2" placeholder="Puntos incorrectos">
+												<b class="tooltip tooltip-bottom-right">Necesario para verificar su cuenta</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="">
+												<b class="tooltip tooltip-bottom-right">Contraseña que utilizará para registrarse</b> </label>
+										</section>
+
+										
+									</fieldset>
+
+									<footer>
+										<button type="submit" class="btn btn-primary" id = "btn_sub">
+											Guardar
+										</button>
+									</footer>
+
+									<div class="message">
+										<i class="fa fa-check"></i>
+										{% if registered %}
+										<p>
+											{{ msg }}
+										</p>
+										{% endif %}
+									</div>
+								</form>
+						</div> 
+						<div id = "teacher_info" class="well no-padding">
+
+								<form id="smart-form-register" class="smart-form client-form" method="post">
+									{% csrf_token %}
+									<header>
+										Actualizar datos
+									</header>
+
+									<fieldset id="update_techaer_first">
+										<section>
+											<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="username" placeholder="Usuario" value="{{teacher.user}}">
+												<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-envelope"></i>
+												<input type="email" name="email" placeholder="Correo electrónico" value="{{teacher.user.email}}">
+												<b class="tooltip tooltip-bottom-right">Necesario para verificar su cuenta</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input type="password" name="password" placeholder="Contraseña" id="password">
+												<b class="tooltip tooltip-bottom-right">Contraseña que utilizará para registrarse</b> </label>
+										</section>
+
+										<section>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input type="password" name="passwordConfirm" placeholder="Confirmar contraseña">
+												<b class="tooltip tooltip-bottom-right">Escriba la misma contraseña que en el campo anterior, verificaremos si hay posibles errores</b> </label>
+										</section>
+									</fieldset>
+
+									<fieldset id="update_techaer_second">
+										<div class="row">
+											<section class="col col-6">
+												<label class="input">
+													<input type="text" name="firstname" placeholder="Nombre" value="{{teacher.name}}">
+												</label>
+											</section>
+											<section class="col col-6">
+												<label class="input">
+													<input type="text" name="lastname" placeholder="Apellido" value="{{teacher.last_name}}">
+												</label>
+											</section>
+										</div>
+
+										<div class="row">
+											<section class="col col-10">
+												<label class="select">
+													<select name="gender" value= "{{teacher.gender}}">
+														<option value="0" selected="" disabled="">Sexo</option>
+														<option value="1">Masculino</option>
+														<option value="2">Femenino</option>
+														<option value="3">No deseo contestar</option>
+													</select> <i></i>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="input"> <i class="icon-append fa fa-calendar"></i>
+													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth" value= "{{teacher.date_of_birth}}">
+												</label>
+											</section>
+										</div>
+									</fieldset>
+									<footer>
+										<button type="submit" class="btn btn-primary" id = "btn_sub">
+											Modificar
+										</button>
+									</footer>
+
+									<div class="message">
+										<i class="fa fa-check"></i>
+										{% if registered %}
+										<p>
+											{{ msg }}
+										</p>
+										{% endif %}
+									</div>
+								</form>
+						</div> 		
+					</div> <!-- close teacher_info -->
+				</div>	<!-- close teacher_info -->
 			</div><!-- END MAIN CONTENT -->
-			
+					
 		</div><!-- END MAIN PANEL -->
 
 

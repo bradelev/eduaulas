@@ -105,5 +105,38 @@
 #dt_results{
 
 
-	width: 500px;
+	width: 700px;
+}
+
+#teacher{
+	padding-top: 50px;
+
+}
+#teacher_configuration_info{
+
+	float: right;
+	margin-right: 50px;
+	
+}
+
+#teacher_info{
+
+	float: left;
+	
+}
+
+#update_techaer_second{
+
+	float: right;
+	margin-right: 0px;
+}
+
+#update_techaer_first{
+
+	float: left;
+}
+
+#btn_sub{
+
+	
 }

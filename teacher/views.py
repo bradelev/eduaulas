@@ -104,3 +104,26 @@ def register_success(request):
     except:
         username = ""
     return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
+
+def update_teacher_info(request):    
+
+        message = ""
+        type = "error"
+        
+        try:
+            if request.POST:
+                
+                code =request.POST['code'] 
+
+                type = "success"
+               
+
+                
+        except Teacher.DoesNotExist:
+                message = "Error al modificar datos"
+        result = simplejson.dumps({
+                        
+                        "message":message,
+                        "type":type,
+                }, cls = LazyEncoder)
+        return HttpResponse(result, mimetype = 'application/javascript')
