@@ -72,7 +72,8 @@ def load_filters_unit(request,code):
 			
 			id_subject =request.POST['id_subject']			
 			s = Subject.objects.get(pk=id_subject)
-			var_units = Unit.objects.filter(subject=s)
+			c = ClassRoom.objects.get(code=code)
+			var_units = Unit.objects.filter(subject=s, grade=c.grade)
 						
 			for p in var_units:				
 				dictionary_units[p.id] = {

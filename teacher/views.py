@@ -107,23 +107,23 @@ def register_success(request):
 
 def update_teacher_info(request):    
 
-        message = ""
-        type = "error"
-        
-        try:
-            if request.POST:
-                
-                code =request.POST['code'] 
+    message=''
+    type=''
 
-                type = "success"
-               
+    try:
+        if request.POST:
+            name =request.POST['name']    
+            last_name = request.POST['last_name']             
+            email = request.POST['email']             
+            user = request.POST['user']             
+            print name, lastname, email, user
 
-                
-        except Teacher.DoesNotExist:
-                message = "Error al modificar datos"
-        result = simplejson.dumps({
-                        
-                        "message":message,
-                        "type":type,
-                }, cls = LazyEncoder)
-        return HttpResponse(result, mimetype = 'application/javascript')
+    except Teacher.DoesNotExist:
+        message = "No hay aulas"
+
+    result = simplejson.dumps({
+                    
+                    "message":message,
+                    "type":type,
+            }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')

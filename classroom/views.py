@@ -14,6 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
+from configurations.models import Configuration
+from teacher.models import Teacher
 
 
 # Create your views here 
@@ -28,9 +30,11 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 @login_required(login_url='/login/')
 def ini(request):
+    userid = request.user.id
+    teacher_config = Configuration.objects.get(teacher=userid)
+    teacher = Teacher.objects.get(pk=userid)
 
-
-	return render_to_response('classroom_list.html', context_instance = RequestContext(request))
+    return render_to_response('classroom_list.html',{"teacher":teacher}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def load_classroom(request):
@@ -101,7 +105,7 @@ def classroom_list(request):
         
        
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def classroom_save_add(request):
     print('entre al save')
     message = ""
@@ -109,15 +113,15 @@ def classroom_save_add(request):
     
     try:
         if request.is_ajax():
+            print 'soy ajax'
             if request.method == 'POST':
-            
-                print('entre al post')
-                """country =request.POST['select_country']             
-                                                                department = request.POST['select_department']             
-                                                                school= request.POST['select_school']            
-                                                                grade= request.POST['select_grade'] 
-                                                                className=request.POST['class_name']           
-                                                                shift=request.POST['select_shift']    """
+                print 'soy post'
+                country =request.POST['select_country']             
+                department = request.POST['select_department']             
+                school= request.POST['select_school']            
+                grade= request.POST['select_grade'] 
+                className=request.POST['class_name']           
+                shift=request.POST['select_shift'] 
                 
                 country = 1            
                 department = 1            
@@ -142,18 +146,21 @@ def classroom_save_add(request):
                 print('hola 6')   
                 #c.save()
                 print('hola 7') 
+              
                 type = "success"
-                print('hola 8') 
+              
     except ClassRoom.DoesNotExist:
-        print('entre a la execpcion')
+      
         message = "No hay alumnos"
 
     result = simplejson.dumps({            
             "message":message,
             "type":type,
         }, cls = LazyEncoder)
-    return HttpResponse(result, content_type = 'application/javascript')
+    return HttpResponse(result, mimetype = 'application/javascript')
   
+
+
 @login_required(login_url='/login/')
 def classroom_save_edit(request):
     message = ""

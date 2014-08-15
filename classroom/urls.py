@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 
-	#url(r'$', 'classroom.views.ini'),
+	#url(r'^$', 'classroom.views.ini_redirect'),
 	url(r'lista/$', 'classroom.views.ini'),
 	url(r'departments/$', 'classroom.views.load_departments'),
 	url(r'schools/$', 'classroom.views.load_schools'),
