@@ -6,6 +6,7 @@ from django.conf import settings
 from classroom.models import  ClassRoom, Grade
 from exercise.models import Exercise, Lecture, Subject, Unit, Area
 from django.utils import simplejson
+import json
 from django.http import *
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import Promise
@@ -16,7 +17,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-class LazyEncoder(simplejson.JSONEncoder):
+class LazyEncoder(json.JSONEncoder):
 	"""Encodes django's lazy i18n strings."""
     
    
@@ -49,7 +50,7 @@ def load_filters_subject(request,code):
 				}
 	except ClassRoom.DoesNotExist:
 	        message = "No hay aulas"
-	result = simplejson.dumps({
+	result = json.dumps({
 	                "dictionary_subjects":dictionary_subjects,
 	                "code":code,
 	                "message":message,
@@ -68,14 +69,15 @@ def load_filters_unit(request,code):
 		if request.POST:
 			id_subject =request.POST['id_subject']			
 			s = Subject.objects.get(pk=id_subject)
-			var_units = Unit.objects.filter(subject=s)
+			c = ClassRoom.objects.get(code=code)
+			var_units = Unit.objects.filter(subject=s, grade=c.grade)
 			for p in var_units:				
 				dictionary_units[p.id] = {
 					"name": p.name,
 					"id": p.id
 				}
 			type = "success"	
-			result = simplejson.dumps({
+			result = json.dumps({
 			"dictionary_units":dictionary_units,
 			"message":message,
 			"type":type,
@@ -83,6 +85,8 @@ def load_filters_unit(request,code):
 			return HttpResponse(result, mimetype = 'application/javascript')
 	except Unit.DoesNotExist:
 		message = "No hay unidades"
+	except:
+		message = "Otro error"
 	return HttpResponse(result, mimetype = 'application/javascript')
 
 
@@ -143,7 +147,7 @@ def list_contents(request,code):
 		message = "Todo bien"
 	except ClassRoom.DoesNotExist:
 	        message = "No hay aulas"
-	result = simplejson.dumps({
+	result = json.dumps({
 	        "dictionary_experiments":dictionary_experiments,
 			"dictionary_lectures":dictionary_lectures,
 			"dictionary_exercises":dictionary_exercises,
@@ -179,7 +183,7 @@ def send_comment(request):
         print('entre a la execpcion')
         message = "No hay docente"
 
-    result = simplejson.dumps({            
+    result = json.dumps({            
             "message":message,
             "type":type,
         }, cls = LazyEncoder)

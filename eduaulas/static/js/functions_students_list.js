@@ -73,7 +73,32 @@ if(data['type'] == 'success'){
 
       $("#dt_students > tbody ").html(output);
       $("#dt_students > thead").html(output_thead);
-      $("#dt_students").dataTable();
+      $("#dt_students").dataTable({
+
+            "language":{
+              "emptyTable":     "No hay datos en la tabla",
+              "info":           "Mostrando _START_ a _END_ de _TOTAL_ datos",
+              "infoEmpty":      "Mostrando 0 a 0 de 0 datos",
+              "infoFiltered":   "(filtrado de _MAX_ entradas)",
+              "infoPostFix":    "",
+              "thousands":      ",",
+              "lengthMenu":     "Mostrando _MENU_ entradas",
+              "loadingRecords": "Cargando...",
+              "processing":     "Procesando...",
+              "search":         "Buscar:",
+              "zeroRecords":    "No hubo coincidencias",
+              "paginate": {
+                  "first":      "Primero",
+                  "last":       "Ultimo",
+                  "next":       "Siguiente",
+                  "previous":   "Previo"
+              },
+              "aria": {
+                  "sortAscending":  ": ordenar la columna en forma ascendente",
+                  "sortDescending": ": ordenar la columna en forma descendente"
+              }
+            }
+          });
       $("#more_info_stats_students").html(txt);
    
     }
