@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.base import TemplateView
 
 urlpatterns = patterns('',
 	
@@ -17,5 +18,5 @@ urlpatterns = patterns('',
 	url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
-
+    
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 	

@@ -16,7 +16,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 from configurations.models import Configuration
 from teacher.models import Teacher
-
+#from django.http import Http500
 
 # Create your views here 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -105,96 +105,75 @@ def classroom_list(request):
         
        
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def classroom_save_add(request):
     print('entre al save')
     message = ""
     type = "error"
     
     try:
-        if request.is_ajax():
-            print 'soy ajax'
-            if request.method == 'POST':
-                print 'soy post'
-                country =request.POST['select_country']             
+        if request.is_ajax():           
+            if request.method == 'POST':                
+                country =request.POST['select_country']                       
                 department = request.POST['select_department']             
-                school= request.POST['select_school']            
+                school= request.POST['select_school']         
                 grade= request.POST['select_grade'] 
                 className=request.POST['class_name']           
                 shift=request.POST['select_shift'] 
-                
-                country = 1            
-                department = 1            
-                school= 1         
-                grade= 1
-                className='Q'          
-                shift='OHTER'  
+
                 c= ClassRoom()
-                c.code = generate_classroom_code()
-                print c.code
-                print('hola uno')
+                code = generate_classroom_code()
+                print code, 'code'
+                c.code= code
                 c.class_letter = className
-                print('hola dos')
                 c.shift = shift
-                print('hola tres')
                 g = Grade.objects.get(pk=grade)
                 c.grade=g
-                print('hola cuatro')
                 s= School.objects.get(pk=school)
-                print('hola cinco')
                 c.school=s
-                print('hola 6')   
-                #c.save()
-                print('hola 7') 
-              
+                c.save()             
                 type = "success"
               
-    except ClassRoom.DoesNotExist:
-      
-        message = "No hay alumnos"
-
+    except: 
+        
+        print 'Se ha producido  un error'
+        message = "erorr"
+        
     result = simplejson.dumps({            
-            "message":message,
-            "type":type,
-        }, cls = LazyEncoder)
+                 "message":message,
+                 "type":type,
+             }, cls = LazyEncoder)
     return HttpResponse(result, mimetype = 'application/javascript')
-  
+         
 
 
 @login_required(login_url='/login/')
 def classroom_save_edit(request):
     message = ""
     type = "error"
-    print('entre al save delete')
+    print('entre al save edit')
     try:
 
         if request.POST:
             print('entre al post')
-            country =request.POST['select_country']             
-            department = request.POST['select_department']             
-            school= request.POST['select_school']            
+            country =request.POST['select_country']           
+            department = request.POST['select_department']    
+            school= request.POST['select_school']
             grade= request.POST['select_grade'] 
-            className=request.POST['class_name']           
-            shift=request.POST['select_shift']                
+            className=request.POST['class_name']      
+            shift=request.POST['select_shift']
             code=request.POST['code_class'] 
-            
             c = ClassRoom.objects.get(pk=code)
-            print('hola uno')
             c.class_letter = className
-            print('hola dos')
             c.shift = shift
-            print('hola tres')
             g = Grade.objects.get(pk=grade)
             c.grade=g
-            print('hola cuatro')
             s= School.objects.get(pk=school)
-            print('hola cinco')
             c.school=s
-            print('hola 6')   
             c.save()
             
             type = "success"
-    except ClassRoom.DoesNotExist:
+    except: 
         print('entre a la execpcion')
         message = "No hay alumnos"
 
@@ -384,8 +363,11 @@ def classroom_delete(request):
     return HttpResponse(result, mimetype = 'application/javascript')
 
 
-@login_required(login_url='/login/')
-def generate_classroom_code(size=6, chars=string.ascii_uppercase + string.digits):
 
-    return ''.join(random.choice(chars) for _ in range(size))
+def generate_classroom_code():
+    code = ''
+    chars=string.ascii_uppercase + string.digits
+    size=5
+    code = ''.join(random.choice(chars) for _ in range(size))
+    return code
 	

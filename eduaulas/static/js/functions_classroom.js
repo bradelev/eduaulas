@@ -6,7 +6,7 @@ function ini(){
   create_classroom_table();
   $('#add_classroom').click(get_data_for_selects_classroom);
   var editing_classroom;
-  $('#subtmit_classroom').click(save_classroom_add);
+  //$('#subtmit_classroom').submit(save_classroom_add);
   $('#dlt_classroom').click(delete_classroom);
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
@@ -51,16 +51,16 @@ function update_techer_info(){
 function edit_or_save(){
 
   var action = $('#action').val(); 
-// alert(action);
+ //alert(action);
   if (action==1){
 
       save_classroom_add();
   }
   if (action==2){
-
+     
       save_classroom_edit();
   }
-
+  alert(action);
 }
 
 function create_classroom_table() {
@@ -128,6 +128,7 @@ function draw_table_classrooms (data) {
 function load_classroom_code(){
 
     var code_classroom= $(this).val();
+
     var tok = $("#token").attr("value");
      $.ajax({
       beforeSend: function(){
@@ -198,7 +199,6 @@ function load_classroom(){
   editing_classroom= true;
   var tok = $("#token").attr("value");
   var code_classroom= $(this).val();
-  
     var query = $.ajax({
     url:"cargar/aula/",
     type:'POST',
@@ -271,8 +271,8 @@ function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,cou
 
 
 function load_selects_classroom(data,editing_classroom,grade_id,school_id,country_id,department_id,code_class){
-    
-   $('#subtmit_classroom_edit').click(function(){save_classroom_edit(code_class)});
+    alert('loaddd')
+   $('#save').click(function(){save_classroom_edit(code_class)});
     var output_select_country = "";
     output_select_country += '<option value="0" selected="" disabled="">Pais</option>'
     for (var y in data["dictionary_countrys"]){
@@ -388,7 +388,7 @@ function load_selects_schools(editing_classroom,school_id){
 
 
 function save_classroom_add() {
-
+  alert('saveeeee');
   var tok = $("#token").attr("value");
   valido = true;
   var select_country = $('#select_country').val();
@@ -405,13 +405,11 @@ function save_classroom_add() {
   valido *= (select_shift != null);
   
     if (valido){
-     // alert('hola');
       $.ajax({
         url:"/aulas/lista/agregar/aula/",
         type: "POST",
         dataType: 'json',      
         data:{
-
              
               csrfmiddlewaretoken: tok,
               state:'inactive',
@@ -434,7 +432,8 @@ function save_classroom_add() {
 }/*cierro function*/
 
 function save_classroom_edit(code_class) {
-    
+    alert('editandoooooooooooooooo');
+
     var tok = $("#token").attr("value");
     valido = true;
     var select_country = $('#select_country').val();
