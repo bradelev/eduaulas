@@ -27,7 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 #CSRF_COOKIE_DOMAIN = '127.0.0.1:8080'
 
@@ -74,9 +74,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eduaulas_db',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'USER': 'ipanel_root',
+        'PASSWORD': 'ipanel_pass',
+        'HOST': 'ipanel-db.cnynwpmxidse.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
 
     }
