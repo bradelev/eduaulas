@@ -7,6 +7,7 @@ from location.models import School, Department, Country
 from teacher.models import Teacher
 from student.models import Student
 from person.models import Person
+from configurations.models import Configuration
 
 
 # Register your models here.
@@ -24,3 +25,4 @@ admin.site.register(Teacher)
 admin.site.register(Student)
 admin.site.register(Grade)
 admin.site.register(ClassRoom)
+admin.site.register(Configuration)
