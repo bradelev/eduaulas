@@ -11,7 +11,7 @@ class Person(models.Model):
 	date_of_birth = models.DateField(blank=True, verbose_name=u'Fecha de nacimiento', null=True)
 	type_choices = (
 		('1', 'Masculino'), 
-		('2', 'Femenino')
+		('2', 'Femenino'),
 		('3', 'No desea responder')
 	)
 	gender = models.CharField(choices=type_choices, max_length=10, verbose_name=u'Género', null=True)
