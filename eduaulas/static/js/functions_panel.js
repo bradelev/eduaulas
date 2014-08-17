@@ -172,8 +172,6 @@ function load_units(){
           id_subject: id_subject,
           name: 'p.name',
           id:'p.id',
-          
-          
     }, 
     
     "success":function(data){
@@ -187,17 +185,13 @@ function load_units(){
         output_select_unit += "</option>";
         }/*Cierro for dictionary_subjects*/
         $("#select_unit").html(output_select_unit);
-      }
+      
 
        
-
+}
     })
 
     $('#select_unit').change(get_students_data);
-   
-    setInterval(get_students_data, 60000);
-    
- 
 
 }/*cierro funcion load_units*/
 
@@ -223,12 +217,15 @@ function get_students_data () {
           results_exist:'results_exist',
           students_exist:'students_exist',
           id:'id',
+          time_to_update_panel:'time_to_update_panel'
 
     }, 
 
     "success":function(data){
         create_table_students(data);
-       
+        var time = (data['time_to_update_panel'])*(1000*60);
+        alert(time);
+        setInterval(get_students_data, time);
        $('#refresh_results').removeAttr('disabled','disabled');
       }
 

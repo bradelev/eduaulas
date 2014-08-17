@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
-
+from teacher.models import Teacher
 # Create your views here.
 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -63,7 +63,7 @@ def load_filters_subject(request,code):
 
 @login_required(login_url='/login/')
 def load_filters_unit(request,code):
-	
+	print 'cargo unidades'
 	dictionary_units = {}
 	message = ""
 	type = "error"	
@@ -74,7 +74,7 @@ def load_filters_unit(request,code):
 			s = Subject.objects.get(pk=id_subject)
 			c = ClassRoom.objects.get(code=code)
 			var_units = Unit.objects.filter(subject=s, grade=c.grade)
-						
+			
 			for p in var_units:				
 				dictionary_units[p.id] = {
 					
@@ -83,16 +83,19 @@ def load_filters_unit(request,code):
 					
 				}
 		
-			type = "success"	
-			result = simplejson.dumps({
-			"dictionary_units":dictionary_units,
-			"message":message,
-			"type":type,
-			}, cls = LazyEncoder)
-			return HttpResponse(result, mimetype = 'application/javascript')
+			type = "success"
 
 	except Unit.DoesNotExist:
 		message = "No hay unidades"
+	except:
+		message = "Hubo un error"
+		print message
+
+	result = simplejson.dumps({
+				"dictionary_units":dictionary_units,
+				"message":message,
+				"type":type,
+				}, cls = LazyEncoder)
 	return HttpResponse(result, mimetype = 'application/javascript')
 
 
@@ -105,6 +108,15 @@ def list_students(request,code):
 	results_exist = 'no'
 	students_exist = 'no'
 	try:
+		userid = request.user.id
+		teacher = Teacher.objects.get(user=userid)
+		teacher_config = Configuration.objects.get(teacher=teacher.id)
+		time_to_update_panel = teacher_config.time_to_update_panel      
+	except:
+		message="Debe loguearse como un maestro"
+		return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+
+	try:
 		if request.POST:
 			id_unit =request.POST['id_unit']
 			var_unit = Unit.objects.get(pk=id_unit)	
@@ -114,8 +126,14 @@ def list_students(request,code):
 			matriz = []
 			type = "success"
 			i=0
-			userid = request.user.id
-			teacher_config = Configuration.objects.get(teacher=userid)
+			try:
+				userid = request.user.id
+				teacher = Teacher.objects.get(user=userid)
+				teacher_config = Configuration.objects.get(teacher=teacher.id)      
+			except:
+			        message="Debe loguearse como un maestro"
+	        		return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+
 			for s in students:
 				students_exist = 'yes'
 				average = 0
@@ -177,6 +195,7 @@ def list_students(request,code):
 			"dictionary_units_exercises":dictionary_units_exercises,
 			"matriz":matriz,
 			"results_exist":results_exist,
+			"time_to_update_panel":time_to_update_panel,
 			"students_exist":students_exist,
 			"message":message,
 			"type":type,
@@ -191,8 +210,13 @@ def load_suggestions_students(request,code):
 	type = "error"
 	
 	try:
-		userid = request.user.id
-		teacher_config = Configuration.objects.get(teacher=userid)
+		try:
+			userid = request.user.id
+			teacher = Teacher.objects.get(user=userid)
+			teacher_config = Configuration.objects.get(teacher=teacher.id)      
+		except:
+				message="Debe loguearse como un maestro"
+				return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
 		if request.POST:
 			id_unit = request.POST['id_unit']
 			var_unit = Unit.objects.get(pk=id_unit)	

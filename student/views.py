@@ -14,6 +14,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 import datetime
 from configurations.models import Configuration
+from teacher.models import Teacher
 # Create your views here.
 
 class LazyEncoder(simplejson.JSONEncoder):
