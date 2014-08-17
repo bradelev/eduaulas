@@ -10,3 +10,4 @@ class Configuration(models.Model):
 	incorrect_points = models.FloatField(default = 0.3, blank = True, verbose_name=u'Puntaje ejercicio sea incorrecto')
 	correct_points = models.FloatField(default = 0.85, blank = True, verbose_name=u'Puntaje ejercicio sea correcto')
 	minimum_quantity_exercise = models.IntegerField(default = 3, blank = True, verbose_name=u'Cantidad de ejercicios minimos')
+	time_to_update_panel = models.IntegerField(default=5, blank=True, verbose_name=u'Tiempo para actualizar panel')

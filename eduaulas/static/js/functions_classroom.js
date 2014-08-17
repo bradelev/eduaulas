@@ -5,8 +5,7 @@ function ini(){
 
   create_classroom_table();
   $('#add_classroom').click(get_data_for_selects_classroom);
-  var editing_classroom;
-  //$('#subtmit_classroom').submit(save_classroom_add);
+  var editing_classroom = false
   $('#dlt_classroom').click(delete_classroom);
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
@@ -53,14 +52,14 @@ function edit_or_save(){
   var action = $('#action').val(); 
  //alert(action);
   if (action==1){
-
+     // alert(action);
       save_classroom_add();
   }
   if (action==2){
-     
+     //alert(action);
       save_classroom_edit();
   }
-  alert(action);
+  
 }
 
 function create_classroom_table() {
@@ -271,8 +270,10 @@ function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,cou
 
 
 function load_selects_classroom(data,editing_classroom,grade_id,school_id,country_id,department_id,code_class){
-    alert('loaddd')
-   $('#save').click(function(){save_classroom_edit(code_class)});
+  //  alert(editing_classroom);
+    if (editing_classroom == true){
+       $('#save').click(function(){save_classroom_edit(code_class)});
+       }
     var output_select_country = "";
     output_select_country += '<option value="0" selected="" disabled="">Pais</option>'
     for (var y in data["dictionary_countrys"]){
@@ -388,7 +389,7 @@ function load_selects_schools(editing_classroom,school_id){
 
 
 function save_classroom_add() {
-  alert('saveeeee');
+ // alert('saveeeee');
   var tok = $("#token").attr("value");
   valido = true;
   var select_country = $('#select_country').val();
@@ -432,7 +433,7 @@ function save_classroom_add() {
 }/*cierro function*/
 
 function save_classroom_edit(code_class) {
-    alert('editandoooooooooooooooo');
+  // alert('editandoooooooooooooooo');
 
     var tok = $("#token").attr("value");
     valido = true;

@@ -368,6 +368,14 @@ def generate_classroom_code():
     code = ''
     chars=string.ascii_uppercase + string.digits
     size=5
-    code = ''.join(random.choice(chars) for _ in range(size))
+    existe = True 
+    while existe:        
+        code = ''.join(random.choice(chars) for _ in range(size))
+        try:
+            classroom = ClassRoom.objects.get(pk=code)
+            print 'NO EXISTE CODIGO'
+        except:
+            print 'EXISTE CODIGO'
+            existe = False    
     return code
 	
