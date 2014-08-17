@@ -104,28 +104,54 @@ def students_info(request,code):
 @login_required(login_url='/login/')
 def student_info(request,code,id):
 	years = ''
-
+	quantity_results = 0
+	metacognitive_percentage = 0
+	cognitive_percentage = 0
+	socio_affective_percentage = 0
+	sub = Subject.objects.all()
+	average_metacognitive_percentage = 0
+	average_cognitive_percentage = 0
+	average_socio_affective_percentage = 0
+	student_results = None
 	dictionary_subjects_average={}
-	student = Student.objects.get(pk=id)
-	if not (student.date_of_birth is None):
+	student_gender = ''
+	try:
+		student = Student.objects.get(pk=id)
+	except Student.DoesNotExist:
+		message = "No existe alumno"
+		print message
+	try:
+	#if not (student.date_of_birth is None):
 		diff = (datetime.date.today() - student.date_of_birth).days
 		years = str(int(diff/365))
-
+	except:
+		message = 'Fechas de nacimiento vacia'
+		print message
+		years = ''
+			
 	if student.gender == '1':
-		student_gender = 'Femenino'
-	else:
 		student_gender = 'Masculino'
+	if student.gender == '2':
+		student_gender = 'Masculino'
+	if student.gender == '3':	
+		student_gender = '---------'
 	try:
-		userid = request.user.id
-		teacher_config = Configuration.objects.get(teacher=userid)
-		quantity_results = 0
-		metacognitive_percentage = 0
-		cognitive_percentage = 0
-		socio_affective_percentage = 0
-		sub = Subject.objects.all()
-		average_metacognitive_percentage = 0
-		average_cognitive_percentage = 0
-		average_socio_affective_percentage = 0
+		try:
+			userid = request.user.id
+			print 'tres', userid
+			teacher = Teacher.objects.get(user=userid)
+
+			print 'dos'
+			teacher_config = Configuration.objects.get(teacher=teacher.id)     
+			print 'unooo'
+		except Teacher.DoesNotExist:
+			message="No existe meastro"
+			print message					
+		except:
+				message="Debe loguearse como un maestro"
+				return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+		
+		
 		
 		for s in sub:			
 			points = 0
@@ -147,7 +173,7 @@ def student_info(request,code,id):
 				"correct_points":teacher_config.correct_points * 100,				
 			}
 								
-		print dictionary_subjects_average	
+			
 		student_results= Result.objects.filter(person=student)
 
 		for r in student_results:
@@ -162,8 +188,9 @@ def student_info(request,code,id):
 			average_socio_affective_percentage= socio_affective_percentage/quantity_results
 
 
-	except Result.DoesNotExist:
-	        message = "El alumno no tiene ejercicios"
+	except:
+	        message = "Hubo un error"
+	        print message
 	return render_to_response('student_info.html',{"code":code,"student_results":student_results,"quantity_results":quantity_results,'list_average':dictionary_subjects_average,'years':years,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	

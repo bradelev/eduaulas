@@ -34,6 +34,7 @@ def ini(request):
         userid = request.user.id
         teacher = Teacher.objects.get(user=userid)
         teacher_config = Configuration.objects.get(teacher=teacher.id)
+       
     except:
         message="Debe loguearse como un maestro"
         return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
@@ -84,19 +85,19 @@ def classroom_list(request):
         message = ""
         type = "error"
         try:
-                classrooms = ClassRoom.objects.all()
-                type = "success"
-                for x in classrooms:                              
-                        dictionary_classrooms[x.code] = {
-                                
-                                "code": x.code,
-                                "shift": x.shift,
-                                "class_letter": x.class_letter,
-                                "grade":x.grade.name,
-                                "school": x.school.name,
+            classrooms = ClassRoom.objects.all()
+            type = "success"
+            for x in classrooms:                              
+                    dictionary_classrooms[x.code] = {
+                            
+                            "code": x.code,
+                            "shift": x.shift,
+                            "class_letter": x.class_letter,
+                            "grade":x.grade.name,
+                            "school": x.school.name,
 
-                                
-                        }
+                            
+                    }
                 
         except ClassRoom.DoesNotExist:
                 message = "No hay aulas"
