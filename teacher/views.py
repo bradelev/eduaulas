@@ -52,7 +52,8 @@ def inicio(request):
 
 def logout_view(request):
     logout(request)
-    return render_to_response('logout.html' , context_instance=RequestContext(request))
+    return HttpResponseRedirect("/login/")
+    
 
 def register(request):
     registered = False
@@ -101,6 +102,7 @@ def register(request):
 def register_success(request):
     try:
         username = request.user.username
+        return HttpResponseRedirect("/aulas/lista/")
     except:
         username = ""
     return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
