@@ -72,7 +72,7 @@ def register(request):
             dob = datetime.datetime.now().date()
 
         try:
-            t = Teacher.objects.get(username=username)
+            t = Teacher.objects.get(user__username=username)
             msg = "Ya existe un usuario con este usuario"
         except:
             user = User.objects.create_user(username,email,password)
