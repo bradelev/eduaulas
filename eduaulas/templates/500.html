@@ -1,4 +1,4 @@
-{% extends left_menu %}
+{% extends template_base %}
 {% block body %}
 {% load staticfiles %}
         {% block left_menu %}
@@ -21,11 +21,12 @@
                                     <p class="lead semi-bold">
                                         <strong>Hubo un error inesperado. Lo sentimos.</strong><br><br>
                                         <small>
-                                            Estamos trabajando para resolver el problema. Por favor espere un momento, y vuelva a intentarlo <br> 
+                                            {{message}}
+                                            <br> 
                                         </small>
                                     </p>
                                     <ul class="error-search text-left font-md">
-                                        <li><a href="javascript:void(0);"><small>Ir a aulas<i class="fa fa-arrow-right"></i></small></a></li>
+                                        <li><a href="/login"><small>Ir al login<i class="fa fa-arrow-right"></i></small></a></li>
                                         
                                     </ul>
                                 </div>

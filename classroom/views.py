@@ -30,10 +30,13 @@ class LazyEncoder(simplejson.JSONEncoder):
 
 @login_required(login_url='/login/')
 def ini(request):
-    userid = request.user.id
-    teacher = Teacher.objects.get(user=userid)
-    teacher_config = Configuration.objects.get(teacher=teacher.id)
-    
+    try:
+        userid = request.user.id
+        teacher = Teacher.objects.get(user=userid)
+        teacher_config = Configuration.objects.get(teacher=teacher.id)
+    except:
+        message="Debe loguearse como un maestro"
+        return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
 
     return render_to_response('classroom_list.html',{"teacher":teacher}, context_instance = RequestContext(request))
 
