@@ -22,10 +22,21 @@
 
 		<!-- HEADER -->
 		<header id="header">
-			
-			<h1 class="txt-color-red login-header-big">EduAulas</h1>
-	
-		</header>
+            <div id="logo-group">
+
+                <!-- PLACE YOUR LOGO HERE -->
+                  <h1><i class ="glyphicon glyphicon-th-large"></i>EduAulas</h1>
+                <!-- END LOGO PLACEHOLDER -->
+                
+                
+            </div>
+            <div class="pull-right">
+
+                Hola <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{teacher.name}} {{teacher.last_name}}</a><br>
+                <a href="/logout/">Cerrar sesión</a>
+            </div>
+            
+        </header>
 		<!-- END HEADER -->
 
 		
@@ -82,21 +93,30 @@
 
 									<fieldset id="update_techaer_first">
 										<section>
+											<label for="" class="label">Puntos correctos</label>
 											<label class="input"> <i class="icon-append fa fa-cogs "></i>
-												<input type="text" name="config1" placeholder="Puntos correctos">
+												<input type="text" name="config1" placeholder="Puntos correctos" value="{{conf.correct_points}}">
 												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma correcta</b> </label>
 										</section>
 
 										<section>
+											<label for="" class="label">Puntos incorrectos</label>
 											<label class="input"> <i class="icon-append fa  fa-cogs"></i>
-												<input name="config2" placeholder="Puntos incorrectos">
+												<input name="config2" placeholder="Puntos incorrectos" value="{{conf.incorrect_points}}">
 												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma incorrecta</b> </label>
 										</section>
 
 										<section>
+											<label for="" class="label">Cantidad minima de ejercicios</label>
 											<label class="input"> <i class="icon-append fa fa-cogs "></i>
-												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="">
+												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="" value="{{conf.minimum_quantity_exercise}}">
 												<b class="tooltip tooltip-bottom-right">Cantidad de ejercicios para poder evaluar a un alumno.</b> </label>
+										</section>
+										<section>
+											<label for="" class="label">Tiempo de actualización del panel</label>
+											<label class="input"> <i class="icon-append fa fa-cogs "></i>
+												<input  name="config3" placeholder="Tiempo de actualización del panel" id="" value="{{conf.time_to_update_panel}}">
+												<b class="tooltip tooltip-bottom-right">Tiempo para actualizar el panel de forma automática (en segundos).</b> </label>
 										</section>
 
 										

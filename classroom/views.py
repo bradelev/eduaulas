@@ -43,7 +43,7 @@ def ini(request):
         message="Debe loguearse como un maestro"
         return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
 
-    return render_to_response('classroom_list.html',{"teacher":teacher}, context_instance = RequestContext(request))
+    return render_to_response('classroom_list.html',{"teacher":teacher, "conf":teacher_config}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def load_classroom(request):
