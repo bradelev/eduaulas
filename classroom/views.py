@@ -29,6 +29,10 @@ class LazyEncoder(simplejson.JSONEncoder):
 	    return obj  
 
 @login_required(login_url='/login/')
+def ini_redirect(request):
+    return HttpResponseRedirect("/aulas/lista/")
+
+@login_required(login_url='/login/')
 def ini(request):
     try:
         userid = request.user.id

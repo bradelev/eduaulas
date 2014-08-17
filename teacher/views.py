@@ -52,7 +52,8 @@ def inicio(request):
 
 def logout_view(request):
     logout(request)
-    return render_to_response('logout.html' , context_instance=RequestContext(request))
+    return HttpResponseRedirect("/login/")
+    
 
 def register(request):
     registered = False
@@ -71,7 +72,7 @@ def register(request):
             dob = datetime.datetime.now().date()
 
         try:
-            t = Teacher.objects.get(username=username)
+            t = Teacher.objects.get(user__username=username)
             msg = "Ya existe un usuario con este usuario"
         except:
             user = User.objects.create_user(username,email,password)
@@ -101,6 +102,7 @@ def register(request):
 def register_success(request):
     try:
         username = request.user.username
+        return HttpResponseRedirect("/aulas/lista/")
     except:
         username = ""
     return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
