@@ -24,7 +24,7 @@ SECRET_KEY = '%v*rncfr(ck(1ofvb&(#^cx3xj&p)u7xj^=^g6r_n*5n3^vm_7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+    
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -72,11 +72,11 @@ WSGI_APPLICATION = 'eduaulas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eduaulas_db',
-        'USER': 'ipanel_root',
-        'PASSWORD': 'ipanel_pass',
-        'HOST': 'ipanel-db.cnynwpmxidse.us-east-1.rds.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db/eduaulas_db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'eduaulas-db.cnynwpmxidse.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
 
     }
@@ -98,9 +98,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-MEDIA_ROOT = os.path.join(RUTA_PROYECTO,'carga')
-MEDIA_URL = 'http://127.0.0.1:8080/media/'
+MEDIA_ROOT = '/srv/eduaulas/media'
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
+STATIC_ROOT = ''
+
+EDUAULAS_DIR="/srv/eduaulas/media/eduaulas"
+EDUAULAS_GIT="/srv/eduaulas/eduaulas-git"
+
+FILEBROWSER_MEDIA_ROOT="/srv/eduaulas/media"
+FILEBROWSER_DIRECTORY="cuasimodo/assets"
 
 GRAPPELLI_ADMIN_TITLE = "ADMINISTRADOR DE EDUAULAS"
 
