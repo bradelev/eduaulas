@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 	url(r'cargar/codigo_aula/$', 'classroom.views.load_classroom_code'),
 	url(r'aulas/$', 'classroom.views.classroom_list'),
 	url(r'cargar_form/$', 'classroom.views.load_classroom_form'),
+	url(r'actualizar_datos/$', 'classroom.views.update_teacher_info'),
 
 
 )

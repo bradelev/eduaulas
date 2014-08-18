@@ -7,7 +7,7 @@ import random
 import string
 from classroom.models import  ClassRoom, Grade
 from location.models import School, Country, Department
-#from django.utils import json
+import datetime
 from django.utils import simplejson
 from django.http import *
 from django.utils.translation import ugettext_lazy as _
@@ -41,32 +41,102 @@ def ini(request):
 def load_teacher(request):
     message =""
     type = "error"
-    print 'unooo'
     teacher_dic = {}
     try:
         userid = request.user.id
         teacher = Teacher.objects.get(user=userid)
         teacher_config = Configuration.objects.get(teacher=teacher.id)
-        teacher_dic[teacher.id] = {
-
-            "name":teacher.name,
-            "last_name": teacher.last_name,
-            "email": teacher.email,
-            "gender": teacher.gender,
-            "date_birth": teacher.date_of_birth,
-
-        }
+        
+        user = request.user.username
+        name = teacher.name
+        last_name = teacher.last_name
+        email = teacher.user.email
+        gender = teacher.gender
+        date_birth = str(teacher.date_of_birth)
+       
         type = "success"
+        
     except:
         message="Debe loguearse como un maestro "
         return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
     result = simplejson.dumps({
-                        "teacher":teacher_dic,
+                        "name":name,
+                        "user": user,
+                        "last_name": last_name,
+                        "email": email,
+                        "gender": gender,
+                        "date_birth":date_birth,
                         "message":message,
                         "type":type,
                 }, cls = LazyEncoder)
     return HttpResponse(result, mimetype = 'application/javascript')
 
+
+
+@login_required(login_url='/login/')
+def update_teacher_info(request):    
+    print 'updateeeeee'
+    message=''
+    type='error'
+    msg =''
+    teach = None
+    try:
+        if request.POST:
+            print 'hola unooooooooooooooxxxxxxxxxxxxxxxxxxxxxx'
+            name =request.POST['name']  
+            last_name = request.POST['last_name']          
+            email = request.POST['email']       
+            user = request.POST['user']
+            gender = request.POST['gender']
+
+            #password = request.POST['password']   
+            date_birth = request.POST['date_birth']
+            print 'hola pepe'  
+            print 'hola unoooooooooooooo'
+            try:
+                dob = datetime.datetime.strptime(date_birth,"%d/%m/%Y").date()
+                print 'Fecha convertida exitosamente'
+            except:
+                dob = datetime.datetime.now().date()
+                print 'Error al convertir la fecha'
+            try:
+                if (name != '' and last_name != '' and email != ''):
+                    
+                    userid = request.user.id
+                    user_name = request.user.username
+                    teach = Teacher.objects.get(user=userid)
+                    teach.name = name
+                    teach.last_name = last_name
+                    """usr= User.objects.get(id=userid)
+                    print 'hollllaaa'
+                    usr.email = email
+                    usr.save() """
+                    teach.date_of_birth = dob
+                    teach.gender = gender
+                    teach.save()
+                    print 'gola'
+                    type='success'
+                else:
+                    msg = 'No puede haber campos vacios' 
+            except:
+                message = "Hubo un error al guardar"
+                print message   
+            
+            
+    except Teacher.DoesNotExist:
+        message = "No existe maestro"
+        print message
+
+    except:
+        message = "Hubo un error"
+        print message
+    print type    
+    result = simplejson.dumps({
+                   
+                    "message":message,
+                    "type":type,
+            }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
 
 
 @login_required(login_url='/login/')

@@ -8,6 +8,5 @@ urlpatterns = patterns('',
     url(r'^registro/', 'teacher.views.register'),
     url(r'^logout/', 'teacher.views.logout_view'),
     url(r'^registro_exitoso/', 'teacher.views.register_success'),
-    url(r'^actualizar_datos/', 'teacher.views.update_teacher_info'),
 	
 )

@@ -1,6 +1,6 @@
 {% extends left_menu %}
 {% block body_tag %}
-<body id="login" class="animated fadeInDown">
+<body id="login"> <!-- class="animated fadeInDown"-->
 {% endblock %}	
 {% block body %}
 {% load staticfiles %}
@@ -56,7 +56,8 @@
 			
 			<!--Aulas *******************************************************************************************-->
 				<!-- widget grid -->
-											
+	<input type = 'text'>
+	<button id="test">test</button>										
 	<div class="well no-padding">								
 					<header class= "header_classroom">
 						<h6>Mis Aulas </h6>				
@@ -83,7 +84,7 @@
 		</div>			
 				
 				<div id="teacher" class="row">
-						<div id = "teacher_configuration_info" class="well no-padding">
+						<div id = "teacher_configuration_info" class="well no-padding animated fadeInDown">
 							<form id="smart-form-register" class="smart-form client-form" method="post">
 									{% csrf_token %}
 									<header class="header_update_teacher_configuration">
@@ -138,8 +139,8 @@
 									</div>
 								</form>
 						</div> 
-						<div id = "teacher_info" class="well no-padding">
-								<form id="smart-form-register" class="smart-form client-form" method="post">
+						<div id = "teacher_info" class="well no-padding animated fadeInDown"> 
+								<form id="smart-form-register" class="smart-form client-form" >
 									{% csrf_token %}
 									<header class="header_update_teacher">
 									<h6>Actualizar datos</h6>
@@ -148,7 +149,7 @@
 									<fieldset id="update_techaer_first">
 										<section >
 											<label class="input"> <i class="icon-append fa fa-user"></i>
-												<input type="text" name="username" placeholder="Usuario" id="user" value="">
+												<input type="text" name="username" placeholder="Usuario" id="user" disabled="disabled">
 												<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
 										</section>
 
@@ -188,7 +189,7 @@
 										<div class="row">
 											<section >
 												<label class="select">
-													<select name="gender" value= "">
+													<select name="gender" value= "" id="gender">
 														<option value="0" selected="" disabled="">Sexo</option>
 														<option value="1">Masculino</option>
 														<option value="2">Femenino</option>
@@ -200,7 +201,7 @@
 										<div class="row">
 											<section >
 												<label class="input"> <i class="icon-append fa fa-calendar"></i>
-													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth" value= "{{teacher.date_of_birth}}">
+													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth" value= "">
 												</label>
 											</section>
 										</div>

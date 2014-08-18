@@ -185,21 +185,96 @@ function load_units(){
         output_select_unit += "</option>";
         }/*Cierro for dictionary_subjects*/
         $("#select_unit").html(output_select_unit);
-      
+      $('#select_unit').change(get_students_data);
 
        
 }
     })
 
-    $('#select_unit').change(get_students_data);
+    
 
 }/*cierro funcion load_units*/
 
+function getTime(){
+
+ var d = new Date();
+    var hours = d.getHours();
+    var minutes = d.getMinutes();
+    var seconds = d.getSeconds();
+    var year =d.getFullYear();
+    var month = (d.getMonth()+1);
+    var day = d.getDate();   
+    var date = "";
+    var str_hours = new String(hours);
+    var str_minutes = new String(minutes);
+    var str_seconds = new String(seconds);
+    var str_year = new String(year);
+    var str_month = new String(month);
+    var str_day = new String(day);  
+
+    if (str_day.length == 1){
+       date += '0' + str_day;
+    }
+    else{
+      date += str_day;
+    }
+
+    date += '/';
+        
+    if (str_month.length == 1){
+       date += '0' + str_month;
+       
+    }
+    else{
+      date += str_month;
+    }
+
+    date += '/';
+
+    if (str_year.length == 1){
+       date += '0' + str_year;
+    }
+    else{
+      date += str_year;
+    }
+
+    date += '-';
+
+    if (str_hours.length == 1){
+       date += '0' + str_hours;
+    }
+    else{
+      date += str_hours;
+    }
+
+    date += '-';
+
+    if (str_minutes.length == 1){
+       date += '0' + str_minutes;
+    }
+    else{
+      date += str_minutes;
+    }
+
+    date += '-';
+
+    if (str_seconds.length == 1){
+       date += '0' + str_seconds;
+    }
+    else{
+      date += str_seconds;
+    }
+
+   
+
+
+    $('#last_update').html(date)
+
+}
+
 function get_students_data () {
   
-    var d = new Date();
-    var date = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + "-" + d.getHours() + ":" + d.getMinutes() +":"+ d.getSeconds();
-    $('#last_update').html(date)
+    getTime();
     var code_class = $("#code").attr("value");
     var id_unit = $('#select_unit').val();
     var tok = $("#token").attr("value");
@@ -224,7 +299,6 @@ function get_students_data () {
     "success":function(data){
         create_table_students(data);
         var time = (data['time_to_update_panel'])*(1000*60);
-        alert(time);
         setInterval(get_students_data, time);
        $('#refresh_results').removeAttr('disabled','disabled');
       }

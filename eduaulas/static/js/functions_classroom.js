@@ -11,14 +11,19 @@ function ini(){
   $('#action').val('0'); 
   $('#btn_update_techer_info').click(update_techer_info);
   load_teacher_info();
+
+
  }
+
+
 
 
 function load_teacher_info(){
 
+  var tok = $("#token").attr("value");
   var query = $.ajax({
     url:"datos_docente/",
-    type:'GET',
+    type:'POST',
     dataType:"json",
     data:{
           name: 'name',
@@ -26,18 +31,21 @@ function load_teacher_info(){
           email:'email',
           gender: 'gender',
           date_birth: 'date_birth',
+          user: 'user',
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+
 
     }, 
 
     "success":function(data){
-       
-       var t = data['name'];
-       alert(t);
-      $("#name").val();
-      $("#last_name").val();
-      $("#user").val();
-      $("#email").val();
-
+           
+      $("#name").val(data["name"]);
+      $("#last_name").val(data["last_name"]);
+      $("#user").val(data["user"]);
+      $("#email").val(data["email"]);
+      $("#gender").val(data["gender"]);
+      $("#dateofbirth").val(data["date_birth"]);
        
       }
 
@@ -47,32 +55,48 @@ function load_teacher_info(){
 
 
 function update_techer_info(){
+
+//$('#smart-form-register').submit(function){
+  //validate_teacher_form();
   var name = $("#name").val();
   var last_name = $("#last_name").val();
   var user = $("#user").val();
   var email = $("#email").val();
-
+  var date_birth = $("#dateofbirth").val();
+  var gender = $("#gender").val();
+  var password = $("#password").val();
   var tok = $("#token").attr("value");
-
   var query = $.ajax({
-    url:"/actualizar_datos/",
+    url:"actualizar_datos/",
     type:'POST',
     dataType:"json",
     data:{
           name:name,
           last_name:last_name,
           user:user,
+          gender: gender,
           email:email,
+          date_birth:date_birth,
           csrfmiddlewaretoken: tok,
           state:'inactive',
 
     }, 
+    success: function(response) {
+      alert('success');
+      $('#teacher_info').html(response);
+      
+    },
+    error: function() {
+       alert('error');
+      $('#teacher_info').html(response);
 
-    "success":function(data){
+    }  
+
+    //"success":function(data){
        // draw_table_classrooms(data);
-       
-       
-      }
+      //      $('#teacher_info').html(response);
+       //alert('entre al success');
+     // }
 
     })
   
@@ -81,13 +105,13 @@ function update_techer_info(){
 function edit_or_save(){
 
   var action = $('#action').val(); 
- //alert(action);
+
   if (action==1){
-     // alert(action);
+
       save_classroom_add();
   }
   if (action==2){
-     //alert(action);
+
       save_classroom_edit();
   }
   
@@ -121,8 +145,6 @@ function create_classroom_table() {
 
 
 function draw_table_classrooms (data) {
-
-  //$(".edit_class").click(edit_classroom);
   
   if(data['type'] == 'success'){  
      
@@ -464,7 +486,7 @@ function save_classroom_add() {
 }/*cierro function*/
 
 function save_classroom_edit(code_class) {
-  // alert('editandoooooooooooooooo');
+
 
     var tok = $("#token").attr("value");
     valido = true;
@@ -560,4 +582,76 @@ messages : {
           error.insertAfter(element.parent());
         }
       })
+  
 });/*cierro function form_classroom_validate*/
+
+
+function validate_teacher_form(){
+
+  $("#smart-form-register").validate({
+          // Rules for form validation
+          rules : {
+            username : {
+              required : true,
+            },
+            email : {
+              required : true,
+              email : true
+            },
+            password : {
+              required : true,
+              minlength : 3,
+              maxlength : 20
+            },
+            passwordConfirm : {
+              required : true,
+              minlength : 3,
+              maxlength : 20,
+              equalTo: '#password'
+            },
+            firstname : {
+              required : true,
+            },
+            lastname : {
+              required : true,
+            },
+            dateofbirth : {
+              required : true,
+              date : true,  
+            }
+          },
+
+          // Messages for form validation
+          messages : {
+            username : {
+              required : 'Ingrese su usuario'
+            },
+            email : {
+              required : 'Ingrese su correo correctamente',
+              email : 'Correo debe tener un formato correcto usuario@dominio.com'
+            },
+            password : {
+              required : 'Ingrese su contraseña'
+            },
+            passwordConfirm : {
+              required : 'Ingrese su contraseña',
+              equalTo: 'Debe coincidir con la contraseña de arriba'
+            },
+            firstname : {
+              required : 'Ingrese su nombre',
+            },
+            lastname : {
+              required : 'Ingrese su apellido',
+            },
+            dateofbirth : {
+              date : 'Ingrese una fecha válida',
+            }
+
+          },
+          errorPlacement : function(error, element) {
+            error.insertAfter(element.parent());
+          }
+          });
+
+
+}/*cierro funcion validate teacher form*/
