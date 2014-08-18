@@ -8,9 +8,7 @@ urlpatterns = patterns('',
 	url(r'departments/$', 'classroom.views.load_departments'),
 	url(r'schools/$', 'classroom.views.load_schools'),
 	url(r'agregar/aula/$', 'classroom.views.classroom_save_add'),
-	
-	#url(r'mariana/$', 'classroom.views.test'),
-
+	url(r'datos_docente/$', 'classroom.views.load_teacher'),
 	url(r'eliminar/aula/$', 'classroom.views.classroom_delete'),
 	url(r'editar/aula/$', 'classroom.views.classroom_save_edit'),
 	url(r'cargar/aula/$', 'classroom.views.load_classroom'),

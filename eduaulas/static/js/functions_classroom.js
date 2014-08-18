@@ -10,8 +10,40 @@ function ini(){
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
   $('#btn_update_techer_info').click(update_techer_info);
+  load_teacher_info();
  }
 
+
+function load_teacher_info(){
+
+  var query = $.ajax({
+    url:"datos_docente/",
+    type:'GET',
+    dataType:"json",
+    data:{
+          name: 'name',
+          last_name:'last_name',
+          email:'email',
+          gender: 'gender',
+          date_birth: 'date_birth',
+
+    }, 
+
+    "success":function(data){
+       
+       var t = data['name'];
+       alert(t);
+      $("#name").val();
+      $("#last_name").val();
+      $("#user").val();
+      $("#email").val();
+
+       
+      }
+
+    })
+
+}
 
 
 function update_techer_info(){
@@ -20,10 +52,9 @@ function update_techer_info(){
   var user = $("#user").val();
   var email = $("#email").val();
 
-
   var tok = $("#token").attr("value");
 
-  var query2 = $.ajax({
+  var query = $.ajax({
     url:"/actualizar_datos/",
     type:'POST',
     dataType:"json",

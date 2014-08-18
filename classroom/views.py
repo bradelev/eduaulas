@@ -34,16 +34,40 @@ def ini_redirect(request):
 
 @login_required(login_url='/login/')
 def ini(request):
+    
+    return render_to_response('classroom_list.html', context_instance = RequestContext(request))
+
+
+def load_teacher(request):
+    message =""
+    type = "error"
+    print 'unooo'
+    teacher_dic = {}
     try:
         userid = request.user.id
         teacher = Teacher.objects.get(user=userid)
         teacher_config = Configuration.objects.get(teacher=teacher.id)
-       
-    except:
-        message="Debe loguearse como un maestro"
-        return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+        teacher_dic[teacher.id] = {
 
-    return render_to_response('classroom_list.html',{"teacher":teacher, "conf":teacher_config}, context_instance = RequestContext(request))
+            "name":teacher.name,
+            "last_name": teacher.last_name,
+            "email": teacher.email,
+            "gender": teacher.gender,
+            "date_birth": teacher.date_of_birth,
+
+        }
+        type = "success"
+    except:
+        message="Debe loguearse como un maestro "
+        return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+    result = simplejson.dumps({
+                        "teacher":teacher_dic,
+                        "message":message,
+                        "type":type,
+                }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
+
+
 
 @login_required(login_url='/login/')
 def load_classroom(request):

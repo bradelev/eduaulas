@@ -32,7 +32,7 @@
             </div>
             <div class="pull-right">
 
-                Hola <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{teacher.name}} {{teacher.last_name}}</a><br>
+                Hola <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user.username}} </a><br>
                 <a href="/logout/">Cerrar sesión</a>
             </div>
             
@@ -148,13 +148,13 @@
 									<fieldset id="update_techaer_first">
 										<section >
 											<label class="input"> <i class="icon-append fa fa-user"></i>
-												<input type="text" name="username" placeholder="Usuario" id="user" value="{{teacher.user}}">
+												<input type="text" name="username" placeholder="Usuario" id="user" value="">
 												<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
 										</section>
 
 										<section>
 											<label class="input"> <i class="icon-append fa fa-envelope"></i>
-												<input type="email" name="email" placeholder="Correo electrónico" id = "email" value="{{teacher.user.email}}">
+												<input type="email" name="email" placeholder="Correo electrónico" id = "email" value="">
 												<b class="tooltip tooltip-bottom-right">Necesario para verificar su cuenta</b> </label>
 										</section>
 
@@ -175,12 +175,12 @@
 										<div class="row">
 											<section >
 												<label class="input">
-													<input type="text" name="firstname" id="name" placeholder="Nombre" value="{{teacher.name}}">
+													<input type="text" name="firstname" id="name" placeholder="Nombre" value="">
 												</label>
 											</section>
 											<section >
 												<label class="input">
-													<input type="text" name="lastname" placeholder="Apellido" id ="last_name" value="{{teacher.last_name}}">
+													<input type="text" name="lastname" placeholder="Apellido" id ="last_name" value="">
 												</label>
 											</section>
 										</div>
@@ -188,7 +188,7 @@
 										<div class="row">
 											<section >
 												<label class="select">
-													<select name="gender" value= "{{teacher.gender}}">
+													<select name="gender" value= "">
 														<option value="0" selected="" disabled="">Sexo</option>
 														<option value="1">Masculino</option>
 														<option value="2">Femenino</option>
