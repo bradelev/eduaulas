@@ -39,16 +39,16 @@ function create_table_students (data) {
 
 var code_class = $("#code").attr("value");
 if(data['type'] == 'success'){  
-    var output_thead = "";
+    //var output_thead = "";
     var output = "";
 
-    output_thead +='<tr>';
+    /*output_thead +='<tr>';
     output_thead +='<th>Nombre</th>';                                                   
     output_thead +='<th>Promedio meta cognitivo</th>';
     output_thead +='<th>Promedio cognitivo</th>';
     output_thead +='<th>Promedio socio afectivo</th>';
     output_thead +='<th>% promedio academico</th>';
-    output_thead +='</tr>';
+    output_thead +='</tr>';*/
 
     for (var x in (data["matriz"])){
     	output += "<tr>";
@@ -70,10 +70,12 @@ if(data['type'] == 'success'){
        
   var txt = "<p>Para estos datos se evaluaron " +(data["quantity_results"]) +" ejercicios, de "+ (data["quantity_students"]) +" alumnos.</p>" ;    
     if (output != ""){
-
+     // $("#dt_students > thead").html(output_thead);
       $("#dt_students > tbody ").html(output);
-      $("#dt_students > thead").html(output_thead);
-      $("#dt_students").dataTable({
+      
+      $("#dt_students").dataTable();
+
+      /*$("#dt_students").dataTable({
 
             "language":{
               "emptyTable":     "No hay datos en la tabla",
@@ -99,7 +101,7 @@ if(data['type'] == 'success'){
               }
             }
           });
-      $("#more_info_stats_students").html(txt);
+      $("#more_info_stats_students").html(txt);*/
    
     }
 

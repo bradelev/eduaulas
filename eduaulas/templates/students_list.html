@@ -62,9 +62,14 @@
                                         <div class="widget-body-toolbar">
                 
                                         </div>
+
                                         <table  id="dt_students" class="table table-striped table-bordered table-hover">
                                             <thead>
-                                                
+                                                <th>Nombre</th>
+                                                <th>Promedio meta cognitivo</th>
+                                                <th>Promedio cognitivo</th>
+                                                <th>Promedio socio afectivo</th>
+                                                <th>% promedio academico</th>
                                             
                                             </thead>
                                             <tbody >                            
@@ -105,25 +110,26 @@
 {% block scripts %}  
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="{% static "js/functions_students_list.js" %}"></script>
+       
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/ColReorder.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/FixedColumns.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/media/js/TableTools.min.js" %}"></script>
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
-                        
+       
+        <script src="{% static "js/functions_students_list.js" %}"></script>                
        
         
         <script type="text/javascript">
             $(document).ready(function() {
                
                 pageSetUp();
-               
             
                 });/*cieero pagesetup*/
         </script>
-        
+
+
     
      
 {% endblock %}
