@@ -206,7 +206,7 @@ def specific_content(request, grade, subject, unit, number):
 	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
-def specific_content_id(request,code,id):
+def specific_exercise_id(request,code,id):
 	error = False
 	try:
 		exercise = Exercise.objects.get(pk=id)
@@ -218,6 +218,20 @@ def specific_content_id(request,code,id):
 		print "no encontro ejercicio"
 		error = True
 	return render_to_response('specific_content.html',{'subject':s, 'unit':u, 'exercise':exercise, 'error':error}, context_instance = RequestContext(request))
+
+@login_required(login_url='/login/')
+def specific_lecture_id(request,code,id):
+	error = False
+	try:
+		lecture = Lecture.objects.get(pk=id)
+		s = lecture.unit.subject
+		g = lecture.grade
+		u = lecture.unit
+
+	except Exercise.DoesNotExist:
+		print "no encontro ejercicio"
+		error = True
+	return render_to_response('specific_lecture.html',{'subject':s, 'unit':u, 'lecture':lecture, 'error':error}, context_instance = RequestContext(request))	
 
 
 		
