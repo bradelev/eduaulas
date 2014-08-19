@@ -10,11 +10,82 @@ function ini(){
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
   $('#btn_update_techer_info').click(update_techer_info);
-  load_teacher_info();
+  //load_teacher_info();
+  load_teacher_configuration();
 
+  $('#btn_sub').click(update_techer_configuration);
 
  }
 
+
+function load_teacher_configuration(){
+
+  var tok = $("#token").attr("value");
+  var query = $.ajax({
+    url:"configuracion_docente/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          corrects_points:'corrects_points',
+          incorrect_points: 'incorrect_points',
+          quantity_exercises: 'quantity_exercises',
+          time_to_update_panel: 'time_to_update_panel',
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+
+
+    }, 
+
+    "success":function(data){
+           
+      $("#correct_points").val(data["corrects_points"]);
+      $("#incorrect_points").val(data["incorrect_points"]);
+      $("#quantity_exercises").val(data["quantity_exercises"]);
+      $("#time_to_update_panel").val(data["time_to_update_panel"]);
+       
+      }
+
+    })
+
+}/*load_teacher_configuration*/
+
+function update_techer_configuration(){
+
+ // alert('update_techer_configuration');
+  var correct_points = $("#correct_points").val();
+  var incorrect_points = $("#incorrect_points").val();
+  var quantity_exercises = $("#quantity_exercises").val();
+  var time_to_update_panel = $("#time_to_update_panel").val();
+  
+  var tok = $("#token").attr("value");
+  var query = $.ajax({
+    url:"actualizar_configuracion/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          correct_points:correct_points,
+          incorrect_points:incorrect_points,
+          quantity_exercises:quantity_exercises,
+          time_to_update_panel: time_to_update_panel,
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+
+    }, 
+    success: function(response) {
+      alert('success');
+      $('#teacher_configuration_info').html(response);
+      
+    },
+    error: function(response) {
+       alert('error');
+      $('#teacher_configuration_info').html(response);
+
+    }  
+
+
+    })
+  
+}/*close function update_techer_configuration*/
 
 
 
@@ -86,7 +157,7 @@ function update_techer_info(){
       $('#teacher_info').html(response);
       
     },
-    error: function() {
+    error: function(response) {
        alert('error');
       $('#teacher_info').html(response);
 
