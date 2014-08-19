@@ -38,10 +38,95 @@ def ini(request):
     return render_to_response('classroom_list.html', context_instance = RequestContext(request))
 
 
+
+@login_required(login_url='/login/')
+def load_teacher_configuration(request):
+    message =""
+    type = "error"
+    
+    try:
+        userid = request.user.id
+        teacher = Teacher.objects.get(user=userid)
+        try:
+            teacher_config = Configuration.objects.get(teacher=teacher.id)
+            corrects_points = teacher_config.correct_points
+            incorrect_points = teacher_config.incorrect_points
+            quantity_exercises = teacher_config.minimum_quantity_exercise
+            time_to_update_panel = teacher_config.time_to_update_panel
+       
+            type = "success"
+        except:
+            message = "No se pudo obtener la configuracion"
+            print message
+        
+    except:
+        message="Debe loguearse como un maestro "
+        return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
+    result = simplejson.dumps({
+                        "corrects_points":corrects_points,
+                        "incorrect_points": incorrect_points,
+                        "quantity_exercises": quantity_exercises,
+                        "time_to_update_panel": time_to_update_panel,
+                        "message":message,
+                        "type":type,
+                }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
+
+
+#@login_required(login_url='/login/')
+def update_teacher_configuration(request):    
+    print 'actualizando configuracion'
+    message=''
+    type='error'
+    msg =''
+    try:
+        if request.POST:
+            print 'unooo'
+            correct_points =request.POST['correct_points']  
+            incorrect_points = request.POST['incorrect_points']          
+            quantity_exercises = request.POST['quantity_exercises']       
+            time_to_update_panel = request.POST['time_to_update_panel']
+            print 'dos'
+            try:
+                if (correct_points != '' and incorrect_points != '' and quantity_exercises != '' and time_to_update_panel != ''):
+                    
+                    userid = request.user.id
+                    user_name = request.user.username
+                    teach = Teacher.objects.get(user=userid)
+                    teacher_config = Configuration.objects.get(teacher=teach)
+                    print correct_points ,'correctos', incorrect_points, 'incorrectos', quantity_exercises, 'cantidad',time_to_update_panel,'tiempo'
+                    teacher_config.correct_points = correct_points
+                    teacher_config.incorrect_points = incorrect_points
+                    teacher_config.minimum_quantity_exercise = quantity_exercises
+                    teacher_config.time_to_update_panel = time_to_update_panel
+                    print 'holaaaaaaaaaaaa', teacher_config.teacher.id
+                    teacher_config.save()
+
+                  
+                    type='success'
+                else:
+                    msg = 'No puede haber campos vacios' 
+            except:
+                message = "Hubo un error al guardar"
+                print message
+
+    except:
+        message = "Hubo un error"
+        print message
+    print type    
+    result = simplejson.dumps({
+                   
+                    "message":message,
+                    "type":type,
+            }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
+
+
+"""@login_required(login_url='/login/')
 def load_teacher(request):
     message =""
     type = "error"
-    teacher_dic = {}
+    
     try:
         userid = request.user.id
         teacher = Teacher.objects.get(user=userid)
@@ -94,7 +179,7 @@ def update_teacher_info(request):
             print 'hola pepe'  
             print 'hola unoooooooooooooo'
             try:
-                dob = datetime.datetime.strptime(date_birth,"%d/%m/%Y").date()
+                dob = datetime.datetime.strptime(date_birth,"%Y/%m/%d").date()
                 print 'Fecha convertida exitosamente'
             except:
                 dob = datetime.datetime.now().date()
@@ -107,10 +192,10 @@ def update_teacher_info(request):
                     teach = Teacher.objects.get(user=userid)
                     teach.name = name
                     teach.last_name = last_name
-                    """usr= User.objects.get(id=userid)
+                   usr= User.objects.get(id=userid)
                     print 'hollllaaa'
                     usr.email = email
-                    usr.save() """
+                    usr.save() 
                     teach.date_of_birth = dob
                     teach.gender = gender
                     teach.save()
@@ -136,7 +221,7 @@ def update_teacher_info(request):
                     "message":message,
                     "type":type,
             }, cls = LazyEncoder)
-    return HttpResponse(result, mimetype = 'application/javascript')
+    return HttpResponse(result, mimetype = 'application/javascript')"""
 
 
 @login_required(login_url='/login/')

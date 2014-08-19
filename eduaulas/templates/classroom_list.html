@@ -6,8 +6,7 @@
 {% load staticfiles %}
         
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-	
+		
 		<!-- FAVICONS -->
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
@@ -56,8 +55,7 @@
 			
 			<!--Aulas *******************************************************************************************-->
 				<!-- widget grid -->
-	<input type = 'text'>
-	<button id="test">test</button>										
+									
 	<div class="well no-padding">								
 					<header class= "header_classroom">
 						<h6>Mis Aulas </h6>				
@@ -96,27 +94,27 @@
 										<section>
 											<label for="" class="label">Puntos correctos</label>
 											<label class="input"> <i class="icon-append fa fa-cogs "></i>
-												<input type="text" name="config1" placeholder="Puntos correctos" value="{{conf.correct_points}}">
+												<input type="text" name="config1" placeholder="Puntos correctos" id = "correct_points">
 												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma correcta</b> </label>
 										</section>
 
 										<section>
 											<label for="" class="label">Puntos incorrectos</label>
 											<label class="input"> <i class="icon-append fa  fa-cogs"></i>
-												<input name="config2" placeholder="Puntos incorrectos" value="{{conf.incorrect_points}}">
+												<input name="config2" placeholder="Puntos incorrectos" id = "incorrect_points">
 												<b class="tooltip tooltip-bottom-right">Puntos para que un ejercicio se considere resuelto de forma incorrecta</b> </label>
 										</section>
 
 										<section>
 											<label for="" class="label">Cantidad minima de ejercicios</label>
 											<label class="input"> <i class="icon-append fa fa-cogs "></i>
-												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="" value="{{conf.minimum_quantity_exercise}}">
+												<input  name="config3" placeholder="Cantidad minima de ejercicios" id="quantity_exercises" >
 												<b class="tooltip tooltip-bottom-right">Cantidad de ejercicios para poder evaluar a un alumno.</b> </label>
 										</section>
 										<section>
 											<label for="" class="label">Tiempo de actualización del panel</label>
 											<label class="input"> <i class="icon-append fa fa-cogs "></i>
-												<input  name="config3" placeholder="Tiempo de actualización del panel" id="" value="{{conf.time_to_update_panel}}">
+												<input  name="config3" placeholder="Tiempo de actualización del panel" id="time_to_update_panel">
 												<b class="tooltip tooltip-bottom-right">Tiempo para actualizar el panel de forma automática (en segundos).</b> </label>
 										</section>
 
@@ -140,7 +138,7 @@
 								</form>
 						</div> 
 						<div id = "teacher_info" class="well no-padding animated fadeInDown"> 
-								<form id="smart-form-register" class="smart-form client-form" >
+								<form id="smart-form-register" class="smart-form client-form" method='POST' >
 									{% csrf_token %}
 									<header class="header_update_teacher">
 									<h6>Actualizar datos</h6>
@@ -187,7 +185,7 @@
 										</div>
 
 										<div class="row">
-											<section >
+											<section > 
 												<label class="select">
 													<select name="gender" value= "" id="gender">
 														<option value="0" selected="" disabled="">Sexo</option>
@@ -201,8 +199,9 @@
 										<div class="row">
 											<section >
 												<label class="input"> <i class="icon-append fa fa-calendar"></i>
-													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth" value= "">
+													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='yy/mm/dd' id="dateofbirth" value= "">
 												</label>
+
 											</section>
 										</div>
 									</fieldset>
@@ -342,6 +341,9 @@
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
         
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
+
+
+        
    	    <script type="text/javascript">
             $(document).ready(function() {
                
