@@ -17,6 +17,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from teacher.models import Teacher
 from configurations.models import Configuration
 import datetime
+import json
 
 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -37,8 +38,12 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/aulas/lista/')
+                try:
+                    teacher = Teacher.objects.get(user=user)
+                    login(request, user)
+                    return HttpResponseRedirect('/aulas/lista/')
+                except:
+                    msg = "Usuario debe ser un Docente"
         else:
             msg = "No existe este usuario o la contraseña es incorrecta"
     else:
@@ -98,6 +103,29 @@ def register(request):
             return HttpResponseRedirect("/registro_exitoso/")
         
     return render_to_response('register.html', {'registered': registered, 'msg':msg}, context_instance=RequestContext(request))
+
+def user_validation(request):
+    exist_user = False
+    print "entra"
+    type = "error"
+    try:
+        if request.POST:
+            user_post = request.POST['user']
+            try:
+                print "entra"
+                #user = User.objects.get(username=user_post)
+                exist_user = True
+            except:
+                pass
+            type = "success"
+    except:
+        message = "Hubo un error"
+    result = simplejson.dumps({
+                "exist_user":exist_user,
+                "message":message,
+                "type":type,
+                }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
 
 def register_success(request):
     try:

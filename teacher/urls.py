@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^login/','teacher.views.login_user'),
     url(r'^inicio/', 'teacher.views.inicio'),
     url(r'^registro/', 'teacher.views.register'),
+    url(r'^validacion/', 'teacher.views.user_validation'),
     url(r'^logout/', 'teacher.views.logout_view'),
     url(r'^registro_exitoso/', 'teacher.views.register_success'),
 	

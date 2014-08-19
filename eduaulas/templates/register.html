@@ -21,7 +21,8 @@
 
 		<!-- MAIN CONTENT -->
 		<div id="content" class="container">
-
+			<input type="hidden" id="token" value="{{csrf_token}}"></input>
+                <input type="hidden" id="code" value="{{code}}"></input>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
 					<h1 class="txt-color-red login-header-big">EduAulas</h1>
@@ -49,8 +50,9 @@
 							<fieldset>
 								<section>
 									<label class="input"> <i class="icon-append fa fa-user"></i>
-										<input type="text" name="username" placeholder="Usuario">
-										<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b> </label>
+										<input type="text" name="username" placeholder="Usuario" id="user">
+										<b class="tooltip tooltip-bottom-right">Necesario para entrar al panel</b>
+										<div id="user_msg"></div> </label>
 								</section>
 
 								<section>
@@ -134,6 +136,7 @@
 
 		<!-- MAIN APP JS FILE -->
 		<script src="{% static "js/app.js" %}"></script>
+		<script src="{% static "js/functions_register.js" %}"></script>
 
 		<script type="text/javascript">
 			runAllForms();
