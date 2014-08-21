@@ -805,12 +805,12 @@ body.smart-style-3, .smart-style-3 body {
 }
 
 .smart-style-3 #header {
-	background-color: #f78c40;
-	background-image: -moz-linear-gradient(top, #f78c40, #d67632);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f78c40), to(#d67632));
-	background-image: -webkit-linear-gradient(top, #f78c40, #d67632);
-	background-image: -o-linear-gradient(top, #f78c40, #d67632);
-	background-image: linear-gradient(to bottom, #f78c40, #d67632);
+	background-color: #16a085 !important;
+	background-image: -moz-linear-gradient(top, #16a085, #16a085);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#16a085), to(#16a085));
+	background-image: -webkit-linear-gradient(top, #16a085, #16a085);
+	background-image: -o-linear-gradient(top, #16a085, #16a085);
+	background-image: linear-gradient(to bottom, #16a085, #16a085);
 }
 
 .smart-style-3 #ribbon {

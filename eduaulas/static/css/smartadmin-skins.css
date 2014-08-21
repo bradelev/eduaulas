@@ -805,12 +805,12 @@ body.smart-style-3, .smart-style-3 body {
 }
 
 .smart-style-3 #header {
-	background-color: #f78c40;
-	background-image: -moz-linear-gradient(top, #f78c40, #d67632);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f78c40), to(#d67632));
-	background-image: -webkit-linear-gradient(top, #f78c40, #d67632);
-	background-image: -o-linear-gradient(top, #f78c40, #d67632);
-	background-image: linear-gradient(to bottom, #f78c40, #d67632);
+	background-color: #e74c3c !important;
+	background-image: -moz-linear-gradient(top, #e74c3c, #16a085);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e74c3c), to(#e74c3c));
+	background-image: -webkit-linear-gradient(top, #e74c3c, #e74c3c);
+	background-image: -o-linear-gradient(top, #e74c3c, #e74c3c);
+	background-image: linear-gradient(to bottom, #e74c3c, #e74c3c);
 }
 
 .smart-style-3 #ribbon {
@@ -826,17 +826,12 @@ color: #5F5F5F;
 }
 
 .smart-style-3.fixed-ribbon #ribbon {
-	box-shadow: 0 .0625em .3125em rgba(0, 0, 0, .35);
+	
 }
 
 .smart-style-3 .btn-header>:first-child>a,
 .smart-style-3 #logo-group span#activity {
 	background-color: #DD7C37;
-	background-image: -moz-linear-gradient(top, #DD7C37, #B9662B);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B9662B), to(#B9662B));
-	background-image: -webkit-linear-gradient(top, #DD7C37, #B9662B);
-	background-image: -o-linear-gradient(top, #DD7C37, #B9662B);
-	background-image: linear-gradient(to bottom, #DD7C37, #B9662B);
 	color: #fff !important;
 	border: 1px solid #f09d61;
 	text-shadow: #985813 0 -1px;
@@ -848,15 +843,8 @@ color: #5F5F5F;
 .smart-style-3 #logo-group span#activity:hover,
 .smart-style-3 .btn-header>:first-child>a:active,
 .smart-style-3 #logo-group span#activity:active {
-	-webkit-box-shadow: inset 1px 1px 0px #985813,inset -1px -1px 0px #985813;
-	-moz-box-shadow: inset 1px 1px 0px #985813,inset -1px -1px 0px #985813;
-	box-shadow: inset 1px 1px 0px #985813,inset -1px -1px 0px #985813;
-	background-color: #dd7a35;
-	background-image: -moz-linear-gradient(top, #dd7a35, #984a13);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dd7a35), to(#984a13));
-	background-image: -webkit-linear-gradient(top, #dd7a35, #984a13);
-	background-image: -o-linear-gradient(top, #dd7a35, #984a13);
-	background-image: linear-gradient(to bottom, #dd7a35, #984a13);
+		background-color: #dd7a35;
+	
 }
 
 .smart-style-3 #project-selector, 
@@ -909,11 +897,6 @@ color: #5F5F5F;
 
 .smart-style-3 nav>ul>li {
 	background-color: #f2f2f2;
-	background-image: -moz-linear-gradient(top, #f9f9f9, #f2f2f2);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9), to(#f2f2f2));
-	background-image: -webkit-linear-gradient(top, #f9f9f9, #f2f2f2);
-	background-image: -o-linear-gradient(top, #f9f9f9, #f2f2f2);
-	background-image: linear-gradient(to bottom, #f9f9f9, #f2f2f2);
 	border-bottom: 1px solid #DFDFDF;
 }
 

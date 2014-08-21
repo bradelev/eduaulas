@@ -7,32 +7,23 @@
 
         <!-- MAIN PANEL -->
         <div id="main" role="main">
-
-            <!-- RIBBON -->
-            <div id="ribbon">
-
-               
-
-                <!-- breadcrumb -->
-                <ol class="breadcrumb">
-                    <li>
-                        Informacion de los alumnos
-                    </li>
-                   <li>
-                        Aula: {{code}}
-                    </li>
-                </ol>
-
-
+              <div class="row title">
+                <div class="col-sm-8 col-xs-8 ">    
+                    <header>
+                        <h1>Información academica de los alumnos</h1>
+                    </header>
+                </div>
+                <div class ="class_info well well-light col-sm-3 col-xs-3">
+                    <h6> Información del aula: </h6>
+                    <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                    <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                    <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                </div>
             </div>
-            <!-- END RIBBON -->
-
            <!-- MAIN CONTENT -->
            <div>
                 
            </div>
-            
-
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
                 <!-- widget grid -->
@@ -50,13 +41,7 @@
                                 <input type="hidden" id="code" value="{{code}}"></input>
                                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                                 <!-- widget div-->
-                                <div>
-                                    
-                                <header>
-                                 <h1>Información academica de los alumnos</h1>
-                    
-                                </header>
-                
+                              <div>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <div class="widget-body-toolbar">

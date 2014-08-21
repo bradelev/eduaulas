@@ -223,7 +223,7 @@ function draw_table_classrooms (data) {
       for (var x in data["dictionary_classrooms"]){
         output += "<tr>";
         var code_classroom=data["dictionary_classrooms"][x]['code'];
-        (data["dictionary_classrooms"][x]['code'] == "0") ? output += "<td></td>": output += "<td>"+"<a title='Ir a aula' href='http://127.0.0.1:8080/panel/lista/"+[code_classroom]+"'>"+data["dictionary_classrooms"][x]['code']+"</a></td>";
+        (data["dictionary_classrooms"][x]['code'] == "0") ? output += "<td></td>": output += "<td>"+"<a title='Ir a aula' href='/panel/lista/"+[code_classroom]+"'>"+data["dictionary_classrooms"][x]['code']+"</a></td>";
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";

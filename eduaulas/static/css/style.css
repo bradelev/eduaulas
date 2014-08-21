@@ -1,3 +1,5 @@
+
+
 #teacher{
 
 	margin-top: 20px;
@@ -34,6 +36,8 @@
 	
 
 }
+
+
 
 
 
@@ -138,4 +142,31 @@
 
 
 	width: 700px;
+}
+
+
+.class_info{
+
+	float: right;
+	text-align: center;
+	margin-right: 10px;
+	
+}
+.header_tables{
+
+	background-color: #bdc3c7 !important;
+	border-radius: 1px;
+	border-color: #bdc3c7 !important;
+}
+
+.txt{
+
+	font-weight: bolder;
+}
+
+
+.title{
+	padding-left: 20px;
+	margin-right: 10px;
+	padding-top: 10px;
 }
