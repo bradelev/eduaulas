@@ -71,10 +71,14 @@ def register(request):
         last_name = request.POST['lastname']
         gender = request.POST['gender']
         str_dob = request.POST['dateofbirth']
+
+        print str_dob, 'fecha nac'
         try:
             dob = datetime.datetime.strptime(str_dob,"%d/%m/%Y").date()
+            print 'converti exitosamente'
         except:
             dob = datetime.datetime.now().date()
+            print 'NOOO converti exitosamente'
 
         try:
             t = Teacher.objects.get(user__username=username)

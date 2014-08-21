@@ -79,7 +79,7 @@
 				
 				<div id="teacher" class="row">
 						<div id = "teacher_configuration_info" class="well no-padding animated fadeInDown">
-							<form id="smart-form-register" class="smart-form client-form" method="post">
+							<form id="update-teacher-config" class="smart-form client-form" method="post">
 									{% csrf_token %}
 									<header class="header_update_teacher_configuration">
 										<h6>Configuración</h6> 
@@ -134,7 +134,7 @@
 								</form>
 						</div> 
 						<div id = "teacher_info" class="well no-padding animated fadeInDown"> 
-								<form id="smart-form-register" class="smart-form client-form" method='POST' >
+								<form id="update-teacher" class="smart-form client-form" method='POST' >
 									{% csrf_token %}
 									<header class="header_update_teacher">
 									<h6>Actualizar datos</h6>
@@ -154,14 +154,17 @@
 										</section>
 
 										<section>
+											<label class="toggle">
+											<input type="checkbox" name="checkbox-toggle" id="change_password" checked="checked">
+											<i data-swchon-text="SI" data-swchoff-text="NO"></i>¿Desea cambiar la contraseña?</label>
 											<label class="input"> <i class="icon-append fa fa-lock"></i>
-												<input type="password" name="password" placeholder="Contraseña" id="password">
+												<input type="password" name="password" placeholder="Contraseña" id="password" disabled="disabled">
 												<b class="tooltip tooltip-bottom-right">Contraseña que utilizará para registrarse</b> </label>
 										</section>
 
 										<section>
 											<label class="input"> <i class="icon-append fa fa-lock"></i>
-												<input type="password" name="passwordConfirm" placeholder="Confirmar contraseña">
+												<input type="password" name="passwordConfirm" placeholder="Confirmar contraseña" id="passwordConfirm"  disabled="disabled">
 												<b class="tooltip tooltip-bottom-right">Escriba la misma contraseña que en el campo anterior, verificaremos si hay posibles errores</b> </label>
 										</section>
 									</fieldset>
@@ -172,6 +175,7 @@
 												<label class="input">
 													<input type="text" name="firstname" id="name" placeholder="Nombre" value="">
 												</label>
+
 											</section>
 											<section >
 												<label class="input">
@@ -194,15 +198,16 @@
 										</div>
 										<div class="row">
 											<section >
-												<label class="input"> <i class="icon-append fa fa-calendar"></i>
-													<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='yy/mm/dd' id="dateofbirth" value= "">
+												<label class="input"> 
+													<div class="bfh-datepicker" data-max="today" data-format="d-m-y" data-close="true" id="dateofbirth"></div>
 												</label>
-
 											</section>
 										</div>
+										
+										
 									</fieldset>
 									<footer>
-										<button class="btn btn-primary" id = "btn_update_techer_info">
+										<button class="btn btn-primary" id = "btn_update_techer_info" type='submit'>
 											Modificar
 										</button>
 									</footer>
@@ -337,6 +342,8 @@
         <script src="{% static "js/plugin/datatables/jquery.dataTables-cust.js" %}"></script>
         
         <script src="{% static "js/plugin/datatables/DT_bootstrap.js" %}"></script>
+       
+        <script src="{% static "js/bootstrap-formhelpers.js" %}"></script>
 
 
         

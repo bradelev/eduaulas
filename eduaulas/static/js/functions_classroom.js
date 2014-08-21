@@ -10,7 +10,7 @@ function ini(){
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
   $('#btn_update_techer_info').click(update_techer_info);
-  //load_teacher_info();
+  load_teacher_info();
   load_teacher_configuration();
 
   $('#btn_sub').click(update_techer_configuration);
@@ -90,7 +90,11 @@ function update_techer_configuration(){
 
 
 function load_teacher_info(){
-
+  $("#checkbox")
+  //var val= $("#change_password").is("checked");
+ // alert(val);
+  var change =$("#change_password").prop('checked') ; //(val == true);
+  $("#change_password").change(function(){ change_pass(change);});
   var tok = $("#token").attr("value");
   var query = $.ajax({
     url:"datos_docente/",
@@ -117,25 +121,45 @@ function load_teacher_info(){
       $("#email").val(data["email"]);
       $("#gender").val(data["gender"]);
       $("#dateofbirth").val(data["date_birth"]);
-       
       }
 
     })
 
 }
 
+function change_pass(change){
+  alert(change);
+  if (change == true){
+    alert('hol');
+    $("#password").removeClass("disabled","disabled")
+    $("#passwordConfirm").removeClass("disabled","disabled")
+  }
+  else{
+    $("#password").addClass("disabled","disabled")
+    $("#passwordConfirm").addClass("disabled","disabled")
+
+  }
+
+}
 
 function update_techer_info(){
+  validate_teacher_form();
 
-//$('#smart-form-register').submit(function){
-  //validate_teacher_form();
+  
+  var valid = true;
+  
   var name = $("#name").val();
+  valid = (name == null);
   var last_name = $("#last_name").val();
+  valid = (last_name == null);
   var user = $("#user").val();
   var email = $("#email").val();
+  valid = (email == null);
   var date_birth = $("#dateofbirth").val();
+  valid = (date_birth == null);
   var gender = $("#gender").val();
   var password = $("#password").val();
+  valid = (password == null);
   var tok = $("#token").attr("value");
   var query = $.ajax({
     url:"actualizar_datos/",
@@ -154,7 +178,7 @@ function update_techer_info(){
     }, 
     success: function(response) {
       alert('success');
-      $('#teacher_info').html(response);
+     // $('#teacher_info').html(response);
       
     },
     error: function(response) {
@@ -601,65 +625,11 @@ function save_classroom_edit(code_class) {
 
 }/*cierro function*/
 
-$(function(){
 
-$('#classroom-form').validate({
-      // Rules for form validation
-        rules : {
-          country : {
-            required : true
-          },
-          department : {
-            required : true
-          },
-          grade : {
-            required : true
-          },
-           className : {
-            required : true
-          },
-          school : {
-            required : true
-          },
-          shift : {
-            required : true
-          }
-        },
-
-       
-// Messages for form validation
-messages : {
-          country : {
-            required : 'Por favor ingrese su pais'
-          },
-          department : {
-            required : 'Por favor ingrese su departamento'
-          },
-          grade : {
-            required : 'Por favor ingrese el año del aula'
-          },
-          school : {
-            required : 'Por favor ingrese la escuela'
-          },
-          className : {
-            required : 'Por favor ingrese el nombre de la clase'
-          },
-          shift : {
-            required : 'Por favor ingrese el turno de la clase'
-          }
-        },
-        // Do not change code below
-        errorPlacement : function(error, element) {
-          error.insertAfter(element.parent());
-        }
-      })
-  
-});/*cierro function form_classroom_validate*/
-
+//$(function(){
 
 function validate_teacher_form(){
-
-  $("#smart-form-register").validate({
+  $("#update-teacher").validate({
           // Rules for form validation
           rules : {
             username : {
@@ -723,6 +693,5 @@ function validate_teacher_form(){
             error.insertAfter(element.parent());
           }
           });
-
-
-}/*cierro funcion validate teacher form*/
+}
+//});

@@ -17,7 +17,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from configurations.models import Configuration
 from teacher.models import Teacher
 #from django.http import Http500
-
+from django.contrib.auth.models import User
 # Create your views here 
 class LazyEncoder(simplejson.JSONEncoder):
 	"""Encodes django's lazy i18n strings."""
@@ -44,9 +44,15 @@ def load_teacher_configuration(request):
     message =""
     type = "error"
     
+    corrects_points = ''
+    incorrect_points = ''
+    quantity_exercises = ''
+    time_to_update_panel = ''
     try:
         userid = request.user.id
         teacher = Teacher.objects.get(user=userid)
+        teacher_config = Configuration.objects.get(teacher=teacher.id)
+        print 'obtuve el maestro'
         try:
             teacher_config = Configuration.objects.get(teacher=teacher.id)
             corrects_points = teacher_config.correct_points
@@ -73,9 +79,13 @@ def load_teacher_configuration(request):
     return HttpResponse(result, mimetype = 'application/javascript')
 
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def update_teacher_configuration(request):    
     print 'actualizando configuracion'
+    corrects_points = ''
+    incorrect_points = ''
+    quantity_exercises = ''
+    time_to_update_panel =''
     message=''
     type='error'
     msg =''
@@ -99,7 +109,7 @@ def update_teacher_configuration(request):
                     teacher_config.incorrect_points = incorrect_points
                     teacher_config.minimum_quantity_exercise = quantity_exercises
                     teacher_config.time_to_update_panel = time_to_update_panel
-                    print 'holaaaaaaaaaaaa', teacher_config.teacher.id
+                   
                     teacher_config.save()
 
                   
@@ -122,7 +132,7 @@ def update_teacher_configuration(request):
     return HttpResponse(result, mimetype = 'application/javascript')
 
 
-"""@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def load_teacher(request):
     message =""
     type = "error"
@@ -137,6 +147,7 @@ def load_teacher(request):
         last_name = teacher.last_name
         email = teacher.user.email
         gender = teacher.gender
+        password = teacher.user.password
         date_birth = str(teacher.date_of_birth)
        
         type = "success"
@@ -151,6 +162,7 @@ def load_teacher(request):
                         "email": email,
                         "gender": gender,
                         "date_birth":date_birth,
+                        "password":password,
                         "message":message,
                         "type":type,
                 }, cls = LazyEncoder)
@@ -167,7 +179,7 @@ def update_teacher_info(request):
     teach = None
     try:
         if request.POST:
-            print 'hola unooooooooooooooxxxxxxxxxxxxxxxxxxxxxx'
+            
             name =request.POST['name']  
             last_name = request.POST['last_name']          
             email = request.POST['email']       
@@ -176,10 +188,10 @@ def update_teacher_info(request):
 
             #password = request.POST['password']   
             date_birth = request.POST['date_birth']
-            print 'hola pepe'  
-            print 'hola unoooooooooooooo'
+            print 'fechaa',date_birth  
+            
             try:
-                dob = datetime.datetime.strptime(date_birth,"%Y/%m/%d").date()
+                dob = datetime.datetime.strptime(date_birth,"%d/%m/%y").date()
                 print 'Fecha convertida exitosamente'
             except:
                 dob = datetime.datetime.now().date()
@@ -188,19 +200,23 @@ def update_teacher_info(request):
                 if (name != '' and last_name != '' and email != ''):
                     
                     userid = request.user.id
+                    print 'uno'
                     user_name = request.user.username
+                    print 'dos'
                     teach = Teacher.objects.get(user=userid)
+                    print 'tres'
                     teach.name = name
+                    print 'cuatro'
                     teach.last_name = last_name
-                   usr= User.objects.get(id=userid)
-                    print 'hollllaaa'
-                    usr.email = email
-                    usr.save() 
+                    print 'cinco'
+                    user = User.objects.get(pk=userid)
+                    user.email = email
+                    user.save() 
                     teach.date_of_birth = dob
                     teach.gender = gender
                     teach.save()
-                    print 'gola'
                     type='success'
+                    msg = 'Se ha actualizado co exito'
                 else:
                     msg = 'No puede haber campos vacios' 
             except:
@@ -217,11 +233,11 @@ def update_teacher_info(request):
         print message
     print type    
     result = simplejson.dumps({
-                   
+                    
                     "message":message,
                     "type":type,
             }, cls = LazyEncoder)
-    return HttpResponse(result, mimetype = 'application/javascript')"""
+    return HttpResponse(result, mimetype = 'application/javascript')
 
 
 @login_required(login_url='/login/')
