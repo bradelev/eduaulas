@@ -9,7 +9,7 @@
 				<span id="logo"> <img src="{% static "img/logo.png" %}" alt="SmartAdmin"> </span>
 				<!-- END AJAX-DROPDOWN -->
 			</div>
-			<span id="login-header-space"> <span class="hidden-mobile">No estás registrado?</span> <a href="/registro" class="btn btn-danger">Registrarse</a> </span>
+			<span id="login-header-space"> <span class="hidden-mobile">No estás registrado?</span> <a href="/registro/" class="btn btn-danger">Registrarse</a> </span>
 		</header>
 
 		<div id="main" role="main">
@@ -57,7 +57,7 @@
 											{% if msg %}
 												<p style="color:#f00;">{{msg}}</p>
 											{% endif %}
-											<a href="forgotpassword.html">Olvidaste la contraseña?</a>
+											<a href="/recupera_password/">Olvidaste la contraseña?</a>
 										</div>
 									</section>
 								</fieldset>

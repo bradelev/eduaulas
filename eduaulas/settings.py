@@ -72,10 +72,10 @@ WSGI_APPLICATION = 'eduaulas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db/eduaulas_db',
-        'USER': '',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'eduaulas_db',
+        'USER': 'eduaulas_root',
+        'PASSWORD': 'eduaulas',
         'HOST': 'eduaulas-db.cnynwpmxidse.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
 
@@ -98,10 +98,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-MEDIA_ROOT = '/srv/eduaulas/media'
+MEDIA_ROOT = '/srv/www/eduaulas/media/'
 MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
-STATIC_ROOT = ''
+STATIC_URL = '/'
+STATIC_ROOT = '/srv/www/eduaulas/static/'
 
 EDUAULAS_DIR="/srv/eduaulas/media/eduaulas"
 EDUAULAS_GIT="/srv/eduaulas/eduaulas-git"
