@@ -10,18 +10,18 @@
 
 .header_update_teacher{
 
-	background-color: #FF6A6A !important;
+	background-color: #c0392b !important;
 }
 
 .header_update_teacher_configuration{
 
-	background-color: #7A8B8B !important;
+	background-color: #f39c12 !important;
 
 }
 
 .header_classroom{
 
-	background-color: #4F94CD !important;
+	background-color: #2980b9 !important;
 	height: 50px;
 	padding-top: 5px;
 	padding-left: 10px;
@@ -183,4 +183,11 @@
 	color: #95a5a6 !important;
 	font-weight: bold;
 	text-decoration: none;
+}
+
+#add_classroom{
+
+	background-color: #e67e22;
+	border-color: #e67e22 !important;
+	border: 0px 0px 0px 0px;
 }
