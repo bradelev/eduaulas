@@ -427,7 +427,7 @@ body.smart-style-2 {
 
 .smart-style-2 #header, .smart-style-2 .inbox-footer, .smart-style-2 .superbox-show {
 	background-image:none;
-	background-color: #2C3742;
+	background-color: #34495e;
 }
 .smart-style-2 .superbox-list.active:before {
 	color: #2C3742;
@@ -805,12 +805,12 @@ body.smart-style-3, .smart-style-3 body {
 }
 
 .smart-style-3 #header {
-	background-color: #e74c3c !important;
-	background-image: -moz-linear-gradient(top, #e74c3c, #16a085);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e74c3c), to(#e74c3c));
-	background-image: -webkit-linear-gradient(top, #e74c3c, #e74c3c);
-	background-image: -o-linear-gradient(top, #e74c3c, #e74c3c);
-	background-image: linear-gradient(to bottom, #e74c3c, #e74c3c);
+	background-color: #34495e !important;
+	background-image: -moz-linear-gradient(top, #34495e, #34495e);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#34495e), to(#34495e));
+	background-image: -webkit-linear-gradient(top, #34495e,#34495e );
+	background-image: -o-linear-gradient(top, #34495e, #34495e);
+	background-image: linear-gradient(to bottom,#34495e,#34495e);
 }
 
 .smart-style-3 #ribbon {

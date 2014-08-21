@@ -9,58 +9,47 @@
         <!-- MAIN PANEL -->
         <div id="main" role="main">
 
-            <!-- RIBBON -->
-            <div id="ribbon">
-
-               
-                <!-- breadcrumb -->
-                <ol class="breadcrumb">
-                    <li>Consultas</li>
-                    <li>Por perfiles de aprendizaje</li>
-                </ol>
-
-
-            </div>
-            <!-- END RIBBON -->
-
+           
            <!-- MAIN CONTENT -->
 
             <div id="content">
-    
-                <header>
-                    <h1>Estadísticas por perfiles de aprendizaje</h1>
-                    
-                </header>
-
+                <div class="row title">
+                    <div class="col-sm-8 col-xs-8 ">    
+                        <header>
+                            <h1>Estadísticas por perfiles de aprendizaje</h1>
+                        </header>
+                    </div>
+                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
+                </div>
+                
                 <!-- widget div-->
                 <div>
 
-                    <!-- widget edit box -->
-                    <div class="jarviswidget-editbox">
-                        <!-- This area used as dropdown edit box -->
-
-                    </div>
-                    <!-- end widget edit box -->
+                   
 
                     <!-- widget content -->
 
-                    <div class="widget-body">
-                        <div class="well well-sm well-light content_stats">
-                            
-                            
-                                <div class= "stats">
-                                    <h5>Meta cognitivo</h5>
-                                     <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{metacognitive_percentage}}" data-pie-size="180">
-                                        <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{metacognitive_percentage}}</span>
-                                    </div>    
+                    <div class="widget-body title">
+                        <div class="well well-sm well-light content_stats row">
+                                <div class= "stats row ">
+                                    <div class= "divRight col-sm-4 col-xs-4">
+                                        <h5>Meta cognitivo</h5>
+                                         <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{metacognitive_percentage}}" data-pie-size="180">
+                                            <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{metacognitive_percentage}}</span>
+                                        </div>    
                                 </div>
-                                <div class= "divRight">
+                                <div class= "divRight col-sm-4 col-xs-4">
                                     <h5>Cognitivo</h5>
                                      <div class="easy-pie-chart txt-color-green easyPieChart" data-percent="{{cognitive_percentage}}" data-pie-size="180">
                                         <span class="percent percent-sign txt-color-green font-xl semi-bold">{{cognitive_percentage}}</span>
                                     </div>  
                                 </div>      
-                                <div class="stats">
+                                <div class="divRight col-sm-4 col-xs-4">
                                     <h5>Socio afectivo</h5>
                                      <div class="easy-pie-chart txt-color-red easyPieChart" data-percent="{{socio_affective_percentage}}" data-pie-size="180">
                                         <span class="percent percent-sign txt-color-red font-xl semi-bold">{{socio_affective_percentage}}</span>

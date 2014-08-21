@@ -8,20 +8,21 @@
     <!-- MAIN PANEL -->
     <div id="main" role="main">
 
-            <!-- RIBBON -->
-            <div id="ribbon">
-
-                <!-- breadcrumb -->
-                <ol class="breadcrumb">
-                    <li>Alumnos</li>
-                    <li>Información</li>
-                </ol>
-
-
-            </div><!-- END RIBBON -->
-                   
-
+          
             <div id="content"> <!-- CONTENT -->
+                <div class="row title">
+                    <div class="col-sm-8 col-xs-8 ">    
+                        <header>
+                            <h1>Información de un alumno</h1>
+                        </header>
+                    </div>
+                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
+            </div>
             
                 <div class="jarviswidget" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
                    

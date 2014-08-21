@@ -8,36 +8,37 @@
         <!-- MAIN PANEL -->
         <div id="main" role="main">
               <div class="row title">
-                <div class="col-sm-8 col-xs-8 ">    
-                    <header>
-                        <h1>Información academica de los alumnos</h1>
-                    </header>
-                </div>
-                <div class ="class_info well well-light col-sm-3 col-xs-3">
-                    <h6> Información del aula: </h6>
-                    <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
-                    <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
-                    <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
-                </div>
+                    <div class="col-sm-8 col-xs-8 ">    
+                        <header>
+                            <h1>Información academica de los alumnos</h1>
+                        </header>
+                    </div>
+                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
             </div>
            <!-- MAIN CONTENT -->
-           <div>
-                
-           </div>
-                <input type="hidden" id="token" value="{{csrf_token}}"></input>
-                <input type="hidden" id="code" value="{{code}}"></input>
+       
+               
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
-                
+                    <input type="hidden" id="token" value="{{csrf_token}}"></input>
+                    <input type="hidden" id="code" value="{{code}}"></input>
                     <!-- row -->
-                    <div class="row">
+                    <div class="row title">
                 
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="false">
-
+                            <div class="jarviswidget jarviswidget" id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="false">
+                                <header class="header_tables">
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Alumnos </h2>
+                                </header>
                                 <input type="hidden" id="code" value="{{code}}"></input>
                                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                                 <!-- widget div-->
@@ -57,16 +58,14 @@
                                                 <th>% promedio academico</th>
                                             
                                             </thead>
-                                            <tbody >                            
-
-                                                
+                                            <tbody >
                                             </tbody>
                                         </table>
                                     </div>
                                     <!-- end widget content -->
                                     <div "well well-sm well-light" id ="more_info_stats_students">
                                        
-                                    </div>
+                                     </div>
                                 </div>
                                 <!-- end widget div -->
                             </div>

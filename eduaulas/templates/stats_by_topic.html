@@ -9,29 +9,23 @@
         <!-- MAIN PANEL -->
         <div id="main" role="main">
 
-            <!-- RIBBON -->
-            <div id="ribbon">
-
-               
-                <!-- breadcrumb -->
-                <ol class="breadcrumb">
-                    <li>Consultas</li>
-                    <li>Por areas tematicas</li>
-                </ol>
-
-
-            </div>
-            <!-- END RIBBON -->
-
-           <!-- MAIN CONTENT -->
+         <!-- MAIN CONTENT -->
 
             <div id="content">
     
-                <header>
-                    <h1>Estadísticas por areas tematicas</h1>
-                    
-                </header>
-
+                <div class="row title">
+                    <div class="col-sm-8 col-xs-8 ">    
+                        <header>
+                            <h1>Estadísticas por áreas temáticas </h1>
+                        </header>
+                    </div>
+                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
+                </div>
                 <!-- widget div-->
                 <div>
 
@@ -45,7 +39,7 @@
                     <!-- widget content -->
 
                     <div class="widget-body">
-                        <div class="well well-sm well-light content_stats">
+                        <div class="well well-sm well-light content_stats row">
                             
                             {% for k,value in dictionary_subjects_average.items %}
                               

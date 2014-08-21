@@ -14,6 +14,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 import datetime
 from configurations.models import Configuration
+from classroom.models import  ClassRoom
 from teacher.models import Teacher
 # Create your views here.
 
@@ -29,14 +30,15 @@ class LazyEncoder(simplejson.JSONEncoder):
 @login_required(login_url='/login/')
 def ini(request,code):
 
-
-	return render_to_response('students_list.html',{"code":code}, context_instance = RequestContext(request))
+	class_room = ClassRoom.objects.get(pk = code)
+	return render_to_response('students_list.html',{"code":code,'classroom':class_room}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def students_info(request,code):
 	message = ""
 	type = "error"
 	students = Student.objects.filter(class_room=code)
+
 	matriz = []
 	i=0
 	average=0
@@ -104,6 +106,7 @@ def students_info(request,code):
 
 @login_required(login_url='/login/')
 def student_info(request,code,id):
+	class_room = ClassRoom.objects.get(pk = code)
 	years = ''
 	quantity_results = 0
 	metacognitive_percentage = 0
@@ -192,12 +195,12 @@ def student_info(request,code,id):
 	except:
 	        message = "Hubo un error"
 	        print message
-	return render_to_response('student_info.html',{"code":code,"student_results":student_results,"quantity_results":quantity_results,'list_average':dictionary_subjects_average,'years':years,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
+	return render_to_response('student_info.html',{'classroom':class_room,"code":code,"student_results":student_results,"quantity_results":quantity_results,'list_average':dictionary_subjects_average,'years':years,'student':student, 'gender':student_gender,'socio_affective_percentage':average_socio_affective_percentage,'cognitive_percentage':average_cognitive_percentage, 'metacognitive_percentage':average_metacognitive_percentage}, context_instance = RequestContext(request))
 
 	
 @login_required(login_url='/login/')	
 def stats_by_learning_profiles(request,code):
-
+	class_room = ClassRoom.objects.get(pk = code)
 	quantity_students = 0
 	metacognitive_percentage= 0
 	cognitive_percentage =0
@@ -230,13 +233,14 @@ def stats_by_learning_profiles(request,code):
 			average_socio_affective_percentage = (socio_affective_percentage/quantity_results)+1
 		
 
-	return render_to_response('stats_by_learning_profiles.html',{"quantity_students":quantity_students,"quantity_results":quantity_results,"code":code,"cognitive_percentage":average_cognitive_percentage,"metacognitive_percentage":average_metacognitive_percentage,"socio_affective_percentage":average_socio_affective_percentage}, context_instance = RequestContext(request))
+	return render_to_response('stats_by_learning_profiles.html',{'classroom':class_room,"quantity_students":quantity_students,"quantity_results":quantity_results,"code":code,"cognitive_percentage":average_cognitive_percentage,"metacognitive_percentage":average_metacognitive_percentage,"socio_affective_percentage":average_socio_affective_percentage}, context_instance = RequestContext(request))
 
 
 
 
 @login_required(login_url='/login/')
 def stats_by_topics(request,code):
+	class_room = ClassRoom.objects.get(pk = code)
 	dictionary_subjects_average ={}
 	message = ""
 	type = "error"
@@ -280,6 +284,6 @@ def stats_by_topics(request,code):
 		
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
-	return render_to_response('stats_by_topic.html',{'code':code,'dictionary_subjects_average':dictionary_subjects_average}, context_instance = RequestContext(request))
+	return render_to_response('stats_by_topic.html',{'classroom':class_room,'code':code,'dictionary_subjects_average':dictionary_subjects_average}, context_instance = RequestContext(request))
 
 

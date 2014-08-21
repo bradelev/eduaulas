@@ -8,25 +8,56 @@
         <!-- MAIN PANEL -->
         <div id="main" role="main">
 
-            <!-- RIBBON -->
-            <div id="ribbon">
-
-                <!-- breadcrumb -->
-                <ol class="breadcrumb">
-                    <li>
-                        Contenidos
-                    </li>
-                </ol>
-
-
-            </div>
-            <!-- END RIBBON -->
-
-           <!-- MAIN CONTENT -->
+           
+          <!-- MAIN CONTENT -->
            <div>
                 
            </div>
             <div id="content">
+                 <div class="row ">
+                    <div class="col-sm-8 col-xs-8 ">    
+                        <header>
+                            <h1>Contenidos de Cuasimodo </h1>
+                            <h5>Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h5>
+                        </header>    
+                            <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
+                                {% csrf_token %}
+                                <section class="col col-3">
+                                    <label class="select" >
+                                    <select id="select_area">
+                                        <option value="0" selected="" disabled="">Área</option>
+                                        {% for a in areas %}
+                                        <option value="{{a.id}}" >{{a.name}}</option>
+                                        {% endfor %}
+                                    </select>   
+                                    </select> <i></i> </label>
+                                </section>    
+                                <section class="col col-3">
+                                    <label class="select">
+                                    <select id="select_subject" >
+                                        
+                                        
+                                    </select>   
+                                    </select> <i></i> </label>
+                                </section>  
+                                <section class="col col-3">
+                                    <label class="select">
+                                    <select name="unit" id="select_unit">
+                                        
+                                    </select>   
+                                    </select> <i></i> </label>
+                                </section>
+                            </form>
+
+                        
+                    </div>
+                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
+                </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -63,46 +94,6 @@
                 </div>
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
-               <h1 class="titleh1 txt-color-orange">Seleccione el área, la materia y unidad que desea ver.</h1>
-                <div id="filters">    
-                    <form id="classroom-form" class="smart-form" novalidate="novalidate" method="post">
-                        {% csrf_token %}
-                    <section class="col col-2">
-                        <label class="select" >
-                        <select id="select_area">
-                            <option value="0" selected="" disabled="">Área</option>
-                            {% for a in areas %}
-                            <option value="{{a.id}}" >{{a.name}}</option>
-                            {% endfor %}
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>    
-                    <section class="col col-2">
-                        <label class="select">
-                        <select id="select_subject" >
-                            
-                            
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>  
-                    <section class="col col-3">
-                        <label class="select">
-                        <select name="unit" id="select_unit">
-                            
-                        </select>   
-                        </select> <i></i> </label>
-                    </section>  
-                    
-
-                                
-                </form>
-                <!--<div id="div_btn_classroom">
-                    <button class="btn btn-labeled btn-info disabled" data-toggle="modal" data-target="#myModal" id="send_comment" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>
-                </div>-->
-                   
-                </div> <!-- filters -->   
-
-                
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
                 

@@ -7,14 +7,14 @@
             <div id="logo-group">
 
                 <!-- PLACE YOUR LOGO HERE -->
-                  <h1><i class ="glyphicon glyphicon-th-large"></i>EduAulas</h1>
+                 <h1 class="logo"> <img src="{% static 'img/icono.png' %}"> EduAulas</h1>
                 <!-- END LOGO PLACEHOLDER -->
                 
                 
             </div>
-            <div class="pull-right">
+            <div class="pull-right div_logout">
 
-                Hola <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}}</a><br>
+                ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} !</a><br>
                 <a href="/logout/">Cerrar sesión</a>
             </div>
             

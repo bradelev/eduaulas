@@ -170,3 +170,17 @@
 	margin-right: 10px;
 	padding-top: 10px;
 }
+
+.logo{
+	font-weight: bolder;
+
+	color: #95a5a6;
+	margin-left: 10px;
+}
+
+.div_logout{
+	padding-top: 5px;
+	color: #95a5a6 !important;
+	font-weight: bold;
+	text-decoration: none;
+}
