@@ -20,6 +20,7 @@ from teacher.models import Teacher
 from django.contrib.auth.models import User
 import json
 from django.http import HttpResponse
+import socket
 
 # Create your views here 
 class LazyEncoder(simplejson.JSONEncoder):
@@ -198,6 +199,7 @@ def update_teacher_info(request):
             except:
                 dob = datetime.datetime.now().date()
                 print 'Error al convertir la fecha'
+                return HttpResponse(simplejson.dumps(result), mimetype = 'application/json')
             try:
                 if (name != '' and last_name != '' and email != ''):
                     
@@ -221,22 +223,23 @@ def update_teacher_info(request):
                     msg = 'No puede haber campos vacios' 
             except:
                 message = "Hubo un error al guardar"
-                print message   
+                print message  
+                return HttpResponse(simplejson.dumps(result), mimetype = 'application/json') 
             
             
     except Teacher.DoesNotExist:
         message = "No existe maestro"
         print message
+        return HttpResponse(simplejson.dumps(result), mimetype = 'application/json')
 
     except:
         message = "Hubo un error"
         print message
+        return HttpResponse(simplejson.dumps(result), mimetype = 'application/json')
     print type    
-    result = simplejson.dumps({                 
-                    "message":message,
-                    "type":type,
-            }),
-    return HttpResponse(simplejson.dumps(result), mimetype = 'application/javascript')
+    result = {"type":type }               
+  
+    return HttpResponse(simplejson.dumps(result), mimetype = 'application/json')
 
 
 @login_required(login_url='/login/')

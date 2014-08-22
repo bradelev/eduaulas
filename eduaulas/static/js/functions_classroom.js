@@ -703,3 +703,59 @@ function validate_teacher_form(){
           });
 }
 //});
+
+
+$(function(){
+
+$('#classroom-form').validate({
+      // Rules for form validation
+        rules : {
+          country : {
+            required : true
+          },
+          department : {
+            required : true
+          },
+          grade : {
+            required : true
+          },
+           className : {
+            required : true
+          },
+          school : {
+            required : true
+          },
+          shift : {
+            required : true
+          }
+        },
+
+       
+// Messages for form validation
+messages : {
+          country : {
+            required : 'Por favor ingrese su pais'
+          },
+          department : {
+            required : 'Por favor ingrese su departamento'
+          },
+          grade : {
+            required : 'Por favor ingrese el año del aula'
+          },
+          school : {
+            required : 'Por favor ingrese la escuela'
+          },
+          className : {
+            required : 'Por favor ingrese el nombre de la clase'
+          },
+          shift : {
+            required : 'Por favor ingrese el turno de la clase'
+          }
+        },
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        }
+      })
+  
+});/*cierro function form_classroom_validate*/
