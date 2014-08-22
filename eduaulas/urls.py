@@ -1,4 +1,7 @@
 from django.conf.urls import patterns, include, url
+from exercise.api.resources import ResultResource, TeacherCommentsResource
+from student.api.resources import StudentResource
+from tastypie.api import Api
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -7,8 +10,13 @@ admin.autodiscover()
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
 
+api = Api(api_name="v1")
+api.register(ResultResource())
+api.register(TeacherCommentsResource())
+api.register(StudentResource())
+
 urlpatterns = patterns('',
-	
+	url(r'^api/', include(api.urls)),
 	url(r'^$', include('classroom.urls')),
 	url(r'^', include('teacher.urls')),
 	url(r'^alumnos/', include('student.urls')),
