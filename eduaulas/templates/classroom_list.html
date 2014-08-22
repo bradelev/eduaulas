@@ -149,24 +149,35 @@
 
 										<section>
 											<label class="input"> <i class="icon-append fa fa-envelope"></i>
-												<input type="email" name="email" placeholder="Correo electrónico" id = "email" value="">
+												<input type="email" name="email" placeholder="Correo electrónico" id="email" value="">
 												<b class="tooltip tooltip-bottom-right">Necesario para verificar su cuenta</b> </label>
 										</section>
-
-										<section>
-											<label class="toggle">
-											<input type="checkbox" name="checkbox-toggle" id="change_password" checked="checked">
-											<i data-swchon-text="SI" data-swchoff-text="NO"></i>¿Desea cambiar la contraseña?</label>
-											<label class="input"> <i class="icon-append fa fa-lock"></i>
+										<section >
+												<label class="input"> 
+													<div class="bfh-datepicker" data-max="today" data-format="y-m-d" data-close="true" id="dateofbirth"></div>
+												</label>
+											</section>
+										<label class="label">¿Desea modificar la contraseña?</label>
+													<div class="inline-group">
+														<label class="radio">
+															<input type="radio" name="radio-inline" id="change_yes" class="change_password">
+															<i></i>Si</label>
+														<label class="radio">
+															<input type="radio" name="radio-inline" checked="checked" id="change_no" class="change_password">
+															<i></i>No</label>
+													</div>		
+										<div  id="psw" hidden="hidden">
+											<section>
+												<label class="input"> <i class="icon-append fa fa-lock"></i>
 												<input type="password" name="password" placeholder="Contraseña" id="password" disabled="disabled">
 												<b class="tooltip tooltip-bottom-right">Contraseña que utilizará para registrarse</b> </label>
-										</section>
-
-										<section>
-											<label class="input"> <i class="icon-append fa fa-lock"></i>
+											</section>
+											<section>
+												<label class="input"> <i class="icon-append fa fa-lock"></i>
 												<input type="password" name="passwordConfirm" placeholder="Confirmar contraseña" id="passwordConfirm"  disabled="disabled">
 												<b class="tooltip tooltip-bottom-right">Escriba la misma contraseña que en el campo anterior, verificaremos si hay posibles errores</b> </label>
-										</section>
+											</section>
+										</div>	
 									</fieldset>
 
 									<fieldset id="update_techaer_second">
@@ -196,15 +207,6 @@
 												</label>
 											</section>
 										</div>
-										<div class="row">
-											<section >
-												<label class="input"> 
-													<div class="bfh-datepicker" data-max="today" data-format="d-m-y" data-close="true" id="dateofbirth"></div>
-												</label>
-											</section>
-										</div>
-										
-										
 									</fieldset>
 									<footer>
 										<button class="btn btn-primary" id = "btn_update_techer_info" type='submit'>
