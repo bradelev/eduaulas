@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from exercise.api.resources import ResultResource, TeacherCommentsResource
 from student.api.resources import StudentResource
+from location.api.resources import CountryResource
 from tastypie.api import Api
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,6 +15,7 @@ api = Api(api_name="v1")
 api.register(ResultResource())
 api.register(TeacherCommentsResource())
 api.register(StudentResource())
+api.register(CountryResource())
 
 urlpatterns = patterns('',
 	url(r'^api/', include(api.urls)),
