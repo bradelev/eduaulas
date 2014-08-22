@@ -90,11 +90,13 @@ function update_techer_configuration(){
 
 
 function load_teacher_info(){
-  $("#checkbox")
-  //var val= $("#change_password").is("checked");
- // alert(val);
-  var change =$("#change_password").prop('checked') ; //(val == true);
-  $("#change_password").change(function(){ change_pass(change);});
+  
+  var change = false;
+  
+
+
+  //$("#change_password").change(function(){ change_pass(change);});
+  $(".change_password").change(change_pass);
   var tok = $("#token").attr("value");
   var query = $.ajax({
     url:"datos_docente/",
@@ -128,15 +130,18 @@ function load_teacher_info(){
 }
 
 function change_pass(change){
-  alert(change);
-  if (change == true){
-    alert('hol');
-    $("#password").removeClass("disabled","disabled")
-    $("#passwordConfirm").removeClass("disabled","disabled")
+  var no = $("#change_no").is(':checked') ;
+  var yes =$("#change_yes").is(':checked') ;
+  
+  if (yes == true){
+    $("#psw").removeAttr("hidden");
+    $("#password").removeAttr("disabled");
+    $("#passwordConfirm").removeAttr("disabled");
   }
-  else{
-    $("#password").addClass("disabled","disabled")
-    $("#passwordConfirm").addClass("disabled","disabled")
+ if (no == true){
+    $("#psw").attr("hidden","hidden");
+    $("#password").attr('disabled','disabled');
+    $("#passwordConfirm").attr('disabled','disabled');
 
   }
 
@@ -145,23 +150,25 @@ function change_pass(change){
 function update_techer_info(){
   validate_teacher_form();
 
-  
-  var valid = true;
-  
-  var name = $("#name").val();
-  valid = (name == null);
-  var last_name = $("#last_name").val();
-  valid = (last_name == null);
-  var user = $("#user").val();
-  var email = $("#email").val();
-  valid = (email == null);
-  var date_birth = $("#dateofbirth").val();
-  valid = (date_birth == null);
   var gender = $("#gender").val();
+  var user = $("#user").val();
   var password = $("#password").val();
-  valid = (password == null);
+
+  var valid = true;  
+  var name = $("#name").val();
+ // valid *= (name != '');
+  var last_name = $("#last_name").val();
+  valid *= (last_name != '');
+  var email = $("#email").val();
+  valid *= (email != null);
+  var date_birth = $("#dateofbirth").val();
+  valid *= (date_birth != null);
+  
+
+  
   var tok = $("#token").attr("value");
-  var query = $.ajax({
+  if (valid){
+    var query = $.ajax({
     url:"actualizar_datos/",
     type:'POST',
     dataType:"json",
@@ -171,6 +178,7 @@ function update_techer_info(){
           user:user,
           gender: gender,
           email:email,
+          password:password,
           date_birth:date_birth,
           csrfmiddlewaretoken: tok,
           state:'inactive',
@@ -178,12 +186,12 @@ function update_techer_info(){
     }, 
     success: function(response) {
       alert('success');
-     // $('#teacher_info').html(response);
+      $('#teacher_info').append(response);
       
     },
     error: function(response) {
        alert('error');
-      $('#teacher_info').html(response);
+      $('#teacher_info').append(response);
 
     }  
 
@@ -194,7 +202,7 @@ function update_techer_info(){
      // }
 
     })
-  
+}/*close if valid*/  
 }/*close function update_techer_info*/
 
 function edit_or_save(){
