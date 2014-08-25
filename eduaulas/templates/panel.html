@@ -8,6 +8,7 @@
 
         <!-- MAIN PANEL -->
         <div id="main" role="main">
+
             <input type="hidden" id="code" value="{{classroom.code}}"></input>
            <!-- MAIN CONTENT -->
     
@@ -20,7 +21,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                     &times;
                                 </button>
-                                <h4 class="modal-title" id="myModalLabel">Ejercicios sugeridos</h4>
+                                <h4 class="modal-title tit_modal" id="myModalLabel">Ejercicios sugeridos</h4>
                             </div><!-- modal-header -->
                             <div class="modal-body">    
                                 <div id='content_suggestions' ></div>
@@ -47,7 +48,7 @@
                         
                        <h6> Información del aula: </h6>
                         
-                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
                         <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
                         <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
 
@@ -84,10 +85,10 @@
                         </form>
                     </div><!-- close div filters -->    
                 </div>
-                <div class="class="col-sm-12 col-xs-12""><!-- buttons --> 
+                <div class="col-sm-12 col-xs-12 hidden" id="text-update"><!-- buttons --> 
                    <a href="javascript:void(0);" class="btn btn-labeled btn-info space" id='refresh_results'rel="tooltip" data-placement="bottom" data-original-title=" Se actualizará la tabla con los nuevos datos." data-html="true" > <span class="btn-label "><i class="glyphicon glyphicon-refresh"></i></span>Actualizar datos </a>
                    <a href="javascript:void(0);" class="btn btn-labeled btn-info bg-color-green" data-toggle="modal" data-target="#myModal" id='load_suggestions'rel="tooltip" data-placement="bottom" data-original-title=" Se abrira una ventana con las sugerencias de nuevos ejercicios." data-html="true" > <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Mostrar sugerencias</a><br><br>
-                    <p class='txt'>Actualizado por ultima vez: <span id='last_update'></span>  </p>
+                    <p id="txt_last_update" >Actualizado por última vez: <span id='last_update'></span>  </p>
                 </div> <!-- buttons -->   
 
                 <div>  </div>
@@ -99,12 +100,12 @@
                     
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                
+                        <div id="content-hidde" class="hidden">
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget " id="wid-id-0" data-widget-sortable="true" data-widget-deletebutton="false">
                                 <header class="header_tables">
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Alumnos </h2>
+                                   
+                                    <h2 class="head_tables">Alumnos </h2>
                                 </header>
                 
                                 <!-- widget div-->
@@ -136,7 +137,7 @@
                             </div>
                             <!-- end widget -->
                              
-                
+                        </div>
                         </article>
                         <!-- WIDGET END -->
                 

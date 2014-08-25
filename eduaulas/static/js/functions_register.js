@@ -2,7 +2,8 @@ $(document).ready(ini);
 
 
 function ini(){
-	$("#user").on('blur',validar);
+	//$("#user").on('blur',validar);
+	$("#sub-form").click(asign_val_to_date_birth);
 }
 
 function validar(){
@@ -30,4 +31,13 @@ function validar(){
 			$("#user_msg").html(output);
 		}
 	});
+}
+
+function asign_val_to_date_birth(){
+
+	var aux = $("#dateofbirth").val();
+	
+	$("#date_birth").val(aux);
+	
+
 }

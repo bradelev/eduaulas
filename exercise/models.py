@@ -105,7 +105,7 @@ class Result(models.Model):
 		verbose_name_plural = _('Resultados')
 
 	def __unicode__(self):
-		return self.points
+		return self.exercise.name
 
 
 class TeacherComments(models.Model):

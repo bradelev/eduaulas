@@ -95,7 +95,7 @@ var output ='';
     for (var y = 1; y < cont; y++){
       if (y == 1){
 
-      output += "<h6>Alumno:";
+      output += "<h6 class='tit_modal'>Alumno :";
       output += (data["matriz_suggestions_students"])[student][y];
       output += "<br></h6>";
       }
@@ -238,7 +238,7 @@ function getTime(){
       date += str_year;
     }
 
-    date += '-';
+    date += ' - ';
 
     if (str_hours.length == 1){
        date += '0' + str_hours;
@@ -247,7 +247,7 @@ function getTime(){
       date += str_hours;
     }
 
-    date += '-';
+    date += ':';
 
     if (str_minutes.length == 1){
        date += '0' + str_minutes;
@@ -256,7 +256,7 @@ function getTime(){
       date += str_minutes;
     }
 
-    date += '-';
+    date += ':';
 
     if (str_seconds.length == 1){
        date += '0' + str_seconds;
@@ -265,7 +265,7 @@ function getTime(){
       date += str_seconds;
     }
 
-   
+        date += ' hs';   
 
 
     $('#last_update').html(date)
@@ -273,7 +273,9 @@ function getTime(){
 }
 
 function get_students_data () {
-  
+   
+   $('#content-hidde').removeClass('hidden');
+   $('#text-update').removeClass('hidden');
     getTime();
     var code_class = $("#code").attr("value");
     var id_unit = $('#select_unit').val();
@@ -299,7 +301,10 @@ function get_students_data () {
     "success":function(data){
         create_table_students(data);
         var time = (data['time_to_update_panel'])*(1000*60);
-        setInterval(get_students_data, time);
+        var refresh = function(){
+          get_students_data();
+        }
+        setInterval(refresh, time);
        $('#refresh_results').removeAttr('disabled','disabled');
       }
 
@@ -343,9 +348,12 @@ if(data['type'] == 'success'){
 
   for (var x in (data["matriz"])){
     tr_cont++;
-    aux = (data["matriz"]).length;
-    tr_color = (data["matriz"])[x][aux+1];
     output += "<tr>";
+    aux = ((data["matriz"])[x]).length;
+    tr_color = (data["matriz"])[x][aux -1];
+   // alert(aux);
+    
+  //  alert(tr_color);
     if (tr_color == 'orange'){
        output += "<tr class='tr_orange'>";  
     }
@@ -359,7 +367,7 @@ if(data['type'] == 'success'){
     }
     
       
-    
+    //alert(aux);
   
     
     var average = 0;
@@ -369,7 +377,7 @@ if(data['type'] == 'success'){
     for (var y = 1; y < (data["matriz"])[x].length-1; y++){
       
         if (y == 1){
-          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
+          output += "<td ><a class='class_link' target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
           
         else {
           

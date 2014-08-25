@@ -1,72 +1,28 @@
 
 
-#teacher{
-
-	margin-top: 20px;
-
-}
-
-
 
 .header_update_teacher{
 
 	background-color: #c0392b !important;
+	color: #ecf0f1 !important;
 }
 
 .header_update_teacher_configuration{
 
-	background-color: #f39c12 !important;
+	background-color: #27ae60 !important;
+	color: #ecf0f1 !important;
 
 }
 
 .header_classroom{
 
 	background-color: #2980b9 !important;
-	height: 50px;
-	padding-top: 5px;
-	padding-left: 10px;
-	padding-bottom: 10px;
-	margin-bottom: 30px;
-}
 
-#teacher_configuration_info{
-
-	float: right;
-	margin-right: 10px;
-	
-
+	color: #ecf0f1 !important;
 }
 
 
 
-
-
-#teacher_info{
-
-	float: left;
-	margin-left: 10px;
-}
-
-.clear{
-
-	float: none;
-}
-
-#update_techaer_second{
-
-	float: right;
-	width: 400px;
-	margin-right: 10px;
-}
-
-#update_techaer_first{
-
-	float: left;
-	width: 400px;
-
-
-
-}
 .td_graphs{
 
 	width: 120px;
@@ -91,8 +47,15 @@
 
  }
 .labsStudents{
-	font-weight:600;
-	color: #008B8B;
+	font-weight:bold;
+	color: #2c3e50;
+	font-size: 13px;
+}
+
+.pStudents{
+
+	margin-bottom: 15px;
+
 }
 
 .divRight{
@@ -118,6 +81,12 @@
 
 }
 
+.tr_orange{
+
+	background-color: #FF7F50 !important;
+
+}
+
 .stats{
 	float: right;
 	margin-top: 25px;
@@ -133,10 +102,6 @@
 }
 
 
-.more_info_stats{
-
-	position: relative;
-}
 
 #dt_results{
 
@@ -150,6 +115,8 @@
 	float: right;
 	text-align: center;
 	margin-right: 10px;
+	background-color: #f1c40f !important;
+	color: #2c3e50;
 	
 }
 .header_tables{
@@ -162,6 +129,7 @@
 .txt{
 
 	font-weight: bolder;
+
 }
 
 
@@ -185,9 +153,70 @@
 	text-decoration: none;
 }
 
+.div_logout a:hover{
+
+	color: #95a5a6 !important;
+}
+
 #add_classroom{
 
 	background-color: #e67e22;
 	border-color: #e67e22 !important;
 	border: 0px 0px 0px 0px;
 }
+
+
+
+.hidden{
+
+	visibility: hidden;
+
+}
+
+#refresh_results{
+
+	margin-right: 15px;
+}
+
+.head_tables{
+
+	font-weight: bolder !important;
+	color: #2c3e50 !important;
+}
+
+
+#last_update{
+
+	color: #d35400;
+	font-weight: bolder;
+}
+
+.class_link{
+
+	font-weight: bolder;
+	color: #34495e !important;
+}
+
+.name_student_in_suggestions{
+
+	color: #2980b9;
+
+}
+
+.tit_modal{
+
+	font-size: 16px;
+	color: #2c3e50 !important;
+}
+
+.more_info_stats{
+
+	padding-top: 15px;
+	font-size: 14px;
+	padding-left: 35px;
+	font-weight: bold;
+	color:  #d35400 !important;
+	
+
+}
+

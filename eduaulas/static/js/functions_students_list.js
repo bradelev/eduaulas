@@ -42,68 +42,44 @@ if(data['type'] == 'success'){
     //var output_thead = "";
     var output = "";
 
-    /*output_thead +='<tr>';
-    output_thead +='<th>Nombre</th>';                                                   
-    output_thead +='<th>Promedio meta cognitivo</th>';
-    output_thead +='<th>Promedio cognitivo</th>';
-    output_thead +='<th>Promedio socio afectivo</th>';
-    output_thead +='<th>% promedio academico</th>';
-    output_thead +='</tr>';*/
 
     for (var x in (data["matriz"])){
     	output += "<tr>";
 	    for (var y = 1; y < (data["matriz"])[x].length; y++){
 	      
 	        if (y == 1){
-	          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";}
-	          
+	          output += "<td ><a target='blank' href='/alumnos/info_alumno/"+code_class+"/"+(data["matriz"])[x][0]+"'>"+(data["matriz"])[x][y]+"</a></td>";
+          }/*close if*/
 	        else {
-	          
 	          output += '<td>';
 	          output +=  (data["matriz"])[x][y];
-	          output += '</td>';}
-
-	     
+	          output += '</td>';
+          }/*close else*/
+           }
+	     output += "</tr>";
    }/*cierro for dictionary_students*/
     
-    output += "</tr>";
+    
        
-  var txt = "<p>Para estos datos se evaluaron " +(data["quantity_results"]) +" ejercicios, de "+ (data["quantity_students"]) +" alumnos.</p>" ;    
+  var txt = "<p>Para generar estos datos se evaluaron: " +(data["quantity_results"]) +" ejercicios, de "+ (data["quantity_students"]) +" alumnos.</p>" ;    
     if (output != ""){
      // $("#dt_students > thead").html(output_thead);
       $("#dt_students > tbody ").html(output);
       
       $("#dt_students").dataTable();
 
-      /*$("#dt_students").dataTable({
+      $("#more_info_stats_students").html(txt);
+
+     /* $("#dt_students").dataTable({
 
             "language":{
-              "emptyTable":     "No hay datos en la tabla",
-              "info":           "Mostrando _START_ a _END_ de _TOTAL_ datos",
-              "infoEmpty":      "Mostrando 0 a 0 de 0 datos",
-              "infoFiltered":   "(filtrado de _MAX_ entradas)",
-              "infoPostFix":    "",
-              "thousands":      ",",
-              "lengthMenu":     "Mostrando _MENU_ entradas",
-              "loadingRecords": "Cargando...",
-              "processing":     "Procesando...",
-              "search":         "Buscar:",
-              "zeroRecords":    "No hubo coincidencias",
-              "paginate": {
-                  "first":      "Primero",
-                  "last":       "Ultimo",
-                  "next":       "Siguiente",
-                  "previous":   "Previo"
-              },
-              "aria": {
-                  "sortAscending":  ": ordenar la columna en forma ascendente",
-                  "sortDescending": ": ordenar la columna en forma descendente"
+                  
+                  "url": "dataTables.spanish.lang"
               }
-            }
-          });
-      $("#more_info_stats_students").html(txt);*/
+          });*/
+     
    
-    }
+   
 
      }
     }
