@@ -66,14 +66,15 @@
                                     &times;
                                 </button>
                                 <h4 class="modal-title" id="myModalLabel">Comentarios a la editorial</h4>
+
                             </div><!-- modal-header -->
                             <div class="modal-body">    
                                 <input type="hidden" id="token" value="{{csrf_token}}"></input>                                         
-                                <form id="contents-form" class="smart-form" novalidate="novalidate" method="POST">
+                                <form id="contents-form" class="smart-form"  method="POST">
                                     {% csrf_token %}
                                     <div class="modal-body">
                                         <fieldset>
-                                            <textarea class="form-control" placeholder="Escribe tu mensaje" rows="8" required=""></textarea>
+                                            <textarea class="form-control" name ='comment' id="comment" placeholder="Escribe tu mensaje" rows="8" ></textarea>
                                         </fieldset>
                                     </div>
                                     <div class="modal-footer">

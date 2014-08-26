@@ -121,7 +121,7 @@ class TeacherComments(models.Model):
 		verbose_name_plural = _('Comentarios del docente')
 
 	def __unicode__(self):
-		return self.teacher.name + " " + self.teacher.lastname
+		return self.teacher.user.username
     
 
 #UNIDAD A, B, C, etc...

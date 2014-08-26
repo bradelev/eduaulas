@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from classroom.models import  ClassRoom, Grade
-from exercise.models import Exercise, Lecture, Subject, Unit, Area
+from exercise.models import Exercise, Lecture, Subject, Unit, Area,TeacherComments
 from django.utils import simplejson
 import json
 from django.http import *
@@ -14,6 +14,11 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+from teacher.models import Teacher
+import socket
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -162,24 +167,34 @@ def list_contents(request,code):
 
 
 @login_required(login_url='/login/')
-def send_comment(request):
+def send_comment(request,code):
     message = ""
     type = "error"
     try:
         if request.POST:
-			user = None
-			if request.user.is_authenticated():
-				user = request.user
-				t = Teacher.objects.get(user=user)
-				print "encontro teacher"
-				txt_comment = request.POST['comment']
+			
+			try:
+				userid = request.user.id
+				t = Teacher.objects.get(user=userid)
+			except:
+				message = "no se encontro maestro"
+				print message
+			txt_comment = request.POST['comment']
+			print txt_comment, 'cometario'
+			print t.name
+			try:
+				c = TeacherComments(teacher=t)
+				print 'guarde tecdeddddddddddddddddddddddddddddd'
+				c.comments = 'dsfgse' #txt_comment
+				c.save()
+			except:
+				message = "No se pude guardar el comentario"
+				print message
 
-				comentario = TeacherComment()
-			else:
-				message = "No hay usuario registrado"
+			
 
 			type = "success"
-    except Teacher.DoesNotExist:
+    except:
         print('entre a la execpcion')
         message = "No hay docente"
 

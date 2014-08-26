@@ -7,7 +7,33 @@ function ini(){
   $("#select_subject").attr('disabled','disabled');
   
   $('#select_area').change(load_filters);
+  $('#send').click(send_comment);
   
+}
+
+
+function send_comment(){
+
+  validate_contents_form();
+  var code = $('#code').val();
+  var tok = $("#token").attr("value");
+  var comment = $("#comment").val();
+  
+  var query = $.ajax({
+    url:"/contenidos/lista/"+code+"/enviar_comentarios/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+          comment: comment,
+          
+    },
+    "success":function(data){
+      get_content_data();
+      }
+    })
+   get_content_data();
 }
 
 function load_filters(){
@@ -127,7 +153,10 @@ function create_table_contents(data){
               if ((data["dictionary_experiments"])[e]["guia"] != ""){
                 output+= '<h3>Guía docente</h3>';
                 output+= (data["dictionary_experiments"])[e]["guia"];
+                
               }
+             // output +='<input  class="experiments_id" data-id='+(data["dictionary_experiments"])[e]["id"]+' value='+(data["dictionary_experiments"])[e]["id"]+'>';
+             
               output+= '</div>';
             output += '</div>';
             output += '<hr/>';
@@ -135,7 +164,8 @@ function create_table_contents(data){
                 output += '<div class="col-sm-12">';
                   output += '<h3>Enviar comentario a la editorial</h3>';
                   output += '<div id="div_btn_classroom">';
-                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" data-id="'+(data["dictionary_experiments"])[e]+'" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+                    output += '<button class="btn btn-labeled btn-info" data-toggle="modal" data-target="#myModal" data-id="'+(data["dictionary_experiments"])[e]["id"]+'" rel="tooltip" data-placement="bottom" data-original-title="Enviar comentario a la editorial" data-html="true"><span class="btn-label"><i class="glyphicon glyphicon-envelope"></i></span>Enviar comentario</button>';
+
                   output += '</div>';
                 output += '</div>';
               output += '</div>';
@@ -167,7 +197,10 @@ function create_table_contents(data){
               if ((data["dictionary_lectures"])[l]["guia"] != ""){
                 output+= '<h3>Guía docente</h3>';
                 output+= (data["dictionary_lectures"])[l]["guia"];
+                
               }
+               //output+='<input id="lectures_id" value='+(data["dictionary_lectures"])[l]["id"]+'>';
+              
               output+= '</div>';
             output += '</div>';
             output += '<hr/>';
@@ -207,7 +240,10 @@ function create_table_contents(data){
               if ((data["dictionary_exercises"])[e]["guia"] != ""){
                 output+= '<h3>Guía docente</h3>';
                 output+= (data["dictionary_exercises"])[e]["guia"];
+               
               }
+              //output+='<input id="exercises_id" value='+(data["dictionary_exercises"])[e]["id"]+'>';
+              // excer_id = (data["dictionary_exercises"])[e]["id"];
               output+= '</div>';
             output += '</div>';
             output += '<hr/>';
@@ -247,7 +283,9 @@ function create_table_contents(data){
               if ((data["dictionary_homeworks"])[h]["guia"] != ""){
                 output+= '<h3>Guía docente</h3>';
                 output+= (data["dictionary_homeworks"])[h]["guia"];
+                
               }
+             // output+='<input id="homework_id" value='+(data["dictionary_homeworks"])[h]["id"]+'>';
               output+= '</div>';
             output += '</div>';
             output += '<hr/>';
@@ -276,5 +314,32 @@ function create_table_contents(data){
   $('#exercises').tabs();
   $('#homeworks').tabs();
 
+
+}
+
+function validate_contents_form(){
+
+  $('#contents-form').validate({
+      // Rules for form validation
+        rules : {
+          comment : {
+            required : true
+          }
+          
+         },
+
+       
+// Messages for form validation
+messages : {
+          comment : {
+            required : 'Por favor ingrese un comentario.'
+         
+           }         
+        },
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        }
+      });
 
 }
