@@ -67,9 +67,9 @@ class Exercise(models.Model):
 		return "%so %s, %s, ej %s" % (self.grade.name, self.unit.subject.name, self.unit.letter, str(self.cuasimodo_exercise_id))
 
 	def save(self):
+		super(Exercise, self).save()
 		if not self.img:
 			return
-		super(Exercise, self).save()
 		img = Image.open(self.img)
 		(width, height) = img.size
 		razon = width / float(height)
@@ -92,10 +92,10 @@ class Exercise(models.Model):
 
 
 class Result(models.Model):
-	points = models.FloatField(null = True, verbose_name=u'Puntos')
-	answer = models.TextField(null=True, verbose_name=u'Respuesta')
-	exercise = models.ForeignKey(Exercise, verbose_name=u'Ejercicio')
-	person = models.ForeignKey(Person, verbose_name=u'Persona')
+	points = models.FloatField(null = True, verbose_name=u'Puntos', blank=True)
+	answer = models.TextField(null=True, verbose_name=u'Respuesta', blank=True)
+	exercise = models.ForeignKey(Exercise, verbose_name=u'Ejercicio', blank=True)
+	person = models.ForeignKey(Person, verbose_name=u'Persona', blank=True)
 	time_elapsed = models.FloatField(blank=True, verbose_name=u'Tiempo de realización')
 	created = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de creación')
 	updated = models.DateTimeField(auto_now=True, blank=True, verbose_name=u'Fecha de update')

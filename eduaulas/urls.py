@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
-from exercise.api.resources import ResultResource, TeacherCommentsResource
+from exercise.api.resources import ResultResource, TeacherCommentsResource, UnitResource, ExerciseResource, SubjectResource
 from student.api.resources import StudentResource
-from location.api.resources import CountryResource
+from person.api.resources import PersonResource
+from location.api.resources import CountryResource, DepartmentResource 
+from classroom.api.resources import ClassRoomResource, GradeResource
 from tastypie.api import Api
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,8 +16,16 @@ from django.views.generic.base import TemplateView
 api = Api(api_name="v1")
 api.register(ResultResource())
 api.register(TeacherCommentsResource())
+
 api.register(StudentResource())
 api.register(CountryResource())
+api.register(DepartmentResource())
+api.register(ClassRoomResource())
+api.register(UnitResource())
+api.register(ExerciseResource())
+api.register(SubjectResource())
+api.register(PersonResource())
+api.register(GradeResource())
 
 urlpatterns = patterns('',
 	url(r'^api/', include(api.urls)),
