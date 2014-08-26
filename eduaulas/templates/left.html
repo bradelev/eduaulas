@@ -13,11 +13,16 @@
                 
             </div>
             <div class="pull-right div_logout">
-
-                ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} !</a><br>
-                <a href="/logout/">Cerrar sesión</a>
+                <!-- collapse menu button -->
+                <div id="hide-menu" class="btn-header pull-right fa-spinner">
+                    <span> <a href="javascript:void(0);" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+                </div>
+                <!-- end collapse menu -->
+                <div id="logout" class="transparent pull-right">
+                    ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} !</a><br>
+                    <a href="/logout/">Cerrar sesión</a>
+                </div>    
             </div>
-            
         </header>
         <!-- END HEADER -->
 	<aside id="left-panel">

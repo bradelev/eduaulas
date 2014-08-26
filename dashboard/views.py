@@ -169,7 +169,7 @@ def list_students(request,code):
 					print average  , s.name
 					if average >= teacher_config.correct_points: 	
 						matriz[i].append('green')
-					if r.points <= teacher_config.incorrect_points:
+					if average <= teacher_config.incorrect_points:
 						matriz[i].append('red')	
 					if ((average < teacher_config.correct_points) and (average > teacher_config.incorrect_points)):	
 						matriz[i].append('orange')	
@@ -188,7 +188,8 @@ def list_students(request,code):
 					
 				}	
 				
-			print matriz
+			#print matriz
+			#print len(matriz)
 	except Student.DoesNotExist:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
@@ -208,7 +209,7 @@ def load_suggestions_students(request,code):
 
 	message = ""
 	type = "error"
-	
+	matriz_suggestions_students = []
 	try:
 		try:
 			userid = request.user.id
@@ -218,11 +219,16 @@ def load_suggestions_students(request,code):
 				message="Debe loguearse como un maestro"
 				return render_to_response('500.html',{"message":message}, context_instance = RequestContext(request))
 		if request.POST:
-			id_unit = request.POST['id_unit']
-			var_unit = Unit.objects.get(pk=id_unit)	
-			cl = ClassRoom.objects.get(pk=code)
-			students = Student.objects.filter(class_room=cl)
-			var_units_exercises = Exercise.objects.filter(unit=var_unit)
+			try:
+				id_unit = request.POST['id_unit']
+				var_unit = Unit.objects.get(pk=id_unit)	
+				cl = ClassRoom.objects.get(pk=code)
+				students = Student.objects.filter(class_room=cl)
+				var_units_exercises = Exercise.objects.filter(unit=var_unit)
+			except:
+				message = "No se pudieron obtener los datos."
+				print message
+			
 			matriz_suggestions_students = []
 			type = "success"
 			txt = ''
@@ -235,76 +241,82 @@ def load_suggestions_students(request,code):
 				exists_results = False			
 				exists_exercise_for_suggest = False			
 				for j in var_units_exercises:
-					var_results = Result.objects.filter(exercise=j, person=s)						
+					try:
+						var_results = Result.objects.filter(exercise=j, person=s)
+					except:
+						message = "No hay resultados"
+						print message
 					if var_results.exists():
 						exists_results = True	
 						for r in var_results:
-
 							if r.points >= teacher_config.correct_points:
-
-								good_exercises = Exercise.objects.get(pk=r.exercise.id).good_related_exercises.all()
+								try:
+									good_exercises = Exercise.objects.get(pk=r.exercise.id).good_related_exercises.all()
+								except:
+									message = "No hay ejercicios posteriores"
+									print message
 								if good_exercises.exists():
 									exists_exercise_for_suggest = True
+									txt = '<h6 class="name_student_in_suggestions">Ejercicios posterior al numero ' 
+									matriz_suggestions_students[i].append(txt)
+									txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
+									matriz_suggestions_students[i].append(txt)
 									for g in good_exercises:														
-										good_results =Result.objects.filter(exercise_id=g.id, person=s)									
-																			
-										if good_results.exists():		
-																
-											txt = '<h6>Ejercicios posterior al numero ' 
+										good_results =Result.objects.filter(exercise_id=g.id, person=s)
+										if good_results.exists():
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+  str(g.id) +'">'+str(g.cuasimodo_exercise_id) +'</a>'
 											matriz_suggestions_students[i].append(txt)
-											txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
-											matriz_suggestions_students[i].append(txt)
-											txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+  str(g.id) +'">'+str(g.id) +" " +str(g.name)+'</a>'
-											matriz_suggestions_students[i].append(txt)
-											txt = ' Estado: Hecho' + '<br>'
+											txt = ' - Estado: Hecho' + '<br>'
 											matriz_suggestions_students[i].append(txt)
 										else:
+											
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(g.id) + '">'+str(g.cuasimodo_exercise_id) +'</a>'
 											matriz_suggestions_students[i].append(txt)
-											txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(g.id) + '">'+str(g.id) + " " +str(g.name)+'</a>'
+											txt = ' - Estado: Pendiente' + '<br>'
 											matriz_suggestions_students[i].append(txt)
-											txt = ' Estado: Pendiente' + '<br>'
-											matriz_suggestions_students[i].append(txt)
-										
-										
 										txt = ''
 										
 							if r.points <= teacher_config.incorrect_points:
-								bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
+								try:
+									bad_exercises = Exercise.objects.get(pk=r.exercise.id).bad_related_exercises.all()
+								except:
+									message = "No hay ejercicios previos"
+									print message
 								if bad_exercises.exists():
-
 									exists_exercise_for_suggest = True
-									txt = '<h6>Ejercicios previo al numero '
+									txt = '<h6 class="name_student_in_suggestions" >Ejercicios previo al numero '
 									matriz_suggestions_students[i].append(txt)
-									txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'		
-								for b in bad_exercises:														
-									bad_results =Result.objects.filter(exercise_id=b.id, person=s)
-
-									if bad_results.exists():
-										matriz_suggestions_students[i].append(txt)
-										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/" + str(b.id) + '">'+str(b.id) +" " +str(b.name)+'</a>'
-										matriz_suggestions_students[i].append(txt)
-										txt = ' Estado: Hecho' + '<br>'
-										matriz_suggestions_students[i].append(txt)
-									else:
-
-										matriz_suggestions_students[i].append(txt)
-										txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(b.id) + '">'+str(b.id) + " "+ str(b.name)+'</a>'
-										matriz_suggestions_students[i].append(txt)
-										txt = ' Estado: Pendiente' + '<br>'
-										matriz_suggestions_students[i].append(txt)
+									txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'	
+									matriz_suggestions_students[i].append(txt)	
+									for b in bad_exercises:														
+										bad_results =Result.objects.filter(exercise_id=b.id, person=s)
+										if bad_results.exists():
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/" + str(b.id) + '">'+str(b.cuasimodo_exercise_id) +'</a>'
+											matriz_suggestions_students[i].append(txt)
+											txt = ' - Estado: Hecho' + '<br>'
+											matriz_suggestions_students[i].append(txt)
+										else:
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(b.id) + '">'+str(b.cuasimodo_exercise_id) +'</a>'
+											matriz_suggestions_students[i].append(txt)
+											txt = ' - Estado: Pendiente' + '<br>'
+											matriz_suggestions_students[i].append(txt)
 									txt = ''	
-								lectures = Lecture.objects.get(pk=r.exercise.id).lectures.all()
-								if lectures.exists():
-									txt = '<h6>Lecturas sugeridas para el ejercicio ' +str(r.exercise.cuasimodo_exercise_id) + '</h6>'
-									
-										
-									matriz_suggestions_students[i].append(txt)
-									exists_exercise_for_suggest = True
-									for l in lectures:
-										txt =  str(l.name) + '<br>'
+								try:
+									lectures = Exercise.objects.get(pk=r.exercise.id).lectures.all()
+									#lectures = Lecture.objects.filter(exercise=r.exercise.id)
+									#print len(lectures), 'cantidad'
+									if lectures.exists():
+										txt = '<h6 class="name_student_in_suggestions" >Lecturas sugeridas para el ejercicio ' +str(r.exercise.cuasimodo_exercise_id) + '</h6>'
 										matriz_suggestions_students[i].append(txt)
-										#txt = 'Ej.' + '<a target="blank" href="/contenidos/ejercicio/'+str(b.id) +'">'+str(b.id)+'</a>'
-										#matriz_suggestions_students[i].append(txt)
+										exists_exercise_for_suggest = True
+										for l in lectures:
+											
+											txt = 'Lectura ' + '<a target="blank" href="/contenidos/lectura/'+ code + "/"+str(l.id) +'">'+str(l.name)+'</a><br>'
+											matriz_suggestions_students[i].append(txt)
+											
+								except:
+									message="No hay lecturas"
+									print message
 
 				
 				if exists_results == False:	
@@ -318,8 +330,8 @@ def load_suggestions_students(request,code):
 				i = i + 1
 													
 								
-			print(matriz_suggestions_students)
-	except Student.DoesNotExist:
+			#print(matriz_suggestions_students)
+	except Student:
 		message = "No hay alumnos"
 	result = simplejson.dumps({
 			"matriz_suggestions_students":matriz_suggestions_students,

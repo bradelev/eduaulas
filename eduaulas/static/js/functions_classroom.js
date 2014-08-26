@@ -51,7 +51,7 @@ function load_teacher_configuration(){
 
 function update_techer_configuration(){
 
- // alert('update_techer_configuration');
+ validate_teacher_configuration_form();
   var correct_points = $("#correct_points").val();
   var incorrect_points = $("#incorrect_points").val();
   var quantity_exercises = $("#quantity_exercises").val();
@@ -71,16 +71,17 @@ function update_techer_configuration(){
           state:'inactive',
 
     }, 
-    success: function(response) {
-      alert('success');
-      $('#teacher_configuration_info').html(response);
-      
-    },
+   
     error: function(response) {
-       alert('error');
-      $('#teacher_configuration_info').html(response);
+      // alert('error');
+      $('#teacher_configuration_info').append(response);
 
-    }  
+    },  
+     success: function(response) {
+     // alert('success');
+      $('#teacher_configuration_info').append(response);
+      
+    }
 
 
     })
@@ -93,9 +94,6 @@ function load_teacher_info(){
   
   var change = false;
   
-
-
-  //$("#change_password").change(function(){ change_pass(change);});
   $(".change_password").change(change_pass);
   var tok = $("#token").attr("value");
   var query = $.ajax({
@@ -156,7 +154,7 @@ function update_techer_info(){
 
   var valid = true;  
   var name = $("#name").val();
- // valid *= (name != '');
+  valid *= (name != '');
   var last_name = $("#last_name").val();
   valid *= (last_name != '');
   var email = $("#email").val();
@@ -636,6 +634,8 @@ function save_classroom_edit(code_class) {
 
 //$(function(){
 
+
+
 function validate_teacher_form(){
   $("#update-teacher").validate({
           // Rules for form validation
@@ -759,3 +759,49 @@ messages : {
       })
   
 });/*cierro function form_classroom_validate*/
+
+
+function validate_teacher_configuration_form(){
+
+$('#update-teacher-config').validate({
+      // Rules for form validation
+        rules : {
+          correct_points : {
+            required : true
+          },
+          incorrect_points : {
+            required : true
+          },
+          quantity_exercises : {
+            required : true
+          },
+           time_to_update_panel : {
+            required : true
+          }
+         },
+
+       
+// Messages for form validation
+messages : {
+          correct_points : {
+            required : 'Por favor ingrese un valor en este campo.'
+          },
+          incorrect_points : {
+            required : 'Por favor ingrese un valor en este campo.'
+          },
+          quantity_exercises : {
+            required : 'Por favor ingrese un valor en este campo.'
+          },
+          time_to_update_panel : {
+            required : 'Por favor ingrese un valor en este campo.'
+           }         
+        },
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        }
+      });
+  
+//});/*cierro function form_classroom_validate*/
+}
+

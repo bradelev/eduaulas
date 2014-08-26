@@ -37,16 +37,26 @@ def ini(request,code):
 def students_info(request,code):
 	message = ""
 	type = "error"
-	students = Student.objects.filter(class_room=code)
+	try:
+		students = Student.objects.filter(class_room=code)
+		quantity_students = 0
 
+		for s in students:
+			res = Result.objects.filter(person=s)
+			if res.exists():
+				quantity_students = quantity_students + 1
+	except:
+		message = "No hay alumnos"
+		print message
 	matriz = []
 	i=0
 	average=0
 	points=0
-	quantity_students = 0
+	
 	try:
+		quantity_results_gral = 0
 		for s in students:
-			quantity_students = quantity_students + 1
+			
 			metacognitive_percentage= 0
 			cognitive_percentage =0
 			socio_affective_percentage=0
@@ -62,6 +72,7 @@ def students_info(request,code):
 			if students_results.exists():
 				for p in students_results:
 					quantity_results = quantity_results + 1
+					quantity_results_gral = quantity_results_gral + 1
 					metacognitive_percentage += p.exercise.metacognitive_percentage * p.points
 					cognitive_percentage += p.exercise.cognitive_percentage * p.points
 					socio_affective_percentage += p.exercise.socio_affective_percentage * p.points
@@ -75,7 +86,7 @@ def students_info(request,code):
 					matriz[i].append(round(average_cognitive_percentage,1))
 					average_socio_affective_percentage= socio_affective_percentage/quantity_results
 					matriz[i].append(round(average_socio_affective_percentage,1))						
-					matriz[i].append(average_points)
+					matriz[i].append(round(average_points,1))
 				
 
 			else:
@@ -87,7 +98,7 @@ def students_info(request,code):
 
 
 			i = i + 1
-			print(matriz)
+			#print(matriz)
 			type = "success"
 		   
 	except Student.DoesNotExist:
@@ -95,7 +106,7 @@ def students_info(request,code):
 	result = simplejson.dumps({
 			"matriz":matriz,
 			"message":message,
-			"quantity_results":quantity_results,
+			"quantity_results":quantity_results_gral,
 			"quantity_students":quantity_students,
 			"type":type,
 		}, cls = LazyEncoder)
@@ -182,9 +193,9 @@ def student_info(request,code,id):
 
 		for r in student_results:
 			quantity_results = quantity_results + 1
-			metacognitive_percentage += (r.exercise.metacognitive_percentage * r.points) + 1
-			cognitive_percentage += (r.exercise.cognitive_percentage * r.points) + 1
-			socio_affective_percentage += (r.exercise.socio_affective_percentage * r.points) +1
+			metacognitive_percentage += (r.exercise.metacognitive_percentage * r.points) 
+			cognitive_percentage += (r.exercise.cognitive_percentage * r.points) 
+			socio_affective_percentage += (r.exercise.socio_affective_percentage * r.points) 
 
 		if quantity_results !=0:	
 			average_metacognitive_percentage= metacognitive_percentage/quantity_results

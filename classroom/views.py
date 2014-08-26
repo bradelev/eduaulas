@@ -181,7 +181,7 @@ def update_teacher_info(request):
     type = "error"
     msg =''
     teach = None
-    context = {}
+   
     try:
         if request.POST:
             
@@ -212,7 +212,7 @@ def update_teacher_info(request):
                     if password != '':
                         print password
                         user.password = password
-                    #user.email = email
+                    user.email = email
                     user.save() 
                     teach.date_of_birth = dob
                     teach.gender = gender
@@ -286,7 +286,10 @@ def classroom_list(request):
         message = ""
         type = "error"
         try:
-            classrooms = ClassRoom.objects.all()
+            userid = request.user.id
+            user_name = request.user.username
+            teach = Teacher.objects.get(user=userid)
+            classrooms = ClassRoom.objects.filter(teachers=teach)
             type = "success"
             for x in classrooms:                              
                     dictionary_classrooms[x.code] = {
@@ -300,7 +303,7 @@ def classroom_list(request):
                             
                     }
                 
-        except ClassRoom.DoesNotExist:
+        except :
                 message = "No hay aulas"
         result = simplejson.dumps({
                         "dictionary_classrooms":dictionary_classrooms,
@@ -326,18 +329,22 @@ def classroom_save_add(request):
                 grade= request.POST['select_grade'] 
                 className=request.POST['class_name']           
                 shift=request.POST['select_shift'] 
-
+                userid = request.user.id
+                user_name = request.user.username
+                teach = Teacher.objects.get(user=userid)
                 c= ClassRoom()
                 code = generate_classroom_code()
                 print code, 'code'
                 c.code= code
                 c.class_letter = className
+
                 c.shift = shift
                 g = Grade.objects.get(pk=grade)
                 c.grade=g
                 s= School.objects.get(pk=school)
                 c.school=s
-                c.save()             
+                c.save() 
+                c.teachers.add(teach)            
                 type = "success"
               
     except: 

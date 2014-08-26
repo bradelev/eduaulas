@@ -18,7 +18,7 @@
                     </div>
                     <div class ="class_info well well-light col-sm-3 col-xs-3">
                         <h6> Información del aula: </h6>
-                        <p > <span class="txt">Codigo:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
                         <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
                         <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
                     </div> <!-- row title-->
@@ -49,53 +49,54 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab-r1">
-                                    <p>
+                                    <p class="pStudents">
                                       <span class="labsStudents">Nombre completo:</span> {{student.name}} {{student.last_name}} 
                                     </p>
 
-                                    <p>
+                                    <p class="pStudents">
                                        <span class="labsStudents"> Fecha de nacimiento:</span> {{student.date_of_birth}}
                                     </p>
-                                     <p>
+                                     <p class="pStudents">
                                        <span class="labsStudents"> Edad:</span> {{years}}
                                     </p>
-                                    <p>
+                                    <p class="pStudents">
                                         <span class="labsStudents"> Genero:</span> {{gender}}
                                     </p>
                                 </div><!-- end div tab-r1 -->  
                                 <div class="tab-pane" id="tab-r2">
-                                    <div class="divGraphs">
-                                        <div class="divRight">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-3">
                                              <p>Cognitivo</p>
                                                 <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-pie-size="110" data-percent="{{cognitive_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-greenLight font-md">55</span>
                                                 <canvas height="110" width="110"></canvas>
-                                            </div>
+                                               </div>
 
                                         </div>
-                                        <div class="divRight">
+                                        <div class="col-xs-12 col-md-3">
                                             <p>Socio afectivo</p>
                                             <div class="easy-pie-chart txt-color-pinkDark  easyPieChart " data-pie-size="110" data-percent="{{socio_affective_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-pinkDark font-md">55</span>
                                                 <canvas height="110" width="110"></canvas>
                                             </div>
                                         </div>   
-                                        <div class="divRight"> 
+                                        <div class="col-xs-12 col-md-3"> 
                                             <p>Meta cognitivo</p>
                                             <div class="easy-pie-chart txt-color-blue  easyPieChart " data-pie-size="110" data-percent="{{metacognitive_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-blue font-md">55</span>
                                                 <canvas height="110" width="110"></canvas>
                                             </div>
                                         </div>
-                                        <div class="more_info_stats">
-                                            <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
-                                        </div>
+                                    </div>    
+                                    <div class="more_info_stats row">
+                                        <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
                                     </div>
+                                    
                                 </div><!-- end div tab-r2 -->  
                                 <div class="tab-pane" id="tab-r3">
-                                    <div class="divGraphs">
+                                    <div class="divGraphs row">
                                         {% for k,value in list_average.items %}
-                                        <div class="divRight"> 
+                                        <div class="col-xs-12 col-md-3"> 
                                             <p>{{k}}</p>
                                             {% if value.average <= value.incorrect_points %}
                                                 <div class="easy-pie-chart txt-color-red easyPieChart" data-pie-size="110" data-percent="{{value.average}}" style="width: 110px; height: 110px; line-height: 110px;">
@@ -116,17 +117,18 @@
                                                 </div>
                                             {% endif %}    
                                         </div>
-                                        {% endfor %}      
-                                        <div class="more_info_stats">
-                                            <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
-                                        </div>   
-                                    </div>                                                                                 
+                                        {% endfor %}  
+                                    </div>         
+                                    <div class="more_info_stats row">
+                                        <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
+                                    </div>   
+                                                                                                                    
                                 </div><!-- end div tab-r3 -->  
-                                 <div class="tab-pane" id="tab-r4">
-                                    <div id = "table_students_results">
+                                <div class="tab-pane" id="tab-r4">
+                                    <div id = "table_students_results row">
                                         <table id ="dt_results" class= "table table-striped table-bordered table-hover">
                                             <thead>
-                                                <th>Numero / Nombre ejercicio</th>
+                                                <th>Numero ejercicio</th>
                                                 <th>Materia</th>
                                                 <th>Unidad</th>
                                                 <th>Resultado</th>
@@ -134,7 +136,7 @@
                                             <tbody>
                                                 {%for r in student_results %}
                                                     <tr> 
-                                                        <td><a target="blank" href="/contenidos/ejercicio/{{code}}/{{r.exercise.id}}">{{r.exercise.cuasimodo_exercise_id}} - {{r.exercise.name}}</a></td>
+                                                        <td><a target="blank" href="/contenidos/ejercicio/{{code}}/{{r.exercise.id}}">Ejercicio - {{r.exercise.cuasimodo_exercise_id}}</a></td>
                                                         <td>{{r.exercise.unit.subject.name}} </td>  
                                                         <td>{{r.exercise.unit.name }} </td>
                                                         <td>{{r.points}} </td>

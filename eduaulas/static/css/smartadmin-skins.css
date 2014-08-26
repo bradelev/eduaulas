@@ -814,15 +814,15 @@ body.smart-style-3, .smart-style-3 body {
 }
 
 .smart-style-3 #ribbon {
-	background: #fff;
+	background: #c0392b;
 } 
 
 .smart-style-3 #ribbon .breadcrumb, .smart-style-3 #ribbon .breadcrumb a {
-	color: #7C7C7C!important;
+	color: #bdc3c7 !important;
 }
 
 .smart-style-3 #ribbon .breadcrumb li:last-child, .smart-style-3 #ribbon .breadcrumb>.active {
-color: #5F5F5F;
+color: #bdc3c7;
 }
 
 .smart-style-3.fixed-ribbon #ribbon {
@@ -831,19 +831,19 @@ color: #5F5F5F;
 
 .smart-style-3 .btn-header>:first-child>a,
 .smart-style-3 #logo-group span#activity {
-	background-color: #DD7C37;
-	color: #fff !important;
-	border: 1px solid #f09d61;
+	background-color: #c0392b !important;
+	color: #bdc3c7 !important;
+	border: 1px solid #2c3e50;
 	text-shadow: #985813 0 -1px;
 } .smart-style-3 #hide-menu i {
-	color: #fff !important;
+	color: #2c3e50 !important;
 }
 
 .smart-style-3 .btn-header>:first-child>a:hover,
 .smart-style-3 #logo-group span#activity:hover,
 .smart-style-3 .btn-header>:first-child>a:active,
 .smart-style-3 #logo-group span#activity:active {
-		background-color: #dd7a35;
+		background-color: #c0392b;
 	
 }
 

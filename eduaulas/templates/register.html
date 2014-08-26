@@ -102,14 +102,15 @@
 								</div>
 								<div class="row">
 									<section class="col col-10">
-										<label class="input"> <i class="icon-append fa fa-calendar"></i>
-											<input type="text" name="dateofbirth" placeholder="Fecha de nacimiento" class="datepicker" data-dateformat='dd/mm/yy' id="dateofbirth">
-										</label>
+										<label class="input"> 
+											
+												<div class="bfh-datepicker" data-max="today" data-format="y-m-d" data-close="true" id="dateofbirth" data-date="" data-placeholder="Fecha de nacimiento" name="dateofbirth"></div>
+											</label>									<input type="hidden" name="date_birth" id="date_birth">	
 									</section>
 								</div>
 							</fieldset>
 							<footer>
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="btn btn-primary" id="sub-form">
 									Registrar
 								</button>
 							</footer>
@@ -136,11 +137,12 @@
 
 		<!-- MAIN APP JS FILE -->
 		<script src="{% static "js/app.js" %}"></script>
+		<script src="{% static "js/bootstrap-formhelpers.js" %}"></script>
 		<script src="{% static "js/functions_register.js" %}"></script>
 
 		<script type="text/javascript">
 			runAllForms();
-
+			
 			$(function() {
 				// Validation
 				$("#smart-form-register").validate({
@@ -200,6 +202,7 @@
 						},
 						dateofbirth : {
 							date : 'Ingrese una fecha válida',
+							required : 'Este campo no puede quedar vacío.'
 						}
 
 					},

@@ -70,11 +70,13 @@ def register(request):
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
         gender = request.POST['gender']
-        str_dob = request.POST['dateofbirth']
 
-        print str_dob, 'fecha nac'
+        str_dob = request.POST['date_birth']
+
+        #print str_dob, 'fecha nac'
         try:
-            dob = datetime.datetime.strptime(str_dob,"%d/%m/%Y").date()
+            
+            dob = datetime.datetime.strptime(str_dob,"%Y-%m-%d").date()
             print 'converti exitosamente'
         except:
             dob = datetime.datetime.now().date()

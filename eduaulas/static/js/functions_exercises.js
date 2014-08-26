@@ -79,6 +79,7 @@ function load_units(){
 }/*cierro funcion load_units*/
 
 function get_content_data () {
+    $('#content_to_hidde').removeClass('hidden');
     var code_class = $("#code").attr("value");
     var id_unit = $(this).val();
     var tok = $("#token").attr("value");
@@ -267,86 +268,6 @@ function create_table_contents(data){
 
 
 
-/*
-  var output = '';
-  output+= '<div id="lectures">';
-  output+= '<ul>';
-  console.log(data["dictionary_lectures"]);
-  for(var l in data["dictionary_lectures"]){
-    output+= '<li>';
-    output+= '<a href="#lecture-'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'">'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'</a>';
-    output+= '</li>'; 
-  }
-  output+= '</ul>';
-  for(var l in data["dictionary_lectures"]){
-    output+= '<div class="row">';
-    output+= '<div id="lecture-'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'">';
-    output+= '<img src="'+(data["dictionary_lectures"])[l]["img"]+'" alt="" style="width:600px;height:480px;">';
-    output+= '</div>';
-    output+= '<div class="col-sm-4">';
-    if ((data["dictionary_lectures"])[l]["guia"] != ""){
-      output+= '<h3>Guía docente</h3>';
-      output+= (data["dictionary_lectures"])[l]["guia"];
-    }
-    output+= '</div>';
-    output+= '</div>';
-  }
-  output+= '</div>';
-  $("#lecturas").html(output);
-
-  var output = '';
-  output+= '<div id="exercises">';
-  output+= '<ul>';
-  console.log(data["dictionary_exercises"]);
-  for(var e in data["dictionary_exercises"]){
-    output+= '<li>';
-    output+= '<a href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'</a>';
-    output+= '</li>'; 
-  }
-  output+= '</ul>';
-  for(var e in data["dictionary_exercises"]){
-    output+= '<div class="row">';
-    output+= '<div id="exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">';
-    output+= '<div class="col-sm-8">';
-    output+= '<img src="'+(data["dictionary_exercises"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';
-    output+= '</div>';
-    output+= '<div class="col-sm-4">';
-    if ((data["dictionary_exercises"])[e]["guia"] != ""){
-      output+= '<h3>Guía docente</h3>';
-      output+= (data["dictionary_exercises"])[e]["guia"];
-    }
-    output+= '</div>';
-    output+= '</div>';
-  }
-  output+= '</div>';
-  $("#ejercicios").html(output);
-
-  var output = '';
-  output+= '<div id="homeworks">';
-  output+= '<ul>';
-  console.log(data["dictionary_homeworks"]);
-  for(var h in data["dictionary_homeworks"]){
-    output+= '<li>';
-    output+= '<a href="#homework-'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'">'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'</a>';
-    output+= '</li>'; 
-  }
-  output+= '</ul>';
-  for(var h in data["dictionary_homeworks"]){
-    output+= '<div class="row">';
-    output+= '<div id="homework-'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'">';
-    output+= '<img src="'+(data["dictionary_homeworks"])[h]["img"]+'" alt="" style="width:600px;height:480px;">';
-    output+= '</div>';
-    output+= '<div class="col-sm-4">';
-    if ((data["dictionary_homeworks"])[h]["guia"] != ""){
-      output+= '<h3>Guía docente</h3>';
-      output+= (data["dictionary_homeworks"])[h]["guia"];
-    }
-    output+= '</div>';
-    output+= '</div>';
-  }
-  output+= '</div>';
-  $("#deberes").html(output);
-  */
   var title = data["subject"]+"<br><small><strong>"+data["unit_letter"]+"</strong>: "+data["unit_name"]+"</small>";
   $("#title_subject").html(title);
 

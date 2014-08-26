@@ -1,3 +1,4 @@
 *.pyc
 *.nja
+eduaulas/carga/media/*.jpg
 eduaulas/settings.py
