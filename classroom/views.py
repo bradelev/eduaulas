@@ -211,7 +211,7 @@ def update_teacher_info(request):
                     user = User.objects.get(pk=userid)
                     if password != '':
                         print password
-                        user.password = password
+                        user.set_password(password)
                     user.email = email
                     user.save() 
                     teach.date_of_birth = dob
