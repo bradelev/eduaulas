@@ -140,3 +140,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'eduaulas.ort@gmail.com'
 EMAIL_HOST_PASSWORD = 'eduaulas.ort1234'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'eduaulas.ort@gmail.com'
+SERVER_EMAIL = 'eduaulas.ort@gmail.com'
