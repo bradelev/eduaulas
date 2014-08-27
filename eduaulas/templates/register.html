@@ -8,15 +8,17 @@
 		<!--<span id="logo"></span>-->
 
 		<div id="logo-group">
-			<span id="logo"> <img src="{% static "img/logo.png" %}" alt="EduAulas"> </span>
+                <!-- PLACE YOUR LOGO HERE -->
+                 <a href="/aulas/lista/"><h1 class="logo"> <img src="{% static 'img/icono.png' %}"> EduAulas</h1></a>
+                <!-- END LOGO PLACEHOLDER -->
+            </div>
 
-			<!-- END AJAX-DROPDOWN -->
-		</div>
-
-		<span id="login-header-space"> <span class="hidden-mobile">Ya estas registrado?</span> <a href="/" class="btn btn-danger">Entrar</a> </span>
+		<span id="login-header-space"> <span class="hidden-mobile txt-login">Ya estas registrado?</span> <a href="/" class="btn btn-sm btn-regstro">Entrar</a> </span>
 
 	</header>
-
+	<!-- FAVICONS -->
+		<link rel="shortcut icon" href="{% static 'img/icono.png' %}" type="image/x-icon">
+		<link rel="icon" href="{% static 'img/icono.png' %}" type="image/x-icon">
 	<div id="main" role="main">
 
 		<!-- MAIN CONTENT -->
@@ -27,10 +29,19 @@
 				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
 					<h1 class="txt-color-red login-header-big">EduAulas</h1>
 					<div class="pull-left">
-						<h4>EduAulas recolecta los datos de rendimiento de tus alumnos, sugerencias para preparar las clases, ver puntos débiles de tus alumnos y mucho más</h4>
+						
+						<h4>EduAulas es una aplicación que permite al docente ver como los alumnos asimilan los conocimientos enseñados, tanto por los temas que se dictan en clase, como con los conceptos aprendidos en Cuasimodo</h4>
+						<h5>Cuasimodo es un libro electrónico. Es igual a un libro de texto, pero con una gran ventaja. Puede ser actualizado, corregido y mejorado permanentemente</h5>
+						<h5>Nos enfocamos en las ciencias, incluyendo experimentos, lecturas y una aventura educativa que mantendrá motivados a los alumnos.</h5>
+						<br>
+
+
 						<div class="login-app-icons">
-							<a href="http://www.editorialedu.com" class="btn btn-danger btn-sm">Sobre nosotros</a>
-							<a href="http://bibliotecadigital.ceibal.edu.uy/recurso/1105/" class="btn btn-danger btn-sm">Descargar EDU</a>
+							<p>
+									<a href="http://www.ceibal.edu.uy/art%C3%ADculo/noticias/estudiantes/Que-es-EDU" target="_blank" class="btn btn-danger btn-sm">Descargar Edu</a>
+									<a href="http://www.editorialedu.com" target="_blank" >Visitar el sitio de Editorial Edu</a>
+																	
+								</p>
 						</div>
 					</div>
 					
