@@ -137,8 +137,8 @@ STATICFILES_DIRS = (
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'eduaulas.ort@gmail.com'
-EMAIL_HOST_PASSWORD = 'eduaulas.ort1234'
+EMAIL_HOST_USER = 'braulio.deleon@editorialedu.com'
+EMAIL_HOST_PASSWORD = 'R31S189matilda'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'eduaulas.ort@gmail.com'
-SERVER_EMAIL = 'eduaulas.ort@gmail.com'
+DEFAULT_FROM_EMAIL = 'braulio.deleon@editorialedu.com'
+SERVER_EMAIL = 'braulio.deleon@editorialedu.com'
