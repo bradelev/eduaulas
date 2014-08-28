@@ -122,7 +122,7 @@ function get_content_data () {
       create_table_contents(data);
     },
     "error":function(data){
-      alert("error");
+      
     }
 
     });

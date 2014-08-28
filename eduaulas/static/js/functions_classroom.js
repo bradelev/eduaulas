@@ -183,12 +183,12 @@ function update_techer_info(){
 
     }, 
     success: function(response) {
-      alert('success');
+      //alert('success');
       $('#teacher_info').append(response);
       
     },
     error: function(response) {
-       alert('error');
+       //alert('error');
       $('#teacher_info').append(response);
 
     }  
