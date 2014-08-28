@@ -37,31 +37,26 @@
                     <!-- end widget edit box -->
 
                     <!-- widget content -->
-
-                    <div class="widget-body">
-                        <div class="well well-sm well-light content_stats row">
-                            
-                            {% for k,value in dictionary_subjects_average.items %}
-                              
-                                    <div class= "stats">
-                                        <h5>{{k}}</h5>
-                                         <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{value.average}}" data-pie-size="180">
-                                            <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{value.average}}</span>
-                                        </div>   
-                                        <div class="more_info_stats">
-                                             <p>Para construir esta grafica se evaluaron {{value.quantity_results_subject}} resultados de {{value.quantity_students}} alumnos. </p>                
-                                         </div> 
-                                    </div>
-                                
-                            {%endfor%}    
-                            <!--</div> end content_stats -->
-                             
-                    </div>  <!-- end widget body -->
-                                                
-                
-                </div>
-            </div>  <!-- END content -->
-        </div>  <!-- END MAIN PANEL -->
+                    <div class="row">
+                        <div class="widget-body">
+                            <div class="well well-sm well-light content_stats">
+                                {% for k,value in dictionary_subjects_average.items %}
+                                        <div class= "col-sm-4 col-xs-12">
+                                            <h5>{{k}}</h5>
+                                             <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{value.average}}" data-pie-size="180">
+                                                <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{value.average}}</span>
+                                            </div>   
+                                            <div class="more_info_stats">
+                                                 <p>Para construir esta gráfica se evaluaron {{value.quantity_results_subject}} resultados de {{value.quantity_students}} alumnos. </p>                
+                                             </div> 
+                                        </div>
+                                {%endfor%}    
+                            </div>  <!-- end widget body -->
+                        </div>  
+                    </div>
+                </div>  <!-- END content -->
+            </div>  <!-- END MAIN PANEL -->
+        </div>
         
 
 
