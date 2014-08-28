@@ -220,3 +220,17 @@
 
 }
 
+.btn-regstro{
+
+	background-color: #2980b9;
+	color: #ecf0f1;
+	margin-bottom: 15px !important;
+	margin-right: 10px !important;
+
+}
+
+.txt-login{
+
+	color: #bdc3c7 !important;
+	margin-bottom: 35px !important;
+}
