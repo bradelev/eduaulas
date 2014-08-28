@@ -37,6 +37,7 @@ urlpatterns = patterns('',
 	url(r'^contenidos/', include('exercise.urls')),
 	url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^/accounts/login/$','teacher.views.redirect_login'),
     url(r'^user/password/reset/$', 
         'django.contrib.auth.views.password_reset', 
         {'post_reset_redirect' : '/user/password/reset/done/'},
@@ -49,5 +50,6 @@ urlpatterns = patterns('',
     (r'^user/password/done/$', 
         'django.contrib.auth.views.password_reset_complete'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
+
     
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 	
