@@ -141,3 +141,6 @@ def register_success(request):
         username = ""
     return render_to_response('register_success.html', {'username':username}, context_instance=RequestContext(request))
 
+def redirect_login(request):
+    return HttpResponseRedirect("/login/")
+
