@@ -138,7 +138,8 @@ def list_contents(request,code):
 					"id_cuasimodo": e.cuasimodo_exercise_id,
 					"guia": e.teacher_guide,
 					"lecture_type": "Ejercicio",
-					"img": e.img.url
+					"img": e.img.url,
+					"name":e.name,
 				}
 			for h in homeworks:
 				dictionary_homeworks[h.id] = {
@@ -175,6 +176,7 @@ def send_comment(request,code):
 			
 			try:
 				userid = request.user.id
+				print userid , 'usuario'
 				t = Teacher.objects.get(user=userid)
 			except:
 				message = "no se encontro maestro"
@@ -184,8 +186,8 @@ def send_comment(request,code):
 			print t.name
 			try:
 				c = TeacherComments(teacher=t)
-				print 'guarde tecdeddddddddddddddddddddddddddddd'
-				c.comments = 'dsfgse' #txt_comment
+				print 'guarde'
+				c.comments = txt_comment
 				c.save()
 			except:
 				message = "No se pude guardar el comentario"

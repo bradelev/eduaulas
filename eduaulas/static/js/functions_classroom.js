@@ -396,7 +396,7 @@ function load_classroom(){
 
 
 function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,country_id,department_id,code_class){
-  alert(editing_classroom);
+  //alert(editing_classroom);
   if (editing_classroom==false){
 
      $('#myModalLabel').html('Agregar Aula');

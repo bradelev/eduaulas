@@ -27,13 +27,16 @@ function send_comment(){
           csrfmiddlewaretoken: tok,
           state:'inactive',
           comment: comment,
+          comment: comment,
           
     },
     "success":function(data){
-      get_content_data();
+    //  alert('success');
+      //get_content_data();
       }
     })
-   get_content_data();
+ // alert('nooo success');
+  // get_content_data();
 }
 
 function load_filters(){
@@ -99,7 +102,7 @@ function load_units(){
       }
     })
     $('#select_unit').change(get_content_data);
-   // setInterval(get_students_data,5000);
+  
 
 
 }/*cierro funcion load_units*/
@@ -224,7 +227,7 @@ function create_table_contents(data){
     output += '<ul>';
       for(var e in data["dictionary_exercises"]){
         output += '<li>';
-          output += '<a href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'</a>';
+          output += '<a href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["name"]+'</a>';
         output += '</li>';
       }
     output += '</ul>';
