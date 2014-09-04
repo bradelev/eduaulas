@@ -210,9 +210,9 @@ $(document).ready(function() {
 
 		// ask verification
 		$.SmartMessageBox({
-			title : "<i class='fa fa-sign-out txt-color-orangeDark'></i> Logout <span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
-			content : $.logoutMSG || "You can improve your security further after logging out by closing this opened browser",
-			buttons : '[No][Yes]'
+			title : "<i class='fa fa-sign-out txt-color-orangeDark'></i> ¿Cerrar Sesión <span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
+			content : $.logoutMSG || "",
+			buttons : '[No][Si]'
 
 		}, function(ButtonPressed) {
 			if (ButtonPressed == "Yes") {

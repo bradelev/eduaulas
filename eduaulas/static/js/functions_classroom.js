@@ -4,7 +4,7 @@ $(document).ready(ini);
 function ini(){
 
   create_classroom_table();
-  $('#add_classroom').click(get_data_for_selects_classroom);
+  $('#add_classroom').click(function(){ get_data_for_selects_classroom(false,0,0,0,0,0)});
   var editing_classroom = false
   $('#dlt_classroom').click(delete_classroom);
   $('#save').click(edit_or_save);
@@ -347,7 +347,7 @@ function delete_classroom(){
 
 
 function load_classroom(){
-
+  
   $('#action').val('2') /*editing classroom*/
   editing_classroom= true;
   var tok = $("#token").attr("value");
@@ -396,7 +396,13 @@ function load_classroom(){
 
 
 function get_data_for_selects_classroom(editing_classroom,grade_id,school_id,country_id,department_id,code_class){
-    
+  alert(editing_classroom);
+  if (editing_classroom==false){
+
+     $('#myModalLabel').html('Agregar Aula');
+  }else{
+    $('#myModalLabel').html('Editar Aula');}
+   
     var tok = $("#token").attr("value");
      $.ajax({
       beforeSend: function(){
@@ -543,7 +549,8 @@ function load_selects_schools(editing_classroom,school_id){
 
 
 function save_classroom_add() {
- // alert('saveeeee');
+ 
+ 
   var tok = $("#token").attr("value");
   valido = true;
   var select_country = $('#select_country').val();
