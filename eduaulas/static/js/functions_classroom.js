@@ -257,7 +257,9 @@ function draw_table_classrooms (data) {
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
-        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
+        //(data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
+
+        (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+"Nº" + data["dictionary_classrooms"][x]['number']+ " " +data["dictionary_classrooms"][x]['school']+"</td>";
         
         
         output += "<td>";
@@ -534,7 +536,7 @@ function load_selects_schools(editing_classroom,school_id){
     output_select_schools += '<option value="0" selected="" disabled="">Escuela</option>'
     for (var s in data["dictionary_schools"]){
       output_select_schools += "<option value="+(data["dictionary_schools"][s]['id'])+">";
-      output_select_schools += (data["dictionary_schools"][s]['name']); 
+      output_select_schools += "Nº"+ (data["dictionary_schools"][s]['number']) + " "+(data["dictionary_schools"][s]['name']); 
       output_select_schools += "</option>";
       }/*Cierro for dictionary_schools*/
     $("#select_school").html(output_select_schools);

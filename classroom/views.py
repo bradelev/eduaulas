@@ -299,6 +299,7 @@ def classroom_list(request):
                             "class_letter": x.class_letter,
                             "grade":x.grade.name,
                             "school": x.school.name,
+                            "number": x.school.number,
 
                             
                     }
@@ -507,6 +508,7 @@ def load_schools(request):
                 dictionary_schools[s.id] = {
                     
                     "name": s.name,
+                    "number": s.number,
                     "id": s.id                               
                 }
 
