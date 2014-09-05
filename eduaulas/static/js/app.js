@@ -215,7 +215,7 @@ $(document).ready(function() {
 			buttons : '[No][Si]'
 
 		}, function(ButtonPressed) {
-			if (ButtonPressed == "Yes") {
+			if (ButtonPressed == "Si") {
 				$.root_.addClass('animated fadeOutUp');
 				setTimeout(logout, 1000)
 			}
