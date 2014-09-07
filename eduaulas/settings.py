@@ -99,7 +99,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 MEDIA_ROOT = '/srv/www/eduaulas/media/'
-MEDIA_URL = '/media/media/'
+MEDIA_URL = 'http://54.243.196.72/media/'
 STATIC_URL = '/'
 STATIC_ROOT = '/srv/www/eduaulas/static/'
 
