@@ -24,7 +24,7 @@
     $.device = null;
 
 	/*
-	 * APP CONFIGURATION
+	/ * APP CONFIGURATION
 	 * Description: Enable / disable certain theme features here
 	 */		
 	$.navAsAjax = false; // Your left nav in your app will no longer fire ajax calls

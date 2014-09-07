@@ -257,7 +257,7 @@ function draw_table_classrooms (data) {
         (data["dictionary_classrooms"][x]['grade'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['grade']+"</td>";        
         (data["dictionary_classrooms"][x]['class_letter'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['class_letter']+"</td>";
         (data["dictionary_classrooms"][x]['shift'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['shift']+"</td>";
-        //(data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+data["dictionary_classrooms"][x]['school']+"</td>";
+        
 
         (data["dictionary_classrooms"][x]['school'] == "0") ? output += "<td></td>": output += "<td>"+"Nº" + data["dictionary_classrooms"][x]['number']+ " " +data["dictionary_classrooms"][x]['school']+"</td>";
         
