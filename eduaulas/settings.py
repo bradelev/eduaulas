@@ -23,7 +23,7 @@ RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 SECRET_KEY = '%v*rncfr(ck(1ofvb&(#^cx3xj&p)u7xj^=^g6r_n*5n3^vm_7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
     
 TEMPLATE_DEBUG = True
 
