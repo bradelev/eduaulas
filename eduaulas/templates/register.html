@@ -199,11 +199,13 @@
 							email : 'Correo debe tener un formato correcto usuario@dominio.com'
 						},
 						password : {
-							required : 'Ingrese su contraseña'
+							required : 'Ingrese su contraseña',
+							minlength: 'Contraseña debe ser de largo mayor a 2'
 						},
 						passwordConfirm : {
 							required : 'Ingrese su contraseña',
-							equalTo: 'Debe coincidir con la contraseña de arriba'
+							equalTo: 'Debe coincidir con la contraseña de arriba',
+							minlength: 'Contraseña debe ser de largo mayor a 2'
 						},
 						firstname : {
 							required : 'Ingrese su nombre',
