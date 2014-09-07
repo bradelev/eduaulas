@@ -14,47 +14,45 @@
 
             <div id="content">
                 <div class="row title">
-                    <div class="col-sm-8 col-xs-8 ">    
-                        <header>
-                            <h1>Estadísticas por perfiles de aprendizaje</h1>
-                        </header>
-                    </div>
-                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                   
+                    <div class ="class_info well well-light col-sm-4 col-xs-12 pull-right">
                         <h6> Información del aula: </h6>
                         <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
                         <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
                         <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
                     </div> <!-- row title-->
+                     <div class="col-sm-8 col-xs-12 ">    
+                        <header>
+                            <h1>Estadísticas por perfiles de aprendizaje</h1>
+                        </header>
+                    </div>
                 </div>
                 
                 <!-- widget div-->
-                <div>
-
-                   
-
+                <div class="row">
                     <!-- widget content -->
 
-                    <div class="widget-body title">
-                        <div class="well well-sm well-light content_stats row">
-                                <div class= "stats row ">
-                                    <div class= "divRight col-sm-4 col-xs-4">
-                                        <h5>Meta cognitivo</h5>
-                                         <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{metacognitive_percentage}}" data-pie-size="180">
-                                            <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{metacognitive_percentage}}</span>
-                                        </div>    
-                                </div>
-                                <div class= "divRight col-sm-4 col-xs-4">
-                                    <h5>Cognitivo</h5>
-                                     <div class="easy-pie-chart txt-color-green easyPieChart" data-percent="{{cognitive_percentage}}" data-pie-size="180">
-                                        <span class="percent percent-sign txt-color-green font-xl semi-bold">{{cognitive_percentage}}</span>
-                                    </div>  
-                                </div>      
-                                <div class="divRight col-sm-4 col-xs-4">
-                                    <h5>Socio afectivo</h5>
-                                     <div class="easy-pie-chart txt-color-red easyPieChart" data-percent="{{socio_affective_percentage}}" data-pie-size="180">
-                                        <span class="percent percent-sign txt-color-red font-xl semi-bold">{{socio_affective_percentage}}</span>
-                                    </div>    
-                                </div>
+                    <div class="widget-body title ">
+                        <div class="well well-sm well-light  col-sm-12 col-xs-12">
+                                
+                            <div class= " col-sm-4 col-xs-12">
+                                <h5>Meta cognitivo</h5>
+                                 <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{metacognitive_percentage}}" data-pie-size="180">
+                                    <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{metacognitive_percentage}}</span>
+                                </div>    
+                            </div>
+                            <div class= "col-sm-4 col-xs-12">
+                                <h5>Cognitivo</h5>
+                                 <div class="easy-pie-chart txt-color-green easyPieChart" data-percent="{{cognitive_percentage}}" data-pie-size="180">
+                                    <span class="percent percent-sign txt-color-green font-xl semi-bold">{{cognitive_percentage}}</span>
+                                </div>  
+                            </div>      
+                            <div class="col-sm-4 col-xs-12">
+                                <h5>Socio afectivo</h5>
+                                 <div class="easy-pie-chart txt-color-red easyPieChart" data-percent="{{socio_affective_percentage}}" data-pie-size="180">
+                                    <span class="percent percent-sign txt-color-red font-xl semi-bold">{{socio_affective_percentage}}</span>
+                                </div>    
+                            </div>
 
                             <!--</div> end content_stats -->
                              <div class="more_info_stats">
