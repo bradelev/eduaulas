@@ -10,6 +10,8 @@ urlpatterns = patterns('',
 	url(r'agregar/aula/$', 'classroom.views.classroom_save_add'),
 	
 	url(r'eliminar/aula/$', 'classroom.views.classroom_delete'),
+	url(r'eliminar/aula/check/$', 'classroom.views.check_classroom_delete'),
+	
 	url(r'editar/aula/$', 'classroom.views.classroom_save_edit'),
 	url(r'cargar/aula/$', 'classroom.views.load_classroom'),
 	url(r'cargar/codigo_aula/$', 'classroom.views.load_classroom_code'),

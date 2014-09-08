@@ -16,6 +16,7 @@ from django.utils.encoding import force_unicode
 from django.views.decorators.csrf import ensure_csrf_cookie
 from configurations.models import Configuration
 from teacher.models import Teacher
+from student.models import Student
 #from django.http import Http500
 from django.contrib.auth.models import User
 import json
@@ -594,3 +595,27 @@ def generate_classroom_code():
             existe = False    
     return code
 	
+def check_classroom_delete(request):
+    delete_class = True
+    message =""
+    type="error"
+    try:
+        code_class = request.POST['code']
+        print 'cero'
+        #c = ClassRoom.objects.get(code=code_class)
+        print 'uno'
+        st = Student.objects.filter(class_room=code_class)
+        print 'dos'
+        if st.exists():
+            delete_class = False
+    except:
+        message ="No se puede borrar el aula porque hay alumnos asociados"
+        print message
+
+    result = simplejson.dumps({  
+        "delete_class":delete_class, 
+        "message":message,
+        "type":type,
+        }, cls = LazyEncoder)
+    return HttpResponse(result, mimetype = 'application/javascript')
+     

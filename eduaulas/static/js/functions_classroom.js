@@ -6,7 +6,7 @@ function ini(){
   create_classroom_table();
   $('#add_classroom').click(function(){ get_data_for_selects_classroom(false,0,0,0,0,0)});
   var editing_classroom = false
-  $('#dlt_classroom').click(delete_classroom);
+  $('#dlt_classroom').click(check_classroom);
   $('#save').click(edit_or_save);
   $('#action').val('0'); 
   $('#btn_update_techer_info').click(update_techer_info);
@@ -17,6 +17,48 @@ function ini(){
 
  }
 
+
+ function check_classroom(){
+    
+    var tok = $("#token").attr("value");
+    var code_class= $("#txt_delete").val();
+    //alert(code_class);
+    var query = $.ajax({
+    url:"eliminar/aula/check/",
+    type:'POST',
+    dataType:"json",
+    data:{
+          
+          code:code_class,
+          delete_class:'delete_class',
+          csrfmiddlewaretoken: tok,
+          state:'inactive',
+
+
+    }, 
+
+    "success":function(data){
+           
+      
+      
+       var borrar = data["delete_class"];
+
+       if (borrar == false){
+
+          alert('No se puede borrar la clase, hay alumnos asociados');
+       }else{
+
+          delete_classroom();
+       }
+
+
+      }
+
+
+    })
+
+    
+ }
 
 function load_teacher_configuration(){
 
