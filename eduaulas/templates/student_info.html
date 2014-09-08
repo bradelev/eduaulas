@@ -11,17 +11,19 @@
           
             <div id="content"> <!-- CONTENT -->
                 <div class="row title">
-                    <div class="col-sm-8 col-xs-8 ">    
-                        <header>
-                            <h1>Información de un alumno</h1>
-                        </header>
-                    </div>
-                    <div class ="class_info well well-light col-sm-3 col-xs-3">
+                    
+                    <div class ="class_info well well-light col-sm-4 col-xs-12 pull-right">
                         <h6> Información del aula: </h6>
                         <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
                         <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
                         <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
                     </div> <!-- row title-->
+                    <div class="col-sm-8 col-xs-12 ">    
+                        <header>
+                            <h1>Información de un alumno</h1>
+                            <img src="/static/img/lapices.png" alt="" class="hidden-xs">
+                        </header>
+                    </div>
             </div>
             
                 <div class="jarviswidget" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
@@ -32,8 +34,8 @@
                         
                     <div class="widget-body">
 
-                        <div class="tabs-left">
-                            <ul class="nav nav-tabs tabs-left" id="demo-pill-nav">
+                        <div class="tabs-top">
+                            <ul class="nav nav-tabs tabs-top" id="demo-pill-nav">
                                 <li class="active">
                                     <a href="#tab-r1" data-toggle="tab"><span class="badge bg-color-blue txt-color-white"></span> Información personal </a>
                                 </li>
@@ -47,8 +49,8 @@
                                     <a href="#tab-r4" data-toggle="tab"><span class="badge bg-color-greenLight txt-color-white"></span> Ejercicios realizados</a>
                                 </li>
                             </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab-r1">
+                            <div class="tab-content padding-10 row">
+                                <div class="tab-pane active col-xs-12 col-md-12" id="tab-r1">
                                     <p class="pStudents">
                                       <span class="labsStudents">Nombre completo:</span> {{student.name}} {{student.last_name}} 
                                     </p>
@@ -63,9 +65,9 @@
                                         <span class="labsStudents"> Genero:</span> {{gender}}
                                     </p>
                                 </div><!-- end div tab-r1 -->  
-                                <div class="tab-pane" id="tab-r2">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-3">
+                                <div class="tab-pane col-xs-12 col-md-12" id="tab-r2">
+                                    <div >
+                                        <div class="col-xs-12 col-md-4">
                                              <p>Cognitivo</p>
                                                 <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-pie-size="110" data-percent="{{cognitive_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-greenLight font-md">55</span>
@@ -73,14 +75,14 @@
                                                </div>
 
                                         </div>
-                                        <div class="col-xs-12 col-md-3">
+                                        <div class="col-xs-12 col-md-4">
                                             <p>Socio afectivo</p>
                                             <div class="easy-pie-chart txt-color-pinkDark  easyPieChart " data-pie-size="110" data-percent="{{socio_affective_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-pinkDark font-md">55</span>
                                                 <canvas height="110" width="110"></canvas>
                                             </div>
                                         </div>   
-                                        <div class="col-xs-12 col-md-3"> 
+                                        <div class="col-xs-12 col-md-4"> 
                                             <p>Meta cognitivo</p>
                                             <div class="easy-pie-chart txt-color-blue  easyPieChart " data-pie-size="110" data-percent="{{metacognitive_percentage}}" style="width: 110px; height: 110px; line-height: 110px;">
                                                 <span class="percent percent-sign txt-color-blue font-md">55</span>
@@ -88,15 +90,15 @@
                                             </div>
                                         </div>
                                     </div>    
-                                    <div class="more_info_stats row">
+                                    <div class="more_info_stats ">
                                         <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
                                     </div>
                                     
                                 </div><!-- end div tab-r2 -->  
-                                <div class="tab-pane" id="tab-r3">
-                                    <div class="divGraphs row">
+                                <div class="tab-pane col-xs-12 col-md-12" id="tab-r3">
+                                    <div>
                                         {% for k,value in list_average.items %}
-                                        <div class="col-xs-12 col-md-3"> 
+                                        <div class="col-xs-12 col-md-4"> 
                                             <p>{{k}}</p>
                                             {% if value.average <= value.incorrect_points %}
                                                 <div class="easy-pie-chart txt-color-red easyPieChart" data-pie-size="110" data-percent="{{value.average}}" style="width: 110px; height: 110px; line-height: 110px;">
@@ -119,13 +121,13 @@
                                         </div>
                                         {% endfor %}  
                                     </div>         
-                                    <div class="more_info_stats row">
+                                    <div class="more_info_stats">
                                         <p>Para construir estas graficas se evaluaron {{quantity_results}} resultados.</p>
                                     </div>   
                                                                                                                     
                                 </div><!-- end div tab-r3 -->  
                                 <div class="tab-pane" id="tab-r4">
-                                    <div id = "table_students_results row">
+                                    <div id = "col-xs-12 col-md-12 ">
                                         <table id ="dt_results" class= "table table-striped table-bordered table-hover">
                                             <thead>
                                                 <th>Numero ejercicio</th>

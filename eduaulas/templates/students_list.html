@@ -8,18 +8,19 @@
         <!-- MAIN PANEL -->
         <div id="main" role="main">
               <div class="row title">
-                    <div class="col-sm-8 col-xs-8 ">    
-                        <header>
-                            <h1>Información académica de los alumnos</h1>
-                        </header>
-                    </div>
-                    <div class ="class_info well well-light col-sm-3 col-xs-3">
-                        <h6> Información del aula: </h6>
-                        <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
-                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
-                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
-                    </div> <!-- row title-->
-            </div>
+                    
+                <div class ="class_info well well-light col-sm-4 col-xs-12 pull-right">
+                    <h6> Información del aula: </h6>
+                    <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
+                    <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                    <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                </div> 
+                <div class="col-sm-8 col-xs-12 center-block ">    
+                    
+                        <h1>Información académica de los alumnos</h1>
+                    <img src="/static/img/block.png" alt="" class="hidden-xs">
+                </div>
+            </div><!-- row title-->
            <!-- MAIN CONTENT -->
        
                

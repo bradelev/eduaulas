@@ -15,7 +15,14 @@
            </div>
             <div id="content">
                  <div class="row ">
-                    <div class="col-sm-8 col-xs-8 ">    
+                    
+                    <div class ="class_info well well-light col-sm-4 col-xs-12 pull-right">
+                        <h6> Información del aula: </h6>
+                        <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
+                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
+                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
+                    </div> <!-- row title-->
+                    <div class="col-sm-8 col-xs-12 ">    
                         <header>
                             <h1>Contenidos de Cuasimodo </h1>
                             <h5>Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h5>
@@ -51,12 +58,6 @@
 
                         
                     </div>
-                    <div class ="class_info well well-light col-sm-3 col-xs-3">
-                        <h6> Información del aula: </h6>
-                        <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
-                        <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
-                        <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
-                    </div> <!-- row title-->
                 </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

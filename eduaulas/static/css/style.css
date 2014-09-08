@@ -111,10 +111,9 @@
 
 
 .class_info{
-
 	
 	text-align: center;
-	margin-right: 10px;
+	
 	background-color: #f1c40f !important;
 	color: #2c3e50;
 
@@ -213,9 +212,9 @@
 
 .more_info_stats{
 
-	padding-top: 15px;
+	margin-top: 35px !important;
 	font-size: 14px;
-	padding-left: 35px;
+	text-align: center;
 	font-weight: bold;
 	color:  #d35400 !important;
 	

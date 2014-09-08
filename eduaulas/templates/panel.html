@@ -44,16 +44,14 @@
                 <input type="hidden" id="token" value="{{csrf_token}}"></input>
                 <input type="hidden" id="code" value="{{code}}"></input>
                 <div class="row">
-                    <div class ="class_info well well-light col-sm-3 col-xs-3">
-                        
+                    <div class ="class_info well well-light col-sm-4 col-xs-12 pull-right">
                        <h6> Información del aula: </h6>
-                        
                         <p > <span class="txt">Código:</span> {{classroom.code}}  </p>
                         <p > <span class="txt">Clase: </span>{{classroom.grade}} {{classroom.class_letter}} </p>
                         <p > <span class="txt">Escuela:</span> {{classroom.school.name}} </p>
 
                     </div>    
-                    <div id="filters" class="col-sm-8 col-xs-8">    
+                    <div id="filters" class="col-sm-8 col-xs-12">    
                         <header ><h1>  Trabajando en clase</h1> </header>
                         <h5>Seleccione el área, la materia y la unidad en la cual va a comenzar a trabajar.</h5>
 

@@ -227,7 +227,7 @@ function create_table_contents(data){
     output += '<ul>';
       for(var e in data["dictionary_exercises"]){
         output += '<li>';
-          output += '<a href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["name"]+'</a>';
+          output += '<a  href="#exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">'+(data["dictionary_exercises"])[e]["name"]+'</a>';
         output += '</li>';
       }
     output += '</ul>';
