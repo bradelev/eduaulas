@@ -334,9 +334,9 @@ if(data['type'] == 'success'){
     output_thead +='<th>Nombre</th>';                                                   
     for (var e in data["dictionary_units_exercises"]){ 
         output_thead += '<th>';  
-        var contenido = "<div><a target = 'blank' href='/contenidos/ejercicio/"+code_class+"/"+ (data["dictionary_units_exercises"][e]["id"]) +"'><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " ></a>";
+        var contenido = "<div><a target = 'blank' href='/contenidos/ejercicio/"+code_class+"/"+ (data["dictionary_units_exercises"][e]["id"]) + '/'+"'><img src=" + "'" + (data["dictionary_units_exercises"][e]["img"]) +"'" + " ></a>";
         var contenido2 = "<h4>Ejercicio Nº "+ (data["dictionary_units_exercises"][e]["exercise_id"]) +"</h4>";
-        output_thead += '<a href="javascript:void(0);"  rel="popover"  data-html="true" data-placement="top" data-original-title="'+ contenido2 +'" data-content="'+ contenido +'">Ej.'+(data["dictionary_units_exercises"][e]["exercise_id"])+'</a>'; 
+        output_thead += '<a  rel="popover"  data-html="true" data-placement="top" data-original-title="'+ contenido2 +'" data-content="'+ contenido +'">Ej.'+(data["dictionary_units_exercises"][e]["exercise_id"])+'</a>'; 
         output_thead += '</th>';  
     }
     output_thead +='</tr>';
