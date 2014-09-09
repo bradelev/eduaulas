@@ -4,10 +4,10 @@
     {% load staticfiles %}
     <!-- HEADER -->
         <header id="header">
-            <div id="logo-group " class="hidden-xs">
+            <div id="logo-group ">
 
                 <!-- PLACE YOUR LOGO HERE -->
-                 <a href="/aulas/lista/"><h1 class="logo"> <img src="{% static 'img/icono.png' %}"> EduAulas</h1></a>
+                 <a href="/aulas/lista/"><h1 class="logo "> <img src="{% static 'img/icono.png' %}"> <span class="hidden-xs">EduAulas</span></h1></a>
                 <!-- END LOGO PLACEHOLDER -->
                 
                 
@@ -19,7 +19,7 @@
                 </div>
                 <!-- end collapse menu -->
                 <div id="logout" class="transparent pull-right">
-                    ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} !</a><br>
+                    ¡Bienvenido <a href="/aulas/lista/" class="hidden-xs" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} </a>!<br>
                     <a href="/logout/"  id="close_sesion">Cerrar sesión</a>
                 </div>    
             </div>

@@ -148,7 +148,7 @@ function create_table_contents(data){
       output+= '<div id="experiment-'+(data["dictionary_experiments"])[e]["id_cuasimodo"]+'">';
         output += '<div class="row">';
           output += '<div class="col-sm-8">';
-            output += '<img src="'+(data["dictionary_experiments"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';    
+            output += '<img src="'+(data["dictionary_experiments"])[e]["img"]+'" alt="" class="img-responsive" >';    
           output += '</div>';
           output += '<div class="col-sm-4">';
             output += '<div class="row">';
@@ -192,7 +192,7 @@ function create_table_contents(data){
       output+= '<div id="lecture-'+(data["dictionary_lectures"])[l]["id_cuasimodo"]+'">';
         output += '<div class="row">';
           output += '<div class="col-sm-8">';
-            output += '<img src="'+(data["dictionary_lectures"])[l]["img"]+'" alt="" style="width:600px;height:480px;">';    
+            output += '<img src="'+(data["dictionary_lectures"])[l]["img"]+'" alt="" class="img-responsive">';    
           output += '</div>';
           output += '<div class="col-sm-4">';
             output += '<div class="row">';
@@ -235,7 +235,7 @@ function create_table_contents(data){
       output+= '<div id="exercise-'+(data["dictionary_exercises"])[e]["id_cuasimodo"]+'">';
         output += '<div class="row">';
           output += '<div class="col-sm-8">';
-            output += '<img src="'+(data["dictionary_exercises"])[e]["img"]+'" alt="" style="width:600px;height:480px;">';    
+            output += '<img src="'+(data["dictionary_exercises"])[e]["img"]+'" alt="" class="img-responsive">';    
           output += '</div>';
           output += '<div class="col-sm-4">';
             output += '<div class="row">';
@@ -278,7 +278,7 @@ function create_table_contents(data){
       output+= '<div id="homework-'+(data["dictionary_homeworks"])[h]["id_cuasimodo"]+'">';
         output += '<div class="row">';
           output += '<div class="col-sm-8">';
-            output += '<img src="'+(data["dictionary_homeworks"])[h]["img"]+'" alt="" style="width:600px;height:480px;">';    
+            output += '<img src="'+(data["dictionary_homeworks"])[h]["img"]+'" alt="" class="img-responsive">';    
           output += '</div>';
           output += '<div class="col-sm-4">';
             output += '<div class="row">';

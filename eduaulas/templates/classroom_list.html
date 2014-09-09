@@ -21,10 +21,10 @@
 
 		<!-- HEADER -->
         <header id="header">
-            <div id="logo-group" class="hidden-xs">
+            <div id="logo-group">
 
                 <!-- PLACE YOUR LOGO HERE -->
-                 <h1 class="logo"> <img src="{% static 'img/icono.png' %}"> EduAulas</h1>
+                 <h1 class="logo"> <img src="{% static 'img/icono.png' %}"><span class="hidden-xs">EduAulas</span></h1>
                 <!-- END LOGO PLACEHOLDER -->
                 
                 
@@ -32,7 +32,7 @@
             <div class="pull-right div_logout">
                
                 <div id="logout" class="transparent pull-right">
-                    ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" data-placement="bottom" data-original-title="Ir a configuración personal.">{{request.user}} !</a><br>
+                    ¡Bienvenido <a href="/aulas/lista/" rel="tooltip" class="hidden-xs" data-placement="left" data-original-title="Ir a configuración personal.">{{request.user}}</a>!<br>
                     <a href="/logout/">Cerrar sesión</a>
                 </div>    
             </div>
