@@ -239,6 +239,8 @@
 .tickBien, .tickMaso, .tickMal{
 	width:15px;
 	height:10px;
+	background-color: #CCC;
+	display: block;
 }
 .tickBien{
 	background-image: url('../img/tickBien.png');
