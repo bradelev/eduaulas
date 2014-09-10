@@ -236,4 +236,16 @@
 	margin-bottom: 35px !important ;
 }
 
-
+.tickBien, .tickMaso, .tickMal{
+	width:15px;
+	height:10px;
+}
+.tickBien{
+	background-image: url('../img/tickBien.png');
+}
+.tickMaso{
+	background-image: url('../img/tickMaso.png');
+}
+.tickMal{
+	background-image: url('../img/tickMal.png');
+}

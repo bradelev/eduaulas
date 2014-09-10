@@ -150,12 +150,12 @@ def list_students(request,code):
 						for r in var_results:
 							
 							if r.points >= teacher_config.correct_points:
-								matriz[i].append('<img src="{% static "img/tickBien.png" %}" >')
+								matriz[i].append('<span class="tickBien"></span>')
 							if r.points <= teacher_config.incorrect_points:
-								matriz[i].append('<img src="/static/img/tickMal.png" >')
+								matriz[i].append('<span class="tickMal"></span>')
 
 							if (r.points < teacher_config.correct_points and r.points > teacher_config.incorrect_points):
-								matriz[i].append('<img src="{%static "img/tickMaso.png" %}" >')
+								matriz[i].append('<span class="tickMaso"></span>')
 
 							results_quantity = results_quantity + 1	
 							total_points += r.points
