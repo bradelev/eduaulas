@@ -260,7 +260,7 @@ def load_suggestions_students(request,code):
 									exists_exercise_for_suggest = True
 									txt = '<h6 class="name_student_in_suggestions">Ejercicios posterior al numero ' 
 									matriz_suggestions_students[i].append(txt)
-									txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'
+									txt = str(r.exercise.name) + '</h6>'
 									matriz_suggestions_students[i].append(txt)
 									for g in good_exercises:														
 										good_results =Result.objects.filter(exercise_id=g.id, person=s)
@@ -287,7 +287,7 @@ def load_suggestions_students(request,code):
 									exists_exercise_for_suggest = True
 									txt = '<h6 class="name_student_in_suggestions" >Ejercicios previo al numero '
 									matriz_suggestions_students[i].append(txt)
-									txt = str(r.exercise.cuasimodo_exercise_id) + '</h6>'	
+									txt = str(r.exercise.name) + '</h6>'	
 									matriz_suggestions_students[i].append(txt)	
 									for b in bad_exercises:														
 										bad_results =Result.objects.filter(exercise_id=b.id, person=s)
