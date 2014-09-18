@@ -147,7 +147,7 @@ def student_info(request,code,id):
 	if student.gender == '1':
 		student_gender = 'Masculino'
 	if student.gender == '2':
-		student_gender = 'Masculino'
+		student_gender = 'Femenino'
 	if student.gender == '3':	
 		student_gender = '---------'
 	try:
