@@ -184,7 +184,8 @@ def list_students(request,code):
 
 					"exercise_id": e.cuasimodo_exercise_id,
 					"id": e.id,
-					"img": e.thumb_img.url,			
+					"img": e.thumb_img.url,
+					"name": e.name,			
 					
 				}	
 				
