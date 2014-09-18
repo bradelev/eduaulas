@@ -79,12 +79,13 @@ def students_info(request,code):
 					points += p.points
 
 				if quantity_results != 0:
-					average_points = (points/quantity_results)*100					
-					average_metacognitive_percentage= metacognitive_percentage/quantity_results
+					average_points = (points/quantity_results)*100	
+
+					average_metacognitive_percentage= (metacognitive_percentage/quantity_results) - 1
 					matriz[i].append(round(average_metacognitive_percentage,1))					
-					average_cognitive_percentage= cognitive_percentage/quantity_results
+					average_cognitive_percentage= (cognitive_percentage/quantity_results) - 1
 					matriz[i].append(round(average_cognitive_percentage,1))
-					average_socio_affective_percentage= socio_affective_percentage/quantity_results
+					average_socio_affective_percentage= (socio_affective_percentage/quantity_results) - 1
 					matriz[i].append(round(average_socio_affective_percentage,1))						
 					matriz[i].append(round(average_points,1))
 				
