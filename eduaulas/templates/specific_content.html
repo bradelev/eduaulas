@@ -36,11 +36,9 @@
                                                 <div class="col-sm-8">
                                                     <div class="row">
                                                         <div class="col-sm-12">
-                                                            {% if exercise.name %}
-                                                                <h3>{{unit.letter}}{{exercise.cuasimodo_exercise_id}} {{exercise.name}}</h3>
-                                                            {% else %}
-                                                                <h3>{{unit.letter}}{{exercise.cuasimodo_exercise_id}}</h3>
-                                                            {% endif %}
+                                                            
+                                                                <h3>{{unit.letter}} {{exercise.name}}</h3>
+                                                            
                                                             <img src="{{MEDIA_URL}}{{exercise.img}}" alt="{{exercise.name}}" style="width:600px;height:480px;">    
                                                         </div>
                                                     </div>

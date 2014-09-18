@@ -264,13 +264,13 @@ def load_suggestions_students(request,code):
 									for g in good_exercises:														
 										good_results =Result.objects.filter(exercise_id=g.id, person=s)
 										if good_results.exists():
-											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+  str(g.id) +'">'+str(g.cuasimodo_exercise_id) +'</a>'
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+  str(g.id) + "/" +'">'+str(g.cuasimodo_exercise_id) +'</a>'
 											matriz_suggestions_students[i].append(txt)
 											txt = ' - Estado: Hecho' + '<br>'
 											matriz_suggestions_students[i].append(txt)
 										else:
 											
-											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(g.id) + '">'+str(g.cuasimodo_exercise_id) +'</a>'
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(g.id) + "/"+'">'+str(g.cuasimodo_exercise_id) +'</a>'
 											matriz_suggestions_students[i].append(txt)
 											txt = ' - Estado: Pendiente' + '<br>'
 											matriz_suggestions_students[i].append(txt)
@@ -291,12 +291,12 @@ def load_suggestions_students(request,code):
 									for b in bad_exercises:														
 										bad_results =Result.objects.filter(exercise_id=b.id, person=s)
 										if bad_results.exists():
-											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/" + str(b.id) + '">'+str(b.cuasimodo_exercise_id) +'</a>'
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/" + str(b.id) + "/"+'">'+str(b.cuasimodo_exercise_id) +'</a>'
 											matriz_suggestions_students[i].append(txt)
 											txt = ' - Estado: Hecho' + '<br>'
 											matriz_suggestions_students[i].append(txt)
 										else:
-											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(b.id) + '">'+str(b.cuasimodo_exercise_id) +'</a>'
+											txt = 'Ejercicio numero ' + '<a target="blank" href="/contenidos/ejercicio/'+ code + "/"+ str(b.id) + "/"+ '">'+str(b.cuasimodo_exercise_id) + '</a>'
 											matriz_suggestions_students[i].append(txt)
 											txt = ' - Estado: Pendiente' + '<br>'
 											matriz_suggestions_students[i].append(txt)
@@ -311,7 +311,7 @@ def load_suggestions_students(request,code):
 										exists_exercise_for_suggest = True
 										for l in lectures:
 											
-											txt = 'Lectura ' + '<a target="blank" href="/contenidos/lectura/'+ code + "/"+str(l.id) +'">'+str(l.name)+'</a><br>'
+											txt = 'Lectura ' + '<a target="blank" href="/contenidos/lectura/'+ code + "/"+str(l.id) +"/"+ '">'+str(l.name)+'</a><br>'
 											matriz_suggestions_students[i].append(txt)
 											
 								except:
