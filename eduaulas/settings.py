@@ -73,10 +73,10 @@ WSGI_APPLICATION = 'eduaulas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eduaulas_db',
-        'USER': 'eduaulas_root',
+        'NAME': 'db',
+        'USER': 'user',
         'PASSWORD': 'eduaulas',
-        'HOST': 'eduaulas-db.cnynwpmxidse.us-east-1.rds.amazonaws.com',
+        'HOST': 'eduaulas-db',
         'PORT': '3306',
 
     }
@@ -137,8 +137,8 @@ STATICFILES_DIRS = (
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'braulio.deleon@editorialedu.com'
-EMAIL_HOST_PASSWORD = 'R31S189matilda'
+EMAIL_HOST_USER = 'host_user@mail.com'
+EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'braulio.deleon@editorialedu.com'
-SERVER_EMAIL = 'braulio.deleon@editorialedu.com'
+DEFAULT_FROM_EMAIL = 'sender_user@mail.com'
+SERVER_EMAIL = 'sender_user@mail.com'
